@@ -8,12 +8,13 @@ import {
     HouseDoor,
     ListUl,
     BarChartFill,
-    PersonCircle
+    PersonCircle,
+    ArrowBarRight
 } from "react-bootstrap-icons";
 
 function Header() {
     return (
-        <HashRouter>
+        <div>
             <nav className="navbar navbar-expand-lg nav-header">
                 <Link to={"/"}>
                     <img src={image_logo} alt="logo" width={100} height={35} />
@@ -33,19 +34,19 @@ function Header() {
                     <ul className="nav nav-tabs ul-tabs">
                         <li className="nav-item li-tab">
                             <Link to={"/"} className="nav-link">
-                                <HouseDoor color="white" class="icons-svg" />
+                                <HouseDoor color="white" className="icons-svg" />
                                 Home
                             </Link>
                         </li>
                         <li className="nav-item li-tab">
                             <Link to={"/kahoots"} className="nav-link">
-                                <ListUl color="white" class="icons-svg" />
+                                <ListUl color="white" className="icons-svg" />
                                 Kahoots
                             </Link>
                         </li>
                         <li className="nav-item li-tab">
                             <Link to={"/user-reports"} className="nav-link">
-                                <BarChartFill color="white" class="icons-svg" />
+                                <BarChartFill color="white" className="icons-svg" />
                                 Reports
                             </Link>
                         </li>
@@ -57,36 +58,39 @@ function Header() {
                         Create
                     </button>
                 </Link>
-                <div class="dropdown dropdown-person">
+                <div className="dropdown dropdown-person">
                     <PersonCircle
                         style={{width:"2.4rem",height:"2.4rem"}}
                         color="white"
-                        class="icons-svg dropdown-toggle"
+                        className="icons-svg dropdown-toggle"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                     />
                     <div
-                        class="dropdown-menu dropdown-menu-right"
+                        className="dropdown-menu dropdown-menu-right"
                         aria-labelledby="dropdownMenuButton"
                     >
-                        <h6 class="dropdown-header">User Name</h6>
-                        <Link to={"/user"} class="dropdown-item">
+                        <h6 className="dropdown-header">User Name</h6>
+                        <Link to={"/user"} className="dropdown-item">
                             Setting
                         </Link>
-                        <Link class="dropdown-item">Sign Out</Link>
+                        <hr />
+                        <Link to={'/auth/login'} className="dropdown-item" style={{paddingLeft: "15px", color: "red"}}>
+                            <ArrowBarRight color="red" className="icons-svg" />
+                            Sign Out
+                            </Link>
                     </div>
                 </div>
             </nav>
-            {/* RouterPath show components under header */}
-            <RouterPath />
-        </HashRouter>
+            
+        </div>
     );
 }
 
 export default Header;
 
-if (document.getElementById("header")) {
-    ReactDOM.render(<Header />, document.getElementById("header"));
-}
+// if (document.getElementById("header")) {
+//     ReactDOM.render(<Header />, document.getElementById("header"));
+// }

@@ -34,3 +34,49 @@
 
 2. Frontend
 - `Thư mục lưu source code frontend ./kahoot-uet/app/frontend/`
+
+
+
+### C. Câu lệnh phổ biến
+
+1. Backend 
+
+A. Migration
+
+
+B. Seeder
+
+- php artisan make:seed FakeNameSeeder 
+
+C. Factory
+
+- php artisan make:factory NameFactory --model=NameModel
+
+D. Data 
+
+- php artisan db:seed --class=FakeAllDataSeed
+(Fake all data)
+
+- php artisan db:seed --class=FakeSpecSeed
+(Run speci Fake)
+
+E. Database
+
+- php artisan migrate:reset
+(rollback all migration)
+
+- php artisan migrate:fresh 
+(Rerun all migrate)
+
+ 
+
+
+- php artisan make:migration name_migration --create=name_table
+
+- php artisan make:migration name_migration --table=name_table
+
+F. Controller
+
+- php artisan make:controller NameController --resource
+
+G.
