@@ -1,5 +1,16 @@
 # Kahoot-UET
 
+### Run 
+ - php artisan migrate:fresh 
+ - php artisan db:seed --class=FakeAllDataSeed
+
+
+
+
+
+
+
+
 ## Quy tắc chung.
 
 ### A. Git
