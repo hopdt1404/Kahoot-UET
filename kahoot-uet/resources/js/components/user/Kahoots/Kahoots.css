@@ -1,0 +1,153 @@
+.menu{
+    background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.menu-content{
+    margin-top: 100px;
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    background-color: white;
+}
+.text-menu{
+    display: block;
+    color: blue;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.notuse{
+    color:lightgrey;
+}
+.main-content{
+    margin:30px;
+}
+.search-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sort{
+    margin-top:70px;
+    height: auto;
+    font-weight: bold;
+    font-size: 25px;
+    color:black;
+}
+.kahoots-text-area{
+    display: flex;
+    font-weight: bold;
+    font-size: 25px;
+}
+.sort-box{
+    display: inline-flex;
+    margin-left: auto;
+}
+.btn{
+    margin-left:5px;
+    margin-right:5px;
+}
+.list-area{
+    margin-top: 20px;
+}
+.total-area{
+    font-size: large;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+.kahoot-box{
+    margin-top:10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 0.5rem 0 rgba(0,0,0,.15);
+}
+.image-box{
+    position: relative;
+    min-height: 150px;
+    min-width: 250px;
+    background: rgb(204, 204, 204);
+    border-radius: 4px 0px 0px 4px;
+}
+.num-quest{
+    right: auto;
+    left: 8px;
+    display: inline-block;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(51, 51, 51, 0.8);
+    padding: 1.5px 8px;
+    border-radius: 4px;
+}
+.num-quest-text{
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: bold;
+}
+.quest-name{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    min-height: 50px;
+    flex: 1 1 auto;
+}
+.quest-name-area{
+    margin: 8px;
+    max-height: 46px;
+}
+.quest-name-text{
+    margin: 0px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 28px;
+    line-height: 1.3;
+    font-weight: bold;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.num-play{
+    min-height: 30px;
+    background-color: rgb(242, 242, 242);
+}
+.is-public{
+    position: relative;
+    left: 2px;
+    margin-bottom: 5px;
+    
+}
+.public-text{
+    margin-left: 5px;
+    font-weight: lighter;
+    white-space: nowrap;
+    font-size: 20px;
+}
+.num-play-area{
+    position: relative;
+    right: 2px;
+}
+.num-play-text{
+    margin-right: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 20px;
+}
+.time-text{
+    margin-right: 10px;
+    font-weight: lighter;
+    white-space: nowrap;
+    font-size: 20px;
+}
+.play-box{
+    min-height: 50px;
+    background-color: white;
+}
+.play-text{
+    color:white;
+    font-size: 20px;
+    font-weight: bolder;
+}
