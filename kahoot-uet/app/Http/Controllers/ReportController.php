@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Players;
 use Illuminate\Http\Request;
 use App\Reports;
 use App\Rooms;
@@ -50,5 +49,4 @@ class ReportController extends Controller
     {
 
     }
-
 }
