@@ -18,6 +18,7 @@
     font-size: large;
     margin-bottom: 20px;
     text-align: center;
+    cursor: pointer;
 }
 .notuse{
     color:lightgrey;
@@ -50,6 +51,9 @@
     margin-left:5px;
     margin-right:5px;
 }
+.btn-outline-info{
+    color: black;
+}
 .list-area{
     margin-top: 20px;
 }
@@ -57,6 +61,10 @@
     font-size: large;
     font-weight: bolder;
     margin-bottom: 10px;
+}
+.sort-by{
+    display: inline-flex;
+    margin-left: auto;
 }
 .kahoot-box{
     margin-top:10px;

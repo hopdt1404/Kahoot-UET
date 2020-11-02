@@ -69,10 +69,9 @@ export default class Kahoots extends React.Component{
             select:[{}],
             curpage:1,
             perpage:3,
-            search:""
+            search:"",
+            sort:""
         };
-        this.menu_ref =  React.createRef();
-        this.sort_ref = React.createRef();
         this.onFirstBtnClick = this.onFirstBtnClick.bind(this);
         this.onPrevBtnClick = this.onPrevBtnClick.bind(this);
         this.onNextBtnClick = this.onNextBtnClick.bind(this);
@@ -83,8 +82,8 @@ export default class Kahoots extends React.Component{
         this.onNameDescBtnClick = this.onNameDescBtnClick.bind(this);
         this.onFavoriteClick = this.onFavoriteClick.bind(this);
         this.onKahootBtnClick = this.onKahootBtnClick.bind(this);
-        // this.onResetBtnClick = this.onResetBtnClick.bind(this);
-        // this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
+        this.onResetBtnClick = this.onResetBtnClick.bind(this);
+        this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
     }
     componentDidMount(){
         axios.get('/kahoots')
@@ -100,8 +99,26 @@ export default class Kahoots extends React.Component{
         .catch(error => console.log(error));
         this.setState(
            {kahootlist: this.state.kahootlist.sort(this.sortrecent),
-            select : this.state.kahootlist}
+            select : this.state.kahootlist,
+            sort:"Recent"
+           }
         )
+        this.menuselect("mykahoots")
+    }
+    menuselect(select){
+        this.refs.mykahoots.style.backgroundColor = "white";
+        this.refs.favorite.style.backgroundColor = "white";
+        if (select === "mykahoots") {
+            this.refs.mykahoots.style.backgroundColor = "lightblue";
+        }
+        else {
+            this.refs.favorite.style.backgroundColor = "lightblue";
+        }
+    }
+    sortselect(select){
+        this.setState({
+            sort: select
+        })
     }
     onPrevBtnClick(){
         this.setState({
@@ -126,26 +143,30 @@ export default class Kahoots extends React.Component{
     onRecentBtnClick(){
         this.setState({
             select: this.state.select.sort(this.sortrecent),
-            curpage: 1
+            curpage: 1,
         })
+        this.sortselect("Recent");
     }
     onOldestBtnClick(){
         this.setState({
             select: this.state.select.sort(this.sortrecent.bind(this)).reverse(),
             curpage: 1
         })
+        this.sortselect("Oldest");
     }
     onNameAscBtnClick() {
         this.setState({
             select: this.state.select.sort(this.sortname),
             curpage: 1
         })
+        this.sortselect("A->Z");
     }
     onNameDescBtnClick(){
         this.setState({
             select: this.state.select.sort(this.sortname).reverse(),
             curpage: 1
         })
+        this.sortselect("Z->A");
     }
     onFavoriteClick(){
         let arr = [];
@@ -158,22 +179,40 @@ export default class Kahoots extends React.Component{
             select: arr,
             curpage: 1,
         })
+        this.menuselect("favorite");
     }
     onKahootBtnClick(){
         this.setState({
             select: this.state.kahootlist,
             curpage: 1
         })
+        this.menuselect("mykahoots");
     }
-    // onResetBtnClick = () => {
-    //     this.setState({
-    //         select: this.state.kahootlist,
-    //         find:""
-    //     })
-    // }
-    // onSearchBtnClick = () => {
-
-    // }
+    onResetBtnClick(){
+        this.refs.searchinput.value = "";
+        this.setState({
+            select: this.state.kahootlist,
+            search:"",
+            curpage: 1
+        })
+        this.menuselect("mykahoots");
+        this.sortselect("Recent");
+    }
+    onSearchBtnClick(){
+        let searchText = this.refs.searchinput.value;
+        let arr = [];
+        for (let topic of this.state.kahootlist){
+            if (topic.name.toLowerCase().indexOf(searchText.toLowerCase())+1) {
+                arr.push(topic);
+            }
+        }
+        this.setState({
+            search: searchText,
+            select: arr,
+            curpage: 1
+        })
+        this.sortselect("Recent");
+    }
     sortrecent(a,b){ // return newest
         return (a.time - b.time);
     }
@@ -185,7 +224,7 @@ export default class Kahoots extends React.Component{
         return 0;
     }
     render(){
-        const {select,curpage,perpage} = this.state;
+        const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
         const firstrend= lastrend - perpage;
         const rend = select.slice(firstrend,lastrend);
@@ -268,11 +307,11 @@ export default class Kahoots extends React.Component{
             <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
                 <div class="col-sm-3 menu">
                     <div class="menu-content">
-                        <div class="text-menu" id = "mykahoots" onClick={this.onKahootBtnClick}>
+                        <div class="text-menu" ref = "mykahoots" onClick={this.onKahootBtnClick}>
                             <Person />
                             <span>My Kahoots</span>
                         </div>
-                        <div class="text-menu" id = "myfavorite" onClick ={this.onFavoriteClick}>
+                        <div class="text-menu" ref = "favorite" onClick ={this.onFavoriteClick}>
                             <Star />
                             <span>Favorites</span>
                         </div>
@@ -290,10 +329,11 @@ export default class Kahoots extends React.Component{
                     <div class="main-content">
                         <div class="search-area">
                             <div class="search-box">
-                                <input type="text" placeholder="Search..." id="search-input" style={{width:'500px'}}/>
-                                <button class="search-button" style={{background:'green'}}>
+                                <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
+                                <button class="search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
                                     <Search color="white"/>
                                 </button>
+                                <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
                             </div>
                             <div class="sort row">
                                 <div class="kahoots-text-area">
@@ -303,16 +343,17 @@ export default class Kahoots extends React.Component{
                                     <div class="sort-text-area">
                                         <span class="sort-text">Sort by:</span>
                                     </div>
-                                    <button class="btn btn-primary" onClick={this.onRecentBtnClick}>Recent</button>
-                                    <button class="btn btn-secondary" onClick={this.onOldestBtnClick}>Oldest</button>
-                                    <button class="btn btn-success" onClick={this.onNameAscBtnClick}>A-{'>'}Z</button>
-                                    <button class="btn btn-info" onClick={this.onNameDescBtnClick}>Z-{'>'}A</button>
+                                    <button class="btn btn-outline-info" ref = "recent" onClick={this.onRecentBtnClick}>Recent</button>
+                                    <button class="btn btn-outline-info" ref = "oldest" onClick={this.onOldestBtnClick}>Oldest</button>
+                                    <button class="btn btn-outline-info" ref = "nameasc" onClick={this.onNameAscBtnClick}>A-{'>'}Z</button>
+                                    <button class="btn btn-outline-info" ref = "namedesc"onClick={this.onNameDescBtnClick}>Z-{'>'}A</button>
                                 </div>
                             </div>
                         </div>
                         <div class="list-area">
-                            <div class="total-area">
-                                <span class="total-text">Total {'('}{select.length}{')'}</span>
+                            <div class="total-area row">
+                                <span class="d-flex">Total {'('}{select.length}{')'}</span>
+                                <span class="sort-by">Sort by: {sort}</span>
                             </div>
                             <div class="kahoots-list">
                                 {topic}
