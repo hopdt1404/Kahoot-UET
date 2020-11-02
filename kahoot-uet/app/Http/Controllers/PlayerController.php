@@ -54,6 +54,28 @@ class PlayerController extends Controller
         return view('pages.topic', ['data' => $player]);
     }
 
+    /*
+     *  Get Out Player  ... Room
+    */
+    public function getOutPlayer (Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'id' => 'bail|required|integer'
+        ]);
+
+        $data = [];
+        if ($validator->fails()) {
+            $data['message'] = Messager::$MESSAGE_EROORS['400'];
+            $data = json_encode($data);
+            return view('pages.topic', ['data' => $data]);
+        }
+
+        $data['result'] = Players::where('id', $request['id'])->delete();
+
+        return view('pages.topic', ['data' => $data]);
+
+    }
+
     public function show ()
     {
 

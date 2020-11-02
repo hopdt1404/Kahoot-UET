@@ -29,6 +29,6 @@ Route::get('/room/lock', 'RoomController@lockRoom');
 Route::resource('/room', 'RoomController');
 Route::get('/report/search', 'ReportController@searchReportByName');
 Route::resource('/report', 'ReportController');
-
+Route::get('player/add-player', 'PlayerController@addPlayer');
+Route::post('player/get-out-player', 'PlayerController@getOutPlayer');
 Route::resource('/player', 'PlayerController');
-//Route::get('player/add-player', 'PlayerController@addPlayer');
