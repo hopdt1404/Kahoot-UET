@@ -29,4 +29,9 @@ Route::get('/room/lock', 'RoomController@lockRoom');
 Route::resource('/room', 'RoomController');
 Route::get('/report/search', 'ReportController@searchReportByName');
 Route::resource('/report', 'ReportController');
-
+Route::get('player/add-player', 'PlayerController@addPlayer');
+Route::get('player/get-out-player', 'PlayerController@getOutPlayer');
+Route::get('player/update-total-score', 'PlayerController@updateTotalScore');
+Route::get('player/top-five-max-score', 'PlayerController@topFiveMaxScore');
+Route::resource('/player', 'PlayerController');
+Route::resource('/report-player', 'ReportPlayerController');
