@@ -100,4 +100,26 @@ class PlayerController extends Controller
         return view('pages.topic', ['data' => $data]);
     }
 
+    /*
+     * Get Top 5 player maximum score
+    */
+    public function topFiveMaxScore (Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer'
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            $data['message'] = Messager::$MESSAGE_EROORS['400'];
+            $data = json_encode($data);
+            return view('pages.topic', ['data' => $data]);
+        }
+
+        $topFive = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
+        $data['top_five'] = $topFive;
+        $data = json_encode($data);
+        return view('pages.topic', ['data' => $data]);
+
+    }
+
 }
