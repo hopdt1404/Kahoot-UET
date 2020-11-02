@@ -30,3 +30,5 @@ Route::resource('/room', 'RoomController');
 Route::get('/report/search', 'ReportController@searchReportByName');
 Route::resource('/report', 'ReportController');
 
+Route::resource('/player', 'PlayerController');
+//Route::get('player/add-player', 'PlayerController@addPlayer');
