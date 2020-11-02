@@ -76,9 +76,28 @@ class PlayerController extends Controller
 
     }
 
-    public function show ()
+    /*
+     * Update Total Score
+     */
+    public function updateTotalScore (Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'id' => 'bail|required|integer',
+            'score' => 'bail|required|numeric'
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            $data['message'] = Messager::$MESSAGE_EROORS['400'];
+            $data = json_encode($data);
+            return view('pages.topic', ['data' => $data]);
+        }
+        $player = Players::find($request['id']);
+        $player['total_score'] += $request['score'];
+        $player->save();
 
+        $data['player'] = $player;
+        $data = json_encode($data);
+        return view('pages.topic', ['data' => $data]);
     }
 
 }

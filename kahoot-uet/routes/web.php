@@ -30,5 +30,7 @@ Route::resource('/room', 'RoomController');
 Route::get('/report/search', 'ReportController@searchReportByName');
 Route::resource('/report', 'ReportController');
 Route::get('player/add-player', 'PlayerController@addPlayer');
-Route::post('player/get-out-player', 'PlayerController@getOutPlayer');
+Route::get('player/get-out-player', 'PlayerController@getOutPlayer');
+Route::get('player/updateTotalScore', 'PlayerController@updateTotalScore');
 Route::resource('/player', 'PlayerController');
+Route::resource('/report-player', 'ReportPlayerController');

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reports;
-use App\Rooms;
+use App\Messager;
+use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
@@ -50,9 +51,32 @@ class ReportController extends Controller
 
     }
 
+    /*
+     *  Create Report when create room
+    */
+
     public function create (Request $request)
     {
-
+        $validator = Validator::make($request->all(),[
+            'name' => 'bail|required',
+            'room_id' => 'bail|required|integer',
+            'owner_id' => 'bail|required|integer',
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            $data['message'] = Messager::$MESSAGE_EROORS['400'];
+            $data = json_encode($data);
+            return view('pages.topic', ['data' => $data]);
+        }
+        $report = Reports::create([
+            'name' => $request['name'],
+            'room_id' => $request['room_id'],
+            'owner_id' => $request['owner_id']
+        ]);
+        $data['report'] = $report;
+        $data = json_encode($data);
+        return view('pages.topic', ['data' => $data]);
 
     }
+
 }
