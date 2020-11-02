@@ -27,3 +27,6 @@ Route::resource('/question', 'QuestionsController');
 Route::get('/room/finish', 'RoomController@finishRoom');
 Route::get('/room/lock', 'RoomController@lockRoom');
 Route::resource('/room', 'RoomController');
+Route::get('/report/search', 'ReportController@searchReportByName');
+Route::resource('/report', 'ReportController');
+
