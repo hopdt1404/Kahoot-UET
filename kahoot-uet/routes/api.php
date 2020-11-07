@@ -19,7 +19,7 @@ use App\Models\User;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::get('export','ExportExcelController@export');
 Route::group([
     'prefix' => 'auth'
 ], function () {
