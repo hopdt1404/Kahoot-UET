@@ -1,5 +1,18 @@
 # Kahoot-UET
 
+### Run 
+ - php artisan migrate:fresh 
+ - php artisan db:seed --class=FakeAllDataSeed
+ - composer require laravel/passport
+ - php artisan migrate
+ - php artisan passport:install
+
+
+
+
+
+
+
 ## Quy tắc chung.
 
 ### A. Git

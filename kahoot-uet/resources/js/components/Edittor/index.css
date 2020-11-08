@@ -1,0 +1,32 @@
+.Container {
+    font-size: 20em;
+}
+.Container header{
+    display: flex;
+    width: calc(100%);
+    justify-content: center;
+    padding: 20px 0;
+    background-color: blueviolet;
+}
+.Container header input {
+    width: calc(90%);
+    height: 10em;
+}
+main {
+    width: calc(100%);
+    background-color: chartreuse;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+main .left-col {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+main .right-col .preview {
+    width: 40em;
+    height: 40vh; 
+    background-color: chocolate;
+}
