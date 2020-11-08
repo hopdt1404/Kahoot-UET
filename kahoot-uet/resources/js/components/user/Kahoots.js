@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-
-class About extends Component {
+import Header from './Header';
+class Kahoots extends Component {
     render() {
         return (<div>
+            <Header />
             <h1>Welcome to Kahoots!</h1>
         </div>)
     }
 }
 
-export default About
+export default Kahoots;
