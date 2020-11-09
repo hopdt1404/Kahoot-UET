@@ -1,0 +1,98 @@
+.namequest{
+    height: 50px;
+}
+.numplayer{
+    height:20px;
+    
+}
+.quest{
+    color: rgb(51, 51, 51);
+    height: 100%;
+    min-height: 74px;
+    text-decoration: none;
+    display: inherit;
+    border:solid 1px grey;
+}
+.image{
+    position: relative;
+    min-height: 74px;
+    width: 109px;
+    background: rgb(204, 204, 204);
+    border-radius: 4px 0px 0px 4px;
+}
+.num-quest{
+    right: auto;
+    left: 8px;
+    display: inline-block;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(51, 51, 51, 0.8);
+    padding: 1.5px 8px;
+    border-radius: 4px;
+}
+.num-quest-text{
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    font-weight: bold;
+}
+.quest-info{
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+.quest-name{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    min-height: 50px;
+    flex: 1 1 auto;
+}
+.quest-name-area{
+    margin: 8px;
+    max-height: 46px;
+    overflow: hidden;
+}
+.quest-name-text{
+    margin: 0px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: bold;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.num-play{
+    min-height: 22px;
+    height: 24px;
+    background-color: rgb(242, 242, 242);
+}
+.num-play-area{
+    right: 2px;
+    margin-right: 5px;
+    margin-left: auto;
+}
+.num-play-text{
+    margin-right: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 12px;
+}
+.see-all{
+    padding: 0px 16px 16px;
+    border-top: none;
+}
+.see-all-area{
+    text-align: center;
+}
+.see-all-text{
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(19, 104, 206);
+}

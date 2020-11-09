@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::view('/', 'header');
+Route::view('/', 'index');
 // Route::view('/test', 'test');
 
 // Route::view('/', 'test');
