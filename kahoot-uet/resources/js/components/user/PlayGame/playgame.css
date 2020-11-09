@@ -1,0 +1,128 @@
+/* Option CSS */
+
+.option-root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(134, 76, 191);
+}
+
+.option-body {
+    margin: auto;
+}
+
+.option-img {
+    min-height: 3.625rem;
+    max-height: 10rem;
+    padding: 0.875rem;
+    display: flex;
+    justify-content: center;
+}
+
+.option-game {
+    width: 41.25rem;
+    margin: 0.5rem auto 0px;
+}
+
+.option-name-topic {
+    margin-bottom: 30px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -3px inset;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.option-name-topic-text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
+    text-shadow: none;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.option-mode-game {
+    width: 41.25rem;
+    margin: 0px auto 1rem;
+    overflow: hidden;
+}
+
+.style-mode {
+    box-sizing: border-box;
+    width: 18.75rem;
+    margin: 4.5rem 0px 0px;
+    padding: 0px 1rem 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.option-mode-game .classic-mode {
+    float: left;
+}
+
+.option-mode-game .team-mode {
+    float: right;
+}
+
+.mode-img {
+    height: 6.5rem;
+    margin: -4.5rem 0px 0.625rem;
+    vertical-align: top;
+}
+
+.mode-text {
+    margin: 0px 0px 1.25rem;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+}
+
+.mode-button {
+    width: 100%;
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -4px inset; 
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0px 16px 4px;
+}
+.green-button {
+    background: rgb(38, 137, 12);
+}
+
+.green-button:hover {
+    background: rgb(38, 136, 13);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -3px inset;
+    transform: translateY(2px);
+}
+.blue-button {
+    background: rgb(18, 96, 190);
+}
+
+.blue-button:hover {
+    background: rgb(20, 93, 182);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -3px inset;
+    transform: translateY(2px);
+}
+
+.option-game-options {
+    padding: 0.5625rem 1.25rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -0.1875rem inset;
+    position: relative;
+    color: rgb(51, 51, 51);
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.875rem;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 0.25rem;
+}
+
+/* Lobby CSS */
+

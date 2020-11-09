@@ -1,0 +1,95 @@
+.main-content{
+    padding-top: 2rem;
+    padding-bottom: 5.5rem;
+    background-color: rgb(242, 242, 242);
+    min-height: 100vh;
+    z-index: 2;
+}
+.user-profile{
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border: 1px rgb(204, 204, 204);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(184, 164, 164, 0.15) 0px 2px 4px 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.name{
+    color: rgb(70, 23, 143);
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding: 0px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+.username{
+    color: rgb(110, 110, 110);
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    margin-bottom: 5px;
+    padding: 0px;
+}
+.kahoot-list{
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border: 1px rgb(204, 204, 204);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.create-kahoot{
+    padding: 16px;
+}
+.create-kahoot-area{
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    margin-top: 8px;
+    border: 1px dashed rgb(204, 204, 204);
+    background-color: rgb(242, 242, 242);
+}
+.create-kahoot-box{
+    text-align: center;
+    padding: 24px 16px;
+    border-radius: 4px;
+}
+.create-kahoot-text{
+    font-size: 14px;
+    color: rgb(110, 110, 110);
+    max-width: 264px;
+    margin: 0px auto 8px;
+}
+.create-kahoot-button{
+    width: initial;
+    margin: 0px;
+    border: 0px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -4px inset;
+    background: rgb(19, 104, 206);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 4px;
+}
