@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlayerRoom extends Model
+class ReportPlayer extends Model
 {
-    protected $table = 'player_room';
+    protected $table = 'report_players';
 
     protected $guarded = [];
 }

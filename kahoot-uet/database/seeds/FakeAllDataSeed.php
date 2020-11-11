@@ -16,7 +16,7 @@ class FakeAllDataSeed extends Seeder
             FakeQuestionSeeder::class,
             FakeReportSeeder::class,
             FakeRoomSeeder::class,
-            FakeUserSeeder::class,
+//            FakeUserSeeder::class,
             TopicSeeder::class
 
         ]);
