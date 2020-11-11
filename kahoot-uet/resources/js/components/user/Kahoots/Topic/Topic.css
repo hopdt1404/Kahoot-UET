@@ -1,0 +1,86 @@
+.info{
+    background-color: white;
+    box-shadow: 0 0 0.5rem 0 rgba(0,0,0,.15);
+    min-height: 80vh;
+    margin-top:20px;
+}
+.img{
+    width:100%;
+    height:200px;
+    display: block;
+    background-color: cadetblue;
+}
+.topic-name-area{
+    padding-top:20px;
+    display: flex;
+}
+.topic-name-box{
+    padding-right:20px;
+    font-size: 40px;
+    font-weight: bold;
+    color:black;
+}
+.star{
+    position: relative;
+    right:10px;
+    left:auto;
+    top:10px;
+}
+.private-public{
+    font-size: medium;
+    font-weight: lighter;
+    color:grey;
+}
+.favorite-play-player{
+    display: flex;
+}
+.num-text{
+    font-size: 25px;
+    font-weight: bold;
+}
+.fav-play-player{
+    font-size: 20px;
+    font-weight: lighter;
+    margin-right: 20px;
+}
+.quest-count-text{
+    display: flex;
+    margin-left:10px;
+    font-size: 20px;
+    font-weight:bold;
+}
+.quest-box{
+    display: flex;
+    margin:20px;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 0 0.5rem 0 rgba(0,0,0,.15);
+
+}
+.quest-text{
+    display: flex;
+    flex-direction: column;
+}
+.quest-first{
+    font-size: 15px;
+    color:grey;
+}
+.quest-second{
+    font-weight: bold;
+    font-size:20px;
+    overflow: auto;
+    width: 500px;
+    height:100px;
+    display: block;
+    overflow-wrap: break-word;
+}
+.quest-img{
+    flex: 0 0 auto;
+    min-width: 96px;
+    width: 180px;
+    height: 120px;
+    background-color: aquamarine;
+}
+.answer{
+    margin-left:20px;
+}

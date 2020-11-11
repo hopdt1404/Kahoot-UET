@@ -544,8 +544,6 @@
                 "trusted proxy"
             ],
             "time": "2020-10-22T13:48:01+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "firebase/php-jwt",
@@ -596,7 +594,6 @@
                 "php"
             ],
             "time": "2020-03-25T18:49:23+00:00"
->>>>>>> origin/thientk
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2099,8 +2096,6 @@
             "time": "2020-10-11T21:42:15+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "paragonie/random_compat",
             "version": "v9.99.100",
             "source": {
@@ -2196,7 +2191,6 @@
             "time": "2015-12-19T14:08:53+00:00"
         },
         {
->>>>>>> origin/thientk
             "name": "phpoption/phpoption",
             "version": "1.7.5",
             "source": {
@@ -4283,21 +4277,6 @@
                 }
             ],
             "time": "2020-10-23T14:02:19+00:00"
-<<<<<<< HEAD
-        },
-        {
-            "name": "symfony/polyfill-php72",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "cede45fcdfabdd6043b3592e83678e42ec69e930"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/cede45fcdfabdd6043b3592e83678e42ec69e930",
-                "reference": "cede45fcdfabdd6043b3592e83678e42ec69e930",
-=======
         },
         {
             "name": "symfony/polyfill-php72",
@@ -4384,7 +4363,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/8ff431c517be11c78c48a39a66d37431e26a6bed",
                 "reference": "8ff431c517be11c78c48a39a66d37431e26a6bed",
->>>>>>> origin/thientk
                 "shasum": ""
             },
             "require": {
@@ -4450,19 +4428,6 @@
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/polyfill-php73",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "8ff431c517be11c78c48a39a66d37431e26a6bed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/8ff431c517be11c78c48a39a66d37431e26a6bed",
-                "reference": "8ff431c517be11c78c48a39a66d37431e26a6bed",
-=======
             "name": "symfony/polyfill-php80",
             "version": "v1.20.0",
             "source": {
@@ -4474,7 +4439,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
                 "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
->>>>>>> origin/thientk
                 "shasum": ""
             },
             "require": {
@@ -4544,23 +4508,6 @@
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/polyfill-php80",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
-                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-=======
             "name": "symfony/process",
             "version": "v5.1.7",
             "source": {
@@ -4577,20 +4524,11 @@
             "require": {
                 "php": ">=7.2.5",
                 "symfony/polyfill-php80": "^1.15"
->>>>>>> origin/thientk
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-main": "1.20-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-=======
                     "dev-master": "5.1-dev"
->>>>>>> origin/thientk
                 }
             },
             "autoload": {
@@ -4631,22 +4569,6 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2020-10-23T14:02:19+00:00"
-        },
-        {
-            "name": "symfony/process",
-            "version": "v5.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/process.git",
-                "reference": "f00872c3f6804150d6a0f73b4151daab96248101"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/f00872c3f6804150d6a0f73b4151daab96248101",
-                "reference": "f00872c3f6804150d6a0f73b4151daab96248101",
-=======
             "time": "2020-09-02T16:23:27+00:00"
         },
         {
@@ -4661,7 +4583,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/51a21cb3ba3927d4b4bf8f25cc55763351af5f2e",
                 "reference": "51a21cb3ba3927d4b4bf8f25cc55763351af5f2e",
->>>>>>> origin/thientk
                 "shasum": ""
             },
             "require": {
@@ -4669,9 +4590,6 @@
                 "psr/http-message": "^1.0",
                 "symfony/http-foundation": "^4.4 || ^5.0"
             },
-<<<<<<< HEAD
-            "type": "library",
-=======
             "require-dev": {
                 "nyholm/psr7": "^1.1",
                 "symfony/phpunit-bridge": "^4.4 || ^5.0"
@@ -4685,7 +4603,6 @@
                     "dev-master": "2.0-dev"
                 }
             },
->>>>>>> origin/thientk
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bridge\\PsrHttpMessage\\": ""
@@ -4730,11 +4647,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2020-10-24T12:01:57+00:00"
-=======
             "time": "2020-09-29T08:17:46+00:00"
->>>>>>> origin/thientk
         },
         {
             "name": "symfony/routing",

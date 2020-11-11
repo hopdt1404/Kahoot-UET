@@ -8,7 +8,8 @@ export default class Kahoots extends React.Component{
         super(props);
         this.state = {
             kahootlist:[
-                {
+                {   
+                    id:1,
                     name: "test1",
                     numquest: 1,
                     numplay: 1,
@@ -18,6 +19,7 @@ export default class Kahoots extends React.Component{
                     
                 },
                 {
+                    id:2,
                     name: "test3",
                     numquest: 10,
                     numplay: 3,
@@ -26,6 +28,7 @@ export default class Kahoots extends React.Component{
                     time: 2
                 },
                 {
+                    id:3,
                     name: "test4",
                     numquest: 4,
                     numplay: 5,
@@ -34,6 +37,7 @@ export default class Kahoots extends React.Component{
                     time: 3
                 },
                 {
+                    id:4,
                     name: "test2",
                     numquest: 4,
                     numplay: 5,
@@ -42,6 +46,7 @@ export default class Kahoots extends React.Component{
                     time: 10
                 },
                 {
+                    id:5,
                     name: "test5",
                     numquest: 4,
                     numplay: 5,
@@ -50,6 +55,7 @@ export default class Kahoots extends React.Component{
                     time: 7
                 },
                 {
+                    id:7,
                     name: "test7",
                     numquest: 4,
                     numplay: 5,
@@ -58,6 +64,7 @@ export default class Kahoots extends React.Component{
                     time: 4
                 },
                 {
+                    id:6,
                     name: "test6",
                     numquest: 4,
                     numplay: 5,
@@ -223,6 +230,9 @@ export default class Kahoots extends React.Component{
         if (x > y) {return 1;}
         return 0;
     }
+    route(id){
+        return "kahoots/detail/"+String(id);
+    }
     render(){
         const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
@@ -243,17 +253,18 @@ export default class Kahoots extends React.Component{
             else {
                 fav = <Star size = "40px"/>
             }
+            
             return (
                 <div class="kahoot-box row">
-                    <a class="image-box" href="/">
+                    <Link to={this.route(data.id)} class="image-box">
                             <div class="num-quest">
                                 <span class="num-quest-text"> {data.numquest} Q </span>
                             </div>
-                    </a>
+                    </Link>
                     <div class="quest-info">
                         <div class = "quest-name">
                             <div class="quest-name-area">
-                                <a href="/" class="quest-name-text">{data.name}</a>
+                                <Link to={this.route(data.id)} class="quest-name-text">{data.name}</Link>
                             </div>
                             {fav}
                         </div>

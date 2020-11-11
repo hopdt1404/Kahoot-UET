@@ -12,6 +12,7 @@ export default class Home extends React.Component{
             fullname:"FullName",
             username:"username",
             kahootlist: [{
+                id: 123,
                 name_quest: "test",
                 num_quest: 1,
                 num_play: 1
@@ -53,13 +54,13 @@ export default class Home extends React.Component{
                 <div class="container d-flex pt-5 justify-content-center">
                     <div class="col-sm-3">
                         <div class="user-profile container-fluid">
-                            <span class= "name">{this.state.fullname}</span>
-                            <span class = "username">{this.state.username}</span>
+                            <span class="name">{this.state.fullname}</span>
+                            <span class="username">{this.state.username}</span>
                         </div>
                     </div>
                     <div class="col-sm-4 kahoot-list">
                         <h2 class="pt-2">My Kahoots</h2>
-                        {this.state.kahootlist.map(each => <KahootList data={each} />)}
+                        {this.state.kahootlist.map(each => <KahootList key={each.id} data={each} />)}
                         <div class="create-kahoot">
                             <div class="create-kahoot-area">
                                 <div class="create-kahoot-box">

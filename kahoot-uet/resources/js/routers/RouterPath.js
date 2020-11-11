@@ -6,7 +6,7 @@ import Kahoots from "../components/user/Kahoots";
 import Creator from "../components/user/Creator";
 import Login from "../components/user/Login";
 import Header from '../components/user/Header';
-
+import Topic from "../components/user/Kahoots/Topic/Topic";
 function RouterPath() {
     return (
         <main>
@@ -17,6 +17,7 @@ function RouterPath() {
                 <Route exact path="/user-reports" component={Reports} />
                 <Route exact path="/creator" component={Creator} />
                 <Route exact path="/auth/login" component={Login} />
+                <Route exact path="/kahoots/detail/:id" component={Topic} />
             </Switch>
         </main>
     );
