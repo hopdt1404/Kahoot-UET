@@ -12,6 +12,10 @@ use Faker\Generator as Faker;
 
 class TopicController extends Controller
 {
+    /*
+     *  Get all Topic
+    */
+
     public function index () {
         $creator_id = 1;
 

@@ -58,6 +58,9 @@ class EntryController extends Controller
     }
     public function login(Request $request)
     {
+        // return response()->json([
+        //     "cookie" => $request->cookie()
+        // ]);
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
