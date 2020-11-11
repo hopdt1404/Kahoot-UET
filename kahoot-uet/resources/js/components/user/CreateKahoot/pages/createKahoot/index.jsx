@@ -1,6 +1,6 @@
 import React from "react";
 import "./create.css";
-import Header from "../../Header";
+//import Header from "../../Header";
 import SideBar from "../../SideBar";
 import Editor from "../../Edittor";
 
@@ -14,7 +14,7 @@ function CreateKahoot() {
   return (
     <div className="crKahoot">
       <header className="crHeader">
-        <Header />
+        {/* <Header /> */}
       </header>
       <main className="crMain">
         <div className="sidebar">

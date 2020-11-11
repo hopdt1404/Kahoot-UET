@@ -3,6 +3,7 @@ import "./Kahoots/Kahoots.css";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Person, Star,Search ,Tools, StarFill} from 'react-bootstrap-icons';
+import Header from './Header';
 export default class Kahoots extends React.Component{
     constructor(props){
         super(props);
@@ -315,66 +316,69 @@ export default class Kahoots extends React.Component{
             curpagebtn = <li class="page-item active" id ="cur"><button class="page-link">{curpage}</button></li>
         }
         return(
-            <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
-                <div class="col-sm-3 menu">
-                    <div class="menu-content">
-                        <div class="text-menu" ref = "mykahoots" onClick={this.onKahootBtnClick}>
-                            <Person />
-                            <span>My Kahoots</span>
-                        </div>
-                        <div class="text-menu" ref = "favorite" onClick ={this.onFavoriteClick}>
-                            <Star />
-                            <span>Favorites</span>
-                        </div>
-                        <div class="text-menu notuse">
-                            <Tools />
-                            <span>Share With Me</span>
-                        </div>
-                        <div class="text-menu notuse">
-                            <Tools />
-                            <span>My Drafts</span>
+            <div>
+                <Header />
+                <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
+                    <div class="col-sm-3 menu">
+                        <div class="menu-content">
+                            <div class="text-menu" ref = "mykahoots" onClick={this.onKahootBtnClick}>
+                                <Person />
+                                <span>My Kahoots</span>
+                            </div>
+                            <div class="text-menu" ref = "favorite" onClick ={this.onFavoriteClick}>
+                                <Star />
+                                <span>Favorites</span>
+                            </div>
+                            <div class="text-menu notuse">
+                                <Tools />
+                                <span>Share With Me</span>
+                            </div>
+                            <div class="text-menu notuse">
+                                <Tools />
+                                <span>My Drafts</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <div class="main-content">
-                        <div class="search-area">
-                            <div class="search-box">
-                                <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
-                                <button class="search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
-                                    <Search color="white"/>
-                                </button>
-                                <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
-                            </div>
-                            <div class="sort row">
-                                <div class="kahoots-text-area">
-                                    <span class="kahoots-text">My kahoots</span>
+                    <div class="col-sm-9">
+                        <div class="main-content">
+                            <div class="search-area">
+                                <div class="search-box">
+                                    <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
+                                    <button class="search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
+                                        <Search color="white"/>
+                                    </button>
+                                    <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
                                 </div>
-                                <div class="sort-box">
-                                    <div class="sort-text-area">
-                                        <span class="sort-text">Sort by:</span>
+                                <div class="sort row">
+                                    <div class="kahoots-text-area">
+                                        <span class="kahoots-text">My kahoots</span>
                                     </div>
-                                    <button class="btn btn-outline-info" ref = "recent" onClick={this.onRecentBtnClick}>Recent</button>
-                                    <button class="btn btn-outline-info" ref = "oldest" onClick={this.onOldestBtnClick}>Oldest</button>
-                                    <button class="btn btn-outline-info" ref = "nameasc" onClick={this.onNameAscBtnClick}>A-{'>'}Z</button>
-                                    <button class="btn btn-outline-info" ref = "namedesc"onClick={this.onNameDescBtnClick}>Z-{'>'}A</button>
+                                    <div class="sort-box">
+                                        <div class="sort-text-area">
+                                            <span class="sort-text">Sort by:</span>
+                                        </div>
+                                        <button class="btn btn-outline-info" ref = "recent" onClick={this.onRecentBtnClick}>Recent</button>
+                                        <button class="btn btn-outline-info" ref = "oldest" onClick={this.onOldestBtnClick}>Oldest</button>
+                                        <button class="btn btn-outline-info" ref = "nameasc" onClick={this.onNameAscBtnClick}>A-{'>'}Z</button>
+                                        <button class="btn btn-outline-info" ref = "namedesc"onClick={this.onNameDescBtnClick}>Z-{'>'}A</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="list-area">
-                            <div class="total-area row">
-                                <span class="d-flex">Total {'('}{select.length}{')'}</span>
-                                <span class="sort-by">Sort by: {sort}</span>
-                            </div>
-                            <div class="kahoots-list">
-                                {topic}
-                                <ul class="pagination justify-content-center" style={{margin:'20px 0'}}>
-                                {firstbtn}
-                                {prevpagebtn}
-                                {curpagebtn}
-                                {nextpagebtn}
-                                {lastbtn}
-                                </ul>
+                            <div class="list-area">
+                                <div class="total-area row">
+                                    <span class="d-flex">Total {'('}{select.length}{')'}</span>
+                                    <span class="sort-by">Sort by: {sort}</span>
+                                </div>
+                                <div class="kahoots-list">
+                                    {topic}
+                                    <ul class="pagination justify-content-center" style={{margin:'20px 0'}}>
+                                    {firstbtn}
+                                    {prevpagebtn}
+                                    {curpagebtn}
+                                    {nextpagebtn}
+                                    {lastbtn}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

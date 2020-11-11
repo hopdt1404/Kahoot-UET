@@ -2,6 +2,7 @@ import React from 'react';
 import {Star, StarFill, TriangleFill } from 'react-bootstrap-icons';
 import "./Topic.css"
 import axios from 'axios';
+import Header from "../../Header";
 class Topic extends React.Component {
     constructor(props){
         super(props);
@@ -91,7 +92,6 @@ class Topic extends React.Component {
         .catch(error => console.log(error));
     }
     render() {
-        console.log(this.props);
         let fav = null;
         if (this.state.isFavorite === true) {
             fav = <StarFill color="orange" size="40px"/>
@@ -145,35 +145,38 @@ class Topic extends React.Component {
             )
         })
         return (
-            <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
-                <div class="col-sm-4 info">
-                    <img class="img" src={this.state.image} alt="image" />
-                    <div class="topic-name-area">
-                        <div class="topic-name-box">
-                            <span class="topic-name">{this.state.name}</span>
+            <div>
+                <Header />
+                <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
+                    <div class="col-sm-4 info">
+                        <img class="img" src={this.state.image} alt="image" />
+                        <div class="topic-name-area">
+                            <div class="topic-name-box">
+                                <span class="topic-name">{this.state.name}</span>
+                            </div>
+                            <div class="star">
+                                {fav}
+                            </div>
                         </div>
-                        <div class="star">
-                            {fav}
+                        <div class="private-public">
+                            {pub_priv}
+                        </div>
+                        <div class="favorite-play-player">
+                            {favorite}
+                            {play}
+                            {player}
+                        </div>
+                        <div class="d-flex font-weight-bold text-black">
+                            <button class="btn btn-success">Play</button>
+                            <button class="btn btn-primary">Edit</button>
                         </div>
                     </div>
-                    <div class="private-public">
-                        {pub_priv}
+                    <div class="col-sm-7 m-3">
+                        <div class="quest-count-text">
+                            <span> Questions {'('}{this.state.quest.length}{')'}</span>
+                        </div>
+                        {questlist}
                     </div>
-                    <div class="favorite-play-player">
-                        {favorite}
-                        {play}
-                        {player}
-                    </div>
-                    <div class="d-flex font-weight-bold text-black">
-                        <button class="btn btn-success">Play</button>
-                        <button class="btn btn-primary">Edit</button>
-                    </div>
-                </div>
-                <div class="col-sm-7 m-3">
-                    <div class="quest-count-text">
-                        <span> Questions {'('}{this.state.quest.length}{')'}</span>
-                    </div>
-                    {questlist}
                 </div>
             </div>
         )
