@@ -5,20 +5,34 @@ namespace App\Http\Controllers;
 use App\Questions;
 use App\Rooms;
 use App\Topics;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
     /*
-     *  Get all Topic
+     *  Get all Topic creator by user: Waite to TEST
     */
 
-    public function index () {
-        $creator_id = 1;
+    public function index (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'creator_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
 
+        $creator_id = $request['creator_id'];
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Now',
+                'error'=>$validator->errors()], 400);
+        }
         $myTopic = Topics::select('id' ,'name', 'creator_id', 'created_at', 'is_public', 'is_daft', 'is_played', 'created_at')->where('creator_id', $creator_id)->where('is_deleted', 0)->get();
         $result = [];
         for ($i = 0; $i < count($myTopic); $i++) {
@@ -32,8 +46,13 @@ class TopicController extends Controller
                 $topic['number_played'] = $numberPlayer;
             }
         }
-        return view('pages.topic', ['data' => $myTopic]);
+        $result = $myTopic;
+        return response()->json([
+            'message'=> 'registered successfully', $result
+        ],201);
     }
+
+
     public function show ($creator_id = 1) {
 //        if (is_null($creator_id)) {
 //            return view ('Error');
@@ -41,53 +60,68 @@ class TopicController extends Controller
         $data = Topics::where('creator_id', $creator_id)->get();
         return view('pages.topic', ['data' => $data]);
     }
-    public function store () {
-        $numberQuestion = 10;
-        $questions = [];
-        $faker = Faker::class;
-        for ($i = 0; $i < $numberQuestion; $i++ ) {
-            $question = Topics::create([
-                'name' => 'Faker::class.name',
-                'creator_id' => rand(1, 10),
-                'is_deleted' => rand(0, 1),
-                'is_public'  => rand(0, 1),
-                'is_daft'  => rand(0, 1),
-                'is_played' => rand(0,1),
-                'created_at' => now()
-            ]);
-//            $question->save();
 
-            array_push($questions, $question);
+    /*
+     *  Save topic : Wait to test
+    */
 
+    public function save (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'creator_id' => 'bail|required|integer',
+            'name' => 'bail|required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
         }
-        return view('pages.topic', ['data' => $questions]);
+        $data = $request['topic'];
+        $topic = Topics::create([
+            'name' => $data['name'],
+            'creator_id' => $request['creator_id']
+        ]);
+        return response()->json([
+            'message' => "created successfully topic", $topic
+        ], 200);
     }
 
-
-
-    public function update () {
-        $creatorId = 1;
-
-        $dataGet = Topics::where('creator_id', $creatorId)->limit(1)->get();
-        Topics::where('creator_id', $creatorId)->limit(1)->update(['name' => 'con cac', 'is_played' => 1]);
-        $data = [];
-        array_push($data, $dataGet);
-
-        return view('pages.topic', ['data' => json_encode($data, JSON_PRETTY_PRINT)] );
+    /*
+     * Update topic: Wait test
+     */
+    public function update (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'creator_id' => 'bail|required|integer',
+            'name' => 'bail|required|string',
+            'id' => 'bail|required|string'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $data = $request['data'];
+        Topics::where('id', $data['id'])->update(['name' => $data['name']]);
+        return response()->json([
+            'message' => "update successfully topic"
+        ], 200);
     }
-
-    public function destroy () {
-        $creatorId = 1;
-        $dataGet = Topics::where('creator_id', $creatorId)->orderBy('id', 'asc')->limit(1)->get();
-        $dataGet['objcet'] = 'GEt';
-        $data = [];
-        array_push($data, $dataGet);
-        $id = $dataGet[0]['id'];
-        Topics::where('id', $id)->delete();
-        $dataGetAfterDelete = Topics::where('creator_id', $creatorId)->orderBy('id', 'asc')->limit(1)->get();
-        $dataGetAfterDelete['object'] = 'object after delete';
-
-        array_push($data, $dataGetAfterDelete);
-        return view('pages.topic', ['data' => json_encode($data, JSON_PRETTY_PRINT)] );
+    /*
+     * Delete topic: Wait to test
+    */
+    public function delete (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'creator_id' => 'bail|required|integer',
+            'id' => 'bail|required|string'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $data = $request['data'];
+        Topics::where('id', $data['id'])->update(['is_deleted' => 1]);
+        return response()->json([
+            'message' => "delete successfully topic"
+        ], 200);
     }
 }

@@ -21,6 +21,12 @@
     line-height: 0.875rem;
 }
 
+.create-button:hover {
+    background: rgb(211, 211, 211);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -2px inset;
+    transform: translateY(2px);
+}
+
 .nav-header {
     background-color: rgb(70, 23, 143);
 }
@@ -64,4 +70,23 @@
 
 .dropdown-person {
     margin: 0px 30px 0px 10px;
+}
+
+.reports-body {
+    min-width: 0px;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 1280px;
+    flex-wrap: nowrap;
+}
+
+.css-table {
+    margin: 5px;
+}
+
+.td-options {
+    display: flex;
+}
+.div-options {
+    float: right;
 }

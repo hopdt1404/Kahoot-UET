@@ -19,7 +19,7 @@ use App\Models\User;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::get('export','ExportExcelController@export');
 Route::group([
     'prefix' => 'auth'
 ], function () {
@@ -38,4 +38,7 @@ Route::group([
         Route::get('user_id','ProfileController@getUserId');
         Route::put('change-password','EntryController@changePassword');
     });
+
+
 });
+
