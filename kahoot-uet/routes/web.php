@@ -22,7 +22,7 @@ Route::view('/', 'index');
 // Route::view('/test', 'test');
 
 // Route::view('/', 'test');
-Route::resource('/topic', 'TopicController');
+
 Route::resource('/question', 'QuestionsController');
 Route::get('/room/finish', 'RoomController@finishRoom');
 Route::get('/room/lock', 'RoomController@lockRoom');

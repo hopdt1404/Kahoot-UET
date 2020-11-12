@@ -5,20 +5,34 @@ namespace App\Http\Controllers;
 use App\Questions;
 use App\Rooms;
 use App\Topics;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
     /*
-     *  Get all Topic
+     *  Get all Topic creator by user
     */
 
-    public function index () {
-        $creator_id = 1;
+    public function index (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'creator_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
 
+        $creator_id = $request['creator_id'];
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Now',
+                'error'=>$validator->errors()], 400);
+        }
         $myTopic = Topics::select('id' ,'name', 'creator_id', 'created_at', 'is_public', 'is_daft', 'is_played', 'created_at')->where('creator_id', $creator_id)->where('is_deleted', 0)->get();
         $result = [];
         for ($i = 0; $i < count($myTopic); $i++) {
@@ -32,7 +46,10 @@ class TopicController extends Controller
                 $topic['number_played'] = $numberPlayer;
             }
         }
-        return view('pages.topic', ['data' => $myTopic]);
+        $result = $myTopic;
+        return response()->json([
+            'message'=> 'registered successfully', $myTopic
+        ],201);
     }
     public function show ($creator_id = 1) {
 //        if (is_null($creator_id)) {

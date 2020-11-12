@@ -39,3 +39,6 @@ Route::group([
         Route::put('change-password','EntryController@changePassword');
     });
 });
+Route::group(['prefix' => 'topic'], function () {
+    Route::get('', 'TopicController@index');
+});
