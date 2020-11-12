@@ -48,24 +48,16 @@ class TopicController extends Controller
         }
         $result = $myTopic;
         return response()->json([
-            'message'=> 'registered successfully', $result
+            'message'=> 'created topic successfully', $result
         ],201);
     }
 
 
-    public function show ($creator_id = 1) {
-//        if (is_null($creator_id)) {
-//            return view ('Error');
-//        }
-        $data = Topics::where('creator_id', $creator_id)->get();
-        return view('pages.topic', ['data' => $data]);
-    }
-
     /*
-     *  Save topic : Wait to test
+     *  create topic : Wait to test
     */
 
-    public function save (Request $request) {
+    public function create (Request $request) {
         $validator = Validator::make($request->all(), [
             'creator_id' => 'bail|required|integer',
             'name' => 'bail|required|string',
@@ -82,11 +74,12 @@ class TopicController extends Controller
         ]);
         return response()->json([
             'message' => "created successfully topic", $topic
-        ], 200);
+        ], 201);
     }
 
     /*
      * Update topic: Wait test
+     * (update => exist: => create new object and question of tooc)
      */
     public function update (Request $request) {
         $validator = Validator::make($request->all(), [
@@ -100,9 +93,20 @@ class TopicController extends Controller
                 'error'=>$validator->errors()], 400);
         }
         $data = $request['data'];
-        Topics::where('id', $data['id'])->update(['name' => $data['name']]);
+        Topics::where('id', $data['id'])->update(['is_duplicated' => 1]);
+        $topic = Topics::create([
+            'name' => $data['name'],
+            'creator_id' => $request['creator_id']
+        ]);
+        $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        $numberQuestion = count($questions);
+        for ($i = 0; $i < $numberQuestion; $i++) {
+            $question = $questions[$i];
+            $question['topic_id'] = $topic['id'];
+            Questions::create($question);
+        }
         return response()->json([
-            'message' => "update successfully topic"
+            'message' => "updated successfully topic"
         ], 200);
     }
     /*
@@ -121,7 +125,7 @@ class TopicController extends Controller
         $data = $request['data'];
         Topics::where('id', $data['id'])->update(['is_deleted' => 1]);
         return response()->json([
-            'message' => "delete successfully topic"
+            'message' => "deleted successfully topic"
         ], 200);
     }
 }
