@@ -18,9 +18,9 @@ class PlayerController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
         }
         $data['player'] = Players::select('name')->where('room_id', $request['room_id'])->orderBy('created_at')->get();
         $data['number_player'] = count($data['player']);
@@ -121,5 +121,6 @@ class PlayerController extends Controller
         return view('pages.topic', ['data' => $data]);
 
     }
+
 
 }
