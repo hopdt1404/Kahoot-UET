@@ -40,5 +40,3 @@ Route::get('/topi', 'TopicController@index');
 Route::group(['prefix' => 'topic'], function () {
 
 });
-
-Route::get('/export-data', 'ReportController@exportData');
