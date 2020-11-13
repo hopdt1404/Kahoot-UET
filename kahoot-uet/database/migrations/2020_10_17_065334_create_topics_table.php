@@ -20,6 +20,7 @@ class CreateTopicsTable extends Migration
             $table->boolean('is_deleted')->default(0);
             $table->boolean('is_public')->default(0);
             $table->boolean('is_daft')->default(0);
+            $table->boolean('is_duplicated')->default(0);
             $table->boolean('is_played')->default(0);
             $table->timestamps();
         });
