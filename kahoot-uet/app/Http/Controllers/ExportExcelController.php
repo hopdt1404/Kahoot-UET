@@ -15,7 +15,8 @@ use Symfony\Component\Console\Question\Question;
 
 class ExportExcelController extends Controller
 {
-    public function export(){
+    // pass report id,
+    public function export(Request $request){
         //test final scores
         $final_scores_list =[
            "kahoot_name"=> ["Mini Test"], 

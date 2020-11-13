@@ -22,7 +22,7 @@ a. Big Test:<br>
 	+ Played with: ?? sự khác biệt nào với Played<br>
 	+ Played: ??<br>
 	
-b. Overall Perfomance
+b. Overall Performance
 
 	+ Total correct answer: ? định nghĩa là gì ?
 	+ Total incorrect answer: ? định nghĩa là gì ?
@@ -33,7 +33,7 @@ c. Feedback ?? : Có phần feedback thì ở chỗ nào thế ?? sau khi chơi 
 	+ Number of responses
 	+ How fun was it? (out of 5)
 	+ Did you learn something?
-	+ Do you recomment it?
+	+ Do you recommend it?
 	+ How do you feel?
 
 => Định nghĩa sau
