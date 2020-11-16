@@ -11,6 +11,7 @@ $factory->define(ReportPlayer::class, function (Faker $faker) {
     $ansSelect = ['A', 'B', 'C', 'D'];
     return [
         'player_id' => rand(1, $maxPlayer),
+        'report_id' => 1,
         'question_id' => rand(1, $maxQuestion),
         'current_total_score' => rand(100, 1000),
         'player_score' => rand(20, 100),

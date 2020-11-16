@@ -13,6 +13,17 @@
 
 
 ### Question and Answer
+
+Done: 
++ Overview
++ FinalScore 
+
+Now: 
+Each question detail
+Export Report data
+Kahoot summary => Map result to question 
+
+
 Sheets
 1: Overview 
 
