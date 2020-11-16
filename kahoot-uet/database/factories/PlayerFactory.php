@@ -14,6 +14,8 @@ $factory->define(Players::class, function (Faker $faker) {
         'room_id' => 1,
 //        'report_id' => rand(1, 100),
         'report_id' => 1,
+        'number_correct_answer' => rand(0, 50),
+        'number_incorrect_answer' => rand(0, 50),
         'total_score' => rand(100, 99999)
     ];
 });
