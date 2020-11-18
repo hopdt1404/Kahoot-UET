@@ -76,7 +76,7 @@
     position: relative;
     min-height: 150px;
     min-width: 250px;
-    background: rgb(204, 204, 204);
+    background-size:cover;
     border-radius: 4px 0px 0px 4px;
 }
 .kahoots-num-quest{

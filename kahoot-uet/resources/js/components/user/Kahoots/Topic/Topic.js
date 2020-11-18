@@ -3,13 +3,14 @@ import {DiamondFill, Star, StarFill, TriangleFill, SquareFill,CircleFill,Check, 
 import "./Topic.css"
 import axios from 'axios';
 import Header from "../../Header";
+import fake_image from "../../../../images/reports-logo.png";
 class Topic extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             id: 1,
             name:"name",
-            image:null,
+            image:fake_image,
             favorites: 0,
             plays: 0,
             players: 0,
@@ -19,7 +20,7 @@ class Topic extends React.Component {
                 {
                     type: "type",
                     text:"texaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat",
-                    image:"",
+                    image:fake_image,
                     time:20,
                     score:300,
                     answers : [
@@ -45,7 +46,7 @@ class Topic extends React.Component {
                 {
                     type: "type",
                     text:"text",
-                    image:"",
+                    image:fake_image,
                     time:15,
                     score:500,
                     answers : [

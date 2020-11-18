@@ -4,6 +4,8 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Person, Star,Search ,Tools, StarFill} from 'react-bootstrap-icons';
 import Header from './Header';
+import fake_image from "../../images/reports-logo.png";
+
 export default class Kahoots extends React.Component{
     constructor(props){
         super(props);
@@ -16,7 +18,8 @@ export default class Kahoots extends React.Component{
                     numplay: 1,
                     isPuclic: false,
                     isFavorite: false,
-                    time: 1
+                    time: 1,
+                    image:fake_image
                     
                 },
                 {
@@ -26,7 +29,8 @@ export default class Kahoots extends React.Component{
                     numplay: 3,
                     isPuclic: true,
                     isFavorite: false,
-                    time: 2
+                    time: 2,
+                    image:fake_image
                 },
                 {
                     id:3,
@@ -35,7 +39,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: false,
                     isFavorite: true,
-                    time: 3
+                    time: 3,
+                    image:fake_image
                 },
                 {
                     id:4,
@@ -44,7 +49,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 10
+                    time: 10,
+                    image:fake_image
                 },
                 {
                     id:5,
@@ -53,7 +59,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 7
+                    time: 7,
+                    image:fake_image
                 },
                 {
                     id:7,
@@ -62,7 +69,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: false, 
-                    time: 4
+                    time: 4,
+                    image:fake_image
                 },
                 {
                     id:6,
@@ -71,7 +79,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 1
+                    time: 1,
+                    image:fake_image
                 }
             ],
             select:[{}],
@@ -257,7 +266,7 @@ export default class Kahoots extends React.Component{
             
             return (
                 <div class="kahoots-kahoot-box row">
-                    <Link to={this.route(data.id)} class="kahoots-image-box">
+                    <Link to={this.route(data.id)} class="kahoots-image-box" style={{backgroundImage:'url('+data.image+')'}}>
                             <div class="kahoots-num-quest">
                                 <span class="kahoots-num-quest-text"> {data.numquest} Q </span>
                             </div>

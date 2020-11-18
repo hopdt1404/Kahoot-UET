@@ -5,6 +5,7 @@ import Clock from "./Home/Time/Clock";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import fake_image from "../../images/reports-logo.png";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -17,13 +18,15 @@ export default class Home extends React.Component {
                     id: 1,
                     name_quest: "test1",
                     num_quest: 1,
-                    num_play: 1
+                    num_play: 1,
+                    image: fake_image
                 },
                 {   
                     id: 2,
                     name_quest: "test2",
                     num_quest: 2,
-                    num_play: 2
+                    num_play: 2,
+                    image: fake_image
                 }
             ]
             
