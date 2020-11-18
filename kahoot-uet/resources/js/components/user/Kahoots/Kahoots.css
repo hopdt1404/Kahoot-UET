@@ -1,17 +1,17 @@
-.menu{
+.kahoots-menu{
     background-color: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-.menu-content{
+.kahoots-menu-content{
     margin-top: 100px;
     position: fixed;
     top: 100px;
     left: 50px;
     background-color: white;
 }
-.text-menu{
+.kahoots-text-menu{
     display: block;
     color: blue;
     font-weight: bold;
@@ -20,30 +20,30 @@
     text-align: center;
     cursor: pointer;
 }
-.notuse{
+.kahoots-notuse{
     color:lightgrey;
 }
-.main-content{
+.kahoots-main-content{
     margin:30px;
 }
-.search-box{
+.kahoots-search-box{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.sort{
+.kahoots-sort{
     margin-top:70px;
     height: auto;
     font-weight: bold;
     font-size: 25px;
     color:black;
 }
-.kahoots-text-area{
+.kahoots-kahoots-text-area{
     display: flex;
     font-weight: bold;
     font-size: 25px;
 }
-.sort-box{
+.kahoots-sort-box{
     display: inline-flex;
     margin-left: auto;
 }
@@ -54,31 +54,32 @@
 .btn-outline-info{
     color: black;
 }
-.list-area{
+.kahoots-list-area{
     margin-top: 20px;
 }
-.total-area{
+.kahoots-total-area{
     font-size: large;
     font-weight: bolder;
     margin-bottom: 10px;
 }
-.sort-by{
+.kahoots-sort-by{
     display: inline-flex;
     margin-left: auto;
 }
-.kahoot-box{
+.kahoots-kahoot-box{
+    display:flex;
     margin-top:10px;
     margin-bottom: 10px;
     box-shadow: 0 0 0.5rem 0 rgba(0,0,0,.15);
 }
-.image-box{
+.kahoots-image-box{
     position: relative;
     min-height: 150px;
     min-width: 250px;
     background: rgb(204, 204, 204);
     border-radius: 4px 0px 0px 4px;
 }
-.num-quest{
+.kahoots-num-quest{
     right: auto;
     left: 8px;
     display: inline-block;
@@ -89,24 +90,25 @@
     padding: 1.5px 8px;
     border-radius: 4px;
 }
-.num-quest-text{
+.kahoots-num-quest-text{
     margin: 0px;
     color: rgb(255, 255, 255);
     font-size: 24px;
     font-weight: bold;
 }
-.quest-name{
+.kahoots-quest-name{
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     min-height: 50px;
     flex: 1 1 auto;
+    background-color: white;
 }
-.quest-name-area{
+.kahoots-quest-name-area{
     margin: 8px;
     max-height: 46px;
 }
-.quest-name-text{
+.kahoots-quest-name-text{
     margin: 0px;
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 28px;
@@ -118,43 +120,44 @@
     overflow-wrap: break-word;
     word-break: break-word;
 }
-.num-play{
+.kahoots-num-play{
     min-height: 30px;
     background-color: rgb(242, 242, 242);
+    justify-content: space-between;
 }
-.is-public{
+.kahoots-is-public{
     position: relative;
     left: 2px;
     margin-bottom: 5px;
     
 }
-.public-text{
+.kahoots-public-text{
     margin-left: 5px;
     font-weight: lighter;
     white-space: nowrap;
     font-size: 20px;
 }
-.num-play-area{
+.kahoots-num-play-area{
     position: relative;
     right: 2px;
 }
-.num-play-text{
+.kahoots-num-play-text{
     margin-right: 5px;
     font-weight: bold;
     white-space: nowrap;
     font-size: 20px;
 }
-.time-text{
+.kahoots-time-text{
     margin-right: 10px;
     font-weight: lighter;
     white-space: nowrap;
     font-size: 20px;
 }
-.play-box{
+.kahoots-play-box{
     min-height: 50px;
     background-color: white;
 }
-.play-text{
+.kahoots-play-text{
     color:white;
     font-size: 20px;
     font-weight: bolder;

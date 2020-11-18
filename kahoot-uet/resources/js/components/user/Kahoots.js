@@ -256,34 +256,34 @@ export default class Kahoots extends React.Component{
             }
             
             return (
-                <div class="kahoot-box row">
-                    <Link to={this.route(data.id)} class="image-box">
-                            <div class="num-quest">
-                                <span class="num-quest-text"> {data.numquest} Q </span>
+                <div class="kahoots-kahoot-box row">
+                    <Link to={this.route(data.id)} class="kahoots-image-box">
+                            <div class="kahoots-num-quest">
+                                <span class="kahoots-num-quest-text"> {data.numquest} Q </span>
                             </div>
                     </Link>
-                    <div class="quest-info">
-                        <div class = "quest-name">
-                            <div class="quest-name-area">
-                                <Link to={this.route(data.id)} class="quest-name-text">{data.name}</Link>
+                    <div class="kahoots-quest-info flex-fill">
+                        <div class = "kahoots-quest-name">
+                            <div class="kahoots-quest-name-area">
+                                <Link to={this.route(data.id)} class="kahoots-quest-name-text">{data.name}</Link>
                             </div>
                             {fav}
                         </div>
-                        <div class="num-play d-inline-flex">
-                            <div class="is-public d-flex justify-content-start">
-                                <span class="public-text">{public_text}</span>
+                        <div class="kahoots-num-play d-flex">
+                            <div class="kahoots-is-public">
+                                <span class="kahoots-public-text">{public_text}</span>
                             </div>
-                            <div class="num-play-area d-flex justify-content-end">
-                                <div class= "d-flex justify-content-end">
-                                    <span class="time-text">{data.time} day {'('}s{')'} ago {'-'}</span>
-                                    <span class= "num-play-text">{data.numplay} Play{'('}s{')'}</span>
+                            <div class="kahoots-num-play-area ">
+                                <div class= "kahoots-time-play">
+                                    <span class="kahoots-time-text">{data.time} day {'('}s{')'} ago {'-'}</span>
+                                    <span class= "kahoots-num-play-text">{data.numplay} Play{'('}s{')'}</span>
                                 </div>
                                     
                             </div>
                         </div>
-                        <div class="play-box d-flex justify-content-end">
+                        <div class="kahoots-play-box d-flex justify-content-end">
                             <button class="btn btn-primary">
-                                <Link to="#" class="play-text">Play</Link>
+                                <Link to="#" class="kahoots-play-text">Play</Link>
                             </button> 
                         </div>
                     </div>
@@ -319,43 +319,43 @@ export default class Kahoots extends React.Component{
             <div>
                 <Header />
                 <div class="row" style={{background:' rgb(242, 242, 242)',minHeight:'100vh'}}>
-                    <div class="col-sm-3 menu">
-                        <div class="menu-content">
-                            <div class="text-menu" ref = "mykahoots" onClick={this.onKahootBtnClick}>
+                    <div class="col-sm-3 kahoots-menu">
+                        <div class="kahoots-menu-content">
+                            <div class="kahoots-text-menu" ref = "mykahoots" onClick={this.onKahootBtnClick}>
                                 <Person />
                                 <span>My Kahoots</span>
                             </div>
-                            <div class="text-menu" ref = "favorite" onClick ={this.onFavoriteClick}>
+                            <div class="kahoots-text-menu" ref = "favorite" onClick ={this.onFavoriteClick}>
                                 <Star />
                                 <span>Favorites</span>
                             </div>
-                            <div class="text-menu notuse">
+                            <div class="kahoots-text-menu kahoots-notuse">
                                 <Tools />
                                 <span>Share With Me</span>
                             </div>
-                            <div class="text-menu notuse">
+                            <div class="kahoots-text-menu kahoots-notuse">
                                 <Tools />
                                 <span>My Drafts</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-9">
-                        <div class="main-content">
-                            <div class="search-area">
-                                <div class="search-box">
+                        <div class="kahoots-main-content">
+                            <div class="kahoots-search-area">
+                                <div class="kahoots-search-box">
                                     <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
-                                    <button class="search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
+                                    <button class="kahoots-search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
                                         <Search color="white"/>
                                     </button>
                                     <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
                                 </div>
-                                <div class="sort row">
-                                    <div class="kahoots-text-area">
-                                        <span class="kahoots-text">My kahoots</span>
+                                <div class="kahoots-sort row">
+                                    <div class="kahoots-kahoots-text-area">
+                                        <span class="kahoots-kahoots-text">My kahoots</span>
                                     </div>
-                                    <div class="sort-box">
-                                        <div class="sort-text-area">
-                                            <span class="sort-text">Sort by:</span>
+                                    <div class="kahoots-sort-box">
+                                        <div class="kahoots-sort-text-area">
+                                            <span class="kahoots-sort-text">Sort by:</span>
                                         </div>
                                         <button class="btn btn-outline-info" ref = "recent" onClick={this.onRecentBtnClick}>Recent</button>
                                         <button class="btn btn-outline-info" ref = "oldest" onClick={this.onOldestBtnClick}>Oldest</button>
@@ -364,12 +364,12 @@ export default class Kahoots extends React.Component{
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-area">
-                                <div class="total-area row">
+                            <div class="kahoots-list-area">
+                                <div class="kahoots-total-area row">
                                     <span class="d-flex">Total {'('}{select.length}{')'}</span>
-                                    <span class="sort-by">Sort by: {sort}</span>
+                                    <span class="kahoots-sort-by">Sort by: {sort}</span>
                                 </div>
-                                <div class="kahoots-list">
+                                <div class="kahoots-kahoots-list">
                                     {topic}
                                     <ul class="pagination justify-content-center" style={{margin:'20px 0'}}>
                                     {firstbtn}
