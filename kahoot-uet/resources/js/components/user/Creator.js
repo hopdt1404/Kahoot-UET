@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import CreateKahoot from "./CreateKahoot/pages/createKahoot";
 
 class Creator extends Component {
     render() {
-        return (<div>
-            <h1>Welcome to Creator!</h1>
-        </div>)
+        return (
+        <div>
+            <CreateKahoot />
+        </div>
+        );
     }
 }
 

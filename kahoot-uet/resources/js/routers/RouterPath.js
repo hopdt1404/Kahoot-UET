@@ -8,10 +8,11 @@ import Login from "../components/user/Login";
 import Settings from "../components/user/Settings";
 import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
+import Topic from "../components/user/Kahoots/Topic/Topic";
 import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import LobbyPlayer from "../components/player/LobbyPlayer";
-
+import ReportDetail from "../components/user/Reports/Detail/Detail"
 function RouterPath() {
     return (
         <main>
@@ -22,6 +23,8 @@ function RouterPath() {
                 <Route exact path="/creator" component={Creator} />
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/auth/login" component={Login} />
+                <Route exact path="/kahoots/detail/:id" component={Topic} />
+                <Route exact path="/user-reports/detail/:id" component={ReportDetail} />
                 {/* In Game */}
                 {/* Erroring */}
                 <Route exact path="/play-game" component={OptionGame} />
