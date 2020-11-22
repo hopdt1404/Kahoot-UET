@@ -127,7 +127,7 @@ function SideBar() {
             </div>
             <div className="addQuestion">
                 <button className="add" onClick={() => {setShowButton(!showButton)}}>Add question</button>
-                <div style={{visibility:showButton?"hidden":"visible"}} className="selectType" id="popupform" >
+                <div style={{visibility:showButton?"visible":"hidden"}} className="selectType" id="popupform" >
                     <button onClick={() => handleAddQuestion("Quiz")}>Quiz</button>
                     <button onClick={() => handleAddQuestion("True or False")}>True or False</button>
                 </div>

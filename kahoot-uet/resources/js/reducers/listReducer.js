@@ -20,7 +20,7 @@ const initialState = {
         },
         {
           answer: "",
-          correct: true,
+          correct: false,
         },
         {
           answer: "",

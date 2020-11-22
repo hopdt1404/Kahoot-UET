@@ -27,7 +27,7 @@ div.listQuestion {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-height: 70vh;
+    max-height: 65vh;
     overflow-y: scroll;
 }
 div.listQuestion div.draggableQuestion {
@@ -62,12 +62,17 @@ div.addQuestion button.add {
     margin-bottom: 20px;
 }
 
+div.addQuestion button.add:hover {
+    box-shadow: none;    
+    background-color: #083796;
+
+}
 div.addQuestion div.selectType {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 5rem;
+    height: 7rem;
 }
 
 div.addQuestion div.selectType button {
@@ -75,10 +80,16 @@ div.addQuestion div.selectType button {
     margin-bottom: 10px;
     font-weight: bold;
     font-size: 15px;
-    height: 5rem;
     width: 100%;
+    height: 3rem;
     outline: 0;
     border: 0;
     border-radius: 5px;
     box-shadow: 0 5px darkgray;
+}
+
+div.addQuestion div.selectType button:hover {
+    box-shadow: none;
+    background-color: darkgray;
+
 }
