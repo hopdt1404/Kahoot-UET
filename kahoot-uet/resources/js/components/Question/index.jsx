@@ -40,8 +40,9 @@ function Question(props) {
           </p>
           <div className="description">
               <p className="timeLimit">{props.question.timeLimit}</p>
-              <div className="image">
-                <img height={"30px"} src={props.question.image} className="image" alt={"image"}/>
+              <div className="image" >
+                <img style={{visibility:props.question.image===""?"visible":"hidden",marginTop:"10%",marginBottom:"-30px"}} height={"20px"} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAADfklEQVR4nO3bXYtVVRzH8c85Hh3UkCaSzKiEyqKgEC+jp7EHBia7Cwq6iUjywrJBrcCbiArKmroIIowg6jX0oAVFVBf5AgzFgR4wQhuCwlCni3UO7cHjuB/WXns7nS8sOHudvf4Pv73XPns9HEaMGDFixP+XzpC61bgX12F52nBq4x8cwQH8db6TOtiFPzC/RMtJTBty4bv4uAUBpiofDUTo9QWYxiMZQY7gYF+xpcA4tgjdGh7FD3iD0Oezt/17GEsfY+2MYb+F3WEVbM1U/mhpJj9gTLi7B/lOdbExc8IBnGogsFScEnIcsLGLSzIVx9PG0wi/Zj6v6TYWRkvoXfiURVmPe3BV//hnfGGhyq2mrACb8TLuc+5LxTw+wws4VD60NJTpAk/iW9xv+Kt0Bw/gezxdPrQ0FBXgKbwr3xihhxlsKxpUSooIcBveKuHjbdxSol0SigjwknKjwxV4sUS7JOQV4DJMVvCzFZdWaF8beQW4G8sq+OnhzgrtayOvAFdH8BXDRnTyCjCf0FdS8gb1UwRfMWxEJ68AX+FMBT9n8U2F9rWRV4Df8WkFP5/gtwrta6NIv9yL0yV8nO63bSVFBDiE3SV87NLiQVHRJ/Obggh5ngdnhORnigZVM5dnD8oMh1/D13hFeEEaxpd4XhgRVuVa3IqbcRM2YK2QyFoLL+JZzAkTnnP4BbM4JsxVrMPjWeNl5wO+EyZCNmAC1/TrZ4UJkdmSdmENpoTVqQlBgLx0hSnw8f7xpgs1qDojdAzvV7RBCHwSjwnjhpURbOaiqgBVWS4syOwRbvHkNCnApDC/cEODMTQiwHq8g4ca8H0OqQWYEBYm1yX2e15SjtD24nMtSp40d0AH+7Azga/C1C1AFx8IP2+tpO4u8KoWJ0+9AmwXxgKtpi4BNgsDp9ZThwCrhZ+6FTXYjk4dAuzDjTXYrYXYAmzCE5Ft1kpsAWZUW0BJTkwBprR09WcxYgrwXERbyYglwB24PZKtpMQSYEckO8np4s/M8ZUlbIzjwTjhJGeui8OZii2K7xR9uESbtnCYsF/2pP+2j+6XP6GesOjR9O7vMuUEVg52eU3j9UxiR4UtpUcXSX4Z7hJ2i12M7JRZtOkI7+9NX5VU5UNDtvh18KyF3WGplRN4Jpv8sI2Oq4SH4fW4Ysj3FyPHhb8CHMTfDccyYsSIEe3hX86fipCiZJSZAAAAAElFTkSuQmCC"/>
+                <img src={props.question.image} className="image" alt={"image"} style={{visibility:props.question.image===""?"hidden":"visible"}}/>
               </div>
             </div>
           <div className="answers">

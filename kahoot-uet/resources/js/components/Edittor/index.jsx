@@ -115,7 +115,7 @@ function Editor() {
               <img className="previewImage" src={currentQuestion.image} />
             </div>
             <div className="uploadImage">
-              <input type="file" defaultValue={""} onChange={(e) => handleSetImage(e.target.files[0])}/>
+              <input type="file" accept="image/*" defaultValue={""} onChange={(e) => handleSetImage(e.target.files[0])}/>
             </div>
           </div>
         </main>

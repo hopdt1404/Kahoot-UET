@@ -21,8 +21,8 @@ div.left img {
 }
 div.left div.settings {
   border-radius: 5px;
-  height: 4rem;
-  font-size: 1.5rem;
+  height: 3.5rem;
+  font-size: 1.25rem;
   flex-basis: 45%;
   background-color: white;
   display: flex;
@@ -46,7 +46,7 @@ div.left div.settings div.sbutton {
 }
 div.right {
   flex-basis: 50%;
-  /* background-color: cyan; */
+  font-weight: bold;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -54,19 +54,17 @@ div.right {
 div.right div.preview {
   font-size: 1rem;
   color: white;
-  background-color: rgb(52, 54, 165);
   border-radius: 0.2rem;
   padding: 0.5rem 0.5rem;
 }
 div.right button.submit {
   cursor: pointer;
-  width: 9rem;
-  height: 4rem;
+  width: 7rem;
+  height: 3rem;
   font-size: 1rem;
   border-radius: 0.5rem;
   padding: 0.5rem 0.5rem;
   margin-left: 0.5rem;
-  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   color: aliceblue;
@@ -83,7 +81,7 @@ div.right button.exit:hover {
 div.right button.done {
   border: 0px;
   background-color: rgb(37, 161, 12);
-  border-bottom: 4px solid rgb(10, 90, 3);
+  border-bottom: 4px solid rgb(16, 119, 6);
 }
 div.right button.done:hover {
   margin-top: 4px;

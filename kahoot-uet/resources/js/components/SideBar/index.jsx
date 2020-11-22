@@ -9,7 +9,7 @@ function SideBar() {
     const order = useSelector((state) => state.list.order);
     const dispatch = useDispatch();
 
-
+    const [showButton,setShowButton] = React.useState(false);
     const [dragAndDrop, setDragAndDrop] = React.useState(() => {
         return {
             draggedFrom: null,
@@ -77,6 +77,7 @@ function SideBar() {
 
 
     const handleAddQuestion = (questionType) => {
+        setShowButton(!showButton);
         const action = addQuestion(questionType);
         dispatch(action);
     };
@@ -97,7 +98,8 @@ function SideBar() {
             <div className="listQuestion">
                 {questionList.map((question) => {
                     return (
-                        <div draggable={questionList.indexOf(question) === order ? "true" : "false"}
+                        <div className="draggableQuestion"
+                             draggable={questionList.indexOf(question) === order ? "true" : "false"}
                              data-position={questionList.indexOf(question)}
                              id={questionList.indexOf(question) === order ? "target" : ""}
                             // onClick={() => {handleOrderNumber(questionList.indexOf(question));} }
@@ -124,18 +126,10 @@ function SideBar() {
                 })}
             </div>
             <div className="addQuestion">
-                <div className="add">
-                    <a className="add" href="#popupform">
-                        <button className="add">Add question</button>
-                    </a>
-                </div>
-                <div className="selectType" id="popupform">
-                    <a href="/#">
-                        <button onClick={() => handleAddQuestion("Quiz")}>Quiz</button>
-                    </a>
-                    <a href="/#">
-                        <button onClick={() => handleAddQuestion("True or False")}>True or False</button>
-                    </a>
+                <button className="add" onClick={() => {setShowButton(!showButton)}}>Add question</button>
+                <div style={{visibility:showButton?"hidden":"visible"}} className="selectType" id="popupform" >
+                    <button onClick={() => handleAddQuestion("Quiz")}>Quiz</button>
+                    <button onClick={() => handleAddQuestion("True or False")}>True or False</button>
                 </div>
             </div>
         </div>

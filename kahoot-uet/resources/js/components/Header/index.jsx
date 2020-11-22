@@ -23,7 +23,7 @@ function Header() {
       </div>
 
       <div className="right">
-        <div className="preview" hidden="true">Preview</div>
+        <div className="preview">Preview</div>
         <button className="exit submit">Exit</button>
         <button className="done submit">Done</button>
       </div>
