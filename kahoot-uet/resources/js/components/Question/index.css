@@ -37,7 +37,7 @@ div.questionBlock div.blockBody div.col-right {
     justify-content: flex-start;
 }
 #target div.questionBlock div.blockBody div.col-right{
-    background-color: #fffff0;
+    background-color: #ffffff;
     border: solid 3px black;
 }
 #target div.questionBlock div.blockBody div.col-right:hover{

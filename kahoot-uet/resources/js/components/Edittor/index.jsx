@@ -50,6 +50,28 @@ function Editor() {
     const action = setCorrectAnswer(order, answeOrderNumber);
     dispatch(action);
   }
+
+  // const signature = [
+  //   {<svg id="TRIANGLE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>},
+  //   {<svg id="DIAMOND" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M4,16.0038341 L16,4 L28,16.0007668 L16,28 L4,16.0038341 Z" style="fill: inherit;"></path></svg>},
+  //   {<svg id="CIRCLE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z" style="fill: inherit;"></path></svg>},
+  //   {<svg id="SQUARE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M7,7 L25,7 L25,25 L7,25 L7,7 Z" style="fill: inherit;"></path></svg>}
+  // ];
+  // const getSignature = (order) => {
+  //   switch (order){
+  //     case 0: return {
+  //     };
+  //     case 1: return {
+  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
+  //     };
+  //     case 2: return {
+  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
+  //     };
+  //     case 3: return {
+  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
+  //     };
+  //   }
+  // }
   return (
       <div className="Container">
         <header>
@@ -114,9 +136,9 @@ function Editor() {
             <div className="preview">
               <img className="previewImage" src={currentQuestion.image} />
             </div>
-            <div className="uploadImage">
+            <label className="uploadImage">Upload Image
               <input type="file" accept="image/*" defaultValue={""} onChange={(e) => handleSetImage(e.target.files[0])}/>
-            </div>
+            </label>
           </div>
         </main>
         <footer>
@@ -125,6 +147,9 @@ function Editor() {
                 (a) => {
                   return (
                       <div className="answers">
+                        <div className="signature">
+
+                        </div>
                         <input
                           className="answer"
                           type="text"

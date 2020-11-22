@@ -35,7 +35,7 @@ function Question(props) {
         <div className="col-right" onClick={()=>props.handleClick(props.orderNumber)}>
           <p className="title">
             {props.question.questionContent !== ""
-              ? props.question.questionContent
+              ? props.question.questionContent.length>15?props.question.questionContent.substring(0,15)+"...":props.question.questionContent
               : "Type your question"}
           </p>
           <div className="description">

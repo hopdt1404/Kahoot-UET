@@ -1,0 +1,129 @@
+div.Container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+div.Container header{
+    display: flex;
+    width: calc(100%);
+    justify-content: center;
+    padding: 3% 0 1% 0;
+}
+
+.Container header input {
+    width: 90%;
+    height: 10rem;
+    border-radius: 5px;
+    border: 0px;
+    box-shadow: 0 5px grey;
+    text-align: center;
+    font-size: 40px;
+    padding: 0;
+    outline: none;
+}
+
+div.Container main {
+    display: flex;
+    padding: 0% 20% 0 10%;
+}
+
+div.Container main div.left-col {
+    flex: 1 1 20%;
+    margin-right: 20px;
+}
+
+div.Container main div.right-col {
+    flex: 1 1 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1%;
+    margin-right: 25%;
+    flex-basis: 20rem;
+    border: dashed grey 2px;
+}
+
+div.Container main div.right-col div.preview {
+    height: 15rem;
+    width: 100%;
+    max-width: 15rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+div.Container main div.right-col img.previewImage {
+    height: 18rem;
+}
+
+div.Container main div.right-col label.uploadImage {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px darkgray;
+    width: 10rem;
+    height: 3rem;
+    text-align: center;
+    padding-top: 1.25%;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+div.Container main div.right-col label.uploadImage:hover {
+    background-color: rgb(153, 151, 151);
+    box-shadow: none;
+    padding-top: 1.35%;
+}
+div.Container main div.right-col input[type="file"] {
+    display: none;
+}
+div.Container footer {
+    padding: 0 5% 2% 5%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.Container footer div.answers {
+    flex: 1 1 45%;
+    padding-right: 1%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px darkgray;
+    margin: 10px 10px;
+    display: flex;
+    align-items: center;
+}
+div.Container footer div.answers div.signature{
+    flex: 1 0 7%;
+    height: 90%;
+    background-color: red;
+    border-radius: 10px;
+    margin: 1%;
+}
+
+
+div.Container footer div.answers input.answer {
+    flex: 1 1 80%;
+    text-align: center;
+    height:6rem;
+    margin: 5px;
+    outline: 0;
+    border:0;
+}
+div.Container footer div.answers input.correct {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+div.Container footer div.answers input.correct:checked {
+    background-color: greenyellow;
+}
