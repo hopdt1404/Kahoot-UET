@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-
-class FakeUserSeeder extends Seeder
+use App\Topics;
+class ReportTopicTestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +11,7 @@ class FakeUserSeeder extends Seeder
      */
     public function run()
     {
-        $numberRecord = 10;
-        factory(User::class, $numberRecord)->create();
+        $numberRecord = 1;
+        factory(Topics::class, $numberRecord)->create();
     }
 }
