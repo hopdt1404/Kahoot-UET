@@ -16,10 +16,13 @@ class CreateTableReportPlayers extends Migration
         Schema::create('report_players', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('player_id')->nullable(false);
+            $table->unsignedBigInteger('report_id')->nullable(false);
             $table->unsignedBigInteger('question_id')->nullable(false);
+            $table->unsignedDouble('current_total_score', 10, 2)->default(0);
             $table->unsignedDouble('player_score', 8, 2)->nullable(false)->default(0);
             $table->unsignedFloat('reply_time', 8, 2)->nullable(false)->default(0);
             $table->jsonb('ans_selected')->nullable(true);
+
             $table->timestamps();
         });
     }

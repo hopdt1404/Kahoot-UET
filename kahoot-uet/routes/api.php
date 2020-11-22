@@ -20,6 +20,7 @@ use App\Models\User;
 //     return $request->user();
 // });
 Route::get('export','ExportExcelController@export');
+Route::get('/export-data', 'ReportController@exportData');
 Route::group([
     'prefix' => 'auth'
 ], function () {

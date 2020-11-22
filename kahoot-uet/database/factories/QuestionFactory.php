@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Questions::class, function (Faker $faker) {
     $questionType = ['QUIZ', 'T/F'];
     $questionTypeSelect = ['Multi-select', 'Single select'];
+    $topic_id_report = 1;
     return [
         'sequence' => rand(1, 30),
         'title' => $faker->text,
@@ -15,7 +16,8 @@ $factory->define(Questions::class, function (Faker $faker) {
         'question_type' => $questionType[rand(0, count($questionType) - 1)],
         'question_type_select' => $questionTypeSelect[rand(0, count($questionTypeSelect) - 1)],
         'score' => rand(100, 1000),
-        'topic_id' => rand(1, 20),
+//        'topic_id' => rand(1, 20),
+        'topic_id' => $topic_id_report,
         'question_img' => $faker->url,
         'answer' => json_encode([
             "content" => $faker->text,
