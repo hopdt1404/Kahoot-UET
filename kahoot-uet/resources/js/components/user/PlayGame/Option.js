@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./playgame.css";
 import OptionImg from "../../../images/option_img.svg";
 import ClassicMode from "../../../images/option-single-mode.svg";
 import TeamMode from "../../../images/option-team-mode.svg";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+//import component
+import Lobby from "./Lobby";
 
 function Option() {
+    const [gameMode, setGameMode] = useState("");
+
+    function handleClassicMode() {
+        setGameMode("classic");
+        console.log("classic mode: ", gameMode);
+    }
+
+    function handleTeamMode() {
+        setGameMode("team");
+        console.log("team mode: ", gameMode);
+    }
+
     return (
-        <div class="option-root">
+        <div className="option-root">
             <div className="option-body">
-                <div class="option-img">
+                <div className="option-img">
                     <img src={OptionImg} alt="option img" />
                 </div>
                 <div className="option-game">
@@ -28,8 +43,10 @@ function Option() {
                                 <p>Player vs Player</p>
                             </div>
                             {/* must edit */}
-                            <Link to='/play-game/lobby/1'>
-                                <button className="mode-button green-button" >Classic</button>
+                            <Link to="/play-game/lobby">
+                                <button className="mode-button green-button">
+                                    Classic
+                                </button>
                             </Link>
                         </div>
                         <div className="team-mode style-mode">
@@ -40,7 +57,7 @@ function Option() {
                             />
                             <div className="mode-text">Team vs Team</div>
                             {/* must edit */}
-                            <Link to='/play-game/lobby/2'>
+                            <Link to="/play-game/lobby">
                                 <button className="mode-button blue-button">
                                     Team mode
                                 </button>
@@ -48,18 +65,28 @@ function Option() {
                         </div>
                     </div>
                     {/* must edit */}
-                    <div class="dropdown show option-game-options">
-                        <span className="dropdown-toggle test" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</span>
-                        <div
-                            class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                    <div className="dropdown show option-game-options">
+                        <span
+                            className="dropdown-toggle test"
+                            href="#"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
                         >
-                            <a class="dropdown-item" href="#">
+                            Options
+                        </span>
+                        <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                        >
+                            <a className="dropdown-item" href="#">
                                 Action
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a className="dropdown-item" href="#">
                                 Another action
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a className="dropdown-item" href="#">
                                 Something else here
                             </a>
                         </div>
