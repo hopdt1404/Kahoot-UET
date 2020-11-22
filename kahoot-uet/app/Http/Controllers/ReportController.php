@@ -11,9 +11,18 @@ use Illuminate\Support\Facades\Validator;
 class ReportController extends Controller
 {
 //    private $reportModel = new Report();
-    public function index ()
+    public function index (Request $request)
     {
-        $ownerId = 1;
+        $validator = Validator::make($request->all(), [
+            'owner_id' => 'bail|required|integer'
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $ownerId = $request['owner_id'];
         $column = 'name';
         $type = 'desc';
         $reports = Reports::select('id', 'name', 'room_id', 'game_mode', 'created_at')->where('owner_id', $ownerId)->orderBy($column, $type)->get();
@@ -22,7 +31,9 @@ class ReportController extends Controller
             $reportId = $report['id'];
             $report['number_player'] = Players::where('report_id', $reportId)->count();
         }
-        return view('pages.topic', ['data' => $reports]);
+        return response()->json([
+            'message'=> 'Get all report successfully'
+        ],200);
     }
     public function show ()
     {
@@ -49,6 +60,18 @@ class ReportController extends Controller
 
     public function reportDetail ()
     {
+        /*
+         * Summary
+         * - Number question
+         * - Number Player
+         * - Câu hỏi khó <= 35% người trả lời đúng
+         * - Need help: người chơi trả lời <= 35% số câu trả lời
+         * - Didn't finish: Không trả lời câu hỏi hoặc rời khỏi phòng chơi trước
+         * - Detail player:
+         * - Tổng số đáp án đúng / tất cả các đáp án
+         *
+         */
+
 
     }
 
@@ -65,9 +88,9 @@ class ReportController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
         }
         $report = Reports::create([
             'name' => $request['name'],
@@ -75,8 +98,9 @@ class ReportController extends Controller
             'owner_id' => $request['owner_id']
         ]);
         $data['report'] = $report;
-        $data = json_encode($data);
-        return view('pages.topic', ['data' => $data]);
+        return response()->json([
+            'message'=> 'Created report successfully'
+        ],200);
 
     }
 

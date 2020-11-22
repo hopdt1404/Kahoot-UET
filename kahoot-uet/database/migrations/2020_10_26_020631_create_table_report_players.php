@@ -22,6 +22,7 @@ class CreateTableReportPlayers extends Migration
             $table->unsignedDouble('player_score', 8, 2)->nullable(false)->default(0);
             $table->unsignedFloat('reply_time', 8, 2)->nullable(false)->default(0);
             $table->jsonb('ans_selected')->nullable(true);
+            $table->jsonb('is_correct_answer')->nullable(true);
 
             $table->timestamps();
         });

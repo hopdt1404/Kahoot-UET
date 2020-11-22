@@ -10,6 +10,32 @@
    
 
 
+## API
+
+A. Topic - Question
+
+Update topic -> create new topic
+update question of topic => create new topic
+
+B. Room:
+- Create new room:
+    RoomController@index: Tạo 1 room và lấy thông tin room (có mã PIN) 
+- Lock room
+    RoomController@lockRoom
+- Finish:
+    RoomController@finishRoom
+
+
+C: Player:
+- Join room: PlayerController@create
+- Get out player: PlayerController@getOutPlayer
+
+- Danh sách top 5 player điểm cao nhất: PlayerController@topFiveMaxScore 
+
+D: Report:
+- List Report: ReportController@index
+- Cập kết quả sau mỗi câu trả lời: ReportPlayerControler@create
+- 
 
 
 ### Question and Answer

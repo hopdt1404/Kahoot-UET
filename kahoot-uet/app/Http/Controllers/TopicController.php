@@ -48,8 +48,8 @@ class TopicController extends Controller
         }
         $result = $myTopic;
         return response()->json([
-            'message'=> 'created topic successfully', $result
-        ],201);
+            'message'=> 'get topic successfully', $result
+        ],200);
     }
 
 
@@ -72,6 +72,16 @@ class TopicController extends Controller
             'name' => $data['name'],
             'creator_id' => $request['creator_id']
         ]);
+        Topics::where('id', $request['id'])->update(['is_deleted' => 1]);
+        if (isset($request['id'])) {
+            $questions = Questions::where('topic_id', $request['id'])->get();
+            for($i = 0; $i < count($questions); $i++) {
+                $question = $questions[$i];
+                $question['topic_id'] = $topic['id'];
+                Questions::create($questions);
+            }
+        }
+
         return response()->json([
             'message' => "created successfully topic", $topic
         ], 201);

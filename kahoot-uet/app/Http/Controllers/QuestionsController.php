@@ -55,7 +55,8 @@ class QuestionsController extends Controller
         $exitTopic = Topics::where('topic_id', $request['topic_id'])->count();
         if ($exitTopic != 1) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
         }
 
         $data = $request['data'];
