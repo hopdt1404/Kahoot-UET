@@ -15,8 +15,8 @@ class QuesttionSheet implements FromArray,WithEvents, ShouldAutoSize, WithTitle
     private $list = [];
     private $correct_answer;
     private $is_correct_answer= [];
-    private $number_order;
-    public function __construct($list, $number_order)
+    private $numerical_order;
+    public function __construct($list, $numerical_order)
     {
        // dd(strval($number_order));
         $this->list = $list;
@@ -30,7 +30,7 @@ class QuesttionSheet implements FromArray,WithEvents, ShouldAutoSize, WithTitle
                 $this->is_correct_answer[$i] = "✔";         
             }
         }
-        $this->number_order = $number_order;
+        $this->numerical_order = $numerical_order;
     }
     public function array():array{
         $answer_options = ['♦',$this->list[6][0],'▲',$this->list[6][1]];
@@ -257,7 +257,7 @@ class QuesttionSheet implements FromArray,WithEvents, ShouldAutoSize, WithTitle
     }
     public function title(): string
     {
-        if($this->list[0]==["T/F"]) return strval($this->number_order).' True or False';
-        return strval($this->number_order).' Quiz';
+        if($this->list[0]==["T/F"]) return strval($this->numerical_order).' True or False';
+        return strval($this->numerical_order).' Quiz';
     }
 }

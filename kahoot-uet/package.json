@@ -27,6 +27,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "react-router": "^5.2.0"
+        "ioredis": "^4.19.2",
+        "react-router": "^5.2.0",
+        "socket.io": "^3.0.3"
     }
 }
