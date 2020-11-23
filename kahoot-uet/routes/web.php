@@ -35,3 +35,6 @@ Route::get('player/update-total-score', 'PlayerController@updateTotalScore');
 Route::get('player/top-five-max-score', 'PlayerController@topFiveMaxScore');
 Route::resource('/player', 'PlayerController');
 Route::resource('/report-player', 'ReportPlayerController');
+
+Route::get('send-message','RedisController@index');
+Route::post('send-message','RedisController@postSendMessage');
