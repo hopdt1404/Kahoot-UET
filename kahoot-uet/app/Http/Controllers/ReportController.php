@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Players;
+use App\Questions;
+use App\Rooms;
+use App\Topics;
 use Illuminate\Http\Request;
 use App\Reports;
 use App\Messager;
@@ -42,7 +46,7 @@ class ReportController extends Controller
 //        return view('pages.topic', ['data' => $reports]);
     }
 
-    public function searchReportByName ()
+    public function searchReportByName (Request $request)
     {
         $patternSearch = 'Hea';
         $columnSearch = 'name';
@@ -58,12 +62,10 @@ class ReportController extends Controller
         return view('pages.topic', ['data' => $reports]);
     }
 
-    public function reportDetail ()
+    public function reportDetail (Request $request)
     {
         /*
-         * Summary
-         * - Number question
-         * - Number Player
+         *
          * - Câu hỏi khó <= 35% người trả lời đúng
          * - Need help: người chơi trả lời <= 35% số câu trả lời
          * - Didn't finish: Không trả lời câu hỏi hoặc rời khỏi phòng chơi trước
@@ -71,6 +73,45 @@ class ReportController extends Controller
          * - Tổng số đáp án đúng / tất cả các đáp án
          *
          */
+
+        $validator = Validator::make($request->all(), [
+            'id' => 'bail|required|integer'
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $exitReport = Reports::where('id', $request['report_id'])->count();
+        if ($exitReport != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $report = Reports::where('id', $request['id'])->get();
+
+        $report = $report[0];
+        $hosterBy = User::select('name')->where('id', $report['owner_id'])->get();
+        $report['hosted_by'] = $hosterBy[0]['name'];
+
+        // Get number player
+        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        $report['number_player'] = count($players);
+
+        // Get number question
+        $room_id = $report['room_id'];
+        $topic_id = Rooms::select('topic_id')->where('id', $room_id)->get();
+        $topic_id = $topic_id[0]['topic_id'];
+        $questions = Questions::where('topic_id', $topic_id)->get();
+        $report['number_question'] = count($questions);
+
+        //
+        return response()->json([
+            'message' => "Get report detail success",
+            'summary' => $report,
+            'players' => $players,
+            'questions' => $questions
+        ], 200);
 
 
     }
@@ -102,6 +143,14 @@ class ReportController extends Controller
             'message'=> 'Created report successfully'
         ],200);
 
+    }
+
+    public function reportDetailQuestion (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'name' => 'bail|required',
+            'room_id' => 'bail|required|integer',
+            'owner_id' => 'bail|required|integer',
+        ]);
     }
 
     public function exportData (Request $request) {

@@ -43,3 +43,5 @@ Route::group([
 
 });
 
+Route::get('/summary', 'ReportQuestionController@summary');
+

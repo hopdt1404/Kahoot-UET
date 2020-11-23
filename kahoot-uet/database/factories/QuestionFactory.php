@@ -20,9 +20,21 @@ $factory->define(Questions::class, function (Faker $faker) {
         'topic_id' => $topic_id_report,
         'question_img' => $faker->url,
         'answer' => json_encode([
-            "content" => $faker->text,
+            ["content" => $faker->text,
             "isCorrectAns" => rand(0, 1),
-            "img_ans" => $faker->url
+            "img_ans" => $faker->url],
+
+            ["content" => $faker->text,
+            "isCorrectAns" => rand(0, 1),
+            "img_ans" => $faker->url],
+
+            ["content" => $faker->text,
+            "isCorrectAns" => rand(0, 1),
+            "img_ans" => $faker->url],
+
+            ["content" => $faker->text,
+            "isCorrectAns" => rand(0, 1),
+            "img_ans" => $faker->url]
         ], JSON_PRETTY_PRINT)
     ];
 });

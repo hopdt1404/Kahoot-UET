@@ -33,9 +33,14 @@ C: Player:
 - Danh sách top 5 player điểm cao nhất: PlayerController@topFiveMaxScore 
 
 D: Report:
+
+**
 - List Report: ReportController@index
 - Cập kết quả sau mỗi câu trả lời: ReportPlayerControler@create
 - 
+** 
+- Report detail: ReportController@reportDetail
+- Report detail - Question 
 
 
 ### Question and Answer
