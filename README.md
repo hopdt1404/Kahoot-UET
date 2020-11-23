@@ -7,8 +7,90 @@
  - php artisan migrate
  - php artisan passport:install
  - composer require maatwebsite/excel:^3.0.1
-   
+ 
+### Install Socket
+- Redis 3.2.100
+- NodeJS moij version
 
+=> Composer require predis/predis
+=> Npm install socket.io ioredis 
+
+Config  file .env
+Change 
+--- 
+BROADCAST_DRIVER=redis
+CACHE_DRIVER=redis
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=redis
+SESSION_LIFETIME=120
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=1000
+
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=c0298fd2f5e0c4
+MAIL_PASSWORD=cd12739969fe0c
+MAIL_ENCRYPTION=tls
+
+
+---- 
+### Create folder 
+- server_node
+- cd server_node
+- create file server.js
+- copy page: content
+"var io = require('socket.io')(6001)
+ console.log('Connected to port 6001')
+ io.on('error',function(socket){
+ 	console.log('error')
+ })
+ io.on('connection',function(socket){
+ 	//console.log('Co nguoi vua ket noi'+socket.id)
+ })
+ var Redis = require('ioredis')
+ var redis = new Redis(1000)
+ redis.psubscribe("*",function(error,count){
+ 	//
+ })
+ redis.on('pmessage',function(partner,channel,message){
+ 	 console.log(channel)
+ 	// console.log(message)
+ 	//console.log(partner)
+ 
+ 	message = JSON.parse(message)
+ 	io.emit(channel+":"+message.event, message.data.message)
+ 	console.log(message)
+ 	//console.log('Sent')
+ })
+"
+### config/database.php
+- kéo xuống dưới cùng => 
+Chỉnh client: 'client' => env('REDIS_CLIENT', 'predis'),
+- comment dòng: prefix 
+
+## Run
+- Bật redis: redis-server --port 1000 (1)  
+- Chạy khi có thay đổi  file .env
++ php artisan config:cache
++ php artisan cache:clear
+
+
+- Bật "Queue": php artisan queue:listen (2) 
+- Bật server: php artisan sever (3)
+- Bật server node: (Server node thường sẽ ở trong app/)
++  truy cập đến folder server_node
++ Run: node server (4)
+
+#### Cả 4 môi trường đều cùng chạy 1 lúc 
+ 
+
+
+ 
+ 
 
 ## API
 
