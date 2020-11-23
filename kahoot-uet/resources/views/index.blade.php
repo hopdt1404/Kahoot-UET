@@ -4,11 +4,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
+        {{-- error icon tab browser --}}
+        <link rel="shortcut icon" src="{{url('images/icon_kahoot.png')}}" type="image/x-icon"/> 
+        <title>Kahoot!</title>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="header"></div>
+        <div id="index"></div>
         <script src="{{asset('js/app.js')}}" ></script>
     </body>
 </html>

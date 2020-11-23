@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Messager;
 use App\Players;
+use App\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,21 +19,22 @@ class PlayerController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
         }
         $data['player'] = Players::select('name')->where('room_id', $request['room_id'])->orderBy('created_at')->get();
         $data['number_player'] = count($data['player']);
-        $data = json_encode($data);
-        return view('pages.topic', ['data' => $data]);
+        return response()->json([
+            'message'=> 'get all player room successfully', $data
+        ],200);
     }
 
 
     /*
      *  Create Player and return Player Info
     */
-    public function addPlayer (Request $request)
+    public function create (Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'bail|required|string',
@@ -41,17 +43,25 @@ class PlayerController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
         }
-        $player = Players::create([
+        $canCreatePlayer = Rooms::where(['id' => $request['room_id'], 'is_locked' => 0])->count();
+        if ($canCreatePlayer != 1) {
+            return response()->json([
+                'message'=>'Room is locked'], 400);
+        }
+        $player =  Players::create([
             'name' => $request['name'],
             'is_group' => $request['is_group'],
             'group_detail' => $request['group_detail'] ?: '',
             'room_id' => $request['room_id']
         ]);
-        return view('pages.topic', ['data' => $player]);
+        return response()->json([
+            'message'=> 'created player successfully', $player
+        ],200);
+
     }
 
     /*
@@ -65,14 +75,16 @@ class PlayerController extends Controller
 
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
         }
 
         $data['result'] = Players::where('id', $request['id'])->delete();
 
-        return view('pages.topic', ['data' => $data]);
+        return response()->json([
+            'message'=> 'Get out player successfully'
+        ],200);
 
     }
 
@@ -87,17 +99,17 @@ class PlayerController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request'],400);
         }
         $player = Players::find($request['id']);
         $player['total_score'] += $request['score'];
         $player->save();
 
         $data['player'] = $player;
-        $data = json_encode($data);
-        return view('pages.topic', ['data' => $data]);
+        return response()->json([
+            'message'=> 'Update score player successfully'
+        ],200);
     }
 
     /*
@@ -110,16 +122,33 @@ class PlayerController extends Controller
         ]);
         $data = [];
         if ($validator->fails()) {
-            $data['message'] = Messager::$MESSAGE_EROORS['400'];
-            $data = json_encode($data);
-            return view('pages.topic', ['data' => $data]);
+            return response()->json([
+                'message'=>'Bad request'],400);
         }
 
         $topFive = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
         $data['top_five'] = $topFive;
-        $data = json_encode($data);
-        return view('pages.topic', ['data' => $data]);
+        return response()->json([
+            'message'=> 'Get top five player maximum score successfully', $data
+        ],200);
 
     }
+    public function topThreeMaxScore (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer'
+        ]);
+        $data = [];
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request'],400);
+        }
+
+        $topThree = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
+        $data['top_three'] = $topThree;
+        return response()->json([
+            'message'=> 'Get top five player maximum score successfully', $data
+        ],200);
+    }
+
 
 }

@@ -13,4 +13,5 @@ class Topics extends Model
     }
 
     protected $guarded = [];
+
 }
