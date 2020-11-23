@@ -25,6 +25,7 @@ class CreateQuestionsTable extends Migration
             $table->jsonb('answer')->nullable(true)
                 ->comment('Câu trả lời được phép null. ' .
                     'Format: Quiz or T/F: [{"a": "content_ans_A", "isCorrectAns": true/false, "img_ans": ""}, {}, ..]');
+            $table->unsignedSmallInteger('number_correct_answer')->nullable(false);
             $table->string('question_img')->nullable(true)->comment('Ảnh chính của câu hỏi');
             $table->timestamps();
         });

@@ -22,6 +22,8 @@ class ReportPlayerController extends Controller
             'player_score' => 'bail|required|numeric',
             'reply_time' => 'bail|required|numeric',
             'ans_selected' => 'bail|required|nullable',
+            'number_correct_answer' => 'bail|required|integer',
+            'number_incorrect_answer' => 'bail|required|integer',
         ]);
         $data = [];
         if ($validator->fails()) {
@@ -38,6 +40,8 @@ class ReportPlayerController extends Controller
             'player_score' => $request['player_score'],
             'reply_time' => $request['reply_time'],
             'ans_selected' => $request['ans_selected'],
+            'number_correct_answer' => $request['number_correct_answer'],
+            'number_incorrect_answer' => $request['number_incorrect_answer']
         ]);
         $player = Players::find($request['player_id']);
         $player['total_score'] = $request['current_total_score'];

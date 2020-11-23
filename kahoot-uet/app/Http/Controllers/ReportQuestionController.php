@@ -61,6 +61,7 @@ class ReportQuestionController extends Controller
                 ['B' => $summaryResult[1]['total']],
                 ['C' => $summaryResult[2]['total']],
                 ['D' => $summaryResult[3]['total']],
+                ['None' => '']
             ]),
             'correct_percent' => '',
             'agv_time_ans' => $avg_time_ans,
@@ -73,6 +74,7 @@ class ReportQuestionController extends Controller
             'message'=> 'Update report question successfully'
         ],200);
     }
+
 
     public function reportQuestionSummary () {
 

@@ -45,7 +45,8 @@ class QuestionsController extends Controller
             'question_type_select' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
             'time' => 'bail|nullable|integer',
             'score' => 'bail|nullable|integer',
-            'number_question' => 'bail|nullable|integer'
+            'number_question' => 'bail|nullable|integer',
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -74,6 +75,7 @@ class QuestionsController extends Controller
                 'score' => $question['score'],
                 'topic_id' => $request['topic_id'],
                 'answer' => $question['answer'],
+                'number_correct_answer' => $question['number_correct_answer']
             ]);
         }
         return response()->json([

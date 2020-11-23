@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Players;
 use App\Questions;
+use App\ReportPlayer;
 use App\Rooms;
 use App\Topics;
 use Illuminate\Http\Request;
@@ -14,7 +15,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
-//    private $reportModel = new Report();
+
+    /*
+     *  Get all report
+    */
     public function index (Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -36,15 +40,10 @@ class ReportController extends Controller
             $report['number_player'] = Players::where('report_id', $reportId)->count();
         }
         return response()->json([
-            'message'=> 'Get all report successfully'
+            'message'=> 'Get all report successfully', 'reports' => $reports
         ],200);
     }
-    public function show ()
-    {
-        $reportId = 10;
-//        $report
-//        return view('pages.topic', ['data' => $reports]);
-    }
+
 
     public function searchReportByName (Request $request)
     {
@@ -59,7 +58,9 @@ class ReportController extends Controller
             $reportId = $report['id'];
             $report['number_player'] = Players::where('report_id', $reportId)->count();
         }
-        return view('pages.topic', ['data' => $reports]);
+        return response()->json([
+            'message'=> 'Get all report successfully', 'reports' => $reports
+        ],200);
     }
 
     public function reportDetail (Request $request)
@@ -94,9 +95,7 @@ class ReportController extends Controller
         $hosterBy = User::select('name')->where('id', $report['owner_id'])->get();
         $report['hosted_by'] = $hosterBy[0]['name'];
 
-        // Get number player
-        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
-        $report['number_player'] = count($players);
+
 
         // Get number question
         $room_id = $report['room_id'];
@@ -105,12 +104,71 @@ class ReportController extends Controller
         $questions = Questions::where('topic_id', $topic_id)->get();
         $report['number_question'] = count($questions);
 
+        // Not finish
+        $notFinish = DB::table('report_players')
+                        ->select('id', DB::raw('count(`ans_select`) as not_finish'))
+                        ->where('ans_selected', 'is null')
+                        ->groupBy('id')->orderBy('id', 'asc')->get();
+        $playerIds = [];
+        for ($i = 0; $i < count($notFinish); $i++) {
+            array_push($playerIds, $notFinish[$i]['id']);
+        }
+        $players = Players::select('id', 'name')->where([
+            'id', 'in', $playerIds
+        ])->orderBy('id', 'asc')->get();
+        for ($i = 0; $i < count($notFinish); $i++) {
+            $notFinish[$i]['name'] = $players[$i]['name'];
+        }
+
+        // Need help: total correct answered <= 35%
+        $totalCorrectAnswer = Questions::where('topic_id', $topic_id)->sum('number_correct_answer');
+        $havingCondition = (int) 0.35 * $totalCorrectAnswer;
+        $allPlayer = DB::table('report_players')
+                        ->select('id', 'player_id', DB::raw('sum(number_correct_answer) as number_correct_answer'))
+                        ->where([
+                            ['report_id', $report['id']]
+                        ])
+                        ->groupBy('question_id')
+                        ->orderBy('player_id', 'asc');
+        $needHelp = [];
+        for ($i = 0; $i < count($allPlayer); $i++) {
+            $numberCorrectAnswer = $allPlayer[$i]['number_correct_answer'];
+            if ($numberCorrectAnswer < $havingCondition) {
+                $allPlayer[$i]['correct_percent'] = $numberCorrectAnswer / $totalCorrectAnswer;
+                array_push($needHelp, $allPlayer[$i]);
+            }
+        }
+        $playerIds = [];
+        for ($i = 0; $i < count($needHelp); $i++) {
+            array_push($playerIds, $needHelp[$i]['id']);
+        }
+        $players = Players::select('id', 'name')->where(
+            ['id', 'in', $playerIds]
+        )->orderBy('id', 'asc')->get();
+        for ($i = 0; $i < count($needHelp); $i++) {
+            $needHelp[$i]['name'] = $players[$i]['name'];
+        }
+
+//        $allQuestion = DB::table
+
+
+        // different question < 35%
+        $differentQuestion = 0;
+
+
+        // Get number player
+        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        $report['number_player'] = count($players);
         //
         return response()->json([
             'message' => "Get report detail success",
             'summary' => $report,
             'players' => $players,
-            'questions' => $questions
+            'questions' => $questions,
+            'not_finish' => $notFinish,
+            'need_help' => $needHelp,
+            'different_questions' => $differentQuestion
+
         ], 200);
 
 
