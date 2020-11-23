@@ -11,6 +11,7 @@ import Lobby from "../components/user/PlayGame/Lobby";
 import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import LobbyPlayer from "../components/player/LobbyPlayer";
+import Fake from "../components/user/Fake";
 
 function RouterPath() {
     return (
@@ -26,6 +27,7 @@ function RouterPath() {
                 {/* Erroring */}
                 <Route exact path="/play-game" component={OptionGame} />
                 <Route exact path="/play-game/lobby" component={Lobby} />
+                <Route exact path="/fake" component={Fake} />
 
                 {/* Player */}
                 <Route exact path="/pin-player" component={PinInput} />
