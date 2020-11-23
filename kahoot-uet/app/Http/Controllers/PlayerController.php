@@ -23,7 +23,7 @@ class PlayerController extends Controller
                 'message'=>'Bad request',
                 'error'=>$validator->errors()],400);
         }
-        $data['player'] = Players::select('name')->where('room_id', $request['room_id'])->orderBy('created_at')->get();
+        $data['player'] = Players::select('id', 'name')->where('room_id', $request['room_id'])->orderBy('created_at')->get();
         $data['number_player'] = count($data['player']);
         return response()->json([
             'message'=> 'get all player room successfully', $data

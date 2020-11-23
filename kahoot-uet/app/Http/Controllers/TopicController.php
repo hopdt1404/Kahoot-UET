@@ -10,35 +10,22 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
 
 class TopicController extends Controller
 {
     /*
-     *  Get all Topic creator by user: Waite to TEST
+     *  Get all Topic creator by user Done
     */
 
     public function index (Request $request) {
-        $validator = Validator::make($request->all(), [
-            'creator_id' => 'bail|required|integer'
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'message'=>'Bad request',
-                'error'=>$validator->errors()], 400);
-        }
 
-        $creator_id = $request['creator_id'];
-        if ($validator->fails()) {
-            return response()->json([
-                'message'=>'Now',
-                'error'=>$validator->errors()], 400);
-        }
+        $creator_id = $request->user()->only('id');
         $myTopic = Topics::select('id' ,'name', 'creator_id', 'created_at', 'is_public', 'is_daft', 'is_played', 'created_at')->where('creator_id', $creator_id)->where('is_deleted', 0)->get();
-        $result = [];
         for ($i = 0; $i < count($myTopic); $i++) {
             $topic = $myTopic[$i];
-            $creatorName = User::select('username')->where('id', $topic['creator_id'])->get();
-            $creatorName = $creatorName[0]['username'];
+            $creatorName = User::select('name')->where('id', $topic['creator_id'])->get();
+            $creatorName = $creatorName[0]['name'];
             $topic['creator_name'] = $creatorName;
             $topic['number_question'] = Questions::where('topic_id', $topic['id'])->count();
             if ($topic['is_played']) {
@@ -48,13 +35,47 @@ class TopicController extends Controller
         }
         $result = $myTopic;
         return response()->json([
-            'message'=> 'get topic successfully', $result
+            'message'=> 'Get topics successfully', 'topics' => $result
+        ],200);
+    }
+
+    /*
+     * Create duplicate topic: Done
+     *
+     */
+
+    public function duplicateTopic (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'topic_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $topic_id = $request['topic_id'];
+        $topic = Topics::where('id', $topic_id)->get();
+        $topic = $topic[0];
+        $topicDuplicate = $topic->replicate();
+        $topicDuplicate['name'] = 'Duplicate of ' . $topicDuplicate['name'];
+        $topicDuplicate->save();
+        $questions = Questions::where('topic_id', $topic['id'])->get();
+        foreach ($questions as $currentQuestion) {
+            $question = $currentQuestion->replicate();
+            $question['topic_id'] = $topicDuplicate['id'];
+            $question->save();
+        }
+        $result['topic_id'] = $topic['id'];
+        $result['duplicate_topic_id'] = $topicDuplicate['id'];
+
+        return response()->json([
+            'message'=> 'Duplicate topic successfully', 'topics' => $result
         ],200);
     }
 
 
     /*
-     *  create topic : Wait to test
+     *  create topic: Fixing
     */
 
     public function create (Request $request) {
@@ -69,7 +90,7 @@ class TopicController extends Controller
         }
         $data = $request['topic'];
         $topic = Topics::create([
-            'name' => $data['name'],
+            'name' => $request['name'],
             'creator_id' => $request['creator_id']
         ]);
         Topics::where('id', $request['id'])->update(['is_deleted' => 1]);

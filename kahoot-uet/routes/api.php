@@ -38,6 +38,11 @@ Route::group([
         Route::put('rename','ProfileController@rename');
         Route::get('user_id','ProfileController@getUserId');
         Route::put('change-password','EntryController@changePassword');
+
+        Route::prefix('topic')->group(function () {
+            Route::get('', 'TopicController@index');
+            Route::post('/duplicate', 'TopicController@duplicateTopic');
+        });
     });
 
 

@@ -7,13 +7,14 @@
  - php artisan migrate
  - php artisan passport:install
  - composer require maatwebsite/excel:^3.0.1
+ - php artisan passport:client --personal
  
 ### Install Socket
-- Redis 3.2.100
-- NodeJS moij version
+- Redis 3.2.100: doing 
+- NodeJS moij version: Done</br>
 
-=> Composer require predis/predis
-=> Npm install socket.io ioredis 
+=> Composer require predis/predis: Done
+=> Npm install socket.io ioredis : Done
 
 Config  file .env
 Change 
