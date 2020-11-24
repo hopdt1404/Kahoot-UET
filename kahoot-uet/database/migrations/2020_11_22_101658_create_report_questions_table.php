@@ -18,11 +18,15 @@ class CreateReportQuestionsTable extends Migration
             $table->unsignedBigInteger('question_id')->nullable(false);
             $table->unsignedBigInteger('topic_id')->nullable(false);
             $table->unsignedBigInteger('report_id')->nullable(false);
-            $table->jsonb('result')->nullable(false);
-            $table->double('correct_percent', 8, 2)->nullable(false);
-            $table->double('avg_time_ans', 8, 2)->nullable(false);
-            $table->unsignedInteger('number_player')->nullable(false);
-            $table->unsignedInteger('number_player_ans')->nullable(false)->default(0);
+            $table->jsonb('result')->nullable(true);
+            $table->double('correct_percent', 8, 2)->nullable(true);
+            $table->double('avg_time_ans', 8, 2)->nullable(true);
+            $table->unsignedInteger('number_player')->nullable(true);
+            $table->unsignedInteger('number_player_ans')->nullable(true)->default(0);
+            $table->boolean('a')->default(0);
+            $table->boolean('b')->default(0);
+            $table->boolean('c')->default(0);
+            $table->boolean('d')->default(0);
             $table->timestamps();
         });
     }

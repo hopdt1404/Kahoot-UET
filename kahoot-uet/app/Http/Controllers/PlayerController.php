@@ -123,14 +123,13 @@ class PlayerController extends Controller
             return response()->json([
                 'message'=>'Bad request'],400);
         }
-
         $topFive = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
-        $data['top_five'] = $topFive;
         return response()->json([
-            'message'=> 'Get top five player maximum score successfully', $data
+            'message'=> 'Get top five player maximum score successfully', 'top_five' => $topFive
         ],200);
 
     }
+
     public function topThreeMaxScore (Request $request) {
         $validator = Validator::make($request->all(),[
             'room_id' => 'bail|required|integer'
@@ -142,9 +141,8 @@ class PlayerController extends Controller
         }
 
         $topThree = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
-        $data['top_three'] = $topThree;
         return response()->json([
-            'message'=> 'Get top five player maximum score successfully', $data
+            'message'=> 'Get top three player maximum score successfully', 'top_three_final' => $topThree
         ],200);
     }
 

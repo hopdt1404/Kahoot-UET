@@ -62,9 +62,10 @@ Route::group([
             Route::get('', 'ReportController@create');
             Route::post('answer', 'ReportPlayerController@create');
             Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
+            Route::get('top-five', 'PlayerController@topFiveMaxScore');
+            Route::get('top-three-final', 'PlayerController@topThreeMaxScore');
         });
     });
-
 
 });
 
