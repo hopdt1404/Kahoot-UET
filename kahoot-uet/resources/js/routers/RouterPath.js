@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, Router } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+
 import Home from "../components/user/Home";
 import Reports from "../components/user/Reports";
 import Kahoots from "../components/user/Kahoots";
@@ -8,29 +9,80 @@ import Login from "../components/user/Login";
 import Settings from "../components/user/Settings";
 import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
+
+import ErrorPage from "../components/error/ErrorPage";
+
+//player
 import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
+import IndexPlayer from "../components/player/IndexPlayer";
+
 import LobbyPlayer from "../components/player/LobbyPlayer";
+import StartPlayer from "../components/player/StartPlayer";
+import GetReadyPlayer from "../components/player/GetReadyPlayer";
+import AnswerSentPlayer from "../components/player/AnswerSentPlayer";
+import AnswerResultPlayer from "../components/player/AnswerResultPlayer";
+import Ranking from "../components/player/Ranking.jsx";
+import GameBlock from "../components/player/GameBlock";
 
 function RouterPath() {
     return (
         <main>
             <Switch>
+                {/* Host */}
                 <Route exact path="/" component={Home} />
-                <Route exact path="/kahoots" component={Kahoots} />
-                <Route exact path="/user-reports" component={Reports} />
-                <Route exact path="/creator" component={Creator} />
-                <Route exact path="/settings" component={Settings} />
-                <Route exact path="/auth/login" component={Login} />
-                {/* In Game */}
-                {/* Erroring */}
-                <Route exact path="/play-game" component={OptionGame} />
-                <Route exact path="/play-game/lobby" component={Lobby} />
+                <Route path="/kahoots" component={Kahoots} />
+                <Route path="/user-reports" component={Reports} />
+                <Route path="/creator" component={Creator} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/auth/login" component={Login} />
+                {/* In Game - erroring */}
+                <Route exact path="/user" component={OptionGame} />
+                <Route path="/user/lobby" component={Lobby} />
 
                 {/* Player */}
-                <Route exact path="/pin-player" component={PinInput} />
-                <Route exact path="/join" component={NameInput} />
-                <Route exact path="/instructor" component={LobbyPlayer} />
+                <Route path="/pin-player" component={PinInput} />
+                <Route path="/name-player" component={NameInput} />
+                <Route exact path="/player" component={IndexPlayer} />
+                <Route path="/player/lobby" exact component={LobbyPlayer} />
+                <Route path="/player/start" component={StartPlayer} />
+                <Route path="/player/getready" component={GetReadyPlayer} />
+                <Route path="/player/gameblock" component={GameBlock} />
+                <Route
+                    path="/player/answer/sent"
+                    component={AnswerSentPlayer}
+                />
+                <Route
+                    path="/player/answer/result"
+                    component={AnswerResultPlayer}
+                />
+                <Route path="/player/ranking" component={Ranking} />
+
+                {/* <Switch>
+                        <Route
+                            path="/player/lobby"
+                            exact
+                            component={LobbyPlayer}
+                        />
+                        <Route path="/player/start" component={StartPlayer} />
+                        <Route
+                            path="/player/getready"
+                            component={GetReadyPlayer}
+                        />
+                        <Route path="/player/gameblock" component={GameBlock} />
+                        <Route
+                            path="/player/answer/sent"
+                            component={AnswerSentPlayer}
+                        />
+                        <Route
+                            path="/player/answer/result"
+                            component={AnswerResultPlayer}
+                        />
+                        <Route path="/player/ranking" component={Ranking} />
+                    </Switch> */}
+
+                {/* Error announce */}
+                <Route path="*" component={ErrorPage} />
             </Switch>
         </main>
     );

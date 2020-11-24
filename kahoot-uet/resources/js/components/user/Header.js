@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, Switch } from "react-router-dom";
-import "../user.css";
+import "./user.css";
 import image_logo from "../../images/logo_kahoot.png";
 import {
     HouseDoor,
@@ -57,7 +57,12 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link to={"/play-game"}>
+                <Link to={"/player"}>
+                    <button type="button" className="create-button">
+                        Player
+                    </button>
+                </Link>
+                <Link to={"/user"}>
                     <button type="button" className="create-button">
                         Play
                     </button>
