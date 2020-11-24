@@ -14,6 +14,6 @@ class Questions extends Model
        'quiz' => 'QUIZ', 't/f' => 'T/F'
     ];
     public static $QUESTION_TYPE_SELECT = [
-        'multi' => 'Multi-select', 'single' => 'Single select'
+        'multi' => 'Multi select', 'single' => 'Single select'
     ];
 }

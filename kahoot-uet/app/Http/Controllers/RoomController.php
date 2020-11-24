@@ -12,7 +12,6 @@ class RoomController extends Controller
     public function index (Request $request) {
 
         $validator = Validator::make($request->all(),[
-            'creator_id' => 'bail|required|integer',
             'topic_id' => 'bail|required|integer'
         ]);
         if ($validator->fails()) {

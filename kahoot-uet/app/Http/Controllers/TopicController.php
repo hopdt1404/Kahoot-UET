@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 
 class TopicController extends Controller
 {
@@ -74,13 +74,9 @@ class TopicController extends Controller
     }
 
 
-    /*
-     *  create topic: Fixing
-    */
-
-    public function create (Request $request) {
+    public function renameTopic (Request $request) {
         $validator = Validator::make($request->all(), [
-            'creator_id' => 'bail|required|integer',
+            'topic_id' => 'bail|required|integer',
             'name' => 'bail|required|string',
         ]);
         if ($validator->fails()) {
@@ -88,26 +84,95 @@ class TopicController extends Controller
                 'message'=>'Bad request',
                 'error'=>$validator->errors()], 400);
         }
-        $data = $request['topic'];
-        $topic = Topics::create([
-            'name' => $request['name'],
-            'creator_id' => $request['creator_id']
-        ]);
-        Topics::where('id', $request['id'])->update(['is_deleted' => 1]);
-        if (isset($request['id'])) {
-            $questions = Questions::where('topic_id', $request['id'])->get();
-            for($i = 0; $i < count($questions); $i++) {
-                $question = $questions[$i];
-                $question['topic_id'] = $topic['id'];
-                Questions::create($questions);
-            }
-        }
-
+        $topic = Topics::where('id', $request['topic_id'])->update(['name' => $request['name']]);
         return response()->json([
-            'message' => "created successfully topic", $topic
-        ], 201);
+            'message'=> 'Rename topic successfully', 'topic' => $topic
+        ],200);
     }
 
+
+    /*
+     *  create topic: Fixing ghep rồi fix
+    */
+    public function createTopic (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'bail|required|string',
+            'title' => 'bail|nullable|string',
+            'question_type' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE)],
+            'question_type_select' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
+            'time' => 'bail|nullable|integer',
+            'score' => 'bail|nullable|integer',
+            'sequence' => 'bail|integer',
+            'number_correct_answer' => 'bail|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $creator_id = $request->user()->only('id');
+        $creator_id = $creator_id['id'];
+
+        $topic = Topics::create([
+            'name' => $request['name'],
+            'creator_id' => $creator_id
+        ]);
+        if (isset($request['topic_id'])) {
+            Topics::where('id', $request['topic_id'])->update(['is_deleted' => 1]);
+        }
+
+
+        if (isset($request['topic_id'])) {
+            $questions = Questions::where('topic_id', $request['id'])->get();
+
+            foreach($questions as $currentQuestion) {
+                $question = $currentQuestion;
+                $question['topic_id'] = $topic['id'];
+                $question = Questions::create([
+                    'sequence' => $question['sequence'] ?? '',
+                    'title' => $question['title'] ?? "",
+                    'answer' => $question['answer'],
+                    'question_type' => $question['question_type'] ?? '',
+                    'question_type_select' => $question['question_type_select'] ?? "",
+                    'time' => $question['time'] ?? 0,
+                    'score' => $question['score'] ?? 0,
+                    'number_correct_answer' => $question['number_correct_answer'] ?? 0,
+                    'topic_id' => $question['topic_id']
+                ]);
+                return response()->json([
+                    'message' => "now successfully topic",
+                ], 201);
+            }
+
+        } else {
+            $questions = [];
+            if (isset($request['questions'])) {
+                $questions = $request['questions'];
+                for ($i = 0; $i < count($questions); $i++)
+
+                    $question = $questions[$i];
+                    $question['topic_id'] = $topic['id'];
+                    $question = Questions::create([
+                        'sequence' => $question['sequence'] ?? '',
+                        'title' => $question['title'] ?? "",
+                        'answer' => $question['answer'],
+                        'question_type' => $question['question_type'] ?? '',
+                        'question_type_select' => $question['question_type_select'] ?? "",
+                        'time' => $question['time'] ?? 0,
+                        'score' => $question['score'] ?? 0,
+                        'number_correct_answer' => $question['number_correct_answer'] ?? 0,
+                        'topic_id' => $question['topic_id']
+                    ]);
+                }
+
+
+
+
+        }
+        return response()->json([
+            'message' => "created successfully topic"
+        ], 201);
+    }
     /*
      * Update topic: Wait test
      * (update => exist: => create new object and question of tooc)
@@ -143,18 +208,43 @@ class TopicController extends Controller
     /*
      * Delete topic: Wait to test
     */
+    public function createTopics (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'bail|required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+
+        $creator_id = $request->user()->only('id');
+        $creator_id = $creator_id['id'];
+        $topic = Topics::create([
+           'name' => $request['name'],
+            'creator_id' => $creator_id
+        ]);
+        return response()->json([
+            'message' => "deleted successfully topic", $topic
+        ], 200);
+
+    }
+
+    /*
+     * Delete topic
+     */
     public function delete (Request $request) {
         $validator = Validator::make($request->all(), [
-            'creator_id' => 'bail|required|integer',
-            'id' => 'bail|required|string'
+            'topic_id' => 'bail|required|integer'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'message'=>'Bad request',
                 'error'=>$validator->errors()], 400);
         }
-        $data = $request['data'];
-        Topics::where('id', $data['id'])->update(['is_deleted' => 1]);
+        $topic_id = $request['topic_id'];
+        Topics::where('id', $topic_id)->update(['is_deleted' => 1]);
         return response()->json([
             'message' => "deleted successfully topic"
         ], 200);

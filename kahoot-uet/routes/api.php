@@ -41,7 +41,15 @@ Route::group([
 
         Route::prefix('topic')->group(function () {
             Route::get('', 'TopicController@index');
-            Route::post('/duplicate', 'TopicController@duplicateTopic');
+            Route::post('duplicate', 'TopicController@duplicateTopic');
+            Route::patch('rename', 'TopicController@renameTopic');
+            Route::post('create', 'TopicController@createTopic');
+            Route::post('create-topic', 'TopicController@createTopics');
+            Route::post('delete', 'TopicController@delete');
+        });
+
+        Route::prefix('room')->group(function () {
+            Route::get('', 'RoomController@index');
         });
     });
 
