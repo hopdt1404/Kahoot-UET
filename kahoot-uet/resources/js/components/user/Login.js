@@ -35,25 +35,25 @@ class Login extends Component {
 
   submit(event){
     event.prevendefault();
-    // axios.post('/login', this.state.account)
-    // .then(function (res) {
-    //   if(res.data.message){
-    //     this.setState({
-    //       message: "Tài khoản hoặc mật khẩu không đúng"
-    //     })
-    //   }
+    axios.post('http://localhost:8000/api/auth/login', this.state.account)
+    .then(function (res) {
+      if(res.data.message){
+        this.setState({
+          message: "Tài khoản hoặc mật khẩu không đúng"
+        })
+      }
 
-    //   else if(res.data.access_token){
-    //     localStorage.setItem('token', res.data.access_token);
-    //     this.setState({
-    //       loggedIn: true
-    //     })
-    //   }
+      else if(res.data.access_token){
+        localStorage.setItem('token', res.data.access_token);
+        this.setState({
+          loggedIn: true
+        })
+      }
      
-    // })
-    // .catch(function (err){
-    //   console.log(err)
-    // })
+    })
+    .catch(function (err){
+      console.log(err)
+    })
     console.log("hello");
     this.setState({
       loggedIn: true

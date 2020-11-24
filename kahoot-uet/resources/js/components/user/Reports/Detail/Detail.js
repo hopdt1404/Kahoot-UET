@@ -38,7 +38,7 @@ class ReportDetail extends React.Component{
                         },
                         {
                             answered:"correct",
-                            time:null,
+                            time:5.33,
                             score:706
                         }
                     ]

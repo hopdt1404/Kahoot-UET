@@ -28,13 +28,29 @@ export default class Home extends React.Component {
                     num_play: 2,
                     image: fake_image
                 }
+            ],
+            reportlist: [
+                {
+                    id:1,
+                    name:"abc",
+                    topic:"test1",
+                    date:"2016-09-06 11:53:31",
+                    image: fake_image
+                },
+                {
+                    id:2,
+                    name:"test_report",
+                    topic:"test2",
+                    date:"2016-09-06 11:53:31",
+                    image: fake_image
+                }
             ]
             
         };
     }
     componentDidMount() {
         axios
-            .get("/")
+            .get("localhost:8000/api/home")
             .then(res => {
                 const data = res.data;
                 if (data.fullname) {
@@ -52,22 +68,66 @@ export default class Home extends React.Component {
                         kahootlist: data.kahootlist
                     });
                 }
+                if (data.reportlist) {
+                    this.setState({
+                        reportlist: data.reportlist
+                    });
+                }
             })
             .catch(error => console.log(error));
     }
+    route(id){
+        return "/user-reports/detail/"+String(id);
+    }
     render() {
+        const reportShow = this.state.reportlist.map((data,index)=> {
+            return(
+                <div class = "container mt-2 mb-2">
+                    <Link class= "d-flex flex-row home-kahootlist-quest" to={this.route(data.id)}>
+                        <div class="home-kahootlist-image" style={{backgroundImage:'url('+data.image+')'}}>
+                        </div>
+                        <div class ="home-kahootlist-quest-info">
+                            <div class = "home-kahootlist-quest-name">
+                                <div class="home-kahootlist-quest-name-area">
+                                    <span class="home-kahootlist-quest-name-text">{data.name}</span>
+                                </div>
+                            </div>
+                            <div class="home-kahootlist-num-play">
+                                <div class="home-kahootlist-num-play-area">
+                                    <span class= "home-kahootlist-num-play-text d-flex justify-content-end">{data.date}</span>    
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            )
+        })
         return (
             <div>
                 <Header />
                 <div class="home-main-content">
                     <div class="container d-flex pt-5 justify-content-center">
-                        <div class="col-sm-3">
-                            <div class="home-user-profile container-fluid">
+                        <div class="col-sm-4">
+                            <div class="home-user-profile">
+                                <h3 class="mb-3">Welcome back!</h3> 
                                 <span class="home-name">{this.state.fullname}</span>
                                 <span class="home-username">
                                     {this.state.username}
                                 </span>
                             </div>
+
+                            <div class="home-kahoot-list mt-5 p-2">
+                                <h2 class="pt-2abnf">My Reports</h2>
+                                {reportShow}
+                                <div class="home-see-all">
+                                    <div class="home-see-all-area">
+                                        <Link to="/user-reports" class="home-see-all-text">
+                                            See all
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="col-sm-4 home-kahoot-list">
                             <h2 class="pt-2">My Kahoots</h2>
