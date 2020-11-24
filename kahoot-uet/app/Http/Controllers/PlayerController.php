@@ -39,7 +39,7 @@ class PlayerController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'bail|required|string',
             'is_group' => 'bail|boolean',
-            'room_id' => 'integer|required|bail'
+            'PIN' => 'integer|required|bail'
         ]);
         $data = [];
         if ($validator->fails()) {
@@ -47,7 +47,8 @@ class PlayerController extends Controller
                 'message'=>'Bad request',
                 'error'=>$validator->errors()],400);
         }
-        $canCreatePlayer = Rooms::where(['id' => $request['room_id'], 'is_locked' => 0])->count();
+        $room = Rooms::select('id')->where(['PIN' => $request['PIN'], 'is_finished' => 0, 'is_locked' => 0])->get();
+        $canCreatePlayer = count($room);
         if ($canCreatePlayer != 1) {
             return response()->json([
                 'message'=>'Room is locked'], 400);
@@ -56,7 +57,7 @@ class PlayerController extends Controller
             'name' => $request['name'],
             'is_group' => $request['is_group'],
             'group_detail' => $request['group_detail'] ?: '',
-            'room_id' => $request['room_id']
+            'room_id' => $room['0']['id']
         ]);
         return response()->json([
             'message'=> 'created player successfully', $player
@@ -70,18 +71,15 @@ class PlayerController extends Controller
     public function getOutPlayer (Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'id' => 'bail|required|integer'
+            'player_id' => 'bail|required|integer'
         ]);
-
         $data = [];
         if ($validator->fails()) {
             return response()->json([
                 'message'=>'Bad request',
                 'error'=>$validator->errors()],400);
         }
-
-        $data['result'] = Players::where('id', $request['id'])->delete();
-
+        $data['result'] = Players::where('id', $request['player_id'])->delete();
         return response()->json([
             'message'=> 'Get out player successfully'
         ],200);

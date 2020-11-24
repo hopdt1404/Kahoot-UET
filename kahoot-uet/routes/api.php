@@ -49,7 +49,17 @@ Route::group([
         });
 
         Route::prefix('room')->group(function () {
-            Route::get('', 'RoomController@index');
+            Route::get('create', 'RoomController@index');
+            Route::patch('lock', 'RoomController@lockRoom');
+        });
+        Route::prefix('player')->group(function () {
+            Route::get('list', 'PlayerController@index');
+            Route::get('join', 'PlayerController@create');
+            Route::post('get-out', 'PlayerController@getOutPlayer');
+        });
+
+        Route::prefix('play')->group(function () {
+            Route::get('', 'QuestionsController@');
         });
     });
 
