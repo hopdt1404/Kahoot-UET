@@ -3,7 +3,6 @@
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +45,7 @@ Route::group([
             Route::post('create', 'TopicController@createTopic');
             Route::post('create-topic', 'TopicController@createTopics');
             Route::post('delete', 'TopicController@delete');
+            Route::get('detail', 'QuestionsController@index');
         });
 
         Route::prefix('room')->group(function () {
@@ -59,7 +59,9 @@ Route::group([
         });
 
         Route::prefix('play')->group(function () {
-            Route::get('', 'QuestionsController@');
+            Route::get('', 'ReportController@create');
+            Route::post('answer', 'ReportPlayerController@create');
+            Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
         });
     });
 

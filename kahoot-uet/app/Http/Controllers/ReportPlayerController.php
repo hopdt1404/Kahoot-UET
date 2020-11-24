@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Messager;
+use App\Players;
 use App\ReportPlayer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ReportPlayerController extends Controller
             'current_total_score' => 'bail|required|numeric',
             'player_score' => 'bail|required|numeric',
             'reply_time' => 'bail|required|numeric',
-            'ans_selected' => 'bail|required|nullable',
+            'ans_selected' => 'bail|nullable',
             'number_correct_answer' => 'bail|required|integer',
             'number_incorrect_answer' => 'bail|required|integer',
         ]);
@@ -31,7 +32,6 @@ class ReportPlayerController extends Controller
                 'message'=>'Bad request',
                 'error'=>$validator->errors()],400);
         }
-
         $result = ReportPlayer::create([
             'player_id' => $request['player_id'],
             'question_id' => $request['question_id'],
@@ -46,11 +46,8 @@ class ReportPlayerController extends Controller
         $player = Players::find($request['player_id']);
         $player['total_score'] = $request['current_total_score'];
         $player->save();
-
-        $data['ans_select_detail'] = $result;
-
         return response()->json([
-            'message'=> 'Update score player successfully'
+            'message'=> 'Update score player successfully', 'player' => $player
         ],200);
     }
 }

@@ -76,7 +76,7 @@ class ReportQuestionController extends Controller
     }
 
 
-    public function reportQuestionSummary () {
+    public function summaryQuestion (Request $request) {
 
     }
     /**

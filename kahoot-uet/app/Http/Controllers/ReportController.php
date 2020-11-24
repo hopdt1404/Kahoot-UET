@@ -181,24 +181,32 @@ class ReportController extends Controller
     public function create (Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'bail|required',
             'room_id' => 'bail|required|integer',
-            'owner_id' => 'bail|required|integer',
+            'topic_id' => 'bail|required|integer'
         ]);
-        $data = [];
         if ($validator->fails()) {
             return response()->json([
                 'message'=>'Bad request',
                 'error'=>$validator->errors()],400);
         }
+        $topic = Topics::select('name')->where('id', $request['topic_id'])->get();
+        $exitTopic = count($topic);
+        if ($exitTopic != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        $owner_id = $request->user()->only('id');
+        $owner_id = $owner_id['id'];
         $report = Reports::create([
-            'name' => $request['name'],
+            'name' => $topic[0]['name'],
             'room_id' => $request['room_id'],
-            'owner_id' => $request['owner_id']
+            'owner_id' => $owner_id
         ]);
-        $data['report'] = $report;
         return response()->json([
-            'message'=> 'Created report successfully'
+            'message'=> 'Created report successfully',
+            'questions' => $questions,
+            'report' => $report
         ],200);
 
     }
