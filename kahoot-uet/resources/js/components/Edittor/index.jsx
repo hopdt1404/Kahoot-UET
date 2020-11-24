@@ -15,7 +15,6 @@ import {
 
 function Editor() {
   const order = useSelector((state) => state.list.order);
-  console.log("EDITOR ORDER",order);
   const currentQuestion = useSelector((state) => state.list.qlist[order]);
   const dispatch = useDispatch();
   const handleQuestionContent = (content) => {

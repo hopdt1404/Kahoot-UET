@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Init from "../Init";
+import Start from "../Start";
 class Fake extends Component {
     render() {
         return (
             <div>
-                <Init />
+                <Start />
             </div>
         );
     }
