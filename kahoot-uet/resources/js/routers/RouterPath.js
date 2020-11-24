@@ -13,6 +13,7 @@ import Lobby from "../components/user/PlayGame/Lobby";
 import ErrorPage from "../components/error/ErrorPage";
 
 //player
+import Topic from "../components/user/Kahoots/Topic/Topic";
 import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import IndexPlayer from "../components/player/IndexPlayer";
@@ -24,6 +25,8 @@ import AnswerSentPlayer from "../components/player/AnswerSentPlayer";
 import AnswerResultPlayer from "../components/player/AnswerResultPlayer";
 import Ranking from "../components/player/Ranking.jsx";
 import GameBlock from "../components/player/GameBlock";
+
+import ReportDetail from "../components/user/Reports/Detail/Detail"
 
 function RouterPath() {
     return (

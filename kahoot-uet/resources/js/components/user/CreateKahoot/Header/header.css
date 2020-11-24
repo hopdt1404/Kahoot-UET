@@ -1,0 +1,67 @@
+div.header {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  font-size: 1rem;
+}
+
+div.left {
+  flex: 1 0 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* padding: 1% 1%; */
+}
+div.right {
+  flex: 1 0 70%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+div.left img {
+  /* align-self: center; */
+  /* flex: 1 0 20%; */
+  max-height: 2rem;
+}
+div.left > button.settings {
+  align-self: center;
+  flex: 1 1 20%;
+  max-width: 15vw;
+  max-height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+div.left > button.settings > p.title {
+  justify-self: flex-start;
+  flex: 1 0 60%;
+  color: rgb(7, 8, 58);
+}
+
+div.left > button.settings > p.sbutton {
+  justify-self: flex-end;
+  flex: 1 0 30%;
+  font-weight: bolder;
+  color: white;
+  background-color: rgb(77, 79, 231);
+  border-radius: 0.2rem;
+  padding: 0.8rem 0;
+}
+
+div.right > p {
+  font-size: 1rem;
+  color: white;
+  background-color: rgb(52, 54, 165);
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.5rem;
+}
+div.right > button {
+  width: 5rem;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.5rem;
+}
