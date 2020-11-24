@@ -131,7 +131,7 @@ div.header00 div.modal div.modalContent {
 }
 
 div.header00 div.modal div.modalContent h2,
-label {
+div.header00 div.modal div.modalContent label {
     font-weight: bold;
 }
 div.header00 div.modal div.modalContent label span {

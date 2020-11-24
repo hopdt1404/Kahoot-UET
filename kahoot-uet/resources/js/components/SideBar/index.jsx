@@ -103,10 +103,10 @@ function SideBar() {
                              data-position={questionList.indexOf(question)}
                              id={questionList.indexOf(question) === order ? "target" : ""}
                             // onClick={() => {handleOrderNumber(questionList.indexOf(question));} }
-                             onClick={(event) => {
-                                 console.log(event.currentTarget.dataset)
-                             }
-                             }
+                            //  onClick={(event) => {
+                            //      console.log(event.currentTarget.dataset)
+                            //  }
+                            //  }
                              onDragStart={onDragStart}
                              onDragOver={onDragOver}
                              onDrop={onDrop}

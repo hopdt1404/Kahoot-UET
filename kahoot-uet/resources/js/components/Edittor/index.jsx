@@ -1,180 +1,383 @@
-import React from "react";
-import "./index.css";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
 import {
-  setAnswer,
-  setAnswerOption,
-  setCorrectAnswer,
-  setImage,
-  setPoints,
-  setQuestionContent,
-  setTimeLimit,
+    CircleFill,
+    DiamondFill,
+    SquareFill,
+    TriangleFill
+} from "react-bootstrap-icons";
+import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    setAnswer,
+    setAnswerOption,
+    setCorrectAnswer,
+    setImage,
+    setPoints,
+    setQuestionContent,
+    setTimeLimit
 } from "../../actions/list";
-
-
+import { Alert } from "bootstrap";
 
 function Editor() {
-  const order = useSelector((state) => state.list.order);
-  const currentQuestion = useSelector((state) => state.list.qlist[order]);
-  const dispatch = useDispatch();
-  const handleQuestionContent = (content) => {
-    const action = setQuestionContent(content, order);
-    dispatch(action);
-  };
-  const handleTimeLimit = (timeLimit) => {
-    const action = setTimeLimit(timeLimit, order);
-    dispatch(action);
-  };
-  const handleSelectPoints = (points) => {
-    const action = setPoints(points, order);
-    dispatch(action);
-  };
-  const handleAnswerOption = (option) => {
-    const action = setAnswerOption(option, order);
-    dispatch(action);
-  };
-  const handleSetImage = (image) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      const action = setImage(reader.result, order);
-      dispatch(action);
-    });
-    reader.readAsDataURL(image);
-  };
-  const handleSetAnswer = (answer, answeOrderNumber) => {
-    const action = setAnswer(answer, order, answeOrderNumber);
-    dispatch(action);
-  }
-  const handleSetCorrectAnswer = (answeOrderNumber) => {
-    const action = setCorrectAnswer(order, answeOrderNumber);
-    dispatch(action);
-  }
+    const signatures = [
+        <TriangleFill />,
+        <DiamondFill />,
+        <CircleFill />,
+        <SquareFill />,
+        "red",
+        "blue",
+        "#d8d800",
+        "green"
+    ];
 
-  // const signature = [
-  //   {<svg id="TRIANGLE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>},
-  //   {<svg id="DIAMOND" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M4,16.0038341 L16,4 L28,16.0007668 L16,28 L4,16.0038341 Z" style="fill: inherit;"></path></svg>},
-  //   {<svg id="CIRCLE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z" style="fill: inherit;"></path></svg>},
-  //   {<svg id="SQUARE" data-functional-selector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" stroke-width="1.3px" style="paint-order: stroke;"><path d="M7,7 L25,7 L25,25 L7,25 L7,7 Z" style="fill: inherit;"></path></svg>}
-  // ];
-  // const getSignature = (order) => {
-  //   switch (order){
-  //     case 0: return {
-  //     };
-  //     case 1: return {
-  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
-  //     };
-  //     case 2: return {
-  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
-  //     };
-  //     case 3: return {
-  //       <svg id="TRIANGLE" dataFunctionalSelector="icon" viewBox="0 0 32 32" focusable="false" stroke="rgba(0, 0, 0, 0.15)" strokeWidth="1.3px" style="paintOrder: stroke"><path d="M27,24.559972 L5,24.559972 L16,7 L27,24.559972 Z" style="fill: inherit;"></path></svg>
-  //     };
-  //   }
-  // }
-  return (
-      <div className="Container">
-        <header>
-          <input
-              type="text"
-              name="content"
-              id="content"
-              placeholder="Click to start typing your question"
-              onBlur={(e) => handleQuestionContent(e.target.value)}
-          />
-        </header>
-        <main>
-          <div className="left-col">
-            <ul className="subOption">
-              <li className="selectTimeLimit">
-                <label>Time limit</label>
-                <br/>
-                <select name="timeLimit" id="timeLimit" defaultValue={currentQuestion.timeLimit}  onChange={(e) => {
-                  handleTimeLimit(e.target.value)
-                }}>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
-                  <option value="60">60</option>
-                  <option value="90">90</option>
-                  <option value="120">120</option>
-                  <option value="240">240</option>
-                </select>Secs
-              </li>
-              <li className="selectPoints">
-                <label>Points</label>
-                <br/>
+    const order = useSelector(state => state.list.order);
+
+    const currentQuestion = useSelector(state => state.list.qlist[order]);
+
+    const dispatch = useDispatch();
+
+    const handleQuestionContent = content => {
+        const action = setQuestionContent(content, order);
+        dispatch(action);
+    };
+
+    const handleTimeLimit = timeLimit => {
+        const action = setTimeLimit(timeLimit, order);
+        dispatch(action);
+    };
+
+    const handleSelectPoints = points => {
+        const action = setPoints(points, order);
+        dispatch(action);
+    };
+
+    const handleAnswerOption = option => {
+        const action = setAnswerOption(option, order);
+        dispatch(action);
+    };
+
+    const handleSetImage = image => {
+        if (image === "delete") {
+            const action = setImage("", order);
+            dispatch(action);
+        } else {
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                const action = setImage(reader.result, order);
+                dispatch(action);
+            });
+            reader.readAsDataURL(image);
+        }
+    };
+    const handleSetAnswer = (answer, answeOrderNumber) => {
+        const action = setAnswer(answer, order, answeOrderNumber);
+        dispatch(action);
+    };
+    const handleSetCorrectAnswer = answeOrderNumber => {
+        const action = setCorrectAnswer(order, answeOrderNumber);
+        dispatch(action);
+    };
+    const [className, setClassName] = React.useState("hideOption");
+    useEffect(() => {
+        console.log(currentQuestion.answers.filter(a=>a.correct==true).length);
+    }, [currentQuestion]);
+
+    return (
+        <div className="Container">
+            <header>
                 <input
-                    type="range"
-                    name="points"
-                    id="points"
-                    step="1000"
-                    max="2000"
-                    min="0"
-                    defaultValue={currentQuestion.points}
-                    onChange={(e) => {
-                      handleSelectPoints(e.target.value)
-                    }}
+                    type="text"
+                    name="content"
+                    id="content"
+                    placeholder="Click to start typing your question"
+                    value={`${currentQuestion.questionContent}`}
+                    onChange={e => handleQuestionContent(e.target.value)}
                 />
-              </li>
-              <li className="selectAnswerOption" hidden={currentQuestion.questionType === "True or False"}>
-                <label htmlFor="answerOption">Answer options</label>
-                <br/>
-                <select name="answerOption"
-                        id="answerOption"
-                        defaultValue={currentQuestion.answerOption}
-                        onChange={(e) => handleAnswerOption(e.target.value)}
-                >
-                  <option value="Single select">Single select</option>
-                  <option value="Multi select">Multi select</option>
-                </select>
-              </li>
-            </ul>
-          </div>
-          <div className="right-col">
-            <div className="preview">
-              <img className="previewImage" src={currentQuestion.image} />
-            </div>
-            <label className="uploadImage">Upload Image
-              <input type="file" accept="image/*" defaultValue={""} onChange={(e) => handleSetImage(e.target.files[0])}/>
-            </label>
-          </div>
-        </main>
-        <footer>
-          {
-            currentQuestion.answers.map(
-                (a) => {
-                  return (
-                      <div className="answers">
-                        <div className="signature">
-
+            </header>
+            <main>
+                <div className="left-col">
+                    <div className="subOption">
+                        <div className="selectTimeLimit">
+                            <label>Time limit</label>
+                            <br />
+                            <div
+                                className={`timeLimit ${className}`}
+                                id="timeLimit"
+                                onClick={() => {
+                                    setClassName(
+                                        className == "showOption"
+                                            ? "hideOption"
+                                            : "showOption"
+                                    );
+                                }}
+                            >{`${currentQuestion.timeLimit} sec`}</div>
+                            {className == "showOption" && (
+                                <div
+                                    className="optionGrid"
+                                    onClick={() => {
+                                        setClassName(
+                                            className == "showOption"
+                                                ? "hideOption"
+                                                : "showOption"
+                                        );
+                                    }}
+                                >
+                                    <div
+                                        id="o1"
+                                        className={className}
+                                        data-position="5"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        5
+                                    </div>
+                                    <div
+                                        id="o2"
+                                        className={className}
+                                        data-position="10"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        10
+                                    </div>
+                                    <div
+                                        id="o3"
+                                        className={className}
+                                        data-position="20"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        20
+                                    </div>
+                                    <div
+                                        id="o4"
+                                        className={className}
+                                        data-position="30"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        30
+                                    </div>
+                                    <div
+                                        id="o5"
+                                        className={className}
+                                        data-position="60"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        60
+                                    </div>
+                                    <div
+                                        id="o6"
+                                        className={className}
+                                        data-position="90"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        90
+                                    </div>
+                                    <div
+                                        id="o7"
+                                        className={className}
+                                        data-position="120"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        120
+                                    </div>
+                                    <div
+                                        id="o8"
+                                        className={className}
+                                        data-position="240"
+                                        onClick={e => {
+                                            handleTimeLimit(
+                                                e.target.dataset.position
+                                            );
+                                        }}
+                                    >
+                                        240
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <input
-                          className="answer"
-                          type="text"
-                          defaultValue={a.answer}
-                          placeholder={"Add answer "+(currentQuestion.answers.indexOf(a)+1)+((currentQuestion.answers.indexOf(a)>1)?" (Optional)":"")}
-                          onBlur={(e) => {
-                            handleSetAnswer(e.target.value, currentQuestion.answers.indexOf(a))
-                          }}
+                        <div className="selectPoints">
+                            <label>Points</label>
+                            <br />
+                            <input
+                                type="range"
+                                name="points"
+                                id="points"
+                                step="1000"
+                                max="2000"
+                                min="0"
+                                defaultValue={currentQuestion.points}
+                                onChange={e => {
+                                    handleSelectPoints(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div
+                            className="selectAnswerOption"
+                            hidden={
+                                currentQuestion.questionType === "True or False"
+                            }
+                        >
+                            <label htmlFor="answerOption">Answer options</label>
+                            <br />
+                            <select
+                                name="answerOption"
+                                id={currentQuestion.answers.filter( a => a.correct == true).length > 1 && currentQuestion.answerOption === "Single select" ? "alert": ""}
+                                defaultValue={currentQuestion.answerOption}
+                                onChange={e =>
+                                    handleAnswerOption(e.target.value)
+                                }
+                            >
+                                <option value="Single select">
+                                    Single select
+                                </option>
+                                <option value="Multi select">
+                                    Multi select
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className="right-col">
+                    <div className="preview">
+                        <img
+                            className="previewImage"
+                            src={currentQuestion.image}
                         />
-                        <input
-                          className="correct"
-                          type="checkbox"
-                          name="status"
-                          checked={a.correct}
-                          onChange={() => {
-                            handleSetCorrectAnswer(currentQuestion.answers.indexOf(a))
-                          }}
-                        />
-                      </div>
-                  )
-                }
-            )
-          }
-        </footer>
-      </div>
-  );
+                    </div>
+                    {currentQuestion.image === "" && (
+                        <label className="uploadImage">
+                            Upload Image
+                            <input
+                                type="file"
+                                accept="image/*"
+                                defaultValue={""}
+                                onChange={e =>
+                                    handleSetImage(e.target.files[0])
+                                }
+                            />
+                        </label>
+                    )}
+                    {currentQuestion.image !== "" && (
+                        <div
+                            className="deleteImage"
+                            className="deleteImage"
+                            onClick={e => handleSetImage("delete")}
+                        >
+                            Delete Image
+                        </div>
+                    )}
+                </div>
+            </main>
+            <footer>
+                {currentQuestion.answers.map(a => {
+                    return (
+                        <div
+                            className="answers"
+                            style={{
+                                backgroundColor:
+                                    a.answer != ""
+                                        ? signatures[
+                                              currentQuestion.answers.indexOf(
+                                                  a
+                                              ) + 4
+                                          ]
+                                        : ""
+                            }}
+                        >
+                            <div
+                                className="signature"
+                                style={{
+                                    backgroundColor:
+                                        signatures[
+                                            currentQuestion.answers.indexOf(a) +
+                                                4
+                                        ]
+                                }}
+                            >
+                                <div className="sSvg">
+                                    {
+                                        signatures[
+                                            currentQuestion.answers.indexOf(a)
+                                        ]
+                                    }
+                                </div>
+                            </div>
+                            <input
+                                className="answer"
+                                type="text"
+                                value={a.answer}
+                                placeholder={
+                                    "Add answer " +
+                                    (currentQuestion.answers.indexOf(a) + 1) +
+                                    (currentQuestion.answers.indexOf(a) > 1
+                                        ? " (Optional)"
+                                        : "")
+                                }
+                                onChange={e => {
+                                    handleSetAnswer(
+                                        e.target.value,
+                                        currentQuestion.answers.indexOf(a)
+                                    );
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        a.answer != ""
+                                            ? signatures[
+                                                  currentQuestion.answers.indexOf(
+                                                      a
+                                                  ) + 4
+                                              ]
+                                            : ""
+                                }}
+                            />
+                            <input
+                                className="correct"
+                                type="checkbox"
+                                name="status"
+                                checked={a.correct}
+                                onChange={() => {
+                                    handleSetCorrectAnswer(
+                                        currentQuestion.answers.indexOf(a)
+                                    );
+                                }}
+                                style={{
+                                  visibility:
+                                      a.answer != ""
+                                          ? "visible": "hidden"
+                              }}
+                            />
+                        </div>
+                    );
+                })}
+            </footer>
+        </div>
+    );
 }
 
 export default Editor;

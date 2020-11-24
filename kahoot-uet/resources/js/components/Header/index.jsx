@@ -24,7 +24,7 @@ function Header() {
     }
     const handleSubmit = () => {
         console.log(JSON.stringify({ questionList, summary }));
- 
+        console.log("Submit");
         // Axios.post('/create',{
         //   summary,questionList
         // }).then(
