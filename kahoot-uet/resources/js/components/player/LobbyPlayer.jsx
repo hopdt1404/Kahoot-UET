@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
+import IndexPlayer from "./IndexPlayer";
 
-function LobbyPlayer(props) {
+function LobbyPlayer() {
     return (
-        <div className="main-lobby">
-            <div className="header-lobby">
-                dajnsd
-            </div>
-            <div className="body-lobby">
-asjdsnd 
+        <div>
+            <IndexPlayer />
+            <div className="lobby-main">
+                <h1 className="text-1">You're in!</h1>
+                <h3 className="text-2">See you nickname on screen?</h3>
             </div>
         </div>
     );
