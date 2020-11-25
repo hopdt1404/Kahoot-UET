@@ -132,8 +132,9 @@ class ReportController extends Controller
 
         // Done to here
 
-        
+
         // Not finish
+        // Số câu trả lời đáp án rỗng : đến
         $notFinish = DB::table('report_players')
                         ->select('id', DB::raw('count(`ans_select`) as not_finish'))
                         ->where('ans_selected', 'is null')
