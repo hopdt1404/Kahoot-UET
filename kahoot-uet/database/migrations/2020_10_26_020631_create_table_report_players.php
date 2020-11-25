@@ -24,7 +24,10 @@ class CreateTableReportPlayers extends Migration
             $table->jsonb('ans_selected')->nullable(true);
             $table->unsignedSmallInteger('number_correct_answer')->nullable(false)->default(0);
             $table->unsignedSmallInteger('number_incorrect_answer')->nullable(false)->default(0);
-
+            $table->boolean('a')->default(0);
+            $table->boolean('b')->default(0);
+            $table->boolean('c')->default(0);
+            $table->boolean('d')->default(0);
             $table->timestamps();
         });
     }

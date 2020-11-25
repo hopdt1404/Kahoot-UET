@@ -39,6 +39,7 @@ Route::resource('/report-player', 'ReportPlayerController');
 Route::get('send-message','RedisController@index');
 Route::post('send-message','RedisController@postSendMessage');
 Route::get('/topic', 'TopicController@index');
+Route::get('/topic/create', 'TopicController@create');
 Route::group(['prefix' => 'topic'], function () {
 
 });

@@ -16,6 +16,7 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
+            $table->string('description')->nullable(true);
             $table->unsignedBigInteger('creator_id')->nullable(false);
             $table->boolean('is_deleted')->default(0);
             $table->boolean('is_public')->default(0);

@@ -7,13 +7,16 @@
  - php artisan migrate
  - php artisan passport:install
  - composer require maatwebsite/excel:^3.0.1
+ - php artisan passport:client --personal
+ - php artisan make:middleware CheckApiToken
+
  
 ### Install Socket
-- Redis 3.2.100
-- NodeJS moij version
+- Redis 3.2.100: doing 
+- NodeJS moij version: Done</br>
 
-=> Composer require predis/predis
-=> Npm install socket.io ioredis 
+=> Composer require predis/predis: Done
+=> Npm install socket.io ioredis : Done
 
 Config  file .env
 Change 
@@ -73,7 +76,7 @@ Chỉnh client: 'client' => env('REDIS_CLIENT', 'predis'),
 - comment dòng: prefix 
 
 ## Run
-- Bật redis: redis-server --port 1000 (1)  
+- Bật redis: sudo redis-server --port 1000 (1)  
 - Chạy khi có thay đổi  file .env
 + php artisan config:cache
 + php artisan cache:clear

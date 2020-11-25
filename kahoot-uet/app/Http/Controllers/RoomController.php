@@ -10,9 +10,7 @@ class RoomController extends Controller
 {
 
     public function index (Request $request) {
-
         $validator = Validator::make($request->all(),[
-            'creator_id' => 'bail|required|integer',
             'topic_id' => 'bail|required|integer'
         ]);
         if ($validator->fails()) {
@@ -20,15 +18,14 @@ class RoomController extends Controller
                 'message'=>'Bad request',
                 'error'=>$validator->errors()], 400);
         }
-        $minPin = 100000;
-        $maxPin = 100000000;
-        $creatorId = $request['creator_id'];
+        $minPin = 1000000;
+        $maxPin = 10000000;
+        $creatorId = $request->user()->only('id')['id'];
         $topicId = $request['topic_id'];
         $room = Rooms::create([
             'PIN' => rand($minPin, $maxPin),
             'creator_id' => $creatorId,
-            'topic_id' => $topicId,
-            'is_finish' => false
+            'topic_id' => $topicId
         ]);
         return response()->json([
             'message' => "created room successfully", $room

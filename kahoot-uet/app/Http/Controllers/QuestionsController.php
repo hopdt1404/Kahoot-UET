@@ -21,7 +21,7 @@ class QuestionsController extends Controller
             return response()->json([
                 'message'=>'Bad request'], 400);
         }
-        $exitTopic = Topics::where('topic_id', $request['topic_id'])->count();
+        $exitTopic = Topics::where('id', $request['topic_id'])->count();
         if ($exitTopic != 1) {
             return response()->json([
                 'message'=>'Bad request'], 400);
