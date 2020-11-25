@@ -65,6 +65,11 @@ Route::group([
             Route::get('top-five', 'PlayerController@topFiveMaxScore');
             Route::get('top-three-final', 'PlayerController@topThreeMaxScore');
         });
+        Route::prefix('report')->group(function () {
+            Route::get('', 'ReportController@index');
+            Route::patch('rename', 'ReportController@renameReport');
+            Route::get('/detail', 'ReportController@reportDetail');
+        });
     });
 
 });

@@ -139,8 +139,8 @@ class PlayerController extends Controller
             return response()->json([
                 'message'=>'Bad request'],400);
         }
-
-        $topThree = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(5)->get();
+        
+        $topThree = Players::select(['name', 'total_score'])->where('room_id', $request['room_id'])->orderBy('total_score', 'desc')->limit(3)->get();
         return response()->json([
             'message'=> 'Get top three player maximum score successfully', 'top_three_final' => $topThree
         ],200);
