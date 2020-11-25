@@ -311,28 +311,18 @@ div.Container footer div.answers input.correct {
 }
 @keyframes checkbox {
     0% {
-        /* height: 4.5em;
-        width: 3.5em; */
         margin-bottom: 0.5em;
     }
     25% {
         margin-bottom: 0em;
-        /* height: 4em;
-        width: 4em; */
     }
     50% {
         margin-bottom: 0.5em;
-        /* height: 4em;
-        width: 4em; */
     }
     75% {
         margin-bottom: 0em;
-        /* height: 4em;
-        width: 4em; */
     }
     100% {
-        /* height: 4.5em;
-        width: 3.5em; */
         margin-bottom: 0.5em;
     }
 }
