@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-bootstrap-icons";
 
 import LogoLobby from "../../../images/logo_kahoot.png";
 import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
