@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Header from "../Header";
 import SideBar from "../SideBar";
 import Editor from "../Edittor";
-import "../user.css";
+import "./user.css";
 class Creator extends Component {
     render() {
         return (

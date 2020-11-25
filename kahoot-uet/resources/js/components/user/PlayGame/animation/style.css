@@ -105,5 +105,5 @@ div.quizAnimation div.signature#square {
 
 svg path {
     fill-rule: initial;
-    fill:white;
+    /* fill:white; */
 }
