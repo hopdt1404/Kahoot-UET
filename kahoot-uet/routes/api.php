@@ -3,7 +3,6 @@
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +19,7 @@ use App\Models\User;
 //     return $request->user();
 // });
 Route::get('export','ExportExcelController@export');
+Route::get('/export-data', 'ReportController@exportData');
 Route::group([
     'prefix' => 'auth'
 ], function () {
@@ -37,5 +37,42 @@ Route::group([
         Route::put('rename','ProfileController@rename');
         Route::get('user_id','ProfileController@getUserId');
         Route::put('change-password','EntryController@changePassword');
+
+        Route::prefix('topic')->group(function () {
+            Route::get('', 'TopicController@index');
+            Route::post('duplicate', 'TopicController@duplicateTopic');
+            Route::patch('rename', 'TopicController@renameTopic');
+            Route::post('create', 'TopicController@createTopic');
+            Route::post('create-topic', 'TopicController@createTopics');
+            Route::post('delete', 'TopicController@delete');
+            Route::get('detail', 'QuestionsController@index');
+        });
+
+        Route::prefix('room')->group(function () {
+            Route::get('create', 'RoomController@index');
+            Route::patch('lock', 'RoomController@lockRoom');
+        });
+        Route::prefix('player')->group(function () {
+            Route::get('list', 'PlayerController@index');
+            Route::get('join', 'PlayerController@create');
+            Route::post('get-out', 'PlayerController@getOutPlayer');
+        });
+
+        Route::prefix('play')->group(function () {
+            Route::get('', 'ReportController@create');
+            Route::post('answer', 'ReportPlayerController@create');
+            Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
+            Route::get('top-five', 'PlayerController@topFiveMaxScore');
+            Route::get('top-three-final', 'PlayerController@topThreeMaxScore');
+        });
+        Route::prefix('report')->group(function () {
+            Route::get('', 'ReportController@index');
+            Route::patch('rename', 'ReportController@renameReport');
+            Route::get('/detail', 'ReportController@reportDetail');
+        });
     });
+
 });
+
+Route::get('/summary', 'ReportQuestionController@summary');
+

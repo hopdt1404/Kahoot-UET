@@ -12,12 +12,13 @@ class FakeAllDataSeed extends Seeder
     public function run()
     {
         $this->call([
-            FakePlayerSeeder::class,
+//            FakePlayerSeeder::class,
             FakeQuestionSeeder::class,
-            FakeReportSeeder::class,
-            FakeRoomSeeder::class,
+//            FakeReportSeeder::class,
+//            FakeRoomSeeder::class,
 //            FakeUserSeeder::class,
-            TopicSeeder::class
+//            TopicSeeder::class
+
 
         ]);
     }

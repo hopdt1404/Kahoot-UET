@@ -22,7 +22,7 @@ Route::view('/', 'index');
 // Route::view('/test', 'test');
 
 // Route::view('/', 'test');
-Route::resource('/topic', 'TopicController');
+
 Route::resource('/question', 'QuestionsController');
 Route::get('/room/finish', 'RoomController@finishRoom');
 Route::get('/room/lock', 'RoomController@lockRoom');
@@ -35,3 +35,11 @@ Route::get('player/update-total-score', 'PlayerController@updateTotalScore');
 Route::get('player/top-five-max-score', 'PlayerController@topFiveMaxScore');
 Route::resource('/player', 'PlayerController');
 Route::resource('/report-player', 'ReportPlayerController');
+
+Route::get('send-message','RedisController@index');
+Route::post('send-message','RedisController@postSendMessage');
+Route::get('/topic', 'TopicController@index');
+Route::get('/topic/create', 'TopicController@create');
+Route::group(['prefix' => 'topic'], function () {
+
+});
