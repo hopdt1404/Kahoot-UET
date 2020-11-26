@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../user.css";
+import "./user.css";
 import {
     CaretDownFill,
     BarChartFill,

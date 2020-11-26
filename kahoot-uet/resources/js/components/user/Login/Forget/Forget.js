@@ -3,7 +3,7 @@ import { Button, Form, Label, Input } from 'reactstrap';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import './Forget.css'
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

@@ -4,8 +4,6 @@ import { MicrosoftLoginButton, GoogleLoginButton } from 'react-social-login-butt
 import './Register.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

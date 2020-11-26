@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Redirect} from 'react-router-dom';
 import './AccountType.css'
-import 'react-toastify/dist/ReactToastify.css';
 
 
 class AccountType extends Component {

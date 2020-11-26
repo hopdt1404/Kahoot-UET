@@ -87,8 +87,7 @@ function Header() {
                         aria-labelledby="dropdownMenuButton"
                     >
                         <h6 className="dropdown-header">User Name</h6>
-<<<<<<< HEAD
-                        <Link to={"/setting"} className="dropdown-item">
+                        <Link to={"/settings"} className="dropdown-item">
                             Setting
                         </Link>
                         <hr />
@@ -99,20 +98,6 @@ function Header() {
                             </Link>
                         </div>
                         
-=======
-                        <Link to={"/settings"} className="dropdown-item">
-                            Setting
-                        </Link>
-                        <hr />
-                        <Link
-                            to={"/auth/login"}
-                            className="dropdown-item"
-                            style={{ paddingLeft: "15px", color: "red" }}
-                        >
-                            <ArrowBarRight color="red" className="icons-svg" />
-                            Sign Out
-                        </Link>
->>>>>>> 8020fab2446824323fabb79ce2ccca1c8f18c705
                     </div>
                 </div>
             </nav>
