@@ -130,6 +130,11 @@ D: Report:
 
 ### Question and Answer
 
+- Cần làm: Favortity
+API Favoriest
+- Unlock room
+
+
 Done: 
 + Overview
 + FinalScore 
