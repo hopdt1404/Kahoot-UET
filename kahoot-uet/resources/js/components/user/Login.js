@@ -15,14 +15,14 @@ class Login extends Component {
         email: null,
         password: null,
       }, 
-      message: "Tài khoản hoặc mật khẩu không đúng",
+      message:null,
       loggedIn: false,
     };
-    this.handelChange = this.handelChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
   }
 
-  handelChange(event){
+  handleChange(event){
     let name = event.target.name;
     let value = event.target.value;
     let data = {};
@@ -35,7 +35,11 @@ class Login extends Component {
 
   submit(event){
     event.prevendefault();
-    axios.post('http://localhost:8000/api/auth/login', this.state.account)
+    axios.post('http://127.0.0.1:8000/api/auth/login', this.state.account,{
+      header:{
+        accept:"application/json"
+      }
+    })
     .then(function (res) {
       if(res.data.message){
         this.setState({
@@ -73,10 +77,10 @@ class Login extends Component {
 
           <FormGroup>
             <Label>Username or email </Label>
-            <Input name="email" value={this.state.account.email} placeholder="Email..." onChange={this.handelChange} />
+            <Input name="email" value={this.state.account.email} placeholder="Email..." onChange={this.handleChange} />
             <br/>
             <Label>Password</Label>
-            <Input type="password" name="password" value={this.state.account.password} placeholder="Password..." onChange={this.handelChange} />
+            <Input type="password" name="password" value={this.state.account.password} placeholder="Password..." onChange={this.handleChange} />
           </FormGroup>
           <span value="hello" style={{ color: 'red', margin: '0.5rem' }} > {mes} </span>
 
