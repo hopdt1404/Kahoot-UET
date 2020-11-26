@@ -1,0 +1,274 @@
+/* Option CSS */
+
+.option-root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(134, 76, 191);
+}
+
+.option-body {
+    margin: auto;
+}
+
+.option-img {
+    min-height: 3.625rem;
+    max-height: 10rem;
+    padding: 0.875rem;
+    display: flex;
+    justify-content: center;
+}
+
+.option-game {
+    width: 41.25rem;
+    margin: 0.5rem auto 0px;
+}
+
+.option-name-topic {
+    margin-bottom: 30px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -3px inset;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.option-name-topic-text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
+    text-shadow: none;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.option-mode-game {
+    width: 41.25rem;
+    margin: 0px auto 1rem;
+    overflow: hidden;
+}
+
+.style-mode {
+    box-sizing: border-box;
+    width: 18.75rem;
+    margin: 4.5rem 0px 0px;
+    padding: 0px 1rem 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.option-mode-game .classic-mode {
+    float: left;
+}
+
+.option-mode-game .team-mode {
+    float: right;
+}
+
+.mode-img {
+    height: 6.5rem;
+    margin: -4.5rem 0px 0.625rem;
+    vertical-align: top;
+}
+
+.mode-text {
+    margin: 0px 0px 1.25rem;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+}
+
+.mode-button {
+    width: 100%;
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -4px inset;
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0px 16px 4px;
+}
+.green-button {
+    background: rgb(38, 137, 12);
+}
+
+.green-button:hover {
+    background: rgb(38, 136, 13);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -3px inset;
+    transform: translateY(2px);
+}
+.blue-button {
+    background: rgb(18, 96, 190);
+}
+
+.blue-button:hover {
+    background: rgb(20, 93, 182);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -3px inset;
+    transform: translateY(2px);
+}
+
+.option-game-options {
+    padding: 0.5625rem 1.25rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -0.1875rem inset;
+    position: relative;
+    color: rgb(51, 51, 51);
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.875rem;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 0.25rem;
+}
+
+/* Lobby CSS */
+
+.lobby {
+    color: white;
+    position: relative;
+    min-height: calc((7.625rem + 5vmin) - 7.5vmin);
+    /* padding: 5.5vmin calc(2.5rem + 5vmin) 2.5vmin; */
+    padding: 5.5vmin 0 0 0;
+    transition: all 0.2s ease 0s;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 7, 107);
+    border-bottom: 0.2vmin solid rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header {
+    color: black;
+}
+
+.pin {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    flex: 1 0 auto;
+    margin-bottom: 20px;
+}
+
+.pin-text {
+    background-color: rgb(255, 255, 255);
+    font-size: 2.34vmin;
+    line-height: 2.49vmin;
+    font-weight: bold;
+    transform: translateY(-100%);
+    padding: 0.5vmin 1vmin 0px;
+    border-radius: 0.5vmin 0.5vmin 0px 0px;
+    position: absolute;
+    left: 97vmin;
+    bottom: 9.5vmin;
+}
+
+.pin-info {
+    display: flex;
+    margin: 0px auto;
+}
+
+.join-at {
+    background-color: rgb(255, 255, 255);
+    padding: 1.7vmin 2.5vmin 1.7vmin 2.8vmin;
+    border-radius: 0.5vmin 0px 0px 0.5vmin;
+    display: flex;
+    align-items: center;
+    margin-right: -1vmin;
+    clip-path: polygon(
+        calc(100% - 2.5vmin) 0px,
+        100% 50%,
+        calc(100% - 2.5vmin) 100%,
+        0px 100%,
+        0px 0px
+    );
+}
+
+.pin-num {
+    font-size: 9.38vmin;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.286vmin;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px 0.5vmin 0.5vmin 0px;
+    padding: 0px 2.8vmin 0px 5.3vmin;
+    margin-left: -1vmin;
+    clip-path: polygon(0px 0%, 100% 0px, 100% 100%, 0px 100%, 2.5vmin 50%);
+}
+
+.body {
+    background-color: rgb(70, 23, 143);
+    height: 80vh;
+}
+
+.body-info {
+    display: flex;
+    flex: 0 0 auto;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2.5vmin;
+    z-index: 1;
+}
+
+.num-players {
+    background-color: rgb(50, 17, 103);
+    width: 11vmin;
+    height: 6vmin;
+    border-radius: 0.7vmin;
+    font-size: 35px;
+}
+
+.lock-start {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.is-lock {
+    width: 50px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.button-lock {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -0.25rem 0px 0px inset;
+    padding-bottom: 0.25rem;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.button-start {
+    width: 77px;
+    height: 36px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.players {
+    height: 100%;
+}
+
+.wait-players {
+    position: relative;
+    top: 30%;
+    font-size: 4vmin;
+    line-height: 4vmin;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.span-wait {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.4vmin;
+    padding: 1vmin 3vmin;
+}

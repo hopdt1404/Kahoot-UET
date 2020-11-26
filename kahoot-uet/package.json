@@ -27,11 +27,21 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+<<<<<<< HEAD
         "react-bootstrap-icons": "^1.0.0",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
         "react-social-login-buttons": "^3.1.0",
         "react-toastify": "^6.1.0",
         "reactstrap": "^8.6.0"
+=======
+        "express": "^4.17.1",
+        "react-bootstrap-icons": "^1.1.0",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0",
+        "socket.io": "^3.0.3",
+        "socket.io-client": "^3.0.3",
+        "socket.io-react": "^1.2.0"
+>>>>>>> 8020fab2446824323fabb79ce2ccca1c8f18c705
     }
 }
