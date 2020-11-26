@@ -43,7 +43,7 @@ function Option() {
                                 <p>Player vs Player</p>
                             </div>
                             {/* must edit */}
-                            <Link to="/play-game/lobby">
+                            <Link to="/user/lobby">
                                 <button className="mode-button green-button">
                                     Classic
                                 </button>
@@ -57,7 +57,7 @@ function Option() {
                             />
                             <div className="mode-text">Team vs Team</div>
                             {/* must edit */}
-                            <Link to="/play-game/lobby">
+                            <Link to="/user/lobby">
                                 <button className="mode-button blue-button">
                                     Team mode
                                 </button>

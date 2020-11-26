@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import "../user.css";
+import React, { useState } from "react";
+import "./user.css";
 import {
     CaretDownFill,
     BarChartFill,
@@ -8,48 +8,91 @@ import {
     Trash
 } from "react-bootstrap-icons";
 import Header from "./Header";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 //import Data from API (test!!!!!!!!!!!!!!)
 import DataReport from "./Reports/testShowReport.json";
 
-function route(id){
-    return "user-reports/detail/"+String(id);
+function route(id) {
+    return "user-reports/detail/" + String(id);
 }
 function Reports() {
-    const [data,setdata] = useState(DataReport);
-    const [curpage,setCurpage] = useState(1);
-    const perpage=4;
-    const totalpage = Math.ceil(data.length / perpage);  
-    const rend=data.slice((curpage-1)*perpage,curpage*perpage);
+    const [data, setdata] = useState(DataReport);
+    const [curpage, setCurpage] = useState(1);
+    const perpage = 4;
+    const totalpage = Math.ceil(data.length / perpage);
+    const rend = data.slice((curpage - 1) * perpage, curpage * perpage);
     let firstbtn = null;
     let prevpagebtn = null;
     let lastbtn = null;
     let nextpagebtn = null;
     let curpagebtn = null;
-    if (totalpage !== 0){
-        if (curpage !== 1 ) {
-            firstbtn = <li class="page-item"><button class="page-link" href="#" onClick={()=>setCurpage(1)}>First Page</button></li>
-        }
-        
-        if (curpage !== 1 ) {
-            prevpagebtn = <li class="page-item"><button class="page-link" href="#" onClick={()=>setCurpage(curpage-1)}>{curpage-1}</button></li>
+    if (totalpage !== 0) {
+        if (curpage !== 1) {
+            firstbtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(1)}
+                    >
+                        First Page
+                    </button>
+                </li>
+            );
         }
 
-        
+        if (curpage !== 1) {
+            prevpagebtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(curpage - 1)}
+                    >
+                        {curpage - 1}
+                    </button>
+                </li>
+            );
+        }
+
         if (curpage !== totalpage) {
-            lastbtn = <li class="page-item"><button class="page-link" href="#" onClick={()=>setCurpage(totalpage)}>Last Page</button></li>
+            lastbtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(totalpage)}
+                    >
+                        Last Page
+                    </button>
+                </li>
+            );
         }
-        
+
         if (curpage !== totalpage) {
-            nextpagebtn = <li class="page-item"><button class="page-link" href="#" onClick={()=>setCurpage(curpage+1)}>{curpage+1}</button></li>
+            nextpagebtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(curpage + 1)}
+                    >
+                        {curpage + 1}
+                    </button>
+                </li>
+            );
         }
-        curpagebtn = <li class="page-item active" id ="cur"><button class="page-link">{curpage}</button></li>
-        }
-    
-    const rendtable=rend.map((each,index) => {
-        return(
+        curpagebtn = (
+            <li class="page-item active" id="cur">
+                <button class="page-link">{curpage}</button>
+            </li>
+        );
+    }
+
+    const rendtable = rend.map((each, index) => {
+        return (
             <tr>
-                <th scope="row">{(curpage-1)*perpage+index+1}</th>
+                <th scope="row">{(curpage - 1) * perpage + index + 1}</th>
                 <td>{each.name}</td>
                 <td>{each.statusGame}</td>
                 <td>{each.date}</td>
@@ -129,8 +172,8 @@ function Reports() {
                     </div>
                 </td>
             </tr>
-        )
-    })
+        );
+    });
     return (
         <div>
             <Header />
@@ -164,11 +207,12 @@ function Reports() {
                             <th scope="col">Options</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {rendtable}
-                    </tbody>
+                    <tbody>{rendtable}</tbody>
                 </table>
-                <ul class="pagination justify-content-center" style={{margin:'20px 0'}}>
+                <ul
+                    class="pagination justify-content-center"
+                    style={{ margin: "20px 0" }}
+                >
                     {firstbtn}
                     {prevpagebtn}
                     {curpagebtn}
