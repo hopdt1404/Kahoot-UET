@@ -37,8 +37,10 @@ function RouterPath() {
             <Switch>
                 {/* Host */}
                 <Route exact path="/" component={Home} />
-                <Route path="/kahoots" component={Kahoots} />
-                <Route path="/user-reports" component={Reports} />
+                <Route exact path="/kahoots" component={Kahoots} />
+                <Route exact path="/user-reports" component={Reports} />
+                <Route exact path="/kahoots/detail/:id" component={Topic} />
+                <Route exact path="/user-reports/detail/:id" component={ReportDetail} />
                 <Route path="/creator" component={Creator} />
                 <Route path="/settings" component={Settings} />
                 <Route path="/auth/login" component={Login} />
