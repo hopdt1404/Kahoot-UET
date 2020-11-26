@@ -73,14 +73,17 @@ function Header() {
                         aria-labelledby="dropdownMenuButton"
                     >
                         <h6 className="dropdown-header">User Name</h6>
-                        <Link to={"/user"} className="dropdown-item">
+                        <Link to={"/setting"} className="dropdown-item">
                             Setting
                         </Link>
                         <hr />
+                        <div  onClick={()=>{ if(localStorage.getItem('token')){ localStorage.removeItem('token')} }}> 
                         <Link to={'/auth/login'} className="dropdown-item" style={{paddingLeft: "15px", color: "red"}}>
                             <ArrowBarRight color="red" className="icons-svg" />
                             Sign Out
                             </Link>
+                        </div>
+                        
                     </div>
                 </div>
             </nav>

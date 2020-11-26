@@ -39,7 +39,7 @@ class EntryController extends Controller
         if ($validator->fails()) { 
             return response()->json([
                 'message'=>'Registration failed',
-                'error'=>$validator->errors()], 400);            
+                'error'=>$validator->errors()], 200);            
         }
         $verification_code = strval(rand(100000,999999));
         $user = new User([

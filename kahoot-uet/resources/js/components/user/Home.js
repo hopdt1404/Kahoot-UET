@@ -4,6 +4,7 @@ import KahootList from "./Home/KahootList/KahootList";
 import Clock from "./Home/Time/Clock";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import {Redirect} from 'react-router-dom';
 
 export default class Home extends React.Component{
     constructor(props){
@@ -48,6 +49,9 @@ export default class Home extends React.Component{
         .catch(error => console.log(error));
     }
     render(){
+        if(!localStorage.getItem('token')){
+            return <Redirect to="/auth/login" />
+        }
         return (
             <div class = "main-content">
                 <div class="container d-flex pt-5 justify-content-center">
