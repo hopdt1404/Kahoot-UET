@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import '../Login.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { FacebookLoginButton, MicrosoftLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
+import { FacebookLoginButton, MicrosoftLoginButton, GoogleLoginButton} from 'react-social-login-buttons';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 

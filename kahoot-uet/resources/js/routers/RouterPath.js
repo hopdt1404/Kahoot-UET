@@ -18,6 +18,8 @@ import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import IndexPlayer from "../components/player/IndexPlayer";
 
+import Fake from "../components/user/Fake";
+
 import LobbyPlayer from "../components/player/LobbyPlayer";
 import StartPlayer from "../components/player/StartPlayer";
 import GetReadyPlayer from "../components/player/GetReadyPlayer";
@@ -27,6 +29,7 @@ import Ranking from "../components/player/Ranking.jsx";
 import GameBlock from "../components/player/GameBlock";
 
 import ReportDetail from "../components/user/Reports/Detail/Detail"
+ 
 
 function RouterPath() {
     return (
@@ -42,7 +45,7 @@ function RouterPath() {
                 {/* In Game - erroring */}
                 <Route exact path="/user" component={OptionGame} />
                 <Route path="/user/lobby" component={Lobby} />
-
+                <Route exact path="/fake" component={Fake} />
                 {/* Player */}
                 <Route path="/pin-player" component={PinInput} />
                 <Route path="/name-player" component={NameInput} />

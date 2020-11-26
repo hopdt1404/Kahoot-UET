@@ -7,6 +7,7 @@
         {{-- error icon tab browser --}}
         <link rel="shortcut icon" src="{{url('images/icon_kahoot.png')}}" type="image/x-icon"/> 
         <title>Kahoot!</title>
+        <link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body>

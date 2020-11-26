@@ -22,10 +22,10 @@ export const removeQuestion = (orderNumber) => {
         payload: orderNumber,
     };
 };
-export const moveQuestion = (orderNumber, newOrderNumber) => {
+export const moveQuestion = (order,newOrder) => {
     return {
         type: "MOVE_QUESTION",
-        payload: {orderNumber, newOrderNumber}
+        payload: {order,newOrder}
     }
 };
 export const setTimeLimit = (timeLimit, orderNumber) => {
