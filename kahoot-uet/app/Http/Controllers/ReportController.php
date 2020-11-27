@@ -89,16 +89,6 @@ class ReportController extends Controller
 
     public function reportDetail (Request $request)
     {
-        /*
-         *
-         * - Câu hỏi khó <= 35% người trả lời đúng
-         * - Need help: người chơi trả lời <= 35% số câu trả lời
-         * - Didn't finish: Không trả lời câu hỏi hoặc rời khỏi phòng chơi trước
-         * - Detail player:
-         * - Tổng số đáp án đúng / tất cả các đáp án
-         *
-         */
-
         $validator = Validator::make($request->all(), [
             'report_id' => 'bail|required|integer'
         ]);
@@ -129,75 +119,12 @@ class ReportController extends Controller
         $topic_id = $topic_id[0]['topic_id'];
         $questions = Questions::where('topic_id', $topic_id)->get();
         $report['number_question'] = count($questions);
-
-        // Done to here
-
-
-        // Not finish
-        // Số câu trả lời đáp án rỗng : đến
-        $notFinish = DB::table('report_players')
-                        ->select('id', DB::raw('count(`ans_select`) as not_finish'))
-                        ->where('ans_selected', 'is null')
-                        ->groupBy('id')->orderBy('id', 'asc')->get();
-        $playerIds = [];
-        for ($i = 0; $i < count($notFinish); $i++) {
-            array_push($playerIds, $notFinish[$i]['id']);
-        }
-        $players = Players::select('id', 'name')->where([
-            'id', 'in', $playerIds
-        ])->orderBy('id', 'asc')->get();
-        for ($i = 0; $i < count($notFinish); $i++) {
-            $notFinish[$i]['name'] = $players[$i]['name'];
-        }
-//
-//        // Need help: total correct answered <= 35%
-//        $totalCorrectAnswer = Questions::where('topic_id', $topic_id)->sum('number_correct_answer');
-//        $havingCondition = (int) 0.35 * $totalCorrectAnswer;
-//        $allPlayer = DB::table('report_players')
-//                        ->select('id', 'player_id', DB::raw('sum(number_correct_answer) as number_correct_answer'))
-//                        ->where([
-//                            ['report_id', $report['id']]
-//                        ])
-//                        ->groupBy('question_id')
-//                        ->orderBy('player_id', 'asc');
-//        $needHelp = [];
-//        for ($i = 0; $i < count($allPlayer); $i++) {
-//            $numberCorrectAnswer = $allPlayer[$i]['number_correct_answer'];
-//            if ($numberCorrectAnswer < $havingCondition) {
-//                $allPlayer[$i]['correct_percent'] = $numberCorrectAnswer / $totalCorrectAnswer;
-//                array_push($needHelp, $allPlayer[$i]);
-//            }
-//        }
-//        $playerIds = [];
-//        for ($i = 0; $i < count($needHelp); $i++) {
-//            array_push($playerIds, $needHelp[$i]['id']);
-//        }
-//        $players = Players::select('id', 'name')->where(
-//            ['id', 'in', $playerIds]
-//        )->orderBy('id', 'asc')->get();
-//        for ($i = 0; $i < count($needHelp); $i++) {
-//            $needHelp[$i]['name'] = $players[$i]['name'];
-//        }
-//
-////        $allQuestion = DB::table
-//
-//
-//        // different question < 35%
-//        $differentQuestion = 0;
-//
-//
-//        // Get number player
-//        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
-//        $report['number_player'] = count($players);
-//        //
+        $players = Players::where('report_id', $report['id'])->get();
         return response()->json([
             'message' => "Get report detail success",
             'summary' => $report,
-//            'players' => $players,
-//            'questions' => $questions,
-            'not_finish' => $notFinish,
-//            'need_help' => $needHelp,
-//            'different_questions' => $differentQuestion
+            'players' => $players,
+            'questions' => $questions,
 
         ], 200);
 

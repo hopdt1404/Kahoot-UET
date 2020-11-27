@@ -51,6 +51,7 @@ Route::group([
         Route::prefix('room')->group(function () {
             Route::get('create', 'RoomController@index');
             Route::patch('lock', 'RoomController@lockRoom');
+            Route::patch('unlock', 'RoomController@unlockRoom');
         });
         Route::prefix('player')->group(function () {
             Route::get('list', 'PlayerController@index');

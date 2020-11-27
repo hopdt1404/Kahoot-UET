@@ -55,6 +55,26 @@ class RoomController extends Controller
 
     }
 
+    public function unlockRoom (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $isExistedRoom = Rooms::where('id', $request['room_id'])->count();
+        if ($isExistedRoom != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $roomId = $request['room_id'];
+        Rooms::where('id', $roomId)->update(['is_locked' => 0]);
+        return response()->json([
+            'message'=> 'Unlock room successfully',
+        ],200);
+    }
     public function lockRoom (Request $request) {
         $validator = Validator::make($request->all(),[
             'room_id' => 'bail|required|integer',
