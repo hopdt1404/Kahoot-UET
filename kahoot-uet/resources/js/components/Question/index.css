@@ -1,0 +1,115 @@
+p {
+    margin: 1px;
+}
+
+div.questionBlock {
+    padding: 1rem;
+    /* background-color: seagreen; */
+    border: none;
+    /* border-radius: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+div.questionBlock .blockHeader{
+    display: inherit;
+    font-weight: bold;
+    /* background-color: steelblue; */
+}
+div.questionBlock div.blockBody {
+    display: flex;
+    height: 9rem;
+}
+
+div.questionBlock div.blockBody div.col-left {
+    flex: 1 1 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+div.questionBlock div.blockBody div.col-right {
+    background-color: #d6d6d6;
+    border-radius: 10px;
+    flex: 1 1 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#target div.questionBlock div.blockBody div.col-right{
+    background-color: #ffffff;
+    border: solid 3px black;
+}
+#target div.questionBlock div.blockBody div.col-right:hover{
+    margin: 0;
+    border: solid 3px black;
+}
+
+div.questionBlock div.blockBody div.col-right:hover {
+    border:solid 3px gray;
+    margin: -3px;
+}
+
+div.questionBlock div.blockBody div.col-right p.title {
+    text-align: center;
+    margin-top: 5px;
+    width: fit-content;
+}
+
+div.questionBlock div.blockBody div.col-right div.description {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 20% 0% 10%;
+    justify-content: center;
+}
+div.questionBlock div.blockBody div.col-right div.description p.timeLimit {
+    height: 1.5rem;
+    width: 1.5rem;
+    border: solid 1px rgb(180, 180, 180);
+    border-radius: 10rem;
+    text-align: center;
+    font-size: small;
+}
+div.questionBlock div.blockBody div.col-right div.description div.image {
+    margin: 10% 10%;
+    min-height: 30px;
+    height: 3rem;
+    border: 2px dashed rgb(180, 180, 180);
+    max-height: 45px;
+    max-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border-radius: 0;
+}
+div.questionBlock div.blockBody div.col-right div.description img.image {
+    min-height: 30px;
+    max-height: 45px;
+    max-width: 90px;
+}
+div.questionBlock div.blockBody div.col-right div.answers {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 10%;
+}
+div.questionBlock div.blockBody div.col-right div.answers div.choice {
+    border: solid 1px rgb(180, 180, 180);
+    flex: 1 1 40%;
+    height: 12px;
+    margin: 1px;
+    border-radius: 3px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+div.questionBlock div.blockBody div.col-right div.answers div.choice #answer {
+}
+div.questionBlock div.blockBody div.col-right div.answers div.choice #correct {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: chartreuse;
+}

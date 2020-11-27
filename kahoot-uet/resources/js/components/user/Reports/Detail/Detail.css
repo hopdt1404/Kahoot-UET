@@ -1,0 +1,150 @@
+.report-detail-head{
+    background-color: rgb(70, 23, 143);
+    width:100%;
+    display: flex;
+}
+.report-detail-info-left{
+    background-color: rgb(38, 7, 107);
+    border-radius: 0 0 70% 0;
+    display: flex;
+    flex-direction: column;
+    padding-top:20px;
+    padding-left:20px;
+}
+.report-detail-info-name-title{
+    display:flex;
+    justify-content: space-between;
+}
+.report-detail-info-name-title-reports{
+    color: rgb(194, 165, 223);
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+}
+.report-detail-info-name-title-options{
+    color:white;
+    font-size: 15px;
+    display: inline-flex;
+}
+.report-detail-info-name{
+    display: inline;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+.report-detail-info-right{
+    width:300px;
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+}
+.report-detail-info-date-host{
+    padding: 0.9rem;
+    color: rgb(194, 165, 223);
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid rgb(38, 7, 107);
+}
+.report-detail-tab{
+    margin-top:70px;
+}
+.kahoot-detail-summary{
+    padding-top:30px;
+    padding-left:20px;
+    padding-bottom:10px;
+    background-color: rgb(70, 23, 143);
+
+}
+.kahoot-detail-summary-percent{
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+}
+.kahoot-detail-summary-percent-count{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size:70px;
+}
+.kahoot-detail-summary-percent-comment{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size:50px;
+}
+.kahoot-detail-summary-count{
+    padding:20px;
+    width:300px;
+    margin-left:15px;
+    margin-right:15px;
+    background-color: white;
+    border-radius: 5px;
+}
+.kahoot-detail-summary-count-each{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(38, 7, 107);
+    margin-bottom: 15px;
+}
+.kahoot-detail-summary-top{
+    padding:20px;
+    padding-top:10px;
+    width:300px;
+    margin-right:20px;
+    background-color: white;
+    border-radius: 5px;
+}
+.kahoot-detail-summary-top-text{
+    font-size: large;
+    color: goldenrod;
+    margin-bottom:10px;
+}
+.kahoot-detail-summary-top-1{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(38, 7, 107);
+    margin-bottom: 15px;
+    color:gold;
+    font-size:20px;
+}
+.kahoot-detail-summary-top-2{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(38, 7, 107);
+    margin-bottom: 15px;
+    color:silver;
+    font-size:20px;
+}
+.kahoot-detail-summary-top-3{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(38, 7, 107);
+    margin-bottom: 15px;
+    color: coral;
+    font-size:20px;
+}
+.report-detail-player-medal-top{
+    font-weight: bolder;
+    font-size: 25px;
+    border-bottom: black solid 1px;
+    margin-top:10px;
+    margin-bottom:10px;
+    justify-content: space-between;
+}
+.report-detail-question-medal-cor-incor{
+    display:flex;
+    justify-content: space-between;
+    font-size: 15px;
+    border-bottom: black solid 1px;
+    margin-top:10px;
+    margin-bottom:10px;
+}

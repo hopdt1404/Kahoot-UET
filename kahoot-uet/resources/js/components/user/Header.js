@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, Switch } from "react-router-dom";
-import "../user.css";
+import "./user.css";
 import image_logo from "../../images/logo_kahoot.png";
 import {
     HouseDoor,
