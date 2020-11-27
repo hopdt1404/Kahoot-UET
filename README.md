@@ -15,7 +15,7 @@
 - Redis 3.2.100: doing 
 - NodeJS moij version: Done</br>
 
-=> Composer require predis/predis: Done
+=> composer require predis/predis: Done
 => Npm install socket.io ioredis : Done
 
 Config  file .env

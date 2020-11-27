@@ -87,6 +87,42 @@ class ReportController extends Controller
         ],200);
     }
 
+    public function createTmp (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+            'topic_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $topic = Topics::select('name')->where('id', $request['topic_id'])->get();
+        $exitTopic = count($topic);
+        if ($exitTopic != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        $owner_id = 1;
+        $number_player = Players::where('room_id', $request['room_id'])->count('name');
+        $report = Reports::create([
+            'name' => $topic[0]['name'],
+            'room_id' => $request['room_id'],
+            'owner_id' => $owner_id,
+            'number_player' => $number_player
+        ]);
+        Players::where('room_id', $report['room_id'])->update([
+            'report_id' => $report['id']
+        ]);
+        return response()->json([
+            'message'=> 'Created report successfully',
+            'questions' => $questions,
+            'report' => $report
+        ],200);
+
+    }
+
     public function reportDetail (Request $request)
     {
         /*
