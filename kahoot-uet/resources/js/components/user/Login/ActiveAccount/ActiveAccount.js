@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { Button, Form, Label, Input } from 'reactstrap';
 import axios from 'axios';
 import {Link} from "react-router-dom";
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 class ActiveAccount extends Component {
     constructor(props){
