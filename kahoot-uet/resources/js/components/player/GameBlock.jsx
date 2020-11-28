@@ -1,5 +1,3 @@
-// show 4 answers
-
 import React from "react";
 
 import { TriangleFill, SquareFill } from "react-bootstrap-icons";

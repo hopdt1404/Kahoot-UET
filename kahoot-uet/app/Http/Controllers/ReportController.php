@@ -87,6 +87,42 @@ class ReportController extends Controller
         ],200);
     }
 
+    public function createTmp (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+            'topic_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $topic = Topics::select('name')->where('id', $request['topic_id'])->get();
+        $exitTopic = count($topic);
+        if ($exitTopic != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        $owner_id = 1;
+        $number_player = Players::where('room_id', $request['room_id'])->count('name');
+        $report = Reports::create([
+            'name' => $topic[0]['name'],
+            'room_id' => $request['room_id'],
+            'owner_id' => $owner_id,
+            'number_player' => $number_player
+        ]);
+        Players::where('room_id', $report['room_id'])->update([
+            'report_id' => $report['id']
+        ]);
+        return response()->json([
+            'message'=> 'Created report successfully',
+            'questions' => $questions,
+            'report' => $report
+        ],200);
+
+    }
+
     public function reportDetail (Request $request)
     {
         /*
@@ -135,20 +171,20 @@ class ReportController extends Controller
 
         // Not finish
         // Số câu trả lời đáp án rỗng : đến
-        $notFinish = DB::table('report_players')
-                        ->select('id', DB::raw('count(`ans_select`) as not_finish'))
-                        ->where('ans_selected', 'is null')
-                        ->groupBy('id')->orderBy('id', 'asc')->get();
-        $playerIds = [];
-        for ($i = 0; $i < count($notFinish); $i++) {
-            array_push($playerIds, $notFinish[$i]['id']);
-        }
-        $players = Players::select('id', 'name')->where([
-            'id', 'in', $playerIds
-        ])->orderBy('id', 'asc')->get();
-        for ($i = 0; $i < count($notFinish); $i++) {
-            $notFinish[$i]['name'] = $players[$i]['name'];
-        }
+//        $notFinish = DB::table('report_players')
+//                        ->select('id', DB::raw('count(`ans_select`) as not_finish'))
+//                        ->where('ans_selected', 'is null')
+//                        ->groupBy('id')->orderBy('id', 'asc')->get();
+//        $playerIds = [];
+//        for ($i = 0; $i < count($notFinish); $i++) {
+//            array_push($playerIds, $notFinish[$i]['id']);
+//        }
+//        $players = Players::select('id', 'name')->where([
+//            'id', 'in', $playerIds
+//        ])->orderBy('id', 'asc')->get();
+//        for ($i = 0; $i < count($notFinish); $i++) {
+//            $notFinish[$i]['name'] = $players[$i]['name'];
+//        }
 //
 //        // Need help: total correct answered <= 35%
 //        $totalCorrectAnswer = Questions::where('topic_id', $topic_id)->sum('number_correct_answer');
@@ -195,7 +231,7 @@ class ReportController extends Controller
             'summary' => $report,
 //            'players' => $players,
 //            'questions' => $questions,
-            'not_finish' => $notFinish,
+//            'not_finish' => $notFinish,
 //            'need_help' => $needHelp,
 //            'different_questions' => $differentQuestion
 
