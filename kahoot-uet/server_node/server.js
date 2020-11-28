@@ -1,4 +1,16 @@
-var io = require('socket.io')(6001)
+var httpServer = require('http')
+const io = require("socket.io")(httpServer, {
+	cors: {
+	  origin: "http://localhost:6001",
+	  methods: ["GET", "POST"]
+	}
+  });
+var server=httpServer.createServer(function(req,res){
+	res.writeHead(200);
+	res.end("Hello world");
+});
+
+server.listen(6001);
 console.log('Connected to port 6001')
 io.on('error',function(socket){
 	console.log('error')

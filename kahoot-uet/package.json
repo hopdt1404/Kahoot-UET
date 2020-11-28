@@ -27,6 +27,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "http": "0.0.1-security",
         "ioredis": "^4.19.2",
         "react-bootstrap-icons": "^1.1.0",
         "react-router": "^5.2.0",

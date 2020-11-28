@@ -11,7 +11,7 @@
     </div>
     <div>
         <form action="send-message" method="POST">
-        {{csrf_field()}}
+        <!-- {{csrf_field()}} -->
         Name: <input type="text" name="author">
         <br>
         <br>
