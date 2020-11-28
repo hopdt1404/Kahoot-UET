@@ -12,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Messages;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class RedisEvent implements ShouldBroadcastNow
+class RedisEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

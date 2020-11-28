@@ -76,3 +76,38 @@ export const setQuestionContent = (content, orderNumber) => {
         payload: {content, orderNumber}
     }
 }
+
+//play game
+
+// export const setPin = (pin) => {
+//     return {
+//         type: "SELECTED_PIN",
+//         payload: {pin}
+//     }
+// }
+
+// export const setNickname = (nickname) => {
+//     return {
+//         type: "NICKNAME",
+//         payload: {nickname}
+//     }
+// }
+
+export function selectedQuiz(quiz) {
+    return {
+        type: 'SELECTED_QUIZ',
+        payload: quiz
+    }
+}
+export function handleNickname(nickname) {
+    return {
+        type: 'NICKNAME',
+        payload: nickname
+    }
+}
+export function selectedPin(pin) {
+    return {
+        type: 'SELECTED_PIN',
+        payload: pin
+    }
+}

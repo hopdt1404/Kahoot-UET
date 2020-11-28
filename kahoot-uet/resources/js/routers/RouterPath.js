@@ -29,6 +29,7 @@ import Ranking from "../components/player/Ranking.jsx";
 import GameBlock from "../components/player/GameBlock";
 
 import ReportDetail from "../components/user/Reports/Detail/Detail"
+import Landing from "../components/player/Landing";
  
 
 function RouterPath() {
@@ -49,9 +50,10 @@ function RouterPath() {
                 <Route path="/user/lobby" component={Lobby} />
                 <Route exact path="/fake" component={Fake} />
                 {/* Player */}
-                <Route path="/pin-player" component={PinInput} />
-                <Route path="/name-player" component={NameInput} />
-                <Route exact path="/player" component={IndexPlayer} />
+                <Route path="/landing" component={Landing} />
+                {/* <Route path="/pin-player" component={PinInput} />
+                <Route path="/name-player" component={NameInput} /> */}
+                {/* <Route exact path="/player" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />

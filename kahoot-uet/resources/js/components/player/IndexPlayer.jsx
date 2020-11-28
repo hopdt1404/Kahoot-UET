@@ -12,11 +12,6 @@ import axios from 'axios';
 
 function IndexPlayer(props) {
 
-    
-
-    let { path, url } = useRouteMatch();
-    const [test, setTest] = useState(5);
-
     return (
         <div className="index-main">
             <div className="index-header">

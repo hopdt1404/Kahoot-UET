@@ -4,10 +4,10 @@ io.on('error',function(socket){
 	console.log('error')
 })
 io.on('connection',function(socket){
-	//console.log('Co nguoi vua ket noi'+socket.id)
+	console.log('Co nguoi vua ket noi'+socket.id)
 })
 var Redis = require('ioredis')
-var redis = new Redis(1000)
+var redis = new Redis(1001)
 redis.psubscribe("*",function(error,count){
 	//
 })
