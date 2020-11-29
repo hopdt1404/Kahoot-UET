@@ -2,8 +2,16 @@ import React, {useEffect, useState} from "react";
 import IndexPlayer from "./IndexPlayer";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import io from 'socket.io-client';
 
 function LobbyPlayer() {
+
+    // useEffect(() => {
+    //     const socket = io('http://127.0.0.1:6001');
+    //     socket.on('ma kenh', {
+
+    //     })
+    // })
 
     // const [idToken, setIdToken] = useState("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiYmI2YzY0YjY5ZjMxOGEwNjdjNzAyODNmNDMyMTgyMzMzMDhhYWQ0NzRjNjk3NmZiMjRmYjgzOTc1M2QyNmQ4YWE4ZGY1MDM2ZjMxMTExZmQiLCJpYXQiOjE2MDY0OTI2MTcsIm5iZiI6MTYwNjQ5MjYxNywiZXhwIjoxNjM4MDI4NjE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.J45fEEXahIB3b0WeEYIbcO14a7SOziZYNENbuE_khjkQuXlogZbptO9YzqDx_GJRD3W1d5be1JIwM48wuCTxp5XotHM64zJ6DliGRPSPp10gNZ0Z7GhZaKm7TogXmFukKDrYS-bY4PX6Fua0tGTOVn2XTXwIllJFYfdBlceldNydE59N4k_VBHNLO99lKK2_NyMcFEYGSJFEZAK2Bgkp6PRlmhGCWVBq8NxI2OrK3kr6XcoyLKM0qi2rtqiNLLsb55OUX01wYY4IlH9Bp_xwB3gUb8Vz85fFUvyK8ZSYCAr-qh5edUzuW7MdwFSH86iFb_pLlHzLsBoTAawW9pvhbplmXDKAQqGmr9Z5YRr9Ep_7KSGwMCucN2y1zPbNJOMjEqjfszAwQwjMbPlVRCHoDAR2WyG1m2kDP68Z_Y1yYUDb3zFSKxXIg9E30FNVOt2b0PFf0XffUr2xo9cMPrb64ICshAQfTqQRkWRXsWExmol69nBf7U06hMgM-v-oXQbxpFc3Msa4pOEJEzRka_p47dYzjScEsjqI67Ml8bBEuXOGqM7ye-EGM_i0tjLTicf5EfqRirJEn6zouDs-qHIbehzJLLLUlNx3JxCeCm_t9hqN4U30mdptbN0edjX3I4lbFW0fEPZ2e9mQ8puTE0XhXzA-HH9jH_Z-aykT7ciiPNk");
 

@@ -7,7 +7,7 @@ io.on('connection',function(socket){
 	console.log('Co nguoi vua ket noi'+socket.id)
 })
 var Redis = require('ioredis')
-var redis = new Redis(1001)
+var redis = new Redis(1000)
 redis.psubscribe("*",function(error,count){
 	//
 })
