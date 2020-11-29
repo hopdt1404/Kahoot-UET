@@ -17,10 +17,12 @@ class CreatePlayerTable extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->boolean('is_group')->default(0);
-            $table->string('group_detail');
+            $table->string('group_detail')->nullable(true);
             $table->unsignedBigInteger('room_id')->nullable(false);
-            $table->unsignedBigInteger('report_id')->nullable(false);
+            $table->unsignedBigInteger('report_id')->nullable(true);
             $table->unsignedDouble('total_score', 10, 2)->default(0);
+            $table->unsignedInteger('number_correct_answer')->nullable(false)->default(0);
+            $table->unsignedInteger('number_incorrect_answer')->nullable(false)->default(0);
             $table->timestamps();
         });
     }

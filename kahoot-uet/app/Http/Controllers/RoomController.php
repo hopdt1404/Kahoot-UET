@@ -4,39 +4,76 @@ namespace App\Http\Controllers;
 
 use App\Rooms;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
-    public function save () {
 
-
-    }
-
-    public function index () {
-        $minPin = 10000000;
-        $maxPin = 1000000000;
-        $creatorId = 1;
-        $topicId = 1;
+    public function index (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'topic_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $minPin = 1000000;
+        $maxPin = 10000000;
+        $creatorId = $request->user()->only('id')['id'];
+        $topicId = $request['topic_id'];
         $room = Rooms::create([
             'PIN' => rand($minPin, $maxPin),
             'creator_id' => $creatorId,
-            'topic_id' => $topicId,
-            'is_finish' => false
+            'topic_id' => $topicId
         ]);
-        return view('pages.topic', ['data' => $room]);
+        return response()->json([
+            'message' => "created room successfully", $room
+        ], 201);
     }
 
-    public function finishRoom () {
-        $roomId = 201;
-        $room = Rooms::where('id', $roomId)->update(['is_finish' => 1]);
+    public function finishRoom (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $isExistedRoom = Rooms::where('id', $request['room_id'])->count();
+        if ($isExistedRoom != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $roomId = $request['room_id'];
+        Rooms::where('id', $roomId)->update(['is_finish' => 1]);
+        return response()->json([
+            'message'=> 'finish room successfully',
+        ],200);
 
-        return view('pages.topic', ['data' => $room]);
+
     }
 
-    public function lockRoom () {
-        $roomId = 201;
-        $room = Rooms::where('id', $roomId)->update(['is_lock' => 1]);
-        return view('pages.topic', ['data' => $room]);
+    public function lockRoom (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()], 400);
+        }
+        $isExistedRoom = Rooms::where('id', $request['room_id'])->count();
+        if ($isExistedRoom != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $roomId = $request['room_id'];
+        Rooms::where('id', $roomId)->update(['is_locked' => 1]);
+        return response()->json([
+            'message'=> 'locked room successfully',
+        ],200);
     }
 
 }

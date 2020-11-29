@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
@@ -8,11 +8,9 @@ import GetReadyPlayer from './GetReadyPlayer';
 import AnswerSentPlayer from './AnswerSentPlayer';
 import AnswerResultPlayer from './AnswerResultPlayer';
 import Ranking from './Ranking';
+import axios from 'axios';
 
 function IndexPlayer(props) {
-
-    let { path, url } = useRouteMatch();
-    const [test, setTest] = useState(5);
 
     return (
         <div className="index-main">
@@ -40,10 +38,8 @@ function IndexPlayer(props) {
                     <Link to="/player/ranking"><h3>Ranking</h3></Link>
                 </ul>
             </div>
-
             <Switch>
             <Route path={`${path}/lobby`} exact component={LobbyPlayer} />
-
             </Switch> */}
 
             {/* <Switch>

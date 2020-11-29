@@ -11,9 +11,7 @@ class Topics extends Model
     public function user () {
         return $this->hasOne('App\User', 'id','creator_id');
     }
-//    protected $fillable = [
-//      'name'
-//    ];
 
     protected $guarded = [];
+
 }

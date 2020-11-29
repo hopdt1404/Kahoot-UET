@@ -18,7 +18,8 @@ class CreateReportsTable extends Migration
             $table->string('name', 95)->nullable(false)->comment('Tên của report có thể thay đổi, và mặc định là tên topic');
             $table->unsignedBigInteger('room_id')->nullable(false);
             $table->unsignedBigInteger('owner_id')->nullable(false);
-            $table->string('game_mode');
+            $table->unsignedInteger('number_player')->default(0);
+            $table->string('game_mode')->nullable(true);
             $table->timestamps();
         });
     }
