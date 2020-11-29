@@ -7,6 +7,7 @@ import { Redirect, Route } from "react-router";
 import {
     setSummary
 } from "../../actions/summary";
+import { Link } from 'react-router-dom';
 function Header() {
     const [state, setState] = React.useState({ title: "", description: "" });
     const [showModal, setShowModal] = React.useState(false);
@@ -25,6 +26,7 @@ function Header() {
     const handleSubmit = () => {
         console.log(JSON.stringify({ questionList, summary }));
         console.log("Submit");
+
         // Axios.post('/create',{
         //   summary,questionList
         // }).then(
@@ -72,14 +74,16 @@ function Header() {
                     >
                         Exit
                     </button>
-                    <button
-                        onClick={() => {
-                            handleSubmit();
-                        }}
-                        className="done submit"
-                    >
-                        Done
-                    </button>
+                    <Link to="/">
+                        <button
+                            onClick={() => {
+                                handleSubmit();
+                            }}
+                            className="done submit"
+                        >
+                            Done
+                        </button>
+                    </Link>
                 </div>
             </div>
             {showModal && (

@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { HashRouter, Link } from "react-router-dom";
 import RouterPath from "./routers/RouterPath";
 // import "../user.css";
-import { Provider } from "react-redux";
 import store from "./store";
 
 function Index() {

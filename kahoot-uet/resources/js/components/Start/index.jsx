@@ -18,7 +18,7 @@ function Start() {
             questionType: "Quiz",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
+            // youtubeLink: "",
             questionContent: "1 + 1 = ?",
             answers: [
                 {
@@ -45,7 +45,7 @@ function Start() {
             questionType: "Quiz",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
+            // youtubeLink: "",
             questionContent: "1 x 1 = ?",
             answers: [
                 {
@@ -72,7 +72,7 @@ function Start() {
             questionType: "True or False",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
+            // youtubeLink: "",
             questionContent: "1 + 1 = 2",
             answers: [
                 {

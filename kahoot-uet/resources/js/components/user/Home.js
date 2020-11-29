@@ -5,6 +5,7 @@ import Clock from "./Home/Time/Clock";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import {Redirect} from 'react-router-dom';
+import Header from './Header';
 
 export default class Home extends React.Component{
     constructor(props){
@@ -54,6 +55,7 @@ export default class Home extends React.Component{
         }
         return (
             <div class = "main-content">
+                <Header />
                 <div class="container d-flex pt-5 justify-content-center">
                     <div class="col-sm-3">
                         <div class="user-profile container-fluid">
