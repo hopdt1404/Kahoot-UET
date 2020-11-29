@@ -8,9 +8,9 @@ import "./playgame.css";
 
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
-    const [pin, setPin] = useState(Math.floor(Math.random() * 1000000));
+    const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
     const [countPlayers, setCountPlayers] = useState(0);
-    const [players, setPlayers] = useState([]);
+    const [players, setPlayers] = useState(["one", "two", "three"]);
 
     const handleLockRoom = () => {
         if (isLock == true) {
@@ -92,7 +92,8 @@ function Lobby() {
                     {countPlayers == 0 ? (
                         <div className="wait-players">
                             <span className="span-wait">
-                                Waiting for players...
+                                {/* Waiting for players... */}
+                                {players}
                             </span>
                         </div>
                     ) : (
