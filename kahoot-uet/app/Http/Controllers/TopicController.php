@@ -97,14 +97,15 @@ class TopicController extends Controller
     */
     public function createTopic (Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'bail|required|string',
             'title' => 'bail|nullable|string',
-            'question_type' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE)],
-            'question_type_select' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
-            'time' => 'bail|nullable|integer',
-            'score' => 'bail|nullable|integer',
-            'sequence' => 'bail|integer',
-            'number_correct_answer' => 'bail|integer'
+            'description' => 'nullable|string',
+            'timeLimit' => 'bail|nullable|integer',
+            'point' => 'bail|nullable|integer',
+            'questionType' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE)],
+            'answerOption' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
+            'img' => 'string|nullable',
+            'questionContent' => 'string|nullable',
+            'ans' => 'json|nullable'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -114,14 +115,22 @@ class TopicController extends Controller
         $creator_id = $request->user()->only('id');
         $creator_id = $creator_id['id'];
 
+        if (!isset($request['summary'])) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=> 'Summary error'], 400);
+        }
+        $topicRequest= $request['summary'];
         $topic = Topics::create([
-            'name' => $request['name'],
-            'creator_id' => $creator_id
+            'name' => $topicRequest['title'],
+            'description' => $topicRequest['desctiption'],
+            'creator_id' => $creator_id,
         ]);
+
+
         if (isset($request['topic_id'])) {
             Topics::where('id', $request['topic_id'])->update(['is_deleted' => 1]);
         }
-
 
         if (isset($request['topic_id'])) {
             $questions = Questions::where('topic_id', $request['id'])->get();
@@ -147,22 +156,31 @@ class TopicController extends Controller
 
         } else {
             $questions = [];
-            if (isset($request['questions'])) {
-                $questions = $request['questions'];
+            if (isset($request['questionList'])) {
+                $questions = $request['questionList'];
+                $questionResult = [];
                 for ($i = 0; $i < count($questions); $i++)
-
                     $question = $questions[$i];
                     $question['topic_id'] = $topic['id'];
+                    $number_correct_ans = 0;
+                    if (isset($question['ans'])) {
+                        for ($j = 0; $j < count($question['ans']); $j++) {
+                            if ($question['ans'][$j]['correct']) {
+                                $number_correct_ans++;
+                            }
+                        }
+                    }
+
                     $question = Questions::create([
-                        'sequence' => $question['sequence'] ?? '',
-                        'title' => $question['title'] ?? "",
-                        'answer' => $question['answer'],
-                        'question_type' => $question['question_type'] ?? '',
-                        'question_type_select' => $question['question_type_select'] ?? "",
-                        'time' => $question['time'] ?? 0,
-                        'score' => $question['score'] ?? 0,
-                        'number_correct_answer' => $question['number_correct_answer'] ?? 0,
-                        'topic_id' => $question['topic_id']
+                        'title' => $question['questionContent'] ?? "",
+                        'question_type' => $question['questionType'] ?? '',
+                        'question_type_select' => $question['answerOption'] ?? "",
+                        'time' => $question['timeLimit'] ?? 0,
+                        'score' => $question['point'] ?? 0,
+                        'topic_id' => $question['topic_id'],
+                        'question_img' => $question['img'] ?? '',
+                        'number_correct_answer' => $number_correct_ans,
+                        'answer' => json_encode($question['answer'] ?? '')
                     ]);
                 }
 
@@ -171,7 +189,7 @@ class TopicController extends Controller
 
         }
         return response()->json([
-            'message' => "created successfully topic"
+            'message' => "created successfully topic", "topic" => $topic, "question" => $questionResult
         ], 201);
     }
     /*
