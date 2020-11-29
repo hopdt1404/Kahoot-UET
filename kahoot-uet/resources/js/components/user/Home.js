@@ -1,14 +1,14 @@
-import React from "react";
-import "./Home/Home.css";
+import React from 'react';
+import './Home/Home.css';
 import KahootList from "./Home/KahootList/KahootList";
 import Clock from "./Home/Time/Clock";
-import axios from "axios";
+import axios from 'axios';
 import { Link } from "react-router-dom";
-import Header from "./Header";
 import fake_image from "../../images/reports-logo.png";
+import Header from './Header';
 
-export default class Home extends React.Component {
-    constructor(props) {
+export default class Home extends React.Component{
+    constructor(props){
         super(props);
         this.state = {
             fullname: "FullName",
@@ -105,65 +105,48 @@ export default class Home extends React.Component {
         return (
             <div>
                 <Header />
-                <div class="home-main-content">
-                    <div class="container d-flex pt-5 justify-content-center">
-                        <div class="col-sm-4">
-                            <div class="home-user-profile">
-                                <h3 class="mb-3">Welcome back!</h3> 
-                                <span class="home-name">{this.state.fullname}</span>
-                                <span class="home-username">
-                                    {this.state.username}
-                                </span>
-                            </div>
-
-                            <div class="home-kahoot-list mt-5 p-2">
-                                <h2 class="pt-2abnf">My Reports</h2>
-                                {reportShow}
-                                <div class="home-see-all">
-                                    <div class="home-see-all-area">
-                                        <Link to="/user-reports" class="home-see-all-text">
-                                            See all
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                <div class="home-main-content container d-flex pt-5 justify-content-center">
+                    <div class="col-sm-4">
+                        <div class="home-user-profile">
+                            <h3 class="mb-3">Welcome back!</h3> 
+                            <span class="home-name">{this.state.fullname}</span>
+                            <span class="home-username">
+                                {this.state.username}
+                            </span>
                         </div>
-                        <div class="col-sm-4 home-kahoot-list">
-                            <h2 class="pt-2">My Kahoots</h2>
-                            {this.state.kahootlist.map(each => (
-                                <KahootList data={each} />
-                            ))}
-                            <div class="home-create-kahoot">
-                                <div class="home-create-kahoot-area">
-                                    <div class="home-create-kahoot-box">
-                                        <p class="home-create-kahoot-text">
-                                            Create a new Kahoot
-                                        </p>
-                                        <Link
-                                            to="/creator"
-                                            class="home-create-kahoot-button"
-                                        >
-                                            Create
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
+
+                        <div class="home-kahoot-list mt-5 p-2">
+                            <h2 class="pt-2 ">My Reports</h2>
+                            {reportShow}
                             <div class="home-see-all">
                                 <div class="home-see-all-area">
-                                    <Link to="/kahoots" class="home-see-all-text">
+                                    <Link to="/user-reports" class="home-see-all-text">
                                         See all
                                     </Link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3 time ml-3">
-                            <Clock
-                                size={230}
-                                timeFormat="24hour"
-                                hourFormat="standard"
-                            />
+                        
+                    </div>
+                    <div class="col-sm-4 home-kahoot-list">
+                        <h2 class="pt-2">My Kahoots</h2>
+                        {this.state.kahootlist.map(each => <KahootList data={each} />)}
+                        <div class="home-create-kahoot">
+                            <div class="home-create-kahoot-area">
+                                <div class="home-create-kahoot-box">
+                                    <p class="home-create-kahoot-text">Create a new Kahoot</p>
+                                    <Link to="/creator" class="home-create-kahoot-button">Create</Link>
+                                </div>
+                            </div>
                         </div>
+                        <div class = "home-see-all">
+                            <div class= "home-see-all-area">
+                                <Link to="/kahoots" class="home-see-all-text">See all</Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 time ml-3">
+                    <Clock size={230} timeFormat="24hour" hourFormat="standard" />
                     </div>
                 </div>
             </div>

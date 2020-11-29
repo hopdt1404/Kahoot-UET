@@ -91,14 +91,13 @@ function Header() {
                             Setting
                         </Link>
                         <hr />
-                        <Link
-                            to={"/auth/login"}
-                            className="dropdown-item"
-                            style={{ paddingLeft: "15px", color: "red" }}
-                        >
+                        <div  onClick={()=>{ if(localStorage.getItem('token')){ localStorage.removeItem('token')} }}> 
+                        <Link to={'/auth/login'} className="dropdown-item" style={{paddingLeft: "15px", color: "red"}}>
                             <ArrowBarRight color="red" className="icons-svg" />
                             Sign Out
-                        </Link>
+                            </Link>
+                        </div>
+                        
                     </div>
                 </div>
             </nav>

@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
         $user = User::where('email', $request->email)->first();
         if(!$user){
             return response()->json([
-                'massage' => 'can not find this user'
+                'message' => 'can not find this user'
             ], 404);
         }
         

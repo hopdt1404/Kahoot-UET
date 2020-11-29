@@ -243,6 +243,36 @@ export default class Kahoots extends React.Component{
     route(id){
         return "kahoots/detail/"+String(id);
     }
+    favoriteOff(id){
+        // axios("http://localhost:3000/favoriteOn",{topicId:id})
+        // .then(res => {
+
+        // })
+        let newKahootlist = this.state.kahootlist;
+        let check=0;
+        while (newKahootlist[check].id != id){
+            check+= 1
+        }
+        newKahootlist[check].isFavorite = false;
+        this.setState({
+            kahootlist:newKahootlist
+        })
+    }
+    favoriteOn(id){
+        // axios("http://localhost:3000/favoriteOn",{topicId:id})
+        // .then(res => {
+
+        // })
+        let newKahootlist = this.state.kahootlist;
+        let check=0;
+        while (newKahootlist[check].id != id){
+            check+= 1
+        }
+        newKahootlist[check].isFavorite = true;
+        this.setState({
+            kahootlist:newKahootlist
+        })
+    }
     render(){
         const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
@@ -258,10 +288,10 @@ export default class Kahoots extends React.Component{
             }
             let fav = null;
             if (data.isFavorite === true) {
-                fav = <StarFill color="orange" size="40px"/>
+                fav = <StarFill color="orange" size="40px" onClick={() => this.favoriteOff(data.id)}/>
             }
             else {
-                fav = <Star size = "40px"/>
+                fav = <Star size = "40px" onClick={() => this.favoriteOn(data.id)}/>
             }
             
             return (
