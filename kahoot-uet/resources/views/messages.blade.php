@@ -1,4 +1,4 @@
-<!-- <html>
+<html>
 
 <head>
     <title>Demo chat</title>
@@ -11,7 +11,7 @@
     </div>
     <div>
         <form action="send-message" method="POST">
-        <!-- {{csrf_field()}} -->
+        {{csrf_field()}}
         Name: <input type="text" name="author">
         <br>
         <br>
@@ -22,17 +22,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
         <script>
             
-        var socket = io('http://localhost:6001');
-        socket.on('chat:message',function(data){
-            //console.log(data)
-    
-           //$('#data').append('<h1>'+'New Message'+'</h1>')
-           $('#data').append('<p><strong>'+data.author+'</strong>: '+data.content+'</p>')
-          
-        })
+            Echo.private('chat')
+                .listen('message', (e) => {
+                    this.messages.push({
+                    message: e.message.message,
+                    user: e.user
+                    });
+                });
 
         </script>
     </div>
 </body>
 
-</html> -->
+</html>

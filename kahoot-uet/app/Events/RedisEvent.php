@@ -12,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Messages;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class RedisEvent implements ShouldBroadcast
+class RedisEvent implements ShouldBroadcastnow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -39,8 +39,8 @@ class RedisEvent implements ShouldBroadcast
 
         return ['chat'];
     }
-
     public function broadcastAs(){
         return 'message';
     }
+
 }

@@ -27,9 +27,11 @@ function Landing() {
     const [content, setContent] =useState('test-content');
 
     useEffect(() => {
-        const socket = io('http://127.0.0.1:6001');
-        socket.on('chat:message', data => {
-            console(data);
+        var socket = io('http://127.0.0.1:6001');
+        socket.on('chat:App\\Events\\RedisEvent',function(data){
+            if(data) console.log("Hello")
+            else console.log("Yeffffs")
+    
         })
         axios.post('http://127.0.0.1:8000/send-message', {
             author,
@@ -102,7 +104,7 @@ function Landing() {
     //         }
     //     </div>
     <div>
-
+ggdgfdfg
     </div>
     );
 }
