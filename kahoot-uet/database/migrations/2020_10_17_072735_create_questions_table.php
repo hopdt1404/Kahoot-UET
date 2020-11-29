@@ -15,7 +15,6 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('sequence')->nullable(false)->comment('Số thứ tự của câu hỏi trong topic');
             $table->string('title')->nullable(true);
             $table->string('question_type')->nullable(true)->comment('QUIZ or T/F');
             $table->string('question_type_select')->nullable(true)->comment('Phương thức lựa chọn đáp án: Single select , Multi select');
