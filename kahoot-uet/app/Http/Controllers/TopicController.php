@@ -182,6 +182,7 @@ class TopicController extends Controller
                         'number_correct_answer' => $number_correct_ans,
                         'answer' => json_encode($question['answer'] ?? '')
                     ]);
+                    array_push($questionResult, $question);
                 }
 
 
