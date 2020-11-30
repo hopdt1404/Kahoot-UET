@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './Login/Login.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { FacebookLoginButton, MicrosoftLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
+import { FacebookLoginButton, MicrosoftLoginButton, GoogleLoginButton} from 'react-social-login-buttons';
+import axios from 'axios';
 import {Link} from "react-router-dom";
 import {Redirect} from 'react-router-dom';
-import axios from 'axios';
 // import { ToastContainer, toast } from 'react-toastify'
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -114,7 +114,7 @@ class Login extends Component {
     }
     return(
       <div className="auth-form">
-        <h1 className="title">
+        <h1 className="login-title">
             Log in
         </h1>
         <Form className="login-Form" onSubmit={this.submit} >

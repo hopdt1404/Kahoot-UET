@@ -396,23 +396,6 @@
     font-weight: bold;
 }
 
-.game-block-button {
-    /* width: initial;
-    margin: 0px;
-    border: 0px;
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: bottom;
-    background: rgb(19, 104, 206);
-    color: rgb(255, 255, 255);
-    border-radius: 4px;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.875rem;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    padding: 0px 16px 4px; */
-}
 
 .common-button {
     height: 40vh;

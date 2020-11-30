@@ -3,18 +3,18 @@
     height: 100%;
     background-color: rgb(242 242 242);
 }
-.title{
+.register-title{
     text-align: center;
     padding-top: 5rem;
     font-weight: bold;
 }
-label{
+.register-label{
     font-weight: bold;
 }
-span{
+.register-span{
     color: red;
 }
-.form{ 
+.register-form2{ 
     background-color: white;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;

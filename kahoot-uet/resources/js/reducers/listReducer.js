@@ -7,7 +7,7 @@ const initialState = {
             questionType: "Quiz",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
+            // youtubeLink: "",
             questionContent: "",
             answers: [
                 {
@@ -48,7 +48,7 @@ const listReducer = (state = initialState, action) => {
                 questionType: payload,
                 answerOption: "Single select",
                 image: "",
-                youtubeLink: "",
+                // youtubeLink: "",
                 questionContent: "",
                 answers:
                     payload === "Quiz"
@@ -178,18 +178,18 @@ const listReducer = (state = initialState, action) => {
                 qlist: newList
             };
         }
-        case "SET_YOUTUBE_LINK": {
-            const newList = [...state.qlist];
-            const newQuestion = {
-                ...newList[payload.orderNumber],
-                youtubeLink: payload.link
-            };
-            newList.splice(payload.orderNumber, 1, newQuestion);
-            return {
-                ...state,
-                qlist: newList
-            };
-        }
+        // case "SET_YOUTUBE_LINK": {
+        //     const newList = [...state.qlist];
+        //     const newQuestion = {
+        //         ...newList[payload.orderNumber],
+        //         youtubeLink: payload.link
+        //     };
+        //     newList.splice(payload.orderNumber, 1, newQuestion);
+        //     return {
+        //         ...state,
+        //         qlist: newList
+        //     };
+        // }
         case "SET_ANSWER": {
             const newList = [...state.qlist];
             const newAnswers = [...newList[payload.orderNumber].answers];
