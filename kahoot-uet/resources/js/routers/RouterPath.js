@@ -92,13 +92,8 @@ function RouterPath() {
                 /* Test */
                 <Route exact path="/player" component={lobby}/>
                 <Route path="/player/:roomId" component={start}/>
-                {/* <Route path */}
+                {/* Error Page */}
                 <Route path="*" component={ErrorPage} />
-
-               
-
-
-
             </Switch>
         </Router>
     );

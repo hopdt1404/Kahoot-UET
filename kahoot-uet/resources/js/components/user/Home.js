@@ -117,57 +117,44 @@ export default class Home extends React.Component{
         return (
             <div>
                 <Header />
-                <div class="container d-flex pt-5 justify-content-center">
-                    <div class="col-sm-3 home-name">
-                        <div class="user-profile container-fluid">
-                            <h2>Hello {this.state.fullname}</h2>
-                            {/* <span class= "name">{this.state.fullname}</span> */}
-                            {/* <span class = "username">{this.state.username}</span> */}
+                <div class="home-main-content container d-flex pt-5 justify-content-center">
+                    <div class="col-sm-4">
+                        <div class="home-user-profile">
+                            <h3 class="mb-3">Welcome back!</h3> 
+                            <span class="home-name">{this.state.fullname}</span>
+                            <span class="home-username">
+                                {this.state.username}
+                            </span>
                         </div>
-                        <div>
-                            <h5>Create a new Kahoot</h5>
-                            <Link to="/creator" class="create-kahoot-button">
-                                        <button type="button" class="btn btn-primary home-button">
-                                            Create
-                                        </button>
-                                    </Link>
-                        </div>
-                        {/* <div class="create-kahoot">
-                            <div class="create-kahoot-area">
-                                <div class="create-kahoot-box">
-                                    <p class="create-kahoot-text">Create a new Kahoot</p>
-                                    <Link to="/creator" class="create-kahoot-button">
-                                        <button type="button" class="btn btn-primary home-button">
-                                            Create
-                                        </button>
+
+                        <div class="home-kahoot-list mt-5 p-2">
+                            <h2 class="pt-2 ">My Reports</h2>
+                            {reportShow}
+                            <div class="home-see-all">
+                                <div class="home-see-all-area">
+                                    <Link to="/user-reports" class="home-see-all-text home-link-see-all">
+                                        See all
                                     </Link>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                         
                     </div>
-                    <div class="col-sm-4 kahoot-list home-list">
-                        <div>
-                            <h2>My Kahoots</h2>
-                            {this.state.kahootlist.map(each => <KahootList data={each} />)}
-                            <div class = "see-all">
-                                <div class= "see-all-area">
-                                    <Link to="/kahoots" class="see-all-text home-link-see-all">
-                                        See all kahoots
-                                    </Link>
+                    <div class="col-sm-4 home-kahoot-list">
+                        <h2 class="pt-2">My Kahoots</h2>
+                        {this.state.kahootlist.map(each => <KahootList data={each} />)}
+                        <div class="home-create-kahoot">
+                            <div class="home-create-kahoot-area">
+                                <div class="home-create-kahoot-box">
+                                    <p class="home-create-kahoot-text">Create a new Kahoot</p>
+                                    <Link to="/creator" class="home-create-kahoot-button">Create</Link>
                                 </div>
                             </div>
                         </div>
-                        <div >
-                            <h2>Latest reports</h2>
-                            {this.state.kahootlist.map(each => <KahootList data={each} />)}
-                            <div class = "see-all">
-                            <div class= "see-all-area">
-                                <Link to="/user-reports" class="see-all-text home-link-see-all">
-                                    See all reports
-                                </Link>
+                        <div class = "home-see-all">
+                            <div class= "home-see-all-area">
+                                <Link to="/kahoots" class="home-see-all-text home-link-see-all">See all</Link>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div class="col-sm-3 time ml-3">
