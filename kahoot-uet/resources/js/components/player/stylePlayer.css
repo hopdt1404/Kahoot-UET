@@ -395,3 +395,123 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+.game-block-button {
+    /* width: initial;
+    margin: 0px;
+    border: 0px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    background: rgb(19, 104, 206);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    padding: 0px 16px 4px; */
+}
+
+.common-button {
+    height: 40vh;
+    border-radius: 1%;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.game-block-red {
+    background-color: rgb(226, 27, 60);
+    margin: 40px 20px 20px 0;
+}
+
+.game-block-blue {
+    background-color: rgb(19, 104, 206);
+    margin: 40px 0 20px 20px;
+}
+
+.game-block-yellow {
+    background-color: rgb(216, 158, 0);
+    margin: 20px 20px 20px 0;
+}
+
+.game-block-green {
+    background-color: rgb(38, 137, 12);
+    margin: 20px 0 20px 20px;
+}
+
+.triangle {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid #fff;
+    display: inline-block;
+    text-align: center;
+}
+
+.rhombus-1 {
+    width: 100px;
+    height: 100px;
+    border: 50px solid transparent;
+    border-bottom-color: white;
+    position: relative;
+    top: 30px;
+}
+.rhombus-1:after {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 70px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top-color: white;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.square {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    display: inline-block;
+}
+
+/* Answer Sent */
+
+.answer-sent-main {
+    background-color: rgb(66, 185, 224);
+}
+
+.answer-sent-loader {
+    border: 18px solid rgb(66, 185, 224);
+    border-top: 18px solid white;
+    border-right: 18px solid white;
+    border-bottom: 18px solid white;
+}
+
+/* Answer result */
+
+.answer-result-incorrect {
+    background-color: #fe3354;
+}
+
+.check-logo {
+    width: 100px;
+    height: 120px;
+}
+
+.result-point {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.4vmin;
+    padding: 1vmin 10vmin;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}

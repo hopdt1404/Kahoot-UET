@@ -1,27 +1,61 @@
-import React, { useState } from "react";
-import { Link } from "react-bootstrap-icons";
+import React, { useEffect, useRef, useState } from "react";
+import { Redirect } from "react-router";
+import socketIOClient from "socket.io-client";
 
 import LogoLobby from "../../../images/logo_kahoot.png";
 import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
 
 import "./playgame.css";
+import { update } from "lodash";
 
+const SOCKET_SERVER_URL = "http://localhost:4000";
+const ADD_NEW_ROOM = "addNewRoom";
+const UPDATE_PLAYERS = "updatePlayers";
+const LOCK_ROOM = "lookRoom";
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
-    const [pin, setPin] = useState(Math.floor(Math.random() * 1000000));
-    const [countPlayers, setCountPlayers] = useState(0);
+    const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
+    // const [countPlayers, setCountPlayers] = useState(0);
     const [players, setPlayers] = useState([]);
+    const [startGame, setStartGame] = useState(false);
+    const socketRef = useRef();
+
+    useEffect(() => {
+        socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+            query: { pin }
+        });
+        socketRef.current.emit(ADD_NEW_ROOM, pin);
+        socketRef.current.on(ADD_NEW_ROOM, isSuccess => {
+            if (isSuccess) console.log(`creat new room, ${pin}`);
+        });
+        socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
+            const player = { name: newPlayer.name, room: newPlayer.room };
+            setPlayers(players => [...players, player]);
+            console.log(`updated list player`, newPlayer, players);
+        });
+        // socketRef.current.on(LOCK_ROOM, isLook => {
+        //     console.log(isLock);
+        //     if (isLock) {
+        //         setIsLock(true);
+        //         console.log("LOCKED");
+        //     } else {
+        //         setIsLock(false);
+        //         console.log("UNLOCKED");
+        //     }
+        // });
+
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, [pin]);
 
     const handleLockRoom = () => {
+        socketRef.current.emit(LOCK_ROOM, pin);
         if (isLock == true) {
             setIsLock(false);
         } else if (isLock == false) {
             setIsLock(true);
         }
-    };
-
-    const handleStartGame = () => {
-        // handle with database
     };
 
     return (
@@ -53,7 +87,7 @@ function Lobby() {
                                 height: "40px"
                             }}
                         />
-                        {countPlayers}
+                        {players.length}
                     </div>
                     <div className="logo-lobby">
                         <img src={LogoLobby} width="300px" height="100px" />
@@ -80,8 +114,12 @@ function Lobby() {
                         <div className="is-start">
                             <button
                                 className="button-lock button-start"
-                                disabled={countPlayers == 0 ? "true" : false}
-                                onClick={handleStartGame}
+                                disabled={players.length == 0 ? true : false}
+                                onClick={() => {
+                                    setStartGame(true);
+                                    console.log(startGame.toString());
+                                }}
+                                // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
                             >
                                 Start
                             </button>
@@ -89,17 +127,26 @@ function Lobby() {
                     </div>
                 </div>
                 <div className="players">
-                    {countPlayers == 0 ? (
+                    {players.length == 0 ? (
                         <div className="wait-players">
                             <span className="span-wait">
                                 Waiting for players...
+                                {/* {players} */}
                             </span>
                         </div>
                     ) : (
-                        <h1>Players</h1>
+                        <div className="wait-players">
+                            <span className="span-wait">
+                                {/* Waiting for players... */}
+                                {players.map(player => {
+                                    return <div>{player.name}</div>;
+                                })}
+                            </span>
+                        </div>
                     )}
                 </div>
             </div>
+            {startGame && <Redirect to="/user/start" />}
         </div>
     );
 }

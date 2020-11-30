@@ -57,7 +57,12 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link to={"/play-game"}>
+                <Link to={"/player"}>
+                    <button type="button" className="create-button">
+                        Player
+                    </button>
+                </Link>
+                <Link to={"/user"}>
                     <button type="button" className="create-button">
                         Play
                     </button>
