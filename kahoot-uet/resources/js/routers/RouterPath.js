@@ -31,8 +31,6 @@ import GameBlock from "../components/player/GameBlock";
 import ReportDetail from "../components/user/Reports/Detail/Detail"
 import Landing from "../components/player/Landing";
  
-
-import ReportDetail from "../components/user/Reports/Detail/Detail"
  
 /**
  * Test
