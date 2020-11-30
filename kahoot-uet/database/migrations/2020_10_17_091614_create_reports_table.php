@@ -19,6 +19,8 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('room_id')->nullable(false);
             $table->unsignedBigInteger('owner_id')->nullable(false);
             $table->unsignedInteger('number_player')->default(0);
+            $table->boolean('is_deleted')->default(0);
+            $table->unsignedInteger('number_question')->default(0);
             $table->string('game_mode')->nullable(true);
             $table->timestamps();
         });

@@ -38,6 +38,8 @@ Route::group([
         Route::get('user_id','ProfileController@getUserId');
         Route::put('change-password','EntryController@changePassword');
 
+        Route::get('home', 'HomeController@home');
+
         Route::prefix('topic')->group(function () {
             Route::get('', 'TopicController@index');
             Route::post('duplicate', 'TopicController@duplicateTopic');
