@@ -22,7 +22,7 @@ class RedisController extends Controller
     	broadcast(
     		$b = new RedisEvent($test)
     	);
-        return back();
+        return response()->json([ 'message'=>"successful"]);
     }
 
 }

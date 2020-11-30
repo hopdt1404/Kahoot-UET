@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ResetPasswordJob;
+use App\Mail\ResetPassword as MailResetPassword;
 use App\Models\User;
 use App\Models\PasswordReset;
 use App\Notifications\ResetPassword;
@@ -40,7 +42,11 @@ class ResetPasswordController extends Controller
             ]);
         }
         $password_reset->save();
-       $password_reset->notify(new ResetPassword());
+        $details = [
+            'reset_link' => url("/#/auth/reset-password/{$token}"),
+            'email' => $request->email
+        ];
+        dispatch(new ResetPasswordJob($details));
         return response()->json([
             'message' => 'The reset link is sent'
         ],201);

@@ -27,20 +27,30 @@ function Landing() {
     const [content, setContent] =useState('test-content');
 
     useEffect(() => {
-        var socket = io('http://127.0.0.1:6001');
-        socket.on('chat:App\\Events\\RedisEvent',function(data){
-            if(data) console.log("Hello")
-            else console.log("Yeffffs")
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('a0d9b8d744def38cbf02', {
+        cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('chat');
+        channel.bind('message', function(data) {
+        alert(JSON.stringify(data));
+        });
+        // var socket = io('http://127.0.0.1:6001');
+        // socket.on('chat:App\\Events\\RedisEvent',function(data){
+        //     if(data) console.log("Hello")
+        //     else console.log("Yeffffs")
     
-        })
-        axios.post('http://127.0.0.1:8000/send-message', {
-            author,
-            content
-        }, {
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
+        // })
+        // axios.post('http://127.0.0.1:8000/send-message', {
+        //     author,
+        //     content
+        // }, {
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // })
 
         // axios.get('http://127.0.0.1:8000/api/auth/topic', {
         //     headers: {
