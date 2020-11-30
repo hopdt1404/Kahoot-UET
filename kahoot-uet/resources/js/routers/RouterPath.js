@@ -34,7 +34,7 @@ import AnswerResultPlayer from "../components/player/AnswerResultPlayer";
 import Ranking from "../components/player/Ranking.jsx";
 import GameBlock from "../components/player/GameBlock";
 
-import ReportDetail from "../components/user/Reports/Detail/Detail"
+import ReportDetail from "../components/user/Reports/Detail/Detail";
 import Landing from "../components/player/Landing";
  
 /**

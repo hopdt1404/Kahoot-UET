@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { HashRouter, Link } from "react-router-dom";
 import RouterPath from "./routers/RouterPath";
-// import "../user.css";
-import store from "./store";
+import store from './store';
 
 function Index() {
     return (

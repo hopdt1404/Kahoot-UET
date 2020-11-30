@@ -18,8 +18,8 @@ export default class Kahoots extends React.Component{
                     numplay: 1,
                     isPuclic: false,
                     isFavorite: false,
-                    time: 1,
-                    image:fake_image
+                    time: "2018-10-16 07:16:04",
+                    image:null
                     
                 },
                 {
@@ -29,8 +29,8 @@ export default class Kahoots extends React.Component{
                     numplay: 3,
                     isPuclic: true,
                     isFavorite: false,
-                    time: 2,
-                    image:fake_image
+                    time: "2016-03-12 03:14:58",
+                    image:null
                 },
                 {
                     id:3,
@@ -39,8 +39,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: false,
                     isFavorite: true,
-                    time: 3,
-                    image:fake_image
+                    time: "2019-05-27 10:28:22",
+                    image:null
                 },
                 {
                     id:4,
@@ -49,8 +49,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 10,
-                    image:fake_image
+                    time: "2019-07-31 01:26:37",
+                    image:null
                 },
                 {
                     id:5,
@@ -59,8 +59,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 7,
-                    image:fake_image
+                    time: "2015-03-11 04:24:18",
+                    image:null
                 },
                 {
                     id:7,
@@ -69,8 +69,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: false, 
-                    time: 4,
-                    image:fake_image
+                    time: "2020-05-29 12:11:28",
+                    image:null
                 },
                 {
                     id:6,
@@ -79,8 +79,8 @@ export default class Kahoots extends React.Component{
                     numplay: 5,
                     isPuclic: true,
                     isFavorite: true,
-                    time: 1,
-                    image:fake_image
+                    time: "2015-05-10 08:28:50",
+                    image:null
                 }
             ],
             select:[{}],
@@ -103,7 +103,12 @@ export default class Kahoots extends React.Component{
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
     }
     componentDidMount(){
-        axios.get('/kahoots')
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+          }
+        axios.get('http://localhost:3000/api/kahoots',config)
         .then(res => {
             const data = res.data;
             if (data.kahootlist){
@@ -231,7 +236,9 @@ export default class Kahoots extends React.Component{
         this.sortselect("Recent");
     }
     sortrecent(a,b){ // return newest
-        return (a.time - b.time);
+        let x = Date.parse(a.time);
+        let y = Date.parse(b.time);
+        return ( y-x );
     }
     sortname(a,b){ // return a->z
         let x = a.name.toLowerCase();
@@ -243,7 +250,46 @@ export default class Kahoots extends React.Component{
     route(id){
         return "kahoots/detail/"+String(id);
     }
+    favoriteOff(id){
+        // axios remove favorite
+        // axios("http://localhost:3000/favoriteOn",{topicId:id})
+        // .then(res => {
+
+        // })
+        let newKahootlist = this.state.kahootlist;
+        let check=0;
+        while (newKahootlist[check].id != id){
+            check+= 1
+        }
+        newKahootlist[check].isFavorite = false;
+        this.setState({
+            kahootlist:newKahootlist
+        })
+    }
+    favoriteOn(id){
+        // axios add favorite
+        // axios("http://localhost:3000/favoriteOn",{topicId:id})
+        // .then(res => {
+
+        // })
+        let newKahootlist = this.state.kahootlist;
+        let check=0;
+        while (newKahootlist[check].id != id){
+            check+= 1
+        }
+        newKahootlist[check].isFavorite = true;
+        this.setState({
+            kahootlist:newKahootlist
+        })
+    }
     render(){
+        // Bao gio xong het thi them vao
+        // if (!localStorage.getItem("token")){
+        //     window.alert("Ban chưa dăng nhập");
+        //     return(
+        //         <Redirect to="/auth/login" />
+        //     )
+        // }
         const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
         const firstrend= lastrend - perpage;
@@ -258,18 +304,19 @@ export default class Kahoots extends React.Component{
             }
             let fav = null;
             if (data.isFavorite === true) {
-                fav = <StarFill color="orange" size="40px"/>
+                fav = <StarFill color="orange" size="40px" onClick={() => this.favoriteOff(data.id)}/>
             }
             else {
-                fav = <Star size = "40px"/>
+                fav = <Star size = "40px" onClick={() => this.favoriteOn(data.id)}/>
             }
             
             return (
                 <div class="kahoots-kahoot-box row">
-                    <Link to={this.route(data.id)} class="kahoots-image-box" style={{backgroundImage:'url('+data.image+')'}}>
-                            <div class="kahoots-num-quest">
-                                <span class="kahoots-num-quest-text"> {data.numquest} Q </span>
-                            </div>
+                    <Link to={this.route(data.id)} class="kahoots-image-box" style={{backgroundImage:'url('+fake_image+')'}}>
+                        <img src={data.image} style={{position:"absolute",zIndex:"-1"}} />
+                        <div class="kahoots-num-quest">
+                            <span class="kahoots-num-quest-text"> {data.numquest} Q </span>
+                        </div>
                     </Link>
                     <div class="kahoots-quest-info flex-fill">
                         <div class = "kahoots-quest-name">
@@ -284,16 +331,24 @@ export default class Kahoots extends React.Component{
                             </div>
                             <div class="kahoots-num-play-area ">
                                 <div class= "kahoots-time-play">
-                                    <span class="kahoots-time-text">{data.time} day {'('}s{')'} ago {'-'}</span>
+                                    <span class="kahoots-time-text">{data.time} {'-'}</span>
                                     <span class= "kahoots-num-play-text">{data.numplay} Play{'('}s{')'}</span>
                                 </div>
                                     
                             </div>
                         </div>
-                        <div class="kahoots-play-box d-flex justify-content-end">
+                        <div class="kahoots-play-box">
                             <button class="btn btn-primary">
                                 <Link to="#" class="kahoots-play-text">Play</Link>
-                            </button> 
+                            </button>
+                            <div>
+                                <button class="btn btn-info">
+                                <Link to="#" class="kahoots-play-text">Rename</Link>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <Link to="#" class="kahoots-play-text">Delete</Link>
+                                    </button>
+                            </div>
                         </div>
                     </div>
                 </div>

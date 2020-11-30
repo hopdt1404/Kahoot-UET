@@ -32,22 +32,22 @@ class AccountType extends Component {
             <h1 style={{ textAlign: 'center', paddingTop: '5rem', fontWeight: 'bold' }} > Choose your account type </h1>
             <div className="usage-selector" style={{ textAlign: 'center', marginTop:'10rem', width:'864', height:'284', padding: 'auto' }}>
                 
-                <button className='teacher' style={{ height:'268px', width:'200px', margin: '0.5rem'}} name="teacher" value="teacher" onClick={this.chooseType} > 
+                <button className='teacher login-button' style={{ height:'268px', width:'200px', margin: '0.5rem'}} name="teacher" value="teacher" onClick={this.chooseType} > 
                 <span style={{ fontSize:"1rem", fontWeight:"bold", color:'black' }} >
                          Teacher
                 </span>
                 </button>
-                <button className='student' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name="student" value ="student" onClick={this.chooseType} >
+                <button className='student login-button' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name="student" value ="student" onClick={this.chooseType} >
                 <span style={{ fontSize:"1rem", fontWeight:"bold", color:'black' }} >
                          Student
                      </span>
                  </button>
-                <button className='personal' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name ="personal" value="personal" onClick={this.chooseType} >
+                <button className='personal login-button' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name ="personal" value="personal" onClick={this.chooseType} >
                 <span style={{ fontSize:"1rem", fontWeight:"bold", color:'black' }} >
                          Personal 
                      </span>
                 </button>
-                <button className='professional' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name="professional" value="professional" onClick={this.chooseType} > 
+                <button className='professional login-button' style={{ height:'268px', width:'200px', margin: '0.5rem' }} name="professional" value="professional" onClick={this.chooseType} > 
                 <span style={{ fontSize:"1rem", fontWeight:"bold", color:'black' }} >
                 Professional
                      </span>

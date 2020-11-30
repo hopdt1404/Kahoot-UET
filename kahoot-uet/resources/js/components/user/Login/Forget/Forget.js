@@ -63,11 +63,11 @@ class Forget extends Component {
         const mess = this.state.messError;
         const error = this.state.formError;
         return(
-            <div className="forgot-form">
-                <h1 className="title"> Reset your password </h1>
+            <div className="forget-form">
+                <h1 className="forget-title"> Reset your password </h1>
                 <Form className="Form" onSubmit={this.submit} >
                 <div className="email">
-                        <Label>Email</Label>
+                        <Label forget-label>Email</Label>
                         <Input type="text" value={this.state.email} placeholder="Enter email address..." name="email"  noValidate onChange={this.handleChange} />
                         {error && <span style={{ color: 'red'}} className="errorMessage">{error}</span>} 
                 </div> 

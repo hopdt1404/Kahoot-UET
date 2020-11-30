@@ -11,12 +11,25 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 //import Data from API (test!!!!!!!!!!!!!!)
 import DataReport from "./Reports/testShowReport.json";
+import axios from "axios";
 
 function route(id) {
     return "user-reports/detail/" + String(id);
 }
 function Reports() {
-    const [data, setdata] = useState(DataReport);
+    let config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }
+      }
+    const [data, setData] = useState(DataReport);
+    axios.get("httlp://localhost:3000/api/user-reports",config)
+    .then(res => {
+        const getData = res.data;
+        if (getData.reportList){
+            setData(getData.reportList);
+        }
+    })
     const [curpage, setCurpage] = useState(1);
     const perpage = 4;
     const totalpage = Math.ceil(data.length / perpage);
@@ -132,18 +145,6 @@ function Reports() {
                                 />
                                 Open report
                             </Link>
-                            <a class="dropdown-item" href="#">
-                                <CaretRight
-                                    color="gray"
-                                    className="icons-svg"
-                                    style={{
-                                        width: "20px",
-                                        height: "20px",
-                                        marginRight: "10px"
-                                    }}
-                                />
-                                Play Again
-                            </a>
                             <a class="dropdown-item" href="#">
                                 <Pencil
                                     color="gray"

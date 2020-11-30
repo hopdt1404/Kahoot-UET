@@ -3,58 +3,119 @@ import './Home/Home.css';
 import KahootList from "./Home/KahootList/KahootList";
 import Clock from "./Home/Time/Clock";
 import axios from 'axios';
-import { Link } from "react-router-dom";
-import {Redirect} from 'react-router-dom';
+import { Link, Redirect } from "react-router-dom";
+import fake_image from "../../images/reports-logo.png";
 import Header from './Header';
 
 export default class Home extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            fullname:"FullName",
-            username:"username",
-            kahootlist: [{
-                name_quest: "test",
-                num_quest: 1,
-                num_play: 1
-            }]
-            // kahootlist structure:
-            // [{
-            // "name_quest":... "string",
-            // "num_quest":... int,
-            // "num_play":... int
-            // }]
+        this.state = {
+            fullname: "FullName",
+            username: "username",
+            kahootlist: [
+                {   
+                    id: 1,
+                    name_quest: "test1",
+                    num_quest: 1,
+                    num_play: 1,
+                    image: null
+                },
+                {   
+                    id: 2,
+                    name_quest: "test2",
+                    num_quest: 2,
+                    num_play: 2,
+                    image: null
+                }
+            ],
+            reportlist: [
+                {
+                    id:1,
+                    name:"abc",
+                    topic:"test1",
+                    date:"2016-09-06 11:53:31",
+                    image: null
+                },
+                {
+                    id:2,
+                    name:"test_report",
+                    topic:"test2",
+                    date:"2016-09-06 11:53:31",
+                    image: null
+                }
+            ]
+            
         };
     }
-    componentDidMount(){
-        axios.get('/')
-        .then(res => {
-            const data = res.data;
-            if (data.fullname){
-                this.setState({
-                    fullname: data.fullname,
-                });
+    componentDidMount() {
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
-            if (data.username){
-                this.setState({
-                    username: data.username,
-                });
-            }
-            if (data.kahootlist){
-                this.setState({
-                    kahootlist: data.kahootlist,
-                });
-            }
-        }
-        )
-        .catch(error => console.log(error));
+          }
+        axios
+            .get("localhost:8000/api/home",config)
+            .then(res => {
+                const data = res.data;
+                if (data.fullname) {
+                    this.setState({
+                        fullname: data.fullname
+                    });
+                }
+                if (data.username) {
+                    this.setState({
+                        username: data.username
+                    });
+                }
+                if (data.kahootlist) {
+                    this.setState({
+                        kahootlist: data.kahootlist
+                    });
+                }
+                if (data.reportlist) {
+                    this.setState({
+                        reportlist: data.reportlist
+                    });
+                }
+            })
+            .catch(error => console.log(error));
     }
-    render(){
-        if(!localStorage.getItem('token')){
-            return <Redirect to="/auth/login" />
-        }
+    route(id){
+        return "/user-reports/detail/"+String(id);
+    }
+    render() {
+        // Bao gio xong het thi them
+        // if (!localStorage.getItem("token")){
+        //     window.alert("Ban chưa dăng nhập");
+        //     return(
+        //         <Redirect to="/auth/login" />
+        //     )
+        // }
+        const reportShow = this.state.reportlist.map((data,index)=> {
+            return(
+                <div class = "container mt-2 mb-2">
+                    <Link class= "d-flex flex-row home-kahootlist-quest" to={this.route(data.id)}>
+                        <img class="home-kahootlist-image" src={data.image} style={{backgroundImage:'url('+fake_image+')'}}>
+                        </img>
+                        <div class ="home-kahootlist-quest-info">
+                            <div class = "home-kahootlist-quest-name">
+                                <div class="home-kahootlist-quest-name-area">
+                                    <span class="home-kahootlist-quest-name-text">{data.name}</span>
+                                </div>
+                            </div>
+                            <div class="home-kahootlist-num-play">
+                                <div class="home-kahootlist-num-play-area">
+                                    <span class= "home-kahootlist-num-play-text d-flex justify-content-end">{data.date}</span>    
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            )
+        })
         return (
-            <div class = "main-content">
+            <div>
                 <Header />
                 <div class="container d-flex pt-5 justify-content-center">
                     <div class="col-sm-3 home-name">

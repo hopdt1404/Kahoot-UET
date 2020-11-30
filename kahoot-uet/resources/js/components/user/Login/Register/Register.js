@@ -114,36 +114,36 @@ class Register extends Component{
 
         return(
         
-            <div className="register-form" style={{backgroundColor: 'rgb(242 242 242)',   width: '100%' , height: '1156px'}} >
-                <h1 className="title"> Create an account </h1>
-                <Form className="form" onSubmit={this.handleSubmit} noValidate>
+            <div className="register-form2" style={{backgroundColor: 'rgb(242 242 242)',   width: '100%' , height: '1156px'}} >
+                <h1 className="register-title"> Create an account </h1>
+                <Form className="register-form" onSubmit={this.handleSubmit} noValidate>
                     <div className="fullName">
-                        <Label>Full Name</Label>
+                        <Label class="register-label">Full Name</Label>
                         <Input type="text" className={formErrors.fullName.length > 0 ? "error" : null} placeholder="Full Name..." name="fullName"  noValidate onChange={this.handleChange} />
                         {formErrors.fullName.length > 0 && (
-                            <span className="errorMessage">{formErrors.fullName}</span>
+                            <span className="errorMessage register-span">{formErrors.fullName}</span>
                         )}
                     </div>
                     <br/>
                     <div className="Email">
-                        <Label>Email</Label>
+                        <Label class="register-label">Email</Label>
                         <Input type="email" className={formErrors.email.length > 0 ? "error" : null} placeholder="Email..." name="email"  noValidate onChange={this.handleChange} />
                         {formErrors.email.length > 0 && (
-                            <span className="errorMessage">{formErrors.email}</span>
+                            <span className="errorMessage register-span">{formErrors.email}</span>
                         )}
                     </div>
                     <br/>
                     <div className="password">
-                        <Label>Password</Label>
+                        <Label class="register-label">Password</Label>
                         <Input type="password" className={formErrors.password.length > 0 ? "error" : null} placeholder="Password..." name="password"  noValidate onChange={this.handleChange} />
                         {formErrors.password.length > 0 && (
-                            <span className="errorMessage">{formErrors.password}</span>
+                            <span className="errorMessage register-span">{formErrors.password}</span>
                         )}
                     </div>
                     <br/>
                     <div className="submit">
                         <Button type="submit" className="btn-lg btn-dark btn-block"> Sign up </Button>
-                        {mess && ( <span className="errorMessage">{mess}</span> )}
+                        {mess && ( <span className="errorMessage register-span">{mess}</span> )}
                         {verify && <Link to={"/auth/signup/active-account/" + this.state.email}> Click here to active </Link>}
                         <p> Already have an Account?
                         <Link to ="/auth/login"> Login </Link>
