@@ -105,7 +105,6 @@ class TopicController extends Controller
             'answerOption' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
             'img' => 'string|nullable',
             'questionContent' => 'string|nullable',
-            'ans' => 'json|nullable'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -180,7 +179,7 @@ class TopicController extends Controller
                         'topic_id' => $question['topic_id'],
                         'question_img' => $question['img'] ?? '',
                         'number_correct_answer' => $number_correct_ans,
-                        'answer' => json_encode($question['answer'] ?? '')
+                        'answer' => json_encode($question['ans'] ?? '')
                     ]);
                     array_push($questionResult, $question);
                 }

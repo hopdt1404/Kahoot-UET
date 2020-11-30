@@ -85,14 +85,17 @@ Route::prefix('topic')->group(function () {
     Route::post('delete', 'TopicController@delete');
     Route::get('detail', 'QuestionsController@index');
 });
+Route::prefix('question')->group(function () {
+    Route::get('', 'QuestionController@index');
+});
 
 Route::prefix('room')->group(function () {
-    Route::get('create', 'RoomController@index');
+    Route::post('create', 'RoomController@index');
     Route::patch('lock', 'RoomController@lockRoom');
 });
 Route::prefix('player')->group(function () {
     Route::get('list', 'PlayerController@index');
-    Route::get('join', 'PlayerController@create');
+    Route::post('join', 'PlayerController@create');
     Route::post('get-out', 'PlayerController@getOutPlayer');
 });
 
