@@ -6,6 +6,12 @@ import Reports from "../components/user/Reports";
 import Kahoots from "../components/user/Kahoots";
 import Creator from "../components/user/Creator";
 import Login from "../components/user/Login";
+import Header from '../components/user/Header';
+import Register from '../components/user/Login/Register/Register'
+import Forget from '../components/user/Login/Forget/Forget'
+import AccountType from '../components/user/Login/AccountType/AccountType'
+import ResetPassword from '../components/user/Login/ResetPassword/ResetPassword'
+import ActiveAccount from '../components/user/Login/ActiveAccount/ActiveAccount'
 import Settings from "../components/user/Settings";
 import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
@@ -47,6 +53,14 @@ function RouterPath() {
                 <Route exact path="/user-reports" component={Reports} />
                 <Route exact path="/kahoots/detail/:id" component={Topic} />
                 <Route exact path="/user-reports/detail/:id" component={ReportDetail} />
+                <Route exact path="/creator" component={Creator} />
+                <Route path="/auth/login" component={Login} />
+                <Route path="/Register/signup-options/:organization" component={Register} /> 
+                <Route path="/auth/forgot-password" component={Forget} />
+                <Route path="/Register" component={AccountType} />
+                <Route path="/auth/reset-password/:token" component={ResetPassword} />
+                <Route path="/auth/signup/active-account/:email" component={ActiveAccount} />
+                <Route path="/user-reports" component={Reports} />
                 <Route path="/creator" component={Creator} />
                 <Route path="/settings" component={Settings} />
                 <Route path="/auth/login" component={Login} />
