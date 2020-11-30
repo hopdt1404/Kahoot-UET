@@ -1,16 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Redirect } from "react-router";
+import socketIOClient from "socket.io-client";
 
 import LogoLobby from "../../../images/logo_kahoot.png";
 import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
 
 import "./playgame.css";
+import { update } from "lodash";
 
+const SOCKET_SERVER_URL = "http://localhost:4000";
+const ADD_NEW_ROOM = "addNewRoom";
+const UPDATE_PLAYERS = "updatePlayers";
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
     const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
-    const [countPlayers, setCountPlayers] = useState(0);
-    const [players, setPlayers] = useState(["one", "two", "three"]);
+    // const [countPlayers, setCountPlayers] = useState(0);
+    const [players, setPlayers] = useState([]);
+    const [startGame, setStartGame] = useState(false);
+    const socketRef = useRef();
 
+    useEffect(()=>{
+        socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+            query: { pin },
+          });
+        socketRef.current.emit(ADD_NEW_ROOM, pin);
+        socketRef.current.on(ADD_NEW_ROOM, (isSuccess) => {
+           if(isSuccess) console.log(`creat new room, ${pin}`);
+        })
+        socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
+            const player = {name:newPlayer.name, room:newPlayer.room};
+            setPlayers(players => [...players,player]);
+            console.log(`updated list player`,newPlayer,players);
+        })
+
+
+        return () => {
+            socketRef.current.disconnect();
+        };
+    },[pin]);
+
+    
+    
+    
+    
+    
+    
+    
     const handleLockRoom = () => {
         if (isLock == true) {
             setIsLock(false);
@@ -19,9 +54,7 @@ function Lobby() {
         }
     };
 
-    const handleStartGame = () => {
-        // handle with database
-    };
+
 
     return (
         <div className="lobby">
@@ -52,7 +85,7 @@ function Lobby() {
                                 height: "40px"
                             }}
                         />
-                        {countPlayers}
+                        {players.length}
                     </div>
                     <div className="logo-lobby">
                         <img src={LogoLobby} width="300px" height="100px" />
@@ -79,8 +112,9 @@ function Lobby() {
                         <div className="is-start">
                             <button
                                 className="button-lock button-start"
-                                disabled={countPlayers == 0 ? "true" : false}
-                                onClick={handleStartGame}
+                                // disabled={countPlayers == 0 ? true : false}
+                                onClick={() => {setStartGame(true); console.log(startGame.toString())}}
+                                    // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
                             >
                                 Start
                             </button>
@@ -88,18 +122,26 @@ function Lobby() {
                     </div>
                 </div>
                 <div className="players">
-                    {countPlayers == 0 ? (
+                    {players.length == 0 ? (
                         <div className="wait-players">
                             <span className="span-wait">
-                                {/* Waiting for players... */}
-                                {players}
+                                Waiting for players...
+                                {/* {players} */}
                             </span>
                         </div>
                     ) : (
-                        <h1>Players</h1>
+                        <div className="wait-players">
+                            <span className="span-wait">
+                                {/* Waiting for players... */}
+                                {players.map(player => {
+                                    return <div>{player.name}</div>;
+                                })}
+                            </span>
+                        </div>
                     )}
                 </div>
             </div>
+            { startGame && <Redirect to="/user/start" />}
         </div>
     );
 }
