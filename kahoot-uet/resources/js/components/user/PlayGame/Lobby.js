@@ -11,6 +11,7 @@ import { update } from "lodash";
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
+const LOCK_ROOM = "lookRoom";
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
     const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
@@ -19,42 +20,43 @@ function Lobby() {
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
 
-    useEffect(()=>{
+    useEffect(() => {
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-            query: { pin },
-          });
+            query: { pin }
+        });
         socketRef.current.emit(ADD_NEW_ROOM, pin);
-        socketRef.current.on(ADD_NEW_ROOM, (isSuccess) => {
-           if(isSuccess) console.log(`creat new room, ${pin}`);
-        })
+        socketRef.current.on(ADD_NEW_ROOM, isSuccess => {
+            if (isSuccess) console.log(`creat new room, ${pin}`);
+        });
         socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
-            const player = {name:newPlayer.name, room:newPlayer.room};
-            setPlayers(players => [...players,player]);
-            console.log(`updated list player`,newPlayer,players);
-        })
-
+            const player = { name: newPlayer.name, room: newPlayer.room };
+            setPlayers(players => [...players, player]);
+            console.log(`updated list player`, newPlayer, players);
+        });
+        // socketRef.current.on(LOCK_ROOM, isLook => {
+        //     console.log(isLock);
+        //     if (isLock) {
+        //         setIsLock(true);
+        //         console.log("LOCKED");
+        //     } else {
+        //         setIsLock(false);
+        //         console.log("UNLOCKED");
+        //     }
+        // });
 
         return () => {
             socketRef.current.disconnect();
         };
-    },[pin]);
+    }, [pin]);
 
-    
-    
-    
-    
-    
-    
-    
     const handleLockRoom = () => {
+        socketRef.current.emit(LOCK_ROOM, pin);
         if (isLock == true) {
             setIsLock(false);
         } else if (isLock == false) {
             setIsLock(true);
         }
     };
-
-
 
     return (
         <div className="lobby">
@@ -112,9 +114,12 @@ function Lobby() {
                         <div className="is-start">
                             <button
                                 className="button-lock button-start"
-                                // disabled={countPlayers == 0 ? true : false}
-                                onClick={() => {setStartGame(true); console.log(startGame.toString())}}
-                                    // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
+                                disabled={players.length == 0 ? true : false}
+                                onClick={() => {
+                                    setStartGame(true);
+                                    console.log(startGame.toString());
+                                }}
+                                // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
                             >
                                 Start
                             </button>
@@ -141,7 +146,7 @@ function Lobby() {
                     )}
                 </div>
             </div>
-            { startGame && <Redirect to="/user/start" />}
+            {startGame && <Redirect to="/user/start" />}
         </div>
     );
 }

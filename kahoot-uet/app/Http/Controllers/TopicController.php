@@ -158,7 +158,7 @@ class TopicController extends Controller
             if (isset($request['questionList'])) {
                 $questions = $request['questionList'];
                 $questionResult = [];
-                for ($i = 0; $i < count($questions); $i++)
+                for ($i = 0; $i < count($questions); $i++) {
                     $question = $questions[$i];
                     $question['topic_id'] = $topic['id'];
                     $number_correct_ans = 0;
@@ -185,7 +185,7 @@ class TopicController extends Controller
                 }
 
 
-
+            }
 
         }
         return response()->json([

@@ -34,8 +34,9 @@ import AnswerResultPlayer from "../components/player/AnswerResultPlayer";
 import Ranking from "../components/player/Ranking.jsx";
 import GameBlock from "../components/player/GameBlock";
 
-import ReportDetail from "../components/user/Reports/Detail/Detail";
+import ReportDetail from "../components/user/Reports/Detail/Detail"
 import Landing from "../components/player/Landing";
+ 
  
 /**
  * Test
@@ -68,8 +69,9 @@ function RouterPath() {
                 <Route path="/user/lobby" component={Lobby} />
                 <Route exact path="/user/start" component={Start} />
                 {/* Player */}
-                <Route path="/landing" component={Landing} />
-
+                <Route path="/pin-player" component={PinInput} />
+                <Route path="/name-player" component={NameInput} />
+                {/* <Route exact path="/player" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
@@ -87,7 +89,7 @@ function RouterPath() {
                 /* Test */
                 <Route exact path="/player1111" component={lobby}/>
                 <Route path="/player/:roomId" component={start}/>
-                {/* Error Page */}
+                {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
             </Switch>
         </Router>

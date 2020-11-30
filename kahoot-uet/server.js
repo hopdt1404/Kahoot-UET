@@ -8,6 +8,7 @@ const VALIDATE_ROOM = "validatRoom";
 const ADD_PLAYER = "addPlayer";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
+const LOCK_ROOM = "lookRoom";
 
 const roomList = [320];
 const lockedList = []; //room
@@ -61,7 +62,21 @@ io.on("connection", socket => {
         socket.in(player.roomId).emit(UPDATE_PLAYERS, player);
         console.log("updated");
     });
-
+    // Listen for lock
+    socket.on(LOCK_ROOM, roomId => {
+        console.log("LOCK",roomId);
+        if(lockedList.findIndex( room => room == roomId) == -1 ){
+            lockedList.push(roomId);
+            socket.in(roomId).emit(LOCK_ROOM, true)
+            console.log(lockedList);
+        }
+        else{
+            const index = lockedList.findIndex( room => room == roomId);
+            lockedList.splice(index,1);
+            socket.in(roomId).emit(LOCK_ROOM, false)
+            console.log(lockedList);
+        }
+    })
     // Leave the room if the user closes the socket
     socket.on("disconnect", () => {
         socket.leave(roomId);
