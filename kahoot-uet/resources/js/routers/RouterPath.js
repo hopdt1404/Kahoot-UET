@@ -9,8 +9,9 @@ import Login from "../components/user/Login";
 import Settings from "../components/user/Settings";
 import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
-
+import Start from "../components/user/PlayGame/Start"
 import ErrorPage from "../components/error/ErrorPage";
+// import Fake from "../components/user/PlayGame/Fake";
 
 //player
 import Topic from "../components/user/Kahoots/Topic/Topic";
@@ -18,7 +19,6 @@ import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import IndexPlayer from "../components/player/IndexPlayer";
 
-import Fake from "../components/user/Fake";
 
 import LobbyPlayer from "../components/player/LobbyPlayer";
 import StartPlayer from "../components/player/StartPlayer";
@@ -30,10 +30,14 @@ import GameBlock from "../components/player/GameBlock";
 
 import ReportDetail from "../components/user/Reports/Detail/Detail"
  
-
+/**
+ * Test
+ */
+import lobby from "../components/player2/lobby";
+import start from "../components/player2/start";
 function RouterPath() {
     return (
-        <main>
+        <Router>
             <Switch>
                 {/* Host */}
                 <Route exact path="/" component={Home} />
@@ -45,11 +49,11 @@ function RouterPath() {
                 {/* In Game - erroring */}
                 <Route exact path="/user" component={OptionGame} />
                 <Route path="/user/lobby" component={Lobby} />
-                <Route exact path="/fake" component={Fake} />
+                <Route exact path="/user/start" component={Start} />
                 {/* Player */}
                 <Route path="/pin-player" component={PinInput} />
                 <Route path="/name-player" component={NameInput} />
-                <Route exact path="/player" component={IndexPlayer} />
+                {/* <Route exact path="/player" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
@@ -64,33 +68,18 @@ function RouterPath() {
                 />
                 <Route path="/player/ranking" component={Ranking} />
 
-                {/* <Switch>
-                        <Route
-                            path="/player/lobby"
-                            exact
-                            component={LobbyPlayer}
-                        />
-                        <Route path="/player/start" component={StartPlayer} />
-                        <Route
-                            path="/player/getready"
-                            component={GetReadyPlayer}
-                        />
-                        <Route path="/player/gameblock" component={GameBlock} />
-                        <Route
-                            path="/player/answer/sent"
-                            component={AnswerSentPlayer}
-                        />
-                        <Route
-                            path="/player/answer/result"
-                            component={AnswerResultPlayer}
-                        />
-                        <Route path="/player/ranking" component={Ranking} />
-                    </Switch> */}
-
-                {/* Error announce */}
+                /* Test */
+                <Route exact path="/player" component={lobby}/>
+                <Route path="/player/:roomId" component={start}/>
+                {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
+
+               
+
+
+
             </Switch>
-        </main>
+        </Router>
     );
 }
 
