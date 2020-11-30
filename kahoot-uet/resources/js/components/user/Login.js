@@ -83,6 +83,7 @@ class Login extends Component {
   
         else if(res.data.access_token){
           localStorage.setItem('token', res.data.access_token);
+          axios.defaults.headers.common['Authorization']=`Bearer ${res.data.access_token}`;
           this.setState({
             loggedIn: true
           })
