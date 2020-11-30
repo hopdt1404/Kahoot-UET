@@ -57,7 +57,7 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link to={"/player"}>
+                <Link to={"/player1111"}>
                     <button type="button" className="create-button">
                         Player
                     </button>

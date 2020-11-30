@@ -69,12 +69,7 @@ function RouterPath() {
                 <Route exact path="/user/start" component={Start} />
                 {/* Player */}
                 <Route path="/landing" component={Landing} />
-                {/* <Route exact path="/player" component={IndexPlayer} /> */}
 
-                {/* Player */}
-                <Route path="/pin-player" component={PinInput} />
-                <Route path="/name-player" component={NameInput} />
-                {/* <Route exact path="/player" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
@@ -90,7 +85,7 @@ function RouterPath() {
                 <Route path="/player/ranking" component={Ranking} />
 
                 /* Test */
-                <Route exact path="/player" component={lobby}/>
+                <Route exact path="/player1111" component={lobby}/>
                 <Route path="/player/:roomId" component={start}/>
                 {/* Error Page */}
                 <Route path="*" component={ErrorPage} />
