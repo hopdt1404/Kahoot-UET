@@ -3,7 +3,7 @@ import './Home/Home.css';
 import KahootList from "./Home/KahootList/KahootList";
 import Clock from "./Home/Time/Clock";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import fake_image from "../../images/reports-logo.png";
 import Header from './Header';
 
@@ -19,14 +19,14 @@ export default class Home extends React.Component{
                     name_quest: "test1",
                     num_quest: 1,
                     num_play: 1,
-                    image: fake_image
+                    image: null
                 },
                 {   
                     id: 2,
                     name_quest: "test2",
                     num_quest: 2,
                     num_play: 2,
-                    image: fake_image
+                    image: null
                 }
             ],
             reportlist: [
@@ -35,22 +35,27 @@ export default class Home extends React.Component{
                     name:"abc",
                     topic:"test1",
                     date:"2016-09-06 11:53:31",
-                    image: fake_image
+                    image: null
                 },
                 {
                     id:2,
                     name:"test_report",
                     topic:"test2",
                     date:"2016-09-06 11:53:31",
-                    image: fake_image
+                    image: null
                 }
             ]
             
         };
     }
     componentDidMount() {
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+          }
         axios
-            .get("localhost:8000/api/home")
+            .get("localhost:8000/api/home",config)
             .then(res => {
                 const data = res.data;
                 if (data.fullname) {
@@ -80,12 +85,19 @@ export default class Home extends React.Component{
         return "/user-reports/detail/"+String(id);
     }
     render() {
+        // Bao gio xong het thi them
+        // if (!localStorage.getItem("token")){
+        //     window.alert("Ban chưa dăng nhập");
+        //     return(
+        //         <Redirect to="/auth/login" />
+        //     )
+        // }
         const reportShow = this.state.reportlist.map((data,index)=> {
             return(
                 <div class = "container mt-2 mb-2">
                     <Link class= "d-flex flex-row home-kahootlist-quest" to={this.route(data.id)}>
-                        <div class="home-kahootlist-image" style={{backgroundImage:'url('+data.image+')'}}>
-                        </div>
+                        <img class="home-kahootlist-image" src={data.image} style={{backgroundImage:'url('+fake_image+')'}}>
+                        </img>
                         <div class ="home-kahootlist-quest-info">
                             <div class = "home-kahootlist-quest-name">
                                 <div class="home-kahootlist-quest-name-area">

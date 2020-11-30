@@ -65,9 +65,12 @@ function RouterPath() {
                 <Route exact path="/fake" component={Fake} />
                 {/* Player */}
                 <Route path="/landing" component={Landing} />
-                {/* <Route path="/pin-player" component={PinInput} />
-                <Route path="/name-player" component={NameInput} /> */}
                 {/* <Route exact path="/player" component={IndexPlayer} /> */}
+
+                {/* Player */}
+                <Route path="/pin-player" component={PinInput} />
+                <Route path="/name-player" component={NameInput} />
+                <Route exact path="/player" component={IndexPlayer} />
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />

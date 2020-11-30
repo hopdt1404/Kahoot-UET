@@ -52,12 +52,12 @@ export const setImage = (image, orderNumber) => {
         payload: {image, orderNumber}
     };
 };
-export const setYoutubeLink = (link, orderNumber) => {
-    return {
-        type: "SET_YOUTUBE_LINK",
-        payload: {link, orderNumber}
-    };
-};
+// export const setYoutubeLink = (link, orderNumber) => {
+//     return {
+//         type: "SET_YOUTUBE_LINK",
+//         payload: {link, orderNumber}
+//     };
+// };
 export const setAnswer = (answer, orderNumber, aOrderNumber) => {
     return {
         type: "SET_ANSWER",
@@ -105,7 +105,7 @@ export function handleNickname(nickname) {
         payload: nickname
     }
 }
-export function selectedPin(pin) {
+export function handlePin(pin) {
     return {
         type: 'SELECTED_PIN',
         payload: pin
