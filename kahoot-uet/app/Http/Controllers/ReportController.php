@@ -366,4 +366,40 @@ class ReportController extends Controller
         ],200);
     }
 
+    public function resultPlay (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'room_id' => 'bail|required|integer',
+            'name' => 'bail|required|string',
+            'total_score' => 'bail|required|numeric',
+            'number_player' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $players = $request['players'];
+        $user_id = $request->user()->only('id')['id'];
+        $room_id = Rooms::create([
+            'PIN' => $request['room_id'],
+            'creator_id' => $user_id,
+            'topic_id' => -1
+        ]);
+        $room_id = $room_id['id'];
+        $report = Reports::create([
+            'name' => 'Chua truyen topic _id',
+            'room_id' => $room_id,
+            'owner_id' => $user_id,
+            'number_player' => $request['number_player']
+        ]);
+        for ($i = 0; $i < count($players); $i++) {
+            $player = $players[$i];
+            $player = Players::create([
+                'name' => $player['name'],
+                'room_id' => $room_id,
+                'report_id' => $report['id'],
+                'total_score' => $player['total_score']
+            ]);
+        }
+    }
 }
