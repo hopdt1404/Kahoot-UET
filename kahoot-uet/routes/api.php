@@ -51,8 +51,9 @@ Route::group([
         });
 
         Route::prefix('room')->group(function () {
-            Route::get('create', 'RoomController@index');
+            Route::post('create', 'RoomController@index');
             Route::patch('lock', 'RoomController@lockRoom');
+            Route::patch('unlock', 'RoomController@unlockRoom');
         });
         Route::prefix('player')->group(function () {
             Route::get('list', 'PlayerController@index');
@@ -61,7 +62,7 @@ Route::group([
         });
 
         Route::prefix('play')->group(function () {
-            Route::get('', 'ReportController@create');
+            Route::post('', 'ReportController@create');
             Route::post('answer', 'ReportPlayerController@create');
             Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
             Route::get('top-five', 'PlayerController@topFiveMaxScore');
@@ -102,7 +103,7 @@ Route::prefix('player')->group(function () {
 });
 
 Route::prefix('play')->group(function () {
-    Route::get('', 'ReportController@createTmp');
+    Route::post('', 'ReportController@createReport');
     Route::post('answer', 'ReportPlayerController@create');
     Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
     Route::get('top-five', 'PlayerController@topFiveMaxScore');

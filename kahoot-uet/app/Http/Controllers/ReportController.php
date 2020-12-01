@@ -87,7 +87,7 @@ class ReportController extends Controller
         ],200);
     }
 
-    public function createTmp (Request $request) {
+    public function createReport (Request $request) {
         $validator = Validator::make($request->all(),[
             'room_id' => 'bail|required|integer',
             'topic_id' => 'bail|required|integer'
@@ -262,6 +262,9 @@ class ReportController extends Controller
                 'message'=>'Bad request'], 400);
         }
         $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        for ($i = 0; $i < count($questions); $i++) {
+            $questions[$i]['answer'] = json_decode($questions[$i]['answer']);
+        }
         $owner_id = $request->user()->only('id');
         $owner_id = $owner_id['id'];
         $number_player = Players::where('room_id', $request['room_id'])->count('name');
