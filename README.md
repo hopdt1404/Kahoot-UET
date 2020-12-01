@@ -2,14 +2,12 @@
 
 ### Run 
  - php artisan migrate:fresh 
- - php artisan db:seed --class=FakeAllDataSeed
- - composer require laravel/passport
- - php artisan migrate
+ - php artisan config:cache
+ - composer require laravel/passport "~9.0"
  - php artisan passport:install
- - composer require maatwebsite/excel:^3.0.1
  - php artisan passport:client --personal
  - php artisan make:middleware CheckApiToken
-
+- composer require maatwebsite/excel:^3.0.1
  
 ### Install Socket
 - Redis 3.2.100: doing 
