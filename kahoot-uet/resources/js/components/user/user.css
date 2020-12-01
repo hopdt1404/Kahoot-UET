@@ -19,6 +19,7 @@
     padding: 0px 16px 4px;
     position: relative;
     line-height: 0.875rem;
+    margin-right: 10px;
 }
 
 .create-button:hover {

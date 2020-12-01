@@ -57,16 +57,16 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link to={"/player1111"}>
+                <Link to={"/player"}>
                     <button type="button" className="create-button">
                         Player
                     </button>
                 </Link>
-                <Link to={"/user"}>
+                {/* <Link to={"/user"}>
                     <button type="button" className="create-button">
-                        Play
+                        Host
                     </button>
-                </Link>
+                </Link> */}
                 <Link to={"/creator"}>
                     <button type="button" className="create-button">
                         Create
@@ -101,7 +101,6 @@ function Header() {
                     </div>
                 </div>
             </nav>
-            {/* <RouterPathHeader /> */}
         </div>
     );
 }

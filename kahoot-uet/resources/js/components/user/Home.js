@@ -11,23 +11,23 @@ export default class Home extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            fullname: "FullName",
+            fullname: "Nguyễn Hữu Huy", 
             username: "username",
             kahootlist: [
-                {   
-                    id: 1,
-                    name_quest: "test1",
-                    num_quest: 1,
-                    num_play: 1,
-                    image: null
-                },
-                {   
-                    id: 2,
-                    name_quest: "test2",
-                    num_quest: 2,
-                    num_play: 2,
-                    image: null
-                }
+                // {   
+                //     id: 1,
+                //     name: "test1",
+                //     number_question: 1,
+                //     is_played: 1,
+                //     image: null
+                // },
+                // {   
+                //     id: 2,
+                //     name: "test2",
+                //     number_question: 2,
+                //     is_played: 2,
+                //     image: null
+                // }
             ],
             reportlist: [
                 {
@@ -49,37 +49,47 @@ export default class Home extends React.Component{
         };
     }
     componentDidMount() {
-        let config = {
+        axios.get('http://127.0.0.1:8000/api/auth/topic', {
             headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem("token")
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
-          }
-        axios
-            .get("localhost:8000/api/home",config)
-            .then(res => {
-                const data = res.data;
-                if (data.fullname) {
-                    this.setState({
-                        fullname: data.fullname
-                    });
-                }
-                if (data.username) {
-                    this.setState({
-                        username: data.username
-                    });
-                }
-                if (data.kahootlist) {
-                    this.setState({
-                        kahootlist: data.kahootlist
-                    });
-                }
-                if (data.reportlist) {
-                    this.setState({
-                        reportlist: data.reportlist
-                    });
-                }
+        })
+        .then(res => {
+            this.setState({
+                kahootlist: res.data.topics
             })
-            .catch(error => console.log(error));
+        })
+        // let config = {
+        //     headers: {
+        //       'Authorization': 'Bearer ' + localStorage.getItem("token")
+        //     }
+        //   }
+        // axios
+        //     .get("localhost:8000/api/home",config)
+        //     .then(res => {
+        //         const data = res.data;
+        //         if (data.fullname) {
+        //             this.setState({
+        //                 fullname: data.fullname
+        //             });
+        //         }
+        //         if (data.username) {
+        //             this.setState({
+        //                 username: data.username
+        //             });
+        //         }
+        //         if (data.kahootlist) {
+        //             this.setState({
+        //                 kahootlist: data.kahootlist
+        //             });
+        //         }
+        //         if (data.reportlist) {
+        //             this.setState({
+        //                 reportlist: data.reportlist
+        //             });
+        //         }
+        //     })
+        //     .catch(error => console.log(error));
     }
     route(id){
         return "/user-reports/detail/"+String(id);
@@ -122,9 +132,9 @@ export default class Home extends React.Component{
                         <div class="home-user-profile">
                             <h3 class="mb-3">Welcome back!</h3> 
                             <span class="home-name">{this.state.fullname}</span>
-                            <span class="home-username">
+                            {/* <span class="home-username">
                                 {this.state.username}
-                            </span>
+                            </span> */}
                         </div>
 
                         <div class="home-kahoot-list mt-5 p-2">
@@ -142,7 +152,7 @@ export default class Home extends React.Component{
                     </div>
                     <div class="col-sm-4 home-kahoot-list">
                         <h2 class="pt-2">My Kahoots</h2>
-                        {this.state.kahootlist.map(each => <KahootList data={each} />)}
+                        {this.state.kahootlist.slice(0, 2).map(each => <KahootList data={each} />)}
                         <div class="home-create-kahoot">
                             <div class="home-create-kahoot-area">
                                 <div class="home-create-kahoot-box">
