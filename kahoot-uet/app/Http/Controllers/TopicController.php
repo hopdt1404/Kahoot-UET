@@ -100,10 +100,10 @@ class TopicController extends Controller
             'title' => 'bail|nullable|string',
             'description' => 'nullable|string',
             'timeLimit' => 'bail|nullable|integer',
-            'point' => 'bail|nullable|integer',
+            'points' => 'bail|nullable|integer',
             'questionType' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE)],
             'answerOption' => ['bail', 'nullable', Rule::in(Questions::$QUESTION_TYPE_SELECT)],
-            'img' => 'string|nullable',
+            'image' => 'string|nullable',
             'questionContent' => 'string|nullable',
         ]);
         if ($validator->fails()) {
@@ -140,12 +140,13 @@ class TopicController extends Controller
                 $question = Questions::create([
                     'sequence' => $question['sequence'] ?? '',
                     'title' => $question['title'] ?? "",
-                    'answer' => $question['answer'],
+                    'answer' => json_encode($question['answers'] ?? ''),
                     'question_type' => $question['question_type'] ?? '',
                     'question_type_select' => $question['question_type_select'] ?? "",
                     'time' => $question['time'] ?? 0,
-                    'score' => $question['score'] ?? 0,
+                    'score' => $question['points'] ?? 0,
                     'number_correct_answer' => $question['number_correct_answer'] ?? 0,
+                    'question_img' => $question['image'],
                     'topic_id' => $question['topic_id']
                 ]);
                 return response()->json([
@@ -162,9 +163,9 @@ class TopicController extends Controller
                     $question = $questions[$i];
                     $question['topic_id'] = $topic['id'];
                     $number_correct_ans = 0;
-                    if (isset($question['ans'])) {
-                        for ($j = 0; $j < count($question['ans']); $j++) {
-                            if ($question['ans'][$j]['correct']) {
+                    if (isset($question['answers'])) {
+                        for ($j = 0; $j < count($question['answers']); $j++) {
+                            if ($question['answers'][$j]['correct']) {
                                 $number_correct_ans++;
                             }
                         }
@@ -175,11 +176,11 @@ class TopicController extends Controller
                         'question_type' => $question['questionType'] ?? '',
                         'question_type_select' => $question['answerOption'] ?? "",
                         'time' => $question['timeLimit'] ?? 0,
-                        'score' => $question['point'] ?? 0,
+                        'score' => $question['points'] ?? 0,
                         'topic_id' => $question['topic_id'],
-                        'question_img' => $question['img'] ?? '',
+                        'question_img' => $question['image'] ?? 'hello',
                         'number_correct_answer' => $number_correct_ans,
-                        'answer' => json_encode($question['ans'] ?? '')
+                        'answer' => json_encode($question['answers'] ?? '')
                     ]);
                     array_push($questionResult, $question);
                 }
