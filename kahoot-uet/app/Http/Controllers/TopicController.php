@@ -169,7 +169,7 @@ class TopicController extends Controller
                             }
                         }
                     }
-                    
+
                     $question = Questions::create([
                         'title' => $question['questionContent'] ?? "",
                         'question_type' => $question['questionType'] ?? '',
