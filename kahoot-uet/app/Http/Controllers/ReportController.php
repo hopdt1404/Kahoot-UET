@@ -22,19 +22,19 @@ class ReportController extends Controller
     */
     public function index (Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'order_by' => Rule::in(Reports::$LIST_ORDER_BY),
-            'order_by_type' => Rule::in(Reports::$ORDER_BY_TYPE),
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'message'=>'Bad request',
-                'error'=>$validator->errors()],400);
-        }
-        $column = $request['order_by'] ?? 'name';
-        $type = $request['order_by_type'] ?? 'desc';
+//        $validator = Validator::make($request->all(), [
+//            'order_by' => Rule::in(Reports::$LIST_ORDER_BY),
+//            'order_by_type' => Rule::in(Reports::$ORDER_BY_TYPE),
+//        ]);
+//        if ($validator->fails()) {
+//            return response()->json([
+//                'message'=>'Bad request',
+//                'error'=>$validator->errors()],400);
+//        }
+//        $column = $request['order_by'] ?? 'name';
+//        $type = $request['order_by_type'] ?? 'desc';
         $owner_id = $request->user()->only('id')['id'];
-        $reports = Reports::select('id', 'name', 'room_id', 'game_mode', 'created_at', 'number_player')->where('owner_id', $owner_id)->orderBy($column, $type)->get();
+        $reports = Reports::select('id', 'name', 'room_id', 'game_mode', 'created_at', 'number_player')->where('owner_id', $owner_id)->get();
         return response()->json([
             'message'=> 'Get all report successfully', 'reports' => $reports
         ],200);
