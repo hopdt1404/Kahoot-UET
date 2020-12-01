@@ -97,7 +97,7 @@ function Start() {
     useEffect(() => {
         const set_timeout = setTimeout(() => {
             setCount(count - 1);
-            if (count < 1) {
+            if (count < 2) {
                 setStage(stage + 1);
                 setCount(3);
             }

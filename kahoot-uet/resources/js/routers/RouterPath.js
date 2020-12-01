@@ -41,8 +41,8 @@ import Landing from "../components/player/Landing";
 /**
  * Test
  */
-import lobby from "../components/player2/lobby";
-import start from "../components/player2/start";
+import lobby from "../components/Player/lobby";
+import start from "../components/Player/start";
 function RouterPath() {
     return (
         <Router>
@@ -71,7 +71,7 @@ function RouterPath() {
                 {/* Player */}
                 <Route path="/pin-player" component={PinInput} />
                 <Route path="/name-player" component={NameInput} />
-                {/* <Route exact path="/player" component={IndexPlayer} /> */}
+                {/* <Route exact path="/playe-r" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
@@ -87,7 +87,7 @@ function RouterPath() {
                 <Route path="/player/ranking" component={Ranking} />
 
                 /* Test */
-                <Route exact path="/player" component={lobby}/>
+                <Route exact path="/player" component={Landing}/>
                 <Route path="/player/:roomId" component={start}/>
                 {/* <Route path */}
                 <Route path="*" component={ErrorPage} />

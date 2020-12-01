@@ -15,7 +15,6 @@ const LOCK_ROOM = "lookRoom";
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
     const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
-    // const [countPlayers, setCountPlayers] = useState(0);
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
@@ -33,16 +32,6 @@ function Lobby() {
             setPlayers(players => [...players, player]);
             console.log(`updated list player`, newPlayer, players);
         });
-        // socketRef.current.on(LOCK_ROOM, isLook => {
-        //     console.log(isLock);
-        //     if (isLock) {
-        //         setIsLock(true);
-        //         console.log("LOCKED");
-        //     } else {
-        //         setIsLock(false);
-        //         console.log("UNLOCKED");
-        //     }
-        // });
 
         return () => {
             socketRef.current.disconnect();

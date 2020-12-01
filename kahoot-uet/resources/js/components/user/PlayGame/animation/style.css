@@ -103,7 +103,7 @@ div.quizAnimation div.signature#square {
     box-shadow: 1px 1px darkgreen;
 }
 
-svg path {
+div.quizAnimation div.signature svg path {
     fill-rule: initial;
-    /* fill:white; */
+    fill:white;
 }
