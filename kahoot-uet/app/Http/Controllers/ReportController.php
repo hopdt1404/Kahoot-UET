@@ -34,7 +34,7 @@ class ReportController extends Controller
 //        $column = $request['order_by'] ?? 'name';
 //        $type = $request['order_by_type'] ?? 'desc';
         $owner_id = $request->user()->only('id')['id'];
-        $reports = Reports::select('id', 'name', 'room_id', 'game_mode', 'created_at', 'number_player')->where('owner_id', $owner_id)->get();
+        $reports = Reports::select('id', 'name', 'created_at', 'number_player')->where('owner_id', $owner_id)->get();
         return response()->json([
             'message'=> 'Get all report successfully', 'reports' => $reports
         ],200);
