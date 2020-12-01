@@ -14,7 +14,7 @@ const LOADING = "loading";
 
 const roomList = [320];
 const lockedList = []; //room
-const playerList = [{ name: "abcs", room: 320 }];
+const playerList = [];
 io.on("connection", socket => {
     // Join a conversation
     const { roomId } = socket.handshake.query;

@@ -54,14 +54,18 @@ import start from "../components/Player/start";
 
 
 //delete
-import Quiz from '../components/user/PlayGame/animation/tof';
+import Quiz from '../components/user/PlayGame/animation/quiz';
 function RouterPath() {
     return (
         <Router>
             <Switch>
                 {/* Host */}
-                <Route exact path="/" component={Quiz} />
-                {/* <Route exact path="/" component={Home} /> */}
+                {/* <Route exact path="/" component={Quiz} /> */}
+
+
+
+
+                <Route exact path="/" component={Home} />
                 <Route exact path="/kahoots" component={Kahoots} />
                 <Route exact path="/user-reports" component={Reports} />
                 <Route exact path="/kahoots/detail/:id" component={Topic} />

@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router";
-import socketIOClient from "socket.io-client";
-
-import LogoLobby from "../../../images/logo_kahoot.png";
+import { useSelector, useDispatch } from "react-redux";
+import { addPlayer } from "../../../actions/fakeList";
 import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
-
+import socketIOClient from "socket.io-client";
+import LogoLobby from "../../../images/logo_kahoot.png";
 import "./playgame.css";
-import { update } from "lodash";
 
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
@@ -16,11 +15,13 @@ const WAIT_TO_START = "waitToStart";
 
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
-    const [pin, setPin] = useState(String(Math.floor(Math.random() * 10000000)));
+    const [pin, setPin] = useState(
+        String(Math.floor(Math.random() * 10000000))
+    );
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
-
+    const dispatch = useDispatch();
     useEffect(() => {
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
             query: { pin }
@@ -30,7 +31,7 @@ function Lobby() {
             if (isSuccess) console.log(`creat new room, ${pin}`);
         });
         socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
-            const player = { name: newPlayer.name, room: newPlayer.room };
+            const player = { name: newPlayer.name, room: newPlayer.room, score: 0, playerId: newPlayer.playerId };
             setPlayers(players => [...players, player]);
             console.log(`updated list player`, newPlayer, players);
         });
@@ -48,10 +49,16 @@ function Lobby() {
             setIsLock(true);
         }
     };
+    const addPlayers = () => {
+        const action = addPlayer(players);
+        console.log("USE_DISPATCH");
+        dispatch(action);
+    };
     const handleStart = () => {
-        socketRef.current.emit(WAIT_TO_START, pin)
+        addPlayers();
+        socketRef.current.emit(WAIT_TO_START, pin);
         setStartGame(true);
-    }
+    };
     return (
         <div className="lobby">
             <div className="header">
@@ -140,7 +147,11 @@ function Lobby() {
                     )}
                 </div>
             </div>
-            {startGame && <Redirect to={{pathname:"/user/start", data: {roomId: pin}}} />}
+            {startGame && (
+                <Redirect
+                    to={{ pathname: "/user/start", data: { roomId: pin } }}
+                />
+            )}
         </div>
     );
 }

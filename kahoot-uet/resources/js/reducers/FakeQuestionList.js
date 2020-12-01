@@ -1,12 +1,13 @@
 const initialState = {
-    list: [
+    topPlayer: [],
+    listPlayer: [],
+    listQuestion: [
         {
             timeLimit: 20,
             points: 1000,
             questionType: "Quiz",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
             questionContent: "1 + 1 = ?",
             answers: [
                 {
@@ -33,7 +34,6 @@ const initialState = {
             questionType: "Quiz",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
             questionContent: "1 x 1 = ?",
             answers: [
                 {
@@ -60,34 +60,51 @@ const initialState = {
             questionType: "True or False",
             answerOption: "Single select",
             image: "",
-            youtubeLink: "",
             questionContent: "1 + 1 = 2",
             answers: [
                 {
-                    answer: "",
+                    answer: "True",
                     correct: true
                 },
                 {
-                    answer: "",
-                    correct: false
-                },
-                {
-                    answer: "",
-                    correct: false
-                },
-                {
-                    answer: "",
+                    answer: "False",
                     correct: false
                 }
             ]
         }
-    ],
+    ]
 };
-  const fakeQuestionList = (state = initialState, action) => {
-      switch(action.type){
-          default:
-              return state;
-      }
-  };
-  
-  export default fakeQuestionList;
+const fakeQuestionList = (state = initialState, action) => {
+    switch (action.type) {
+        case "SET_QUESTION_LIST":{
+            const newList = [...action.payload];
+            return {
+                ...state, listQuestion: newList
+            };
+        }
+        case "ADD_PLAYERS": {
+            const players = [...action.payload];
+            console.log(players);
+            return {
+                ...state, listPlayer: players
+            }
+        }
+        case "UPDATE_PLAYER": {
+            const newListPlayer = [...state.listPlayer];
+            const newPlayer = action.payload;
+            const indexOfPlayer = state.listPlayer.findIndex(player => player.id = newPlayer.id);
+            newListPlayer.splice(indexOfPlayer,1,newPlayer);
+            newListPlayer.sort((p1,p2) => (p1.score < p2.score) ? 1 : ((p2.score < p1.score) ? -1 : 0)); 
+            const newTopPlayer = newListPlayer.slice(0,3);
+            return {
+                ...state,
+                topPlayer: newTopPlayer,
+                listPlayer: newListPlayer
+            }
+        }
+        default:
+            return state;
+    }
+};
+
+export default fakeQuestionList;

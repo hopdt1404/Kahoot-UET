@@ -19,7 +19,6 @@ function LobbyPlayer(props) {
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
             query: { roomId }
         });
-        console.log(socketRef);
         socketRef.current.on(WAIT_TO_START, (started) => {
             console.log(started);
             if(started){

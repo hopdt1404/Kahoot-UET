@@ -47,7 +47,9 @@ const Landing = () => {
         } else {
             socketRef.current.emit(ADD_PLAYER, {
                 name: playerName,
-                room: roomId
+                room: roomId,
+                score: 0,
+                playerId: socketRef.current.id
             });
             console.log("ADD PLAYER", playerName);
         }
