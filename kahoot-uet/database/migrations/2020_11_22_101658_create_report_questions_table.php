@@ -27,6 +27,10 @@ class CreateReportQuestionsTable extends Migration
             $table->boolean('b')->default(0);
             $table->boolean('c')->default(0);
             $table->boolean('d')->default(0);
+            $table->double('avg_time_a', 8, 2)->nullable(true);
+            $table->double('avg_time_b', 8, 2)->nullable(true);
+            $table->double('avg_time_c', 8, 2)->nullable(true);
+            $table->double('avg_time_d', 8, 2)->nullable(true);
             $table->timestamps();
         });
     }
