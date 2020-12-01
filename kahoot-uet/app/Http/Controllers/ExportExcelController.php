@@ -25,7 +25,9 @@ class ExportExcelController extends Controller
 {
     // pass report id,
     public function export(Request $request){
+
         //test final scores
+        /*
         if (!isset($request['report_id'])) {
             $request['report_id'] = 1;
         }
@@ -44,13 +46,16 @@ class ExportExcelController extends Controller
         $report = Reports::where('id', $request['report_id'])->get();
         $report = $report[0];
         $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        */
 
         /*
          * Done final_score_list
         */
+        /*
         $final_scores_list =[
-           "kahoot_name"=> ["Mini Test"]
+           "kahoot_name"=> [$report['name']]
         ];
+        return response()->json([$report]);
         $totalAllPlayerScore = 0;
         $totalCorrectAnswer = 0;
         $totalIncorrectAnswer = 0;
@@ -74,6 +79,7 @@ class ExportExcelController extends Controller
         //test raw report
 
         $reportPlayers = ReportPlayer::where('report_id', $request['report_id'])->limit(1)->get();
+        */
         $raw_report_data_list =[
             ['1 Quiz', 'sdfsdfdsf', 'A', 'B', 'C', 'D','A','20',
             'Hello','A','Correct','1','0','898','898','898','20.50%','4.1'],
@@ -118,6 +124,7 @@ class ExportExcelController extends Controller
         ];
 
         // test overview
+
         $user = User::select('name')->where('id', $report['owner_id'])->get();
         $user = $user[0];
         $numberPlayer = count($reportPlayers);

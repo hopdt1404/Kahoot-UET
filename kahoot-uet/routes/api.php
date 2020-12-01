@@ -73,11 +73,14 @@ Route::group([
             Route::patch('rename', 'ReportController@renameReport');
             Route::get('/detail', 'ReportController@reportDetail');
         });
+
+        Route::get('/export', 'ExportExcelController@export');
     });
+
 
 });
 
-Route::get('/summary', 'ReportQuestionController@summary');
+
 
 Route::prefix('topic')->group(function () {
     Route::get('', 'TopicController@index');
