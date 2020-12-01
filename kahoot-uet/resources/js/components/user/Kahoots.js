@@ -1,12 +1,10 @@
 import React from 'react';
 import "./Kahoots/Kahoots.css";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Person, Star,Search ,Tools, StarFill} from 'react-bootstrap-icons';
 import Header from './Header';
 import fake_image from "../../images/reports-logo.png";
-
-import { useDispatch } from 'react-redux';
 
 export default class Kahoots extends React.Component{
     constructor(props){
@@ -32,13 +30,6 @@ export default class Kahoots extends React.Component{
         this.onResetBtnClick = this.onResetBtnClick.bind(this);
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
     }
-
-    const mapDispatchToProps = () => {
-        return {
-          increment, decrement
-      
-        };
-      };
 
     componentDidMount(){
         axios.get('http://127.0.0.1:8000/api/auth/topic', {
@@ -312,7 +303,12 @@ export default class Kahoots extends React.Component{
                             {/* <button class="btn btn-primary">
                                 <Link to="/user" class="kahoots-play-text">Play</Link>
                             </button> */}
-                            <Link to="/user" class="kahoots-play-text">
+                            {/* <Redirect to={{pathname:`/user/${data.id}`}} class="kahoots-play-text">
+                                <button class="btn btn-primary">
+                                    Play
+                                </button>
+                            </Redirect> */}
+                            <Link to={`/user/${data.id}`} className="kahoots-play-text">
                                 <button class="btn btn-primary">
                                     Play
                                 </button>

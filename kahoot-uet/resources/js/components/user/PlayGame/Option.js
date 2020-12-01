@@ -9,9 +9,12 @@ import { Link } from "react-router-dom";
 //import component
 import Lobby from "./Lobby";
 
-function Option() {
+function Option(props) {
     const [gameMode, setGameMode] = useState("");
 
+    const id_topic = props.match.params.id_topic;
+    // const name_topic = props.location.data.nameTopic;
+    const name_topic = "haha"
     function handleClassicMode() {
         setGameMode("classic");
         console.log("classic mode: ", gameMode);
@@ -30,7 +33,7 @@ function Option() {
                 </div>
                 <div className="option-game">
                     <div className="option-name-topic">
-                        <div className="option-name-topic-text">Name Topic</div>
+                        <div className="option-name-topic-text">{name_topic}</div>
                     </div>
                     <div className="option-mode-game">
                         <div className="classic-mode style-mode">
@@ -43,7 +46,7 @@ function Option() {
                                 <p>Player vs Player</p>
                             </div>
                             {/* must edit */}
-                            <Link to="/user/lobby">
+                            <Link to={`/user/lobby/${id_topic}`}>
                                 <button className="mode-button green-button">
                                     Classic
                                 </button>
@@ -57,7 +60,7 @@ function Option() {
                             />
                             <div className="mode-text">Team vs Team</div>
                             {/* must edit */}
-                            <Link to="/user/lobby">
+                            <Link to={`/user/lobby/${id_topic}`}>
                                 <button className="mode-button blue-button">
                                     Team mode
                                 </button>

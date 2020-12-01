@@ -65,13 +65,10 @@ function RouterPath() {
                 <Route path="/settings" component={Settings} />
                 <Route path="/auth/login" component={Login} />
                 {/* In Game - erroring */}
-                <Route exact path="/user" component={OptionGame} />
-                <Route path="/user/lobby" component={Lobby} />
+                <Route exact path={`/user/:id_topic`} component={OptionGame} />
+                <Route path={`/user/lobby/:id_topic`} component={Lobby} />
                 <Route exact path="/user/start" component={Start} />
                 {/* Player */}
-                <Route path="/pin-player" component={PinInput} />
-                <Route path="/name-player" component={NameInput} />
-                {/* <Route exact path="/player" component={IndexPlayer} /> */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
