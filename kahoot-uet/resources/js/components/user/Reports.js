@@ -17,19 +17,19 @@ function route(id) {
     return "user-reports/detail/" + String(id);
 }
 function Reports() {
-    let config = {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem("token")
-        }
-      }
-    const [data, setData] = useState(DataReport);
-    axios.get("httlp://localhost:3000/api/user-reports",config)
-    .then(res => {
-        const getData = res.data;
-        if (getData.reportList){
-            setData(getData.reportList);
-        }
-    })
+    // let config = {
+    //     headers: {
+    //       'Authorization': 'Bearer ' + localStorage.getItem("token")
+    //     }
+    //   }
+    // const [data, setData] = useState(DataReport);
+    // axios.get("httlp://localhost:3000/api/user-reports",config)
+    // .then(res => {
+    //     const getData = res.data;
+    //     if (getData.reportList){
+    //         setData(getData.reportList);
+    //     }
+    // })
     const [curpage, setCurpage] = useState(1);
     const perpage = 4;
     const totalpage = Math.ceil(data.length / perpage);

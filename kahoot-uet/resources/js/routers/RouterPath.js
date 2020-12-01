@@ -87,7 +87,7 @@ function RouterPath() {
                 <Route path="/player/ranking" component={Ranking} />
 
                 /* Test */
-                <Route exact path="/player1111" component={lobby}/>
+                <Route exact path="/player" component={lobby}/>
                 <Route path="/player/:roomId" component={start}/>
                 {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
