@@ -1,14 +1,16 @@
 const server = require("http").createServer();
 const io = require("socket.io")(server, {
-    cors: { origin: "*", methods: ["GET", "POST"] }
+    cors: { origin: '*' }
 });
 const PORT = 4000;
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
-const VALIDATE_ROOM = "validatRoom";
+const VALIDATE_ROOM = "validateRoom";
 const ADD_PLAYER = "addPlayer";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
+const WAIT_TO_START = "waitToStart";
+const LOADING = "loading";
 
 const roomList = [320];
 const lockedList = []; //room
@@ -77,6 +79,26 @@ io.on("connection", socket => {
             console.log(lockedList);
         }
     })
+    // Listen to start game
+    socket.on(WAIT_TO_START, roomId => {
+        socket.in(roomId).emit(WAIT_TO_START, true);
+    })
+
+    // Listen for loading
+    socket.on(LOADING, (roomId) => {
+        console.log("LOADING");
+        socket.in(roomId).emit(LOADING, true);
+    });
+
+
+
+
+
+
+
+
+
+
     // Leave the room if the user closes the socket
     socket.on("disconnect", () => {
         socket.leave(roomId);

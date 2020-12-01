@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import IndexPlayer from "./IndexPlayer";
 
-function GetReadyPlayer() {
+function GetReadyPlayer(props) {
+    const player = props.location.data.player;
+    const roomId = props.location.data.roomId;
     const [counter, setCounter] = useState(5);
     const [labelCounter, setLabelCounter] = useState("");
 
@@ -33,7 +35,7 @@ function GetReadyPlayer() {
 
     return (
         <div>
-            <IndexPlayer />
+            <IndexPlayer roomId={roomId} player={player} />
             <div className="lobby-main get-ready-main">
                 <div className="text-1">Question 1</div>
                 <div className="get-ready-countdown">

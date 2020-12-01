@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 import { Link, Redirect } from "react-router-dom";
 import { setAnswer } from "../../actions/list";
 const SOCKET_SERVER_URL = "http://localhost:4000";
-const VALIDATE_ROOM = "validatRoom";
+const VALIDATE_ROOM = "validateRoom";
 const ADD_PLAYER = "addPlayer";
 // import "./Home.css";
 
@@ -60,7 +60,7 @@ const Landing = () => {
                     <div className="play-logo">
                         <img src={Logo} width="300px" height="100px" />
                     </div>
-                    <form className="play-form">
+                    <div className="play-form">
                         <input style={{border:invalidRoomId?"red solid":"white solid"}}
                             type="number"
                             placeholder="Game PIN"
@@ -75,14 +75,14 @@ const Landing = () => {
                         >
                             Enter
                         </button>
-                    </form>
+                    </div>
                 </div>
             ) : (
                 <div className="animation-color play">
                     <div className="play-logo">
                         <img src={Logo} width="300px" height="100px" />
                     </div>
-                    <form className="play-form">
+                    <div className="play-form">
                         <input
                             type="text"
                             className="play-input"
@@ -99,10 +99,10 @@ const Landing = () => {
                             Ok, Go!
                         </button>
                         {/* </Link> */}
-                    </form>
+                    </div>
                 </div>
             )}
-            {isSuccess && <Redirect to={`/player/${roomId}`}></Redirect>}
+            {isSuccess && <Redirect to={{pathname:`/player/lobby/${roomId}`, data: {player: playerName}}}></Redirect>}
         </div>
     );
 };

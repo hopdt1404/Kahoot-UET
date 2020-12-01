@@ -12,9 +12,11 @@ const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
+const WAIT_TO_START = "waitToStart";
+
 function Lobby() {
     const [isLock, setIsLock] = useState(false);
-    const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
+    const [pin, setPin] = useState(String(Math.floor(Math.random() * 10000000)));
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
@@ -46,7 +48,10 @@ function Lobby() {
             setIsLock(true);
         }
     };
-
+    const handleStart = () => {
+        socketRef.current.emit(WAIT_TO_START, pin)
+        setStartGame(true);
+    }
     return (
         <div className="lobby">
             <div className="header">
@@ -105,8 +110,8 @@ function Lobby() {
                                 className="button-lock button-start"
                                 disabled={players.length == 0 ? true : false}
                                 onClick={() => {
-                                    setStartGame(true);
-                                    console.log(startGame.toString());
+                                    handleStart();
+                                    // console.log(startGame.toString());
                                 }}
                                 // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
                             >
@@ -135,7 +140,7 @@ function Lobby() {
                     )}
                 </div>
             </div>
-            {startGame && <Redirect to="/user/start" />}
+            {startGame && <Redirect to={{pathname:"/user/start", data: {roomId: pin}}} />}
         </div>
     );
 }

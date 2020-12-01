@@ -67,12 +67,13 @@ function RouterPath() {
                 {/* In Game - erroring */}
                 <Route exact path="/user" component={OptionGame} />
                 <Route path="/user/lobby" component={Lobby} />
-                <Route exact path="/user/start" component={Start} />
+                <Route path="/user/start" component={Start} />
+                <Route path="/user/gameblock" component={GameBlock} />  
                 {/* Player */}
                 <Route path="/pin-player" component={PinInput} />
                 <Route path="/name-player" component={NameInput} />
                 {/* <Route exact path="/playe-r" component={IndexPlayer} /> */}
-                <Route path="/player/lobby" exact component={LobbyPlayer} />
+                <Route path="/player/lobby/:roomId" component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
                 <Route path="/player/gameblock" component={GameBlock} />

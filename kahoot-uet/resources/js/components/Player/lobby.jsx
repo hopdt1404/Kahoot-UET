@@ -67,9 +67,7 @@ const Lobby = () => {
                 />
             )}
             <button onClick={() => handleSubmit()}>Join</button>
-            {/* <Link to={`/player/${roomId}`} className="enter-room-button">
-                Join room
-            </Link> */}
+
             {isSuccess && <Redirect to={`/player/${roomId}`}></Redirect>}
         </div>
     );
