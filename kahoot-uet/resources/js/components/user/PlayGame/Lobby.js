@@ -8,6 +8,10 @@ import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
 import "./playgame.css";
 import { update } from "lodash";
 import Axios from "axios";
+import {
+    getQuestionsOfTopic
+} from '../../../actions/list';
+import { useDispatch, useSelector } from "react-redux";
 
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
@@ -20,14 +24,13 @@ function Lobby(props) {
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
-    //huy add
-    const [listQuestions, setListQuestions] = useState([]);
 
+    const dispatch = useDispatch();
     //get id_topic 
     const id_topic = props.match.params.id_topic;
+    // global state getQuestion.questions include all questions of your topic
 
     useEffect(() => {
-
         Axios.get('http://127.0.0.1:8000/api/auth/topic/detail', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -36,22 +39,24 @@ function Lobby(props) {
                 "topic_id": id_topic
             }
         }).then((res) => {
-            setListQuestions(res.data.questionList);
-            // console.log(res.data);
+            dispatch(getQuestionsOfTopic(res.data.questionList))
+            console.log(res.data.questionList);
         })
+    }, []);
 
-        // socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-        //     query: { pin }
-        // });
-        // socketRef.current.emit(ADD_NEW_ROOM, pin);
-        // socketRef.current.on(ADD_NEW_ROOM, isSuccess => {
-        //     if (isSuccess) console.log(`creat new room, ${pin}`);
-        // });
-        // socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
-        //     const player = { name: newPlayer.name, room: newPlayer.room };
-        //     setPlayers(players => [...players, player]);
-        //     console.log(`updated list player`, newPlayer, players);
-        // });
+    useEffect(() => {
+        socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+            query: { pin }
+        });
+        socketRef.current.emit(ADD_NEW_ROOM, pin);
+        socketRef.current.on(ADD_NEW_ROOM, isSuccess => {
+            if (isSuccess) console.log(`creat new room, ${pin}`);
+        });
+        socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
+            const player = { name: newPlayer.name, room: newPlayer.room };
+            setPlayers(players => [...players, player]);
+            console.log(`updated list player`, newPlayer, players);
+        });
 
 
         // socketRef.current.on(LOCK_ROOM, isLook => {
@@ -71,14 +76,12 @@ function Lobby(props) {
     }, [pin]);
 
     const handleLockRoom = () => {
-        // socketRef.current.emit(LOCK_ROOM, pin);
+        socketRef.current.emit(LOCK_ROOM, pin);
         if (isLock == true) {
             setIsLock(false);
         } else if (isLock == false) {
             setIsLock(true);
         }
-
-        console.log(listQuestions);
     };
 
     return (

@@ -7,6 +7,7 @@ const SOCKET_SERVER_URL = "http://localhost:4000";
 const VALIDATE_ROOM = "validatRoom";
 const ADD_PLAYER = "addPlayer";
 import Logo from "../.././images/logo_kahoot.png";
+import { useSelector } from 'react-redux';
 
 const Lobby = () => {
     const [roomId, setRoomId] = React.useState("");
@@ -14,6 +15,9 @@ const Lobby = () => {
     const [isSuccess, setIsSuccess] = React.useState(false);
     const [accept, setAccept] = React.useState(false);
     const socketRef = useRef();
+
+    const test = useSelector((state) => state.getQuestion.questions)
+    console.log(test);
 
     useEffect(() => {
         // Creates a WebSocket connection

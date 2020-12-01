@@ -13,22 +13,7 @@ export default class Home extends React.Component{
         this.state = {
             fullname: "Nguyễn Hữu Huy", 
             username: "username",
-            kahootlist: [
-                // {   
-                //     id: 1,
-                //     name: "test1",
-                //     number_question: 1,
-                //     is_played: 1,
-                //     image: null
-                // },
-                // {   
-                //     id: 2,
-                //     name: "test2",
-                //     number_question: 2,
-                //     is_played: 2,
-                //     image: null
-                // }
-            ],
+            kahootlist: [],
             reportlist: [
                 {
                     id:1,
@@ -96,12 +81,12 @@ export default class Home extends React.Component{
     }
     render() {
         // Bao gio xong het thi them
-        // if (!localStorage.getItem("token")){
-        //     window.alert("Ban chưa dăng nhập");
-        //     return(
-        //         <Redirect to="/auth/login" />
-        //     )
-        // }
+        if (!localStorage.getItem("token")){
+            // window.alert("Ban chưa dăng nhập");
+            return(
+                <Redirect to="/auth/login" />
+            )
+        }
         const reportShow = this.state.reportlist.map((data,index)=> {
             return(
                 <div class = "container mt-2 mb-2">

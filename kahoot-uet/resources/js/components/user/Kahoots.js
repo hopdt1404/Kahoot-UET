@@ -5,6 +5,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {Person, Star,Search ,Tools, StarFill} from 'react-bootstrap-icons';
 import Header from './Header';
 import fake_image from "../../images/reports-logo.png";
+import my_kahoot from "../../images/my_kahoot.png";
 
 export default class Kahoots extends React.Component{
     constructor(props){
@@ -243,15 +244,21 @@ export default class Kahoots extends React.Component{
             })
     }
 
+    // getNameTopic(id, name) {
+    //     <Redirect to={{
+    //         pathname: `/user/${id}`, 
+    //         data: {nameTopic: name}}} 
+    //     />
+    // }
 
     render(){
         // Bao gio xong het thi them vao
-        // if (!localStorage.getItem("token")){
-        //     window.alert("Ban chưa dăng nhập");
-        //     return(
-        //         <Redirect to="/auth/login" />
-        //     )
-        // }
+        if (!localStorage.getItem("token")){
+            // window.alert("Ban chưa dăng nhập");
+            return(
+                <Redirect to="/auth/login" />
+            )
+        }
         const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
         const firstrend= lastrend - perpage;
@@ -274,7 +281,7 @@ export default class Kahoots extends React.Component{
             
             return (
                 <div class="kahoots-kahoot-box row">
-                    <Link to={this.route(data.id)} class="kahoots-image-box" style={{backgroundImage:'url('+fake_image+')'}}>
+                    <Link to={{ pathname: `/kahoots/detail/${data.id}`, data: {nameTopic: data.name}}} class="kahoots-image-box" style={{backgroundImage:'url('+my_kahoot+')'}}>
                         <img src={data.image} style={{position:"absolute",zIndex:"-1"}} />
                         <div class="kahoots-num-quest">
                             <span class="kahoots-num-quest-text"> {data.number_question} Q </span>
@@ -283,7 +290,7 @@ export default class Kahoots extends React.Component{
                     <div class="kahoots-quest-info flex-fill">
                         <div class = "kahoots-quest-name">
                             <div class="kahoots-quest-name-area">
-                                <Link to={this.route(data.id)} class="kahoots-quest-name-text">{data.name}</Link>
+                                <Link to={{ pathname: `/kahoots/detail/${data.id}`, data: {nameTopic: data.name}}} class="kahoots-quest-name-text">{data.name}</Link>
                             </div>
                             {fav}
                         </div>
@@ -300,35 +307,19 @@ export default class Kahoots extends React.Component{
                             </div>
                         </div>
                         <div class="kahoots-play-box">
-                            {/* <button class="btn btn-primary">
-                                <Link to="/user" class="kahoots-play-text">Play</Link>
-                            </button> */}
-                            {/* <Redirect to={{pathname:`/user/${data.id}`}} class="kahoots-play-text">
-                                <button class="btn btn-primary">
-                                    Play
-                                </button>
-                            </Redirect> */}
-                            <Link to={`/user/${data.id}`} className="kahoots-play-text">
-                                <button class="btn btn-primary">
+                            <Link to={{ pathname: `/user/${data.id}`, data: {nameTopic: data.name}}} className="kahoots-play-text">
+                                <button class="btn btn-primary" >
                                     Play
                                 </button>
                             </Link>
-                            <div>
-                                {/* <button class="btn btn-info">
-                                    <Link to="#" class="kahoots-play-text">Rename</Link>
-                                </button> */}
-                                {/* <button class="btn btn-danger" onClick={() => this.handleDeleteTopic(data.id)}>
-                                    <Link to="/kahoots" class="kahoots-play-text">Delete</Link>
-                                </button> */}
-                                <Link to="/kahoots" class="kahoots-play-text">
-                                    <button class="btn btn-danger" onClick={() => this.handleDeleteTopic(data.id)}>
-                                        Delete
-                                    </button>
-                                </Link>
-                            </div>
+                            <Link to="/kahoots" class="kahoots-play-text">
+                                <button class="btn btn-danger" onClick={() => this.handleDeleteTopic(data.id)}>
+                                    Delete
+                                </button>
+                            </Link>
+                        </div>
                         </div>
                     </div>
-                </div>
             )}
         );
         const totalpage = Math.ceil(select.length / perpage);       
@@ -384,11 +375,11 @@ export default class Kahoots extends React.Component{
                         <div class="kahoots-main-content">
                             <div class="kahoots-search-area">
                                 <div class="kahoots-search-box">
-                                    <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
-                                    <button class="kahoots-search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
+                                    <input type="text" placeholder="Search..." ref="searchinput" style={{width:'40vmin', height: '5vmin'}}/>
+                                    <button class="btn btn-dark kahoots-search-button" style={{height:"5vmin", width:'5vmin', margin:'1vmin'}} onClick ={this.onSearchBtnClick}>
                                         <Search color="white"/>
                                     </button>
-                                    <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
+                                    <button class="btn btn-success" style={{height:"5vmin", width:'15vmin'}} onClick ={this.onResetBtnClick}> Clear Search </button>
                                 </div>
                                 <div class="kahoots-sort row">
                                     <div class="kahoots-kahoots-text-area">

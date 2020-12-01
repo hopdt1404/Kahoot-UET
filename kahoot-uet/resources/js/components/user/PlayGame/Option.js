@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./playgame.css";
 import OptionImg from "../../../images/option_img.svg";
 import ClassicMode from "../../../images/option-single-mode.svg";
@@ -11,10 +11,13 @@ import Lobby from "./Lobby";
 
 function Option(props) {
     const [gameMode, setGameMode] = useState("");
+    const [isStart, setIsStart] = useState(false);
 
     const id_topic = props.match.params.id_topic;
-    // const name_topic = props.location.data.nameTopic;
-    const name_topic = "haha"
+    const name_topic = props.location.data.nameTopic;
+    console.log(name_topic);
+
+
     function handleClassicMode() {
         setGameMode("classic");
         console.log("classic mode: ", gameMode);
