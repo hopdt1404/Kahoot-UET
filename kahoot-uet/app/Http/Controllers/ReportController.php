@@ -144,13 +144,15 @@ class ReportController extends Controller
                 'error'=>$validator->errors()],400);
         }
         $user = User::select('id', 'name')->where('id', $request->user()->only('id')['id'])->get()[0];
-        $report = Reports::where([
+        $report = Reports::select('id', 'name', 'room_id' ,'number_player', 'number_question', 'created_at')->where([
             'id' => $request['report_id'],
             'owner_id' => $user['id']
         ])->get();
+
         if (count($report) != 1) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+                ], 400);
         }
         $report = $report[0];
         $hostedBy = $user['name'];
@@ -163,7 +165,18 @@ class ReportController extends Controller
             'creator_id' => $user['id']
         ])->get();
         $topic_id = $topic_id[0]['topic_id'];
-        $questions = Questions::where('topic_id', $topic_id)->get();
+        $questions = Questions::select('title', 'question_type', 'score', 'time') ->where('topic_id', $topic_id)->get();
+        $temp = [];
+        for ($i = 0; $i <count($questions); $i++) {
+
+            $question['name'] = $questions[$i]['title'];
+            $question['type'] = $questions[$i]['question_type'];
+            $question['score'] = $questions[$i]['score'];
+            $question['time'] = $questions[$i]['time'];
+            array_push($temp, $question);
+        }
+        $questions = $temp;
+
         $report['number_question'] = count($questions);
 
         // Done to here
@@ -223,14 +236,15 @@ class ReportController extends Controller
 //
 //
 //        // Get number player
-//        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
-//        $report['number_player'] = count($players);
-//        //
+        $players = Players::select('id','name', 'total_score')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        for ($i = 0; $i < count($players); $i++) {
+            $players[$i]['rank'] = $i + 1;
+        }
         return response()->json([
             'message' => "Get report detail success",
             'summary' => $report,
-//            'players' => $players,
-//            'questions' => $questions,
+            'players' => $players,
+            'questions' => $questions,
 //            'not_finish' => $notFinish,
 //            'need_help' => $needHelp,
 //            'different_questions' => $differentQuestion
