@@ -53,7 +53,7 @@ function Start(props) {
     return (
         <div
             className="start"
-            style={{ backgroundColor: stage > 2 && "#ff0000a8" }}
+            // style={{ backgroundColor: stage > 2 && "#ff0000a8" }}
         >
             {stage < 3 && (
                 <div className="layout">
@@ -65,11 +65,7 @@ function Start(props) {
                     </svg>
                 </div>
             )}
-            {/* {stage>2&&<div className="layout">
-                <div className="currentQuestion">
-                  {`${stage-2} of ${questionList.length}`}
-                </div>
-            </div>} */}
+            
             <div className="animation">
                 {stage == 1 && <div className="test_name">{testName}</div>}
                 {stage == 2 && <Countdown count={count} />}
