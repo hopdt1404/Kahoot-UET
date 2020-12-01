@@ -17,6 +17,7 @@ import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
 import Start from "../components/user/PlayGame/Start"
 import ErrorPage from "../components/error/ErrorPage";
+import GameBlockController from "../components/user/PlayGame/GameBlock";
 // import Fake from "../components/user/PlayGame/Fake";
 
 //player
@@ -106,7 +107,9 @@ function RouterPath() {
 
                 /* Test */
                 <Route exact path="/player" component={Landing}/>
-                <Route path="/player/:roomId" component={start}/>
+                <Route exact path="/user/controller/gameblock" component={GameBlockController}/>
+                
+                {/* <Route path="/player/:roomId" component={start}/> */}
                 {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
 

@@ -11,6 +11,7 @@ const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
 const WAIT_TO_START = "waitToStart";
 const LOADING = "loading";
+const SHOW_OPTION = "showOption";
 
 const roomList = [320];
 const lockedList = []; //room
@@ -90,7 +91,11 @@ io.on("connection", socket => {
         socket.in(roomId).emit(LOADING, true);
     });
 
-
+    // Listen to show answer option
+    socket.on(SHOW_OPTION,(room,show)=>{
+        console.log(room,show);
+        socket.in(room).emit(SHOW_OPTION, show==1);
+    })
 
 
 

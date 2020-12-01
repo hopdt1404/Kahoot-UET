@@ -16,3 +16,10 @@ export const updatePlayer = (player) => {
     payload: player,
   };
 };
+
+export const changeQuestion = (number) => {
+  return {
+    type: "CHANGE_QUESTION",
+    payload: number,
+  };
+};

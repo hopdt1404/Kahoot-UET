@@ -22,9 +22,9 @@ function Start(props) {
             query: { roomId }
         });
 
-        socketRef.current.on(LOADING, (loaded) => {
-            if(loaded) setIsLoaded(true);
-        });
+        // socketRef.current.on(LOADING, (loaded) => {
+        //     if(loaded) setIsLoaded(true);
+        // });
 
         return () => {
             socketRef.current.disconnect();
@@ -47,8 +47,8 @@ function Start(props) {
         };
     }, [count]);
     const handleRedirect = () => {
-        // setIsLoaded(true);
         socketRef.current.emit(LOADING, roomId);
+        setIsLoaded(true);
     };
     return (
         <div
@@ -73,8 +73,8 @@ function Start(props) {
                 {isLoaded && (
                     <Redirect
                         to={{
-                            pathname: "/player/gameblock",
-                            data: { roomId: roomId , player: player }
+                            pathname: "/user/controller/gameblock",
+                            data: { roomId: roomId , stage: "loading"}
                         }}
                     />
                 )}

@@ -1,30 +1,52 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Circle, DiamondFill, Square, Triangle } from "react-bootstrap-icons";
 import "./style.css";
-
-Quiz.propTypes = {};
-
+import socketIOClient from "socket.io-client";
+import { Redirect } from "react-router";
+const SHOW_OPTION = "showOption";
 function Quiz(props) {
-    const [bgColor, setBgColor] = useState("#ff0000a8");
+    const [redirect, setRedirect] = useState(false);
+    const socketRef = useRef();
+    const roomId = props.roomId;
+    console.log(roomId);
+    useEffect(() => {
+        socketRef.current = socketIOClient("http://localhost:4000", {
+            query: { roomId }
+        });
+        socketRef.current.on(SHOW_OPTION, (show) => {
+            setRedirect(show);
+        });
+
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, []);
     return (
         <div
             style={{
-                backgroundColor: bgColor,
+                backgroundColor: "#ff0000a8",
                 width: "100vw",
                 height: "100vh"
             }}
         >
+            {redirect && (
+                <Redirect
+                    to={{
+                        pathname: "/user/controller/gameblock",
+                        data: { roomId: roomId, stage: "showQuestion" }
+                    }}
+                />
+            )}
             {
                 <div className="layout">
                     <div className="currentQuestion">
-                        2 of 3
-                        {/* {`${props.indexNumber} of ${props.length}`} */}
+                        {`${props.orderNumber} of ${props.length}`}
                     </div>
                 </div>
             }
             <div className="qBlock">
-                <div className="animation">
+                <div className="animation-tkt">
                     <div className="quizShadow">
                         <div className="quizAnimation">
                             <div className="signature" id="triangle">
@@ -45,7 +67,7 @@ function Quiz(props) {
                 </div>
             </div>
             <div className="qBlock2">
-                <div className="question">This is a question</div>
+                <div className="question">{props.question}</div>
             </div>
             <div className="loading-tkt"></div>
         </div>

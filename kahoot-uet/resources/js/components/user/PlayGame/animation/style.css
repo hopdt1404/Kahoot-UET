@@ -94,7 +94,7 @@ div.qBlock {
         transform: translate(0, -50%) scale(0.5);
     }
 }
-div.qBlock div.animation {
+div.qBlock div.animation-tkt {
     width: 100vw;
     display: flex;
     flex-direction: row;

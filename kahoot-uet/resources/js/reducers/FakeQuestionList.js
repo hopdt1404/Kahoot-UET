@@ -1,4 +1,5 @@
 const initialState = {
+    currentQuestion: 0,
     topPlayer: [],
     listPlayer: [],
     listQuestion: [
@@ -100,6 +101,11 @@ const fakeQuestionList = (state = initialState, action) => {
                 ...state,
                 topPlayer: newTopPlayer,
                 listPlayer: newListPlayer
+            }
+        }
+        case "CHANGE_QUESTION":{
+            return {
+                ...state, currentQuestion: action.payload
             }
         }
         default:

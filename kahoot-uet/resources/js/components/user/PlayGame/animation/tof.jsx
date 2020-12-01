@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Circle, DiamondFill, Square, Triangle } from "react-bootstrap-icons";
+import { DiamondFill, Triangle } from "react-bootstrap-icons";
 import "./style.css";
 
 function TrueFalse(props) {
@@ -22,7 +22,7 @@ function TrueFalse(props) {
                 </div>
             }
             <div className="qBlock">
-                <div className="animation">
+                <div className="animation-tkt">
                     <div className="quizShadow">
                         <div className="quizAnimation">
                             <div className="signature" id="triangle">

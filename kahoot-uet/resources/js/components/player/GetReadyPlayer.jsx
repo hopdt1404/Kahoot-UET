@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import IndexPlayer from "./IndexPlayer";
-
+import socketIOClient from "socket.io-client";
+const SHOW_OPTION = "showOption";
 function GetReadyPlayer(props) {
     const player = props.location.data.player;
     const roomId = props.location.data.roomId;
     const [counter, setCounter] = useState(5);
     const [labelCounter, setLabelCounter] = useState("");
-
+    const socketRef = useRef();
+    useEffect(() => {
+        socketRef.current = socketIOClient("http://localhost:4000", {
+            query: { roomId }
+        });
+        socketRef.current.emit(SHOW_OPTION, roomId, counter);
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, [counter]);
     useEffect(() => {
         counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
     }, [counter]);
@@ -25,9 +35,10 @@ function GetReadyPlayer(props) {
             case 2:
                 setLabelCounter("Set...");
                 break;
-            case 1:
+            case 1: {
                 setLabelCounter("Go!");
                 break;
+            }
             default:
                 break;
         }
