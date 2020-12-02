@@ -62,11 +62,6 @@ function Header() {
                         Player
                     </button>
                 </Link>
-                <Link to={"/test1111"}>
-                    <button type="button" className="create-button">
-                        Test
-                    </button>
-                </Link>
                 <Link to={"/creator"}>
                     <button type="button" className="create-button">
                         Create

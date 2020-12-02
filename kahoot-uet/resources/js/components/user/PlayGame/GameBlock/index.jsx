@@ -109,10 +109,11 @@ function GameBlock(props) {
         socketRef.current.emit("nextQuestion", roomId);
         setIsShowResult(false);
         dispatch(action);
-        
+
     };
     return (
         <div>
+            {currentQuestion > questionList.length && <Redirect to="/player/ranking"/>}
             {stage == "loading" &&
                 questionList[currentQuestion].questionType == "Quiz" && (
                     <Quiz

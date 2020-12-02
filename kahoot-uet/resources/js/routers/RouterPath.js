@@ -105,7 +105,7 @@ function RouterPath() {
                     path="/player/answer/result"
                     component={AnswerResultPlayer}
                 />
-                <Route path="/test1111" component={Ranking} />
+                <Route path="/player/ranking" component={Ranking} />
 
                 /* Test */
                 <Route exact path="/player" component={Landing}/>
