@@ -36,7 +36,8 @@ function Reports() {
     .then(res => {
         const getData = res.data;
         if (getData.reports){
-            setData(getData.reports.sort(sortrecent));
+            let alldata = getData.reports.sort(sortrecent);
+            setData(alldata);
         }
     })
     
@@ -111,53 +112,53 @@ function Reports() {
             );
         }
 
-//         if (curpage !== 1) {
-//             prevpagebtn = (
-//                 <li class="page-item">
-//                     <button
-//                         class="page-link"
-//                         href="#"
-//                         onClick={() => setCurpage(curpage - 1)}
-//                     >
-//                         {curpage - 1}
-//                     </button>
-//                 </li>
-//             );
-//         }
+        if (curpage !== 1) {
+            prevpagebtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(curpage - 1)}
+                    >
+                        {curpage - 1}
+                    </button>
+                </li>
+            );
+        }
 
-//         if (curpage !== totalpage) {
-//             lastbtn = (
-//                 <li class="page-item">
-//                     <button
-//                         class="page-link"
-//                         href="#"
-//                         onClick={() => setCurpage(totalpage)}
-//                     >
-//                         Last Page
-//                     </button>
-//                 </li>
-//             );
-//         }
+        if (curpage !== totalpage) {
+            lastbtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(totalpage)}
+                    >
+                        Last Page
+                    </button>
+                </li>
+            );
+        }
 
-//         if (curpage !== totalpage) {
-//             nextpagebtn = (
-//                 <li class="page-item">
-//                     <button
-//                         class="page-link"
-//                         href="#"
-//                         onClick={() => setCurpage(curpage + 1)}
-//                     >
-//                         {curpage + 1}
-//                     </button>
-//                 </li>
-//             );
-//         }
-//         curpagebtn = (
-//             <li class="page-item active" id="cur">
-//                 <button class="page-link">{curpage}</button>
-//             </li>
-//         );
-//     }
+        if (curpage !== totalpage) {
+            nextpagebtn = (
+                <li class="page-item">
+                    <button
+                        class="page-link"
+                        href="#"
+                        onClick={() => setCurpage(curpage + 1)}
+                    >
+                        {curpage + 1}
+                    </button>
+                </li>
+            );
+        }
+        curpagebtn = (
+            <li class="page-item active" id="cur">
+                <button class="page-link">{curpage}</button>
+            </li>
+        );
+    }
 
     const rendtable = rend.map((each, index) => {
         return (
@@ -339,4 +340,4 @@ function Reports() {
     );
 }
 
-// export default Reports;
+export default Reports;
