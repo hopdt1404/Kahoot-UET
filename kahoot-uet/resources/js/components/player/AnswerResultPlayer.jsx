@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-
+import React, { useState , useRef, useEffect} from "react";
+import socketIOClient from "socket.io-client";
 import { Check2All, DashCircle, X } from "react-bootstrap-icons";
 import IndexPlayer from "./IndexPlayer";
-
+import {Redirect} from "react-router-dom";
 function AnswerResultPlayer(props) {
     const isCorrect = props.location.data.isCorrect;
     const question = props.location.data.question;
@@ -18,9 +18,30 @@ function AnswerResultPlayer(props) {
         "Great try!",
         "頑張れ。。。"
     ];
+    const [isNext, setIsNext] = useState(false);
+    const socketRef = useRef();
 
+    useEffect(() => {
+        socketRef.current = socketIOClient("http://localhost:4000", {
+            query: { roomId }
+        });
+        socketRef.current.on("nextQuestion", (data) => {
+            setIsNext(true);
+        })
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, []);
     return (
         <div>
+            {isNext && (
+                <Redirect
+                    to={{
+                        pathname: "/player/getready",
+                        data: { roomId: roomId, player: player, id: playerId, score: score }
+                    }}
+                ></Redirect>
+            )}
             <IndexPlayer roomId={roomId}
                 player={player}
                 length={length}

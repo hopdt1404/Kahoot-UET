@@ -112,8 +112,11 @@ io.on("connection", socket => {
         socket.in(roomId).emit("skipQuestion",true);
     })
 
-
-
+    // Listen for next question
+    socket.on("nextQuestion", (data) => {
+        socket.in(data).emit("nextQuestion", data)
+    })
+    
 
 
     // Leave the room if the user closes the socket
