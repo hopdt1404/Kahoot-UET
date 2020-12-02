@@ -19,7 +19,8 @@ class QuestionsController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+            'error' => $validator->errors()], 400);
         }
 
         $exitTopic = Topics::where('id', $request['topic_id'])->count();
@@ -31,12 +32,12 @@ class QuestionsController extends Controller
         $result = [];
         for ($i = 0; $i < count($questions); $i++) {
             $question['timeLimit'] = $questions[$i]['time'];
-            $question['point'] = $questions[$i]['score'];
+            $question['points'] = $questions[$i]['score'];
             $question['questionType'] = $questions[$i]['question_type'];
             $question['answerOption'] = $questions[$i]['question_type_select'];
-            $question['img'] = $questions[$i]['question_img'];
+            $question['image'] = $questions[$i]['question_img'];
             $question['questionContent'] = $questions[$i]['title'];
-            $question['ans'] = json_decode($questions[$i]['answer']);
+            $question['answers'] = json_decode($questions[$i]['answer']);
             array_push($result, $question);
 
         }

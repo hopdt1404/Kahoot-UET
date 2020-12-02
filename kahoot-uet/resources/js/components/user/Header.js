@@ -62,9 +62,9 @@ function Header() {
                         Player
                     </button>
                 </Link>
-                <Link to={"/user"}>
+                <Link to={"/test1111"}>
                     <button type="button" className="create-button">
-                        Play
+                        Test
                     </button>
                 </Link>
                 <Link to={"/creator"}>
@@ -101,7 +101,6 @@ function Header() {
                     </div>
                 </div>
             </nav>
-            {/* <RouterPathHeader /> */}
         </div>
     );
 }

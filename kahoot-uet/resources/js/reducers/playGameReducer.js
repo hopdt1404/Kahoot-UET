@@ -1,5 +1,5 @@
 const initialState = {
-    quiz: {},
+    quiz: [],
     nickname: '',
     selectedPin: 0,
 };

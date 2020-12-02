@@ -69,7 +69,7 @@ function RouterPath() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/kahoots" component={Kahoots} />
                 <Route exact path="/user-reports" component={Reports} />
-                <Route exact path="/kahoots/detail/:id" component={Topic} />
+                <Route exact path="/kahoots/detail/:id_topic" component={Topic} />
                 <Route exact path="/user-reports/detail/:id" component={ReportDetail} />
                 <Route exact path="/creator" component={Creator} />
                 <Route path="/auth/login" component={Login} />
@@ -83,9 +83,11 @@ function RouterPath() {
                 <Route path="/settings" component={Settings} />
                 <Route path="/auth/login" component={Login} />
                 {/* In Game - erroring */}
-                <Route exact path="/user" component={OptionGame} />
-                <Route path="/user/lobby" component={Lobby} />
-                <Route path="/user/start" component={Start} />
+                <Route exact path={`/user/:id_topic`} component={OptionGame} />
+                <Route path={`/user/lobby/:id_topic`} component={Lobby} />
+                <Route exact path="/user/start" component={Start} />
+                {/* Player */}
+                <Route path="/player/lobby" exact component={LobbyPlayer} />
                 <Route path="/user/gameblock" component={GameBlock} />  
                 {/* Player */}
                 <Route path="/pin-player" component={PinInput} />
@@ -103,7 +105,7 @@ function RouterPath() {
                     path="/player/answer/result"
                     component={AnswerResultPlayer}
                 />
-                <Route path="/player/ranking" component={Ranking} />
+                <Route path="/test1111" component={Ranking} />
 
                 /* Test */
                 <Route exact path="/player" component={Landing}/>
@@ -112,11 +114,6 @@ function RouterPath() {
                 {/* <Route path="/player/:roomId" component={start}/> */}
                 {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
-
-               
-
-
-
             </Switch>
         </Router>
     );

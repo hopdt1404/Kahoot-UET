@@ -79,20 +79,6 @@ export const setQuestionContent = (content, orderNumber) => {
 
 //play game
 
-// export const setPin = (pin) => {
-//     return {
-//         type: "SELECTED_PIN",
-//         payload: {pin}
-//     }
-// }
-
-// export const setNickname = (nickname) => {
-//     return {
-//         type: "NICKNAME",
-//         payload: {nickname}
-//     }
-// }
-
 export function selectedQuiz(quiz) {
     return {
         type: 'SELECTED_QUIZ',
@@ -109,5 +95,13 @@ export function handlePin(pin) {
     return {
         type: 'SELECTED_PIN',
         payload: pin
+    }
+}
+
+// get data then click play game
+export function getQuestionsOfTopic(topic_id) {
+    return {
+        type: "GET_QUESTIONS_TOPIC",
+        payload: topic_id
     }
 }

@@ -6,6 +6,11 @@ import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
 import socketIOClient from "socket.io-client";
 import LogoLobby from "../../../images/logo_kahoot.png";
 import "./playgame.css";
+import { update } from "lodash";
+import Axios from "axios";
+import {
+    setQuestionList
+} from '../../../actions/fakeList';
 
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
@@ -13,7 +18,7 @@ const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
 const WAIT_TO_START = "waitToStart";
 
-function Lobby() {
+function Lobby(props) {
     const [isLock, setIsLock] = useState(false);
     const [pin, setPin] = useState(
         String(Math.floor(Math.random() * 10000000))
@@ -21,7 +26,26 @@ function Lobby() {
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
+
     const dispatch = useDispatch();
+    //get id_topic 
+    const id_topic = props.match.params.id_topic;
+    // global state getQuestion.questions include all questions of your topic
+
+    useEffect(() => {
+        Axios.get('http://127.0.0.1:8000/api/auth/topic/detail', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            params: {
+                "topic_id": id_topic
+            }
+        }).then((res) => {
+            dispatch(setQuestionList(res.data.questionList))
+            // console.log(res.data.questionList);
+        })
+    }, []);
+
     useEffect(() => {
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
             query: { pin }
@@ -40,6 +64,9 @@ function Lobby() {
             socketRef.current.disconnect();
         };
     }, [pin]);
+
+    const test = useSelector((state) => state.fake.listQuestion);
+    console.log(test);
 
     const handleLockRoom = () => {
         socketRef.current.emit(LOCK_ROOM, pin);

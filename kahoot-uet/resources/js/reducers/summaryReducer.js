@@ -1,8 +1,6 @@
 const initialState = {
     title: "",
-    description: "",
-    saveLocation: "",
-    coverImage: null,
+    description: ""
   };
   const summaryReducer = (state = initialState, action) => {
       switch(action.type){

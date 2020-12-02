@@ -13,3 +13,11 @@ require('./bootstrap');
  */
 
 require('./index');
+
+Echo.channel('chat')
+  .listen('message', (e) => {
+    this.messages.push({
+      message: e.message.message,
+      user: e.user
+    });
+  });

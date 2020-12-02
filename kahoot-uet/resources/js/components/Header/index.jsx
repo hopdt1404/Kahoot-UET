@@ -73,7 +73,7 @@ function Header() {
                     >
                         Exit
                     </button>
-                    <Link to="/">
+                    <Link to="/kahoots">
                     <button
                         onClick={() => {
                             handleSubmit();

@@ -6,7 +6,8 @@ import { setAnswer } from "../../actions/list";
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const VALIDATE_ROOM = "validatRoom";
 const ADD_PLAYER = "addPlayer";
-// import "./Home.css";
+import Logo from "../.././images/logo_kahoot.png";
+import { useSelector } from 'react-redux';
 
 const Lobby = () => {
     const [roomId, setRoomId] = React.useState("");
@@ -14,6 +15,9 @@ const Lobby = () => {
     const [isSuccess, setIsSuccess] = React.useState(false);
     const [accept, setAccept] = React.useState(false);
     const socketRef = useRef();
+
+    const test = useSelector((state) => state.getQuestion.questions)
+    console.log(test);
 
     useEffect(() => {
         // Creates a WebSocket connection
@@ -38,11 +42,14 @@ const Lobby = () => {
         }
     };
     const handleSubmit = () => {
-        if(!accept){
+        if (!accept) {
             socketRef.current.emit(VALIDATE_ROOM, roomId);
             console.log("VALIDATE ROOM", roomId);
-        }else{
-            socketRef.current.emit(ADD_PLAYER, {name:playerName,room:roomId});
+        } else {
+            socketRef.current.emit(ADD_PLAYER, {
+                name: playerName,
+                room: roomId
+            });
             console.log("ADD PLAYER", playerName);
         }
     };
@@ -56,6 +63,15 @@ const Lobby = () => {
                     onChange={handleChange}
                     className="text-input-field"
                 />
+                // <div className="animation-color play">
+                //         <div className="play-logo">
+                //             <img src={Logo} width="300px" height="100px" />
+                //         </div>
+                //         <form className="play-form">
+                //             <input type="text" value={roomId} placeholder="Game PIN" className="play-input" onChange={handleChange}></input>
+                //             <button type="submit" className="play-submit" onClick={() => handleSubmit()}>Enter</button>
+                //         </form>
+                // </div>
             )}
             {accept && (
                 <input
@@ -65,6 +81,17 @@ const Lobby = () => {
                     onChange={handleChange}
                     className="text-input-field"
                 />
+                // <div className="animation-color play">
+                //     <div className="play-logo">
+                //         <img src={Logo} width="300px" height="100px" />
+                //     </div>
+                //     <form className="play-form">
+                //         <input type="text" value={playerName} placeholder="Your Name" className="play-input" onChange={handleChange}></input>
+                //         <Link to="/player/lobby">
+                //             <button type="submit" className="play-submit" onClick={() => handleSubmit()}>Ok, Go!</button>
+                //         </Link>
+                //     </form>
+                // </div>
             )}
             <button onClick={() => handleSubmit()}>Join</button>
 

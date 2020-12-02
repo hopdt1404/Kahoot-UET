@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./playgame.css";
 import OptionImg from "../../../images/option_img.svg";
 import ClassicMode from "../../../images/option-single-mode.svg";
@@ -9,8 +9,14 @@ import { Link } from "react-router-dom";
 //import component
 import Lobby from "./Lobby";
 
-function Option() {
+function Option(props) {
     const [gameMode, setGameMode] = useState("");
+    const [isStart, setIsStart] = useState(false);
+
+    const id_topic = props.match.params.id_topic;
+    const name_topic = props.location.data.nameTopic;
+    console.log(name_topic);
+
 
     function handleClassicMode() {
         setGameMode("classic");
@@ -30,7 +36,7 @@ function Option() {
                 </div>
                 <div className="option-game">
                     <div className="option-name-topic">
-                        <div className="option-name-topic-text">Name Topic</div>
+                        <div className="option-name-topic-text">{name_topic}</div>
                     </div>
                     <div className="option-mode-game">
                         <div className="classic-mode style-mode">
@@ -43,7 +49,7 @@ function Option() {
                                 <p>Player vs Player</p>
                             </div>
                             {/* must edit */}
-                            <Link to="/user/lobby">
+                            <Link to={`/user/lobby/${id_topic}`}>
                                 <button className="mode-button green-button">
                                     Classic
                                 </button>
@@ -57,7 +63,7 @@ function Option() {
                             />
                             <div className="mode-text">Team vs Team</div>
                             {/* must edit */}
-                            <Link to="/user/lobby">
+                            <Link to={`/user/lobby/${id_topic}`}>
                                 <button className="mode-button blue-button">
                                     Team mode
                                 </button>

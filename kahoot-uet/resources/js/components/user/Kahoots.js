@@ -1,89 +1,18 @@
 import React from 'react';
 import "./Kahoots/Kahoots.css";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Person, Star,Search ,Tools, StarFill} from 'react-bootstrap-icons';
 import Header from './Header';
 import fake_image from "../../images/reports-logo.png";
+import my_kahoot from "../../images/my_kahoot.png";
 
 export default class Kahoots extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            kahootlist:[
-                {   
-                    id:1,
-                    name: "test1",
-                    numquest: 1,
-                    numplay: 1,
-                    isPuclic: false,
-                    isFavorite: false,
-                    time: "2018-10-16 07:16:04",
-                    image:null
-                    
-                },
-                {
-                    id:2,
-                    name: "test3",
-                    numquest: 10,
-                    numplay: 3,
-                    isPuclic: true,
-                    isFavorite: false,
-                    time: "2016-03-12 03:14:58",
-                    image:null
-                },
-                {
-                    id:3,
-                    name: "test4",
-                    numquest: 4,
-                    numplay: 5,
-                    isPuclic: false,
-                    isFavorite: true,
-                    time: "2019-05-27 10:28:22",
-                    image:null
-                },
-                {
-                    id:4,
-                    name: "test2",
-                    numquest: 4,
-                    numplay: 5,
-                    isPuclic: true,
-                    isFavorite: true,
-                    time: "2019-07-31 01:26:37",
-                    image:null
-                },
-                {
-                    id:5,
-                    name: "test5",
-                    numquest: 4,
-                    numplay: 5,
-                    isPuclic: true,
-                    isFavorite: true,
-                    time: "2015-03-11 04:24:18",
-                    image:null
-                },
-                {
-                    id:7,
-                    name: "test7",
-                    numquest: 4,
-                    numplay: 5,
-                    isPuclic: true,
-                    isFavorite: false, 
-                    time: "2020-05-29 12:11:28",
-                    image:null
-                },
-                {
-                    id:6,
-                    name: "test6",
-                    numquest: 4,
-                    numplay: 5,
-                    isPuclic: true,
-                    isFavorite: true,
-                    time: "2015-05-10 08:28:50",
-                    image:null
-                }
-            ],
-            select:[{}],
+            kahootlist:[],
+            select:[],
             curpage:1,
             perpage:3,
             search:"",
@@ -102,29 +31,28 @@ export default class Kahoots extends React.Component{
         this.onResetBtnClick = this.onResetBtnClick.bind(this);
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
     }
+
     componentDidMount(){
-        let config = {
+        axios.get('http://127.0.0.1:8000/api/auth/topic', {
             headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem("token")
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
-          }
-        axios.get('http://localhost:3000/api/kahoots',config)
+        })
         .then(res => {
-            const data = res.data;
-            if (data.kahootlist){
-                this.setState({
-                    kahootlist: data.kahootlist
-                });
-            }
-        }
-        )
-        .catch(error => console.log(error));
-        this.setState(
-           {kahootlist: this.state.kahootlist.sort(this.sortrecent),
-            select : this.state.kahootlist,
-            sort:"Recent"
-           }
-        )
+            const data = res.data.topics;
+            this.setState({
+                kahootlist: data
+            })
+        })
+        .then((res) => {
+            this.setState(
+                {kahootlist: this.state.kahootlist.sort(this.sortrecent),
+                    select : this.state.kahootlist,
+                    sort:"Recent"
+                }
+            )
+        })
+        .catch(error => console.log(error))
         this.menuselect("mykahoots")
     }
     menuselect(select){
@@ -193,7 +121,7 @@ export default class Kahoots extends React.Component{
     onFavoriteClick(){
         let arr = [];
         for (let topic of this.state.kahootlist){
-            if (topic.isFavorite) {
+            if (topic.is_daft === 1) {
                 arr.push(topic);
             }
         }
@@ -236,8 +164,8 @@ export default class Kahoots extends React.Component{
         this.sortselect("Recent");
     }
     sortrecent(a,b){ // return newest
-        let x = Date.parse(a.time);
-        let y = Date.parse(b.time);
+        let x = Date.parse(a.created_at);
+        let y = Date.parse(b.created_at);
         return ( y-x );
     }
     sortname(a,b){ // return a->z
@@ -261,7 +189,7 @@ export default class Kahoots extends React.Component{
         while (newKahootlist[check].id != id){
             check+= 1
         }
-        newKahootlist[check].isFavorite = false;
+        newKahootlist[check].is_daft = 0;
         this.setState({
             kahootlist:newKahootlist
         })
@@ -277,33 +205,74 @@ export default class Kahoots extends React.Component{
         while (newKahootlist[check].id != id){
             check+= 1
         }
-        newKahootlist[check].isFavorite = true;
+        newKahootlist[check].is_daft = 1;
         this.setState({
             kahootlist:newKahootlist
         })
     }
+
+    handleDeleteTopic(id) {
+        alert("Are you sure delete this topic?");
+        axios.post('http://127.0.0.1:8000/api/auth/topic/delete', {
+            topic_id: id
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+        })
+        // .then(console.log("deleted: " + id))
+        .catch((error) => {console.log(error)})
+
+        axios.get('http://127.0.0.1:8000/api/auth/topic', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                }
+            })
+            .then(res => {
+                const data = res.data.topics;
+                this.setState({
+                    kahootlist: data
+                })
+            })
+            .then((res) => {
+                this.setState(
+                    {kahootlist: this.state.kahootlist.sort(this.sortrecent),
+                        select : this.state.kahootlist,
+                        sort:"Recent"
+                    }
+                )
+            })
+    }
+
+    // getNameTopic(id, name) {
+    //     <Redirect to={{
+    //         pathname: `/user/${id}`, 
+    //         data: {nameTopic: name}}} 
+    //     />
+    // }
+
     render(){
         // Bao gio xong het thi them vao
-        // if (!localStorage.getItem("token")){
-        //     window.alert("Ban chưa dăng nhập");
-        //     return(
-        //         <Redirect to="/auth/login" />
-        //     )
-        // }
+        if (!localStorage.getItem("token")){
+            // window.alert("Ban chưa dăng nhập");
+            return(
+                <Redirect to="/auth/login" />
+            )
+        }
         const {select,curpage,perpage,sort} = this.state;
         const lastrend = curpage * perpage;
         const firstrend= lastrend - perpage;
         const rend = select.slice(firstrend,lastrend);
         const topic=rend.map((data,index) => {
             let public_text = null;
-            if (data.isPuclic === true) {
+            if (data.is_public === 1) {
                 public_text = "Public";
             }
             else {
                 public_text = "Private";
             }
             let fav = null;
-            if (data.isFavorite === true) {
+            if (data.is_daft === 1) {
                 fav = <StarFill color="orange" size="40px" onClick={() => this.favoriteOff(data.id)}/>
             }
             else {
@@ -312,16 +281,16 @@ export default class Kahoots extends React.Component{
             
             return (
                 <div class="kahoots-kahoot-box row">
-                    <Link to={this.route(data.id)} class="kahoots-image-box" style={{backgroundImage:'url('+fake_image+')'}}>
+                    <Link to={{ pathname: `/kahoots/detail/${data.id}`, data: {nameTopic: data.name}}} class="kahoots-image-box" style={{backgroundImage:'url('+my_kahoot+')'}}>
                         <img src={data.image} style={{position:"absolute",zIndex:"-1"}} />
                         <div class="kahoots-num-quest">
-                            <span class="kahoots-num-quest-text"> {data.numquest} Q </span>
+                            <span class="kahoots-num-quest-text"> {data.number_question} Q </span>
                         </div>
                     </Link>
                     <div class="kahoots-quest-info flex-fill">
                         <div class = "kahoots-quest-name">
                             <div class="kahoots-quest-name-area">
-                                <Link to={this.route(data.id)} class="kahoots-quest-name-text">{data.name}</Link>
+                                <Link to={{ pathname: `/kahoots/detail/${data.id}`, data: {nameTopic: data.name}}} class="kahoots-quest-name-text">{data.name}</Link>
                             </div>
                             {fav}
                         </div>
@@ -331,27 +300,26 @@ export default class Kahoots extends React.Component{
                             </div>
                             <div class="kahoots-num-play-area ">
                                 <div class= "kahoots-time-play">
-                                    <span class="kahoots-time-text">{data.time} {'-'}</span>
-                                    <span class= "kahoots-num-play-text">{data.numplay} Play{'('}s{')'}</span>
+                                    <span class="kahoots-time-text">{data.created_at} {'-'}</span>
+                                    <span class= "kahoots-num-play-text">{data.is_played} Play{'('}s{')'}</span>
                                 </div>
                                     
                             </div>
                         </div>
                         <div class="kahoots-play-box">
-                            <button class="btn btn-primary">
-                                <Link to="#" class="kahoots-play-text">Play</Link>
-                            </button>
-                            <div>
-                                <button class="btn btn-info">
-                                <Link to="#" class="kahoots-play-text">Rename</Link>
+                            <Link to={{ pathname: `/user/${data.id}`, data: {nameTopic: data.name}}} className="kahoots-play-text">
+                                <button class="btn btn-primary" >
+                                    Play
                                 </button>
-                                <button class="btn btn-danger">
-                                    <Link to="#" class="kahoots-play-text">Delete</Link>
-                                    </button>
-                            </div>
+                            </Link>
+                            <Link to="/kahoots" class="kahoots-play-text">
+                                <button class="btn btn-danger" onClick={() => this.handleDeleteTopic(data.id)}>
+                                    Delete
+                                </button>
+                            </Link>
+                        </div>
                         </div>
                     </div>
-                </div>
             )}
         );
         const totalpage = Math.ceil(select.length / perpage);       
@@ -407,11 +375,11 @@ export default class Kahoots extends React.Component{
                         <div class="kahoots-main-content">
                             <div class="kahoots-search-area">
                                 <div class="kahoots-search-box">
-                                    <input type="text" placeholder="Search..." ref="searchinput" style={{width:'500px'}}/>
-                                    <button class="kahoots-search-button" style={{background:'green'}} onClick ={this.onSearchBtnClick}>
+                                    <input type="text" placeholder="Search..." ref="searchinput" style={{width:'40vmin', height: '5vmin'}}/>
+                                    <button class="btn btn-dark kahoots-search-button" style={{height:"5vmin", width:'5vmin', margin:'1vmin'}} onClick ={this.onSearchBtnClick}>
                                         <Search color="white"/>
                                     </button>
-                                    <button class="btn btn-success" onClick ={this.onResetBtnClick}> Clear Search </button>
+                                    <button class="btn btn-success" style={{height:"5vmin", width:'15vmin'}} onClick ={this.onResetBtnClick}> Clear Search </button>
                                 </div>
                                 <div class="kahoots-sort row">
                                     <div class="kahoots-kahoots-text-area">
@@ -451,3 +419,75 @@ export default class Kahoots extends React.Component{
         )
     }
 }
+
+// {   
+//     id:10,
+//     name: "test1",
+//     number_question: 1,
+//     is_played: 1,
+//     is_public: 0,
+//     is_daft: 0,
+//     created_at: "2018-10-16T07:16:04.000000Z",
+//     // image:null
+    
+// },
+// {
+//     id:11,
+//     name: "test3",
+//     number_question: 10,
+//     is_played: 3,
+//     is_public: 1,
+//     is_daft: 0,
+//     created_at: "2016-03-12T03:14:58.000000Z",
+//     // image:null
+// },
+// {
+//     id:12,
+//     name: "test4",
+//     number_question: 3,
+//     is_played: 5,
+//     is_public: 0,
+//     is_daft: 1,
+//     created_at: "2019-05-27T10:28:22.000000Z",
+//     // image:null
+// },
+// {
+//     id:13,
+//     name: "test2",
+//     number_question: 2,
+//     is_played: 5,
+//     is_public: 1,
+//     is_daft: 1,
+//     created_at: "2019-07-31T01:26:37.000000Z",
+//     // image:null
+// },
+// {
+//     id:14,
+//     name: "test5",
+//     number_question: 7,
+//     is_played: 5,
+//     is_public: 1,
+//     is_daft: 1,
+//     created_at: "2015-03-11T04:24:18.000000Z",
+//     // image:null
+// },
+// {
+//     id:15,
+//     name: "test7",
+//     number_question: 6,
+//     is_played: 5,
+//     is_public: 1,
+//     is_daft: 0, 
+//     created_at: "2020-05-29T12:11:28.000000Z",
+//     // image:null
+// },
+// {
+//     id:16,
+//     name: "test6",
+//     number_question: 4,
+//     is_played: 5,
+//     is_public: 1,
+//     is_daft: 1,
+//     created_at: "2015-05-10T08:28:50.000000Z",
+//     // image:null
+// }
