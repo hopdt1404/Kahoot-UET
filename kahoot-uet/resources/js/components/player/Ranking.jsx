@@ -1,6 +1,21 @@
-import React from 'react';
+import Axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function Ranking() {
+
+    const dataPlayer = useSelector((state) => state.fake.listPlayer);
+    const topic_id = useSelector((state) => state.fake.topic_id);
+
+    useEffect(() => {
+        Axios.post("http://127.0.0.1:8000/api/auth/play-done", {
+            dataPlayer, topic_id
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+        })
+    },[])
 
     const test = [
         {

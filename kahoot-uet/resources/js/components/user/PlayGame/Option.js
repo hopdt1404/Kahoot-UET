@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 
 //import component
 import Lobby from "./Lobby";
+import { useDispatch } from "react-redux";
+import {
+    getTopicId
+} from '../../../actions/fakeList';
 
 function Option(props) {
     const [gameMode, setGameMode] = useState("");
@@ -16,6 +20,11 @@ function Option(props) {
     const id_topic = props.match.params.id_topic;
     const name_topic = props.location.data.nameTopic;
     console.log(name_topic);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getTopicId(id_topic))
+    })
 
 
     function handleClassicMode() {
