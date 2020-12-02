@@ -13,6 +13,7 @@ const Landing = () => {
     const [roomId, setRoomId] = React.useState("");
     const [invalidRoomId, setInvalidRoomId] = React.useState(false);
     const [playerName, setPlayerName] = React.useState("");
+    const [playerId, setPlayerId] = React.useState("");
     const [isSuccess, setIsSuccess] = React.useState(false);
     const [accept, setAccept] = React.useState(false);
     const socketRef = useRef();
@@ -45,6 +46,7 @@ const Landing = () => {
             socketRef.current.emit(VALIDATE_ROOM, roomId);
             console.log("VALIDATE ROOM", roomId);
         } else {
+            setPlayerId(socketRef.current.id);
             socketRef.current.emit(ADD_PLAYER, {
                 name: playerName,
                 room: roomId,
@@ -104,7 +106,7 @@ const Landing = () => {
                     </div>
                 </div>
             )}
-            {isSuccess && <Redirect to={{pathname:`/player/lobby/${roomId}`, data: {player: playerName}}}></Redirect>}
+            {isSuccess && <Redirect to={{pathname:`/player/lobby/${roomId}`, data: {player: playerName, id: playerId }}}></Redirect>}
         </div>
     );
 };

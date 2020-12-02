@@ -69,3 +69,24 @@ div.showQuestion-tkt .time {
 div.showQuestion-tkt .media {
     max-height: 50vh;
 }
+div.showQuestion-tkt div.handle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 35vh;
+}
+div.showQuestion-tkt div.handle button.skip {
+    width: 20rem;
+    height: 10rem;
+    border-radius: 14px;
+    font-size: 35px;
+    font-weight: bold;
+}
+div.showQuestion-tkt div.handle .numberOA {
+    color: white;
+    font-size: 70px;
+    word-break: break-word;
+    font-weight: bold;
+    width: 20rem;
+    text-align: center;
+}

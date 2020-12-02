@@ -42,7 +42,7 @@ function LobbyPlayer(props) {
                 <h1 className="text-1">You're in!</h1>
                 <h3 className="text-2">See you nickname on screen?</h3>
             </div>
-            { isStarted && <Redirect to={{pathname:`/player/start`,data: {player: player,roomId: roomId}}}></Redirect>}
+            { isStarted && <Redirect to={{pathname:`/player/start`,data: {player: player,roomId: roomId, id: props.location.data.id}}}></Redirect>}
             {/* { isStarted && <Redirect to={`/player/${roomId}`}></Redirect>} */}
         </div>
     );

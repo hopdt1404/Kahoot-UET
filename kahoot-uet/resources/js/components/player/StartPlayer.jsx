@@ -7,6 +7,7 @@ const LOADING = "loading";
 function StartPlayer(props) {
     const player = props.location.data.player;
     const roomId = props.location.data.roomId;
+    const playerId = props.location.data.id;
     const [isLoaded, setIsLoaded] = useState(false);
     const socketRef = useRef();
     useEffect(() => {
@@ -29,7 +30,7 @@ function StartPlayer(props) {
                 <Redirect
                     to={{
                         pathname: "/player/getready",
-                        data: { roomId: roomId, player: player }
+                        data: { roomId: roomId, player: player, id: playerId, score: 0 }
                     }}
                 ></Redirect>
             )}

@@ -102,8 +102,15 @@ io.on("connection", socket => {
         console.log(question, roomId, length, orderNumber);
         socket.in(roomId).emit(SEND_QUESTION, question, roomId, length, orderNumber);
     })
-
-
+    // Listen for send score
+    socket.on("sendScore",(roomId, playerId, score, numberOfAmswer) => {
+        console.log(roomId, playerId, score, numberOfAmswer);
+        socket.in(String(roomId)).emit("sendScore",roomId, playerId, score, numberOfAmswer);
+    }); 
+    // Listen for skip
+    socket.on("skipQuestion",(roomId) => {
+        socket.in(roomId).emit("skipQuestion",true);
+    })
 
 
 

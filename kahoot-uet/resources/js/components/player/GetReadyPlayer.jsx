@@ -8,6 +8,8 @@ const SHOW_OPTION = "showOption";
 function GetReadyPlayer(props) {
     const player = props.location.data.player;
     const roomId = props.location.data.roomId;
+    const score = props.location.data.score;
+    const playerId = props.location.data.id;
     const [counter, setCounter] = useState(5);
     const [labelCounter, setLabelCounter] = useState("");
     const socketRef = useRef();
@@ -69,7 +71,10 @@ function GetReadyPlayer(props) {
                             question: question,
                             orderNumber: orderNumber,
                             length: length,
-                            roomId: roomId
+                            roomId: roomId,
+                            id: playerId,
+                            score: score,
+                            player: player
                         }
                     }}
                 />
@@ -79,9 +84,10 @@ function GetReadyPlayer(props) {
                 player={player}
                 length={length}
                 indexNumber={orderNumber}
+                score={score}
             />
             <div className="lobby-main get-ready-main">
-                <div className="text-1">Question 1</div>
+                <div className="text-1">{`Question ${orderNumber}`}</div>
                 <div className="get-ready-countdown">
                     <div className="counter">{counter}</div>
                 </div>

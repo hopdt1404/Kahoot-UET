@@ -51,7 +51,6 @@ function Lobby() {
     };
     const addPlayers = () => {
         const action = addPlayer(players);
-        console.log("USE_DISPATCH");
         dispatch(action);
     };
     const handleStart = () => {

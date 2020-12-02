@@ -10,10 +10,10 @@ export const addPlayer = (players) => {
     payload: players,
   };
 };
-export const updatePlayer = (player) => {
+export const updatePlayer = (id, score) => {
   return {
     type: "UPDATE_PLAYER",
-    payload: player,
+    payload: {id: id, score: score},
   };
 };
 

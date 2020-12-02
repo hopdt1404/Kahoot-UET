@@ -42,8 +42,21 @@ function GameBlock(props) {
         "#d8d800",
         "green"
     ];
+    const handleUpdatePlayer = (id, score) => {
+        const action = updatePlayer(id, score);
+        dispatch(action);
+    };
     useEffect(() => {
-        socketRef.current = socketIOClient(SOCKET_SERVER_URL);
+        socketRef.current = socketIOClient("http://localhost:4000", {
+            query: { roomId }
+        });
+        socketRef.current.on(
+            "sendScore",
+            (roomId, playerId, score, numberOfAnswer) => {
+                setNumberOA(numberOA+1);
+                handleUpdatePlayer(playerId,score);
+            }
+        );
         return () => {
             socketRef.current.disconnect();
         };
@@ -52,34 +65,46 @@ function GameBlock(props) {
         const setTimeOut = setTimeout(() => {
             setTimeLimit(timeLimit - 1);
         }, 1000);
+        if (timeLimit < 1) {
+            clearTimeout(setTimeOut);
+            socketRef.current.emit("skipQuestion",roomId);
+        }
         return () => {
             clearTimeout(setTimeOut);
         };
     }, [timeLimit]);
     const handleChangeQuestion = () => {
-        console.log("CLICKKKKKKK");
         const action = changeQuestion(currentQuestion + 1);
+        socketRef.current.emit("skipQuestion",roomId);
         dispatch(action);
     };
     return (
         <div>
-            {stage == "loading" && (
-                <Quiz
-                    roomId={roomId}
-                    orderNumber={currentQuestion + 1}
-                    length={questionList.length}
-                    question={questionList[currentQuestion]}
-                />
-            )}
+            {stage == "loading" &&
+                questionList[currentQuestion].questionType == "Quiz" && (
+                    <Quiz
+                        roomId={roomId}
+                        orderNumber={currentQuestion + 1}
+                        length={questionList.length}
+                        question={questionList[currentQuestion]}
+                    />
+                )}
+            {stage == "loading" &&
+                questionList[currentQuestion].questionType != "Quiz" && (
+                    <TrueFalse
+                        roomId={roomId}
+                        orderNumber={currentQuestion + 1}
+                        length={questionList.length}
+                        question={questionList[currentQuestion]}
+                    />
+                )}
             {stage == "showQuestion" && (
                 <div className="showQuestion-tkt">
                     <div className="title">
                         {questionList[currentQuestion].questionContent}
                     </div>
                     <div className="body">
-                        <div className="time">
-                            {questionList[currentQuestion].timeLimit}
-                        </div>
+                        <div className="time">{timeLimit}</div>
                         <div className="media">
                             <img
                                 className="previewImage"
@@ -91,9 +116,16 @@ function GameBlock(props) {
                             />
                         </div>
                         <div className="handle">
-                            <button className="skip">Skip</button>
+                            <button
+                                onClick={() => {
+                                    handleChangeQuestion();
+                                }}
+                                className="skip"
+                            >
+                                Skip
+                            </button>
                             <div className="numberOA">
-                                {`${numberOA} Answer`}
+                                {`${numberOA} Answers`}
                             </div>
                         </div>
                     </div>
