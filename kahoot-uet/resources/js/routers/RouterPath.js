@@ -26,10 +26,6 @@ import PinInput from "../components/player/PinInput";
 import NameInput from "../components/player/NameInput";
 import IndexPlayer from "../components/player/IndexPlayer";
 
-<<<<<<< HEAD
-=======
-import Fake from "../components/user/Fake";
->>>>>>> d33fd84d3bfd26ae6a9ea481bb46abe62257b645
 
 import LobbyPlayer from "../components/player/LobbyPlayer";
 import StartPlayer from "../components/player/StartPlayer";
@@ -42,7 +38,6 @@ import GameBlock from "../components/player/GameBlock";
 import ReportDetail from "../components/user/Reports/Detail/Detail"
 import Landing from "../components/player/Landing";
  
-<<<<<<< HEAD
  
 /**
  * Test
@@ -53,8 +48,6 @@ import start from "../components/Player/start";
 
 
 
-=======
->>>>>>> d33fd84d3bfd26ae6a9ea481bb46abe62257b645
 
 
 

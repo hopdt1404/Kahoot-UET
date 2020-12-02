@@ -2,9 +2,7 @@ const initialState = {
     currentQuestion: 0,
     topPlayer: [],
     listPlayer: [],
-    listQuestion: [
-        
-    ]
+    listQuestion: []
 };
 const fakeQuestionList = (state = initialState, action) => {
     switch (action.type) {

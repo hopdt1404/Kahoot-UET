@@ -27,9 +27,7 @@ function IndexPlayer(props) {
                     {props.score}
                 </div>}
             </div>
-<<<<<<< HEAD
-=======
-            <Switch>
+            {/* <Switch>
             <Route path={`${path}/lobby`} exact component={LobbyPlayer} />
             </Switch> */}
 
@@ -41,7 +39,6 @@ function IndexPlayer(props) {
                 <Route path="/answer/result"  component={AnswerResultPlayer} />
                 <Route path="/ranking"  component={Ranking} />
             </Switch> */}
->>>>>>> d33fd84d3bfd26ae6a9ea481bb46abe62257b645
         </div>
     );
 }
