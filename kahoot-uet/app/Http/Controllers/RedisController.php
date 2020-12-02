@@ -21,8 +21,8 @@ class RedisController extends Controller
         $test = ['author'=>$messages->author,'content'=>$messages->content];
     	broadcast(
     		$b = new RedisEvent($test)
-    	)->toOthers();
-        return back();
+    	);
+        return response()->json([ 'message'=>"successful"]);
     }
 
 }

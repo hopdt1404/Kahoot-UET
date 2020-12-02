@@ -1,5 +1,5 @@
-import React from 'react';
-import './Home/Home.css';
+import React from "react";
+import "./Home/Home.css";
 import KahootList from "./Home/KahootList/KahootList";
 import Clock from "./Home/Time/Clock";
 import axios from 'axios';
@@ -8,8 +8,8 @@ import { Link, Redirect } from "react-router-dom";
 import my_kahoot from "../../images/my_kahoot.png";
 import Header from './Header';
 
-export default class Home extends React.Component{
-    constructor(props){
+export default class Home extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             fullname: "FullName",
@@ -158,9 +158,13 @@ export default class Home extends React.Component{
                                 <Link to="/kahoots" class="home-see-all-text">See all</Link>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3 time ml-3">
-                    <Clock size={230} timeFormat="24hour" hourFormat="standard" />
+                        <div class="col-sm-3 time ml-3">
+                            <Clock
+                                size={230}
+                                timeFormat="24hour"
+                                hourFormat="standard"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
