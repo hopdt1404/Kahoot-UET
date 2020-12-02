@@ -17,6 +17,7 @@ import OptionGame from "../components/user/PlayGame/Option";
 import Lobby from "../components/user/PlayGame/Lobby";
 import Start from "../components/user/PlayGame/Start"
 import ErrorPage from "../components/error/ErrorPage";
+import GameBlockController from "../components/user/PlayGame/GameBlock";
 // import Fake from "../components/user/PlayGame/Fake";
 
 //player
@@ -41,13 +42,30 @@ import Landing from "../components/player/Landing";
 /**
  * Test
  */
-import lobby from "../components/player2/lobby";
-import start from "../components/player2/start";
+import lobby from "../components/Player/lobby";
+import start from "../components/Player/start";
+
+
+
+
+
+
+
+
+
+
+//delete
+import Quiz from '../components/user/PlayGame/animation/quiz';
 function RouterPath() {
     return (
         <Router>
             <Switch>
                 {/* Host */}
+                {/* <Route exact path="/" component={Quiz} /> */}
+
+
+
+
                 <Route exact path="/" component={Home} />
                 <Route exact path="/kahoots" component={Kahoots} />
                 <Route exact path="/user-reports" component={Reports} />
@@ -70,6 +88,12 @@ function RouterPath() {
                 <Route exact path="/user/start" component={Start} />
                 {/* Player */}
                 <Route path="/player/lobby" exact component={LobbyPlayer} />
+                <Route path="/user/gameblock" component={GameBlock} />  
+                {/* Player */}
+                <Route path="/pin-player" component={PinInput} />
+                <Route path="/name-player" component={NameInput} />
+                {/* <Route exact path="/playe-r" component={IndexPlayer} /> */}
+                <Route path="/player/lobby/:roomId" component={LobbyPlayer} />
                 <Route path="/player/start" component={StartPlayer} />
                 <Route path="/player/getready" component={GetReadyPlayer} />
                 <Route path="/player/gameblock" component={GameBlock} />
@@ -84,8 +108,10 @@ function RouterPath() {
                 <Route path="/test1111" component={Ranking} />
 
                 /* Test */
-                <Route exact path="/player" component={lobby}/>
-                <Route path="/player/:roomId" component={start}/>
+                <Route exact path="/player" component={Landing}/>
+                <Route exact path="/user/controller/gameblock" component={GameBlockController}/>
+                
+                {/* <Route path="/player/:roomId" component={start}/> */}
                 {/* <Route path */}
                 <Route path="*" component={ErrorPage} />
             </Switch>

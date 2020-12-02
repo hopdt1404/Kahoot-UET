@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router";
-import socketIOClient from "socket.io-client";
-
-import LogoLobby from "../../../images/logo_kahoot.png";
+import { useSelector, useDispatch } from "react-redux";
+import { addPlayer } from "../../../actions/fakeList";
 import { LockFill, UnlockFill, PersonFill } from "react-bootstrap-icons";
-
+import socketIOClient from "socket.io-client";
+import LogoLobby from "../../../images/logo_kahoot.png";
 import "./playgame.css";
 import { update } from "lodash";
 import Axios from "axios";
@@ -17,10 +17,13 @@ const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
-function Lobby(props) {
+const WAIT_TO_START = "waitToStart";
+
+function Lobby() {
     const [isLock, setIsLock] = useState(false);
-    const [pin, setPin] = useState(Math.floor(Math.random() * 10000000));
-    // const [countPlayers, setCountPlayers] = useState(0);
+    const [pin, setPin] = useState(
+        String(Math.floor(Math.random() * 10000000))
+    );
     const [players, setPlayers] = useState([]);
     const [startGame, setStartGame] = useState(false);
     const socketRef = useRef();
@@ -53,22 +56,10 @@ function Lobby(props) {
             if (isSuccess) console.log(`creat new room, ${pin}`);
         });
         socketRef.current.on(UPDATE_PLAYERS, newPlayer => {
-            const player = { name: newPlayer.name, room: newPlayer.room };
+            const player = { name: newPlayer.name, room: newPlayer.room, score: 0, playerId: newPlayer.playerId };
             setPlayers(players => [...players, player]);
             console.log(`updated list player`, newPlayer, players);
         });
-
-
-        // socketRef.current.on(LOCK_ROOM, isLook => {
-        //     console.log(isLock);
-        //     if (isLock) {
-        //         setIsLock(true);
-        //         console.log("LOCKED");
-        //     } else {
-        //         setIsLock(false);
-        //         console.log("UNLOCKED");
-        //     }
-        // });
 
         return () => {
             socketRef.current.disconnect();
@@ -83,7 +74,15 @@ function Lobby(props) {
             setIsLock(true);
         }
     };
-
+    const addPlayers = () => {
+        const action = addPlayer(players);
+        dispatch(action);
+    };
+    const handleStart = () => {
+        addPlayers();
+        socketRef.current.emit(WAIT_TO_START, pin);
+        setStartGame(true);
+    };
     return (
         <div className="lobby">
             <div className="header">
@@ -142,8 +141,8 @@ function Lobby(props) {
                                 className="button-lock button-start"
                                 disabled={players.length == 0 ? true : false}
                                 onClick={() => {
-                                    setStartGame(true);
-                                    console.log(startGame.toString());
+                                    handleStart();
+                                    // console.log(startGame.toString());
                                 }}
                                 // onClick={()=> {socketRef.current.emit(UPDATE_PLAYERS, {name: "AAAA", room: pin}); console.log(players)}}
                             >
@@ -172,7 +171,11 @@ function Lobby(props) {
                     )}
                 </div>
             </div>
-            {startGame && <Redirect to="/user/start" />}
+            {startGame && (
+                <Redirect
+                    to={{ pathname: "/user/start", data: { roomId: pin } }}
+                />
+            )}
         </div>
     );
 }

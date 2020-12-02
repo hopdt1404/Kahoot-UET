@@ -1,18 +1,22 @@
 const server = require("http").createServer();
 const io = require("socket.io")(server, {
-    cors: { origin: "*", methods: ["GET", "POST"] }
+    cors: { origin: '*' }
 });
 const PORT = 4000;
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
-const VALIDATE_ROOM = "validatRoom";
+const VALIDATE_ROOM = "validateRoom";
 const ADD_PLAYER = "addPlayer";
 const ADD_NEW_ROOM = "addNewRoom";
 const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
+const WAIT_TO_START = "waitToStart";
+const LOADING = "loading";
+const SHOW_OPTION = "showOption";
+const SEND_QUESTION = "sendQuestion";
 
 const roomList = [320];
 const lockedList = []; //room
-const playerList = [{ name: "abcs", room: 320 }];
+const playerList = [];
 io.on("connection", socket => {
     // Join a conversation
     const { roomId } = socket.handshake.query;
@@ -77,6 +81,41 @@ io.on("connection", socket => {
             console.log(lockedList);
         }
     })
+    // Listen to start game
+    socket.on(WAIT_TO_START, roomId => {
+        socket.in(roomId).emit(WAIT_TO_START, true);
+    })
+
+    // Listen for loading
+    socket.on(LOADING, (roomId) => {
+        console.log("LOADING");
+        socket.in(roomId).emit(LOADING, true);
+    });
+
+    // Listen for show answer option
+    socket.on(SHOW_OPTION,(room,show)=>{
+        socket.in(room).emit(SHOW_OPTION, show==1);
+    })
+
+    // Listen for send question
+    socket.on(SEND_QUESTION, (question, roomId, length, orderNumber)=>{
+        console.log(question, roomId, length, orderNumber);
+        socket.in(roomId).emit(SEND_QUESTION, question, roomId, length, orderNumber);
+    })
+    // Listen for send score
+    socket.on("sendScore",(roomId, playerId, score, numberOfAmswer) => {
+        console.log(roomId, playerId, score, numberOfAmswer);
+        socket.in(String(roomId)).emit("sendScore",roomId, playerId, score, numberOfAmswer);
+    }); 
+    // Listen for skip
+    socket.on("skipQuestion",(roomId) => {
+        socket.in(roomId).emit("skipQuestion",true);
+    })
+
+
+
+
+
     // Leave the room if the user closes the socket
     socket.on("disconnect", () => {
         socket.leave(roomId);

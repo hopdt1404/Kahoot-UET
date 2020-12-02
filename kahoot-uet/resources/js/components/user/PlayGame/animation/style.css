@@ -4,7 +4,7 @@ div.countdown {
     animation-name: popup_countdown;
 }
 
-@keyframes popup_countdown{
+@keyframes popup_countdown {
     0% {
         transform: scale(0.5);
     }
@@ -22,12 +22,21 @@ div.square-rotate {
     animation-iteration-count: infinite;
 }
 @keyframes square-rotate {
-    0%   {}
-    25%  {transform: rotate(45deg);}
-    50%  {transform: rotate(90deg);}
-    75%  {transform: rotate(135deg);}
-    100% {transform: rotate(180deg);}
-  }
+    0% {
+    }
+    25% {
+        transform: rotate(45deg);
+    }
+    50% {
+        transform: rotate(90deg);
+    }
+    75% {
+        transform: rotate(135deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
 div.animation div.count {
     position: absolute;
     top: 50%;
@@ -44,8 +53,7 @@ div.animation div.count {
     animation-name: popup_countdown_2;
 }
 
-
-@keyframes popup_countdown_2{
+@keyframes popup_countdown_2 {
     0% {
         top: 0%;
         left: 40%;
@@ -58,11 +66,118 @@ div.animation div.count {
     }
 }
 
-
+div.layout div.currentQuestion {
+    color: white;
+    font-weight: bolder;
+    font-size: 40px;
+    background-color: darkred;
+    text-align: left;
+    width: 20%;
+    height: 2em;
+    clip-path: polygon(0% 0%, 80% 0%, 70% 80%, 0% 100%);
+    padding: 0% 3%;
+}
+div.qBlock {
+    position: absolute;
+    top: 15vh;
+    left: 0;
+    transform: translate(0, -50%) scale(0.5);
+    animation-duration: 1s;
+    animation-name: qBlock;
+    animation-iteration-count: 1;
+}
+@keyframes qBlock {
+    0% {
+        transform: translate(0, 0%) scale(1);
+    }
+    100% {
+        transform: translate(0, -50%) scale(0.5);
+    }
+}
+div.qBlock div.animation-tkt {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+div.qBlock div.quizShadow {
+    background-color: darkred;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    width: 20em;
+    height: 20em;
+    margin-bottom: -1rem;
+}
+div.qBlock div.quizText {
+    color: white;
+    width: 100%;
+    height: 15vh;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    text-shadow: wheat;
+    padding-top: 2vh;
+    animation-duration: 1s;
+    animation-name: qBlockqText;
+    animation-iteration-count: 1;
+}
+@keyframes qBlockqText {
+    0% {
+        background-color: darkred;
+    }
+    100% {
+        background-color: none;
+    }
+}
+div.qBlock2 div.question {
+    position: absolute;
+    top: 25vh;
+    left: 0;
+    position: relative;
+    width: 100vw;
+    height: fit-content;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    background-color: white;
+    animation-duration: 1s;
+    animation-name: question;
+    animation-iteration-count: 1;
+}
+@keyframes question {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+    }
+}
+div.loading-tkt {
+    position: absolute;
+    bottom: 5%;
+    height: 30px;
+    width: 90vw;
+    background-color: white;
+    margin: 0 5vw;
+    border-radius: 3rem;
+    animation-duration: 8s;
+    animation-name: loading;
+    animation-iteration-count: 1;
+}
+@keyframes loading {
+    0% {
+        width: 0;
+    }
+    100% {
+    }
+}
 div.quizAnimation {
     background-color: white;
     border: solid black 6px;
-    transform: rotate(-20deg);
+    transform: rotate(-30deg);
     display: flex;
     flex-wrap: wrap;
     width: 10rem;
@@ -96,14 +211,13 @@ div.quizAnimation div.signature#diamond {
 div.quizAnimation div.signature#circle {
     background-color: yellow;
     box-shadow: 1px 1px rgb(121, 121, 20);
-
 }
 div.quizAnimation div.signature#square {
     background-color: green;
     box-shadow: 1px 1px darkgreen;
 }
 
-svg path {
+div.quizAnimation div.signature svg path {
     fill-rule: initial;
-    /* fill:white; */
+    fill: white;
 }
