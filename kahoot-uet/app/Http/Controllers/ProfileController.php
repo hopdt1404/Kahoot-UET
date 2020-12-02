@@ -37,9 +37,7 @@ class ProfileController extends Controller
     }
     
     public function getUser(Request $request){
-        return response()->json([
-            $request->user()
-        ]);
+        return $request->user();
     }
     public function rename(Request $request){
         $name = $request->input('name');
@@ -47,7 +45,7 @@ class ProfileController extends Controller
         $user->name = $name;
         $user->save();
         return response()->json([
-            "renamed successfully"
+            'message'=>"renamed successfully"
         ],201);
     }
     public function getUserId(Request $request){

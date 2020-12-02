@@ -5,6 +5,7 @@ import Clock from "./Home/Time/Clock";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import {Redirect} from 'react-router-dom';
+import Header from './Header'
 
 export default class Home extends React.Component{
     constructor(props){
@@ -53,6 +54,8 @@ export default class Home extends React.Component{
             return <Redirect to="/auth/login" />
         }
         return (
+            <div>
+                <Header />
             <div class = "main-content">
                 <div class="container d-flex pt-5 justify-content-center">
                     <div class="col-sm-3">
@@ -82,6 +85,7 @@ export default class Home extends React.Component{
                     <Clock size={230} timeFormat="24hour" hourFormat="standard" />
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
