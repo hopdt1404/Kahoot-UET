@@ -122,6 +122,7 @@ class TopicController extends Controller
         $topicRequest= $request['summary'];
         $topic = Topics::create([
             'name' => $topicRequest['title'],
+            'description' => $topicRequest['description'],
             'creator_id' => $creator_id,
         ]);
 

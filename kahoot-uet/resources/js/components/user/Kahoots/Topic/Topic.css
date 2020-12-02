@@ -2,11 +2,12 @@
     background-color: white;
     box-shadow: 0 0 0.5rem 0 rgba(0,0,0,.15);
     min-height: 80vh;
-    margin-top:20px;
+    margin: 20px;
+    padding: 3vmin;
 }
 .kahoots-topic-img{
     width:100%;
-    height:200px;
+    height:300px;
     display: block;
     background-color: cadetblue;
 }
@@ -64,6 +65,7 @@
 .kahoots-topic-quest-first{
     font-size: 15px;
     color:grey;
+    padding: 2vmin;
 }
 .kahoots-topic-quest-second{
     font-weight: bold;
@@ -73,13 +75,15 @@
     height:100px;
     display: block;
     overflow-wrap: break-word;
+    padding: 2vmin;
 }
 .kahoots-topic-quest-img{
     flex: 0 0 auto;
     min-width: 96px;
-    width: 180px;
-    height: 120px;
-    background-color: aquamarine;
+    width: 140px;
+    height: 125px;
+    background-color: rgb(255, 255, 255);
+    margin: 2vmin;
 }
 .kahoots-topic-answer{
     margin-left:20px;
@@ -114,4 +118,3 @@
     display: flex;
     justify-content: center;
 }
-

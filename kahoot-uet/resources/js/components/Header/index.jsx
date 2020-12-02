@@ -7,6 +7,7 @@ import { Redirect, Route } from "react-router";
 import {
     setSummary
 } from "../../actions/summary";
+import {Link} from 'react-router-dom';
 function Header() {
     const [state, setState] = React.useState({ title: "", description: "" });
     const [showModal, setShowModal] = React.useState(false);
@@ -25,13 +26,13 @@ function Header() {
     const handleSubmit = () => {
         console.log(JSON.stringify({ questionList, summary }));
         console.log("Submit");
-        // Axios.post('/create',{
-        //   summary,questionList
-        // }).then(
-        //   res=>{
-        //     window.location('/home');
-        //   }
-        // )
+        Axios.post('http://127.0.0.1:8000/api/auth/topic/create',{
+              summary,questionList
+        }, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     };
     return (
         <div className="header00">
@@ -72,6 +73,7 @@ function Header() {
                     >
                         Exit
                     </button>
+                    <Link to="/kahoots">
                     <button
                         onClick={() => {
                             handleSubmit();
@@ -80,6 +82,8 @@ function Header() {
                     >
                         Done
                     </button>
+                    </Link>
+                    
                 </div>
             </div>
             {showModal && (

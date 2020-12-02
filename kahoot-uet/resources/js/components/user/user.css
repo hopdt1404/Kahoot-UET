@@ -19,6 +19,7 @@
     padding: 0px 16px 4px;
     position: relative;
     line-height: 0.875rem;
+    margin-right: 10px;
 }
 
 .create-button:hover {
@@ -89,4 +90,54 @@
 }
 .div-options {
     float: right;
+}
+
+div.crKahoot {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;/******/
+}
+
+div.crKahoot header.crHeader{
+    background-color: indigo;
+    height: 4.5rem;
+    width: 100%;
+    padding: 0.2% 1.5% 0% 1.5%;
+}
+
+div.crKahoot main.crMain{
+    background-color: rgb(219, 219, 219);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+div.sidebar {
+     flex: 1 0 15%;
+    background-color: white;
+}
+div.editor {
+    flex: 1 0 85%;
+}
+
+button.home-button {
+    width: 125px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+div.home-list {
+    text-align: center;
+}
+
+div.home-name {
+    margin-top: 9px;
+    text-align: center;
+}
+
+.home-link-see-all {
+    font-size: 2vmin;
 }

@@ -52,12 +52,12 @@ export const setImage = (image, orderNumber) => {
         payload: {image, orderNumber}
     };
 };
-export const setYoutubeLink = (link, orderNumber) => {
-    return {
-        type: "SET_YOUTUBE_LINK",
-        payload: {link, orderNumber}
-    };
-};
+// export const setYoutubeLink = (link, orderNumber) => {
+//     return {
+//         type: "SET_YOUTUBE_LINK",
+//         payload: {link, orderNumber}
+//     };
+// };
 export const setAnswer = (answer, orderNumber, aOrderNumber) => {
     return {
         type: "SET_ANSWER",
@@ -74,5 +74,34 @@ export const setQuestionContent = (content, orderNumber) => {
     return {
         type: "SET_QUESTION_CONTENT",
         payload: {content, orderNumber}
+    }
+}
+
+//play game
+
+export function selectedQuiz(quiz) {
+    return {
+        type: 'SELECTED_QUIZ',
+        payload: quiz
+    }
+}
+export function handleNickname(nickname) {
+    return {
+        type: 'NICKNAME',
+        payload: nickname
+    }
+}
+export function handlePin(pin) {
+    return {
+        type: 'SELECTED_PIN',
+        payload: pin
+    }
+}
+
+// get data then click play game
+export function getQuestionsOfTopic(topic_id) {
+    return {
+        type: "GET_QUESTIONS_TOPIC",
+        payload: topic_id
     }
 }

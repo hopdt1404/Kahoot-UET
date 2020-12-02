@@ -156,6 +156,8 @@
 .kahoots-play-box{
     min-height: 50px;
     background-color: white;
+    display: flex;
+    justify-content: space-between;
 }
 .kahoots-play-text{
     color:white;

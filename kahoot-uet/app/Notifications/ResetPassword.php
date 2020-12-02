@@ -42,7 +42,7 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/api/auth/reset-password/'.$notifiable->token))
+                    ->action('Reset password link', url('/#/auth/reset-password/'.$notifiable->token))
                     ->line('Thank you for using our application!');
     }
 

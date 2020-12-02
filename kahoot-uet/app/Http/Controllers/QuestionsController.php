@@ -19,7 +19,8 @@ class QuestionsController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+            'error' => $validator->errors()], 400);
         }
 
         $exitTopic = Topics::where('id', $request['topic_id'])->count();

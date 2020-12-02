@@ -26,17 +26,17 @@ Route::group([
     Route::post('login', 'EntryController@login');
     Route::post('signup', 'EntryController@signup');
     Route::post('signup/activate', 'EntryController@activateAccount');
-    Route::post('reset-link','ResetPasswordController@getResetLink');
+    Route::post('reset-link', 'ResetPasswordController@getResetLink');
     Route::post('reset-password/{token}', 'ResetPasswordController@resetPassword');
     Route::group([
-      'middleware' => 'auth:api'
-    ], function() {
+        'middleware' => 'auth:api'
+    ], function () {
         Route::get('logout', 'EntryController@logout');
         Route::get('user', 'ProfileController@getUser');
-        Route::post('upload-image','ProfileController@uploadImage');
-        Route::put('rename','ProfileController@rename');
-        Route::get('user_id','ProfileController@getUserId');
-        Route::put('change-password','EntryController@changePassword');
+        Route::post('upload-image', 'ProfileController@uploadImage');
+        Route::put('rename', 'ProfileController@rename');
+        Route::get('user_id', 'ProfileController@getUserId');
+        Route::put('change-password', 'EntryController@changePassword');
 
         Route::get('home', 'HomeController@home');
 
@@ -76,7 +76,4 @@ Route::group([
         Route::post('/play-done', 'ReportController@resultPlay');
         Route::get('/export', 'ExportExcelController@export');
     });
-
-
 });
-

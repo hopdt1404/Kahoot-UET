@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 <head>
     <title>Demo chat</title>
@@ -35,4 +35,4 @@
     </div>
 </body>
 
-</html>
+</html> -->
