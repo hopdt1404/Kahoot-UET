@@ -42,8 +42,37 @@ export default class Home extends React.Component{
         .then(res => {
             this.setState({
                 kahootlist: res.data.topics
-            })
-        })
+        }
+        // axios
+        //     .get("http://localhost:8000/api/auth/home",config)
+        //     .then(res => {
+        //         const data = res.data[0];
+        //         console.log(data);
+        //         if (data.fullname) {
+        //             this.setState({
+        //                 fullname: data.fullname
+        //             });
+        //         }
+        //         if (data.username) {
+        //             this.setState({
+        //                 username: data.username
+        //             });
+        //         }
+        //         if (data.kahootlist) {
+        //             this.setState({
+        //                 kahootlist: data.kahootlist
+        //             });
+        //         }
+        //         if (data.reportlist) {
+        //             this.setState({
+        //                 reportlist: data.reportlist
+        //             });
+        //         }
+        //     })
+        // })
+
+
+
         // let config = {
         //     headers: {
         //       'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -76,8 +105,8 @@ export default class Home extends React.Component{
         //     })
         //     .catch(error => console.log(error));
     }
-    route(id){
-        return "/user-reports/detail/"+String(id);
+    // route(id){
+    //     return "/user-reports/detail/"+String(id);
     }
     render() {
         // Bao gio xong het thi them
