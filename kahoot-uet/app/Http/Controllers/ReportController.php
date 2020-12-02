@@ -428,6 +428,6 @@ class ReportController extends Controller
             'id' => $request['report_id'],
             'owner_id' => $request->user()->only('id')['id']
         ])->update(['is_deleted' => 1]);
-        return response()->json(['success'], 200);
+        return response()->json([ 'success' => 'Delete report success'], 200);
     }
 }
