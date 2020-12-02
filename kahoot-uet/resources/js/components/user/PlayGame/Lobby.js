@@ -9,9 +9,8 @@ import "./playgame.css";
 import { update } from "lodash";
 import Axios from "axios";
 import {
-    getQuestionsOfTopic
-} from '../../../actions/list';
-import { useDispatch, useSelector } from "react-redux";
+    setQuestionList
+} from '../../../actions/fakeList';
 
 const SOCKET_SERVER_URL = "http://localhost:4000";
 const ADD_NEW_ROOM = "addNewRoom";
@@ -19,7 +18,7 @@ const UPDATE_PLAYERS = "updatePlayers";
 const LOCK_ROOM = "lookRoom";
 const WAIT_TO_START = "waitToStart";
 
-function Lobby() {
+function Lobby(props) {
     const [isLock, setIsLock] = useState(false);
     const [pin, setPin] = useState(
         String(Math.floor(Math.random() * 10000000))
@@ -42,8 +41,8 @@ function Lobby() {
                 "topic_id": id_topic
             }
         }).then((res) => {
-            dispatch(getQuestionsOfTopic(res.data.questionList))
-            console.log(res.data.questionList);
+            dispatch(setQuestionList(res.data.questionList))
+            // console.log(res.data.questionList);
         })
     }, []);
 
@@ -65,6 +64,9 @@ function Lobby() {
             socketRef.current.disconnect();
         };
     }, [pin]);
+
+    const test = useSelector((state) => state.fake.listQuestion);
+    console.log(test);
 
     const handleLockRoom = () => {
         socketRef.current.emit(LOCK_ROOM, pin);

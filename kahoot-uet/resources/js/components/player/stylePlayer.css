@@ -551,3 +551,9 @@ span.ranking-span-score {
     /* float: right; */
     padding-right: 4vmin;
 }
+
+div.ranking-text {
+    margin: auto;
+    color: white;
+    font-size: 5rem;
+}

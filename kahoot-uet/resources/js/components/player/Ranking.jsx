@@ -47,6 +47,9 @@ function Ranking() {
             <div className="ranking-header-next">
                 <button type="button" class="btn btn-light ranking-button">Next</button>
             </div>
+            <div className="ranking-text">
+                Ranking
+            </div>
             <ol className="ranking-list">
                 {li_player}
             </ol>
