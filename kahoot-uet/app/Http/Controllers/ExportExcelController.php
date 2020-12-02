@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Players;
 use App\Questions;
 use App\ReportPlayer;
+use App\ReportQuestion;
 use App\Rooms;
 use Facade\FlareClient\Report;
 use App\Reports;
@@ -23,9 +24,185 @@ use Illuminate\Support\Facades\Validator;
 
 class ExportExcelController extends Controller
 {
-    // pass report id,
-    public function export(Request $request){
+
+    public function export (Request $request){
         //test final scores
+        if (!isset($request['report_id'])) {
+            $request['report_id'] = 1;
+        }
+        $validator = Validator::make($request->all(), [
+            'report_id' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $report = Reports::where('id', $request['report_id'])->get();
+        $exitReport = count($report);
+        if ($exitReport != 1) {
+            return response()->json([
+                'message'=>'Bad request'], 400);
+        }
+        $report = $report[0];
+        $user = $request->user();
+        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+
+        $final_scores_list =[
+            "kahoot_name"=> [$report['name']],
+            [
+                '1',
+                'kiên',
+                '2843',
+                '3',
+                '1'
+            ],
+            [
+                '2',
+                'Hello',
+                '1234',
+                '2',
+                '2'
+            ]
+        ];
+        for ($i = 0; $i < count($players); $i++) {
+            $final_score = [
+                $i + 1, $players[$i]['name'], $players[$i]['total_score'], $players[$i]['number_correct_answer'], $players[$i]['number_incorrect_answer']
+            ];
+            array_push($final_scores_list, $final_score);
+        }
+        //test raw report
+
+        $raw_report_data_list =[
+            ['1 Quiz', 'sdfsdfdsf', 'A', 'B', 'C', 'D','A','20',
+                'Hello','A','Correct','1','0','898','898','898','20.50%','4.1'],
+            ['1 Quiz', 'sdfsdfdsf', 'A', 'B', 'C', 'D','A','20',
+                'Kiên','A','Correct','1','0','898','898','898','20.50%','4.1'],
+            ['2 Quiz', 'True of False?', 'True', 'False', '', '','True','20',
+                'Hello','True','Correct','1','0','696','696','1594','25%','5'],
+            ['2 Quiz', 'True of False?', 'True', 'False', '', '','True','20',
+                'Kiên','A','Correct','1','0','0','0','898','20.50%','4.1'],
+        ];
+
+        // test question
+        $quiz_list = [
+            ['Quiz'],
+            ['Mini Test'],
+            ['1 Quiz', 'Hello'],
+            ['ggggh'],
+            ['100.00%'],
+            ['20 secends'],
+            ['ggggh','dsfsdf','sdfsdf','dsfsdfsdf'],
+            ['True','False','False','False'],
+            ['1','0','0','0'],
+            ['1.20','0','0','0'],
+            ['Kiên','ggggh','970','970','1.2'],
+            ['Hello','sdfgsfg','0','0','2.0']
+
+        ];
+        $topic_id = Rooms::select('topic_id')->where('id', $report['room_id'])->get();
+        $topic_id = $topic_id[0]['topic_id'];
+        $questionsQuiz = Questions::where('topic_id', $topic_id)->get();
+        for ($i = 0; $i < count($questionsQuiz); $i++) {
+            $questionsQuiz[$i]['answer'] = json_decode($questionsQuiz[$i]['answer']);
+            $question = $questionsQuiz[$i];
+            $correctAns = [];
+            $answer = $question['answer'];
+            $listAns = [];
+            $listResultAns = [];
+            $listTimeAns = [];
+            $question_report = ReportQuestion::where('topic_id', 'id')->get();
+            $question_report = $question_report[0];
+            $resultAnsPlayer = [$question_report['a'] ?? 3, $question_report['b'] ?? 2, $question_report['c'] ?? 2, $question_report['d'] ?? 0];
+            $resultTimePlayer = [$question_report['avg_time_a'] ?? 2.4, $question_report['avg_time_b'] ?? 1.6, $question_report['avg_time_c'] ?? 1.8, $question_report['avg_time_d'] ?? 2.9];
+            for($i = 0; $i < count($answer); $i++) {
+                array_push($listAns, $answer[$i]['answer']);
+                if ($answer[$i]['correct']) {
+                    array_push($listResultAns, 'True');
+                } else {
+                    array_push($listResultAns, 'False');
+                }
+                if ($answer[$i]['correct']) {
+                    array_push($correctAns, $answer[$i]['answer']);
+                }
+            }
+            $playerReport = ReportPlayer::where([
+                ''
+            ])->get();
+            $quiz = [
+                ['Quiz'],
+                ['Mini Test'],
+                [($i + 1) . ' Quiz', $question['title']],
+                $correctAns,
+                ["100.00%"],
+                [$question['time']],
+                $listAns,
+                $listResultAns,
+                $resultAnsPlayer,
+                $resultTimePlayer
+
+            ];
+        }
+
+
+
+        $true_or_false_list =[
+            ['T/F'],
+            ['Mini Test'],
+            ['2 Quiz', 'True or False?'],
+            ['True'],
+            ['100.00%'],
+            ['20 secends'],
+            ['True','False'],
+            ['True','False'],
+            ['1','0'],
+            ['1.20','0'],
+            ['Kiên','True','970','970','1.2'],
+            ['Hello','False','0','0','2.0']
+        ];
+
+        // test overview
+        $overview_list =[
+            [$report['name']],
+            [$report['created_at']],
+            [$user['name'] ?? 'kien123'],
+            [$report['number_player'] . ' players'],
+            [$report['number_player'] . ' of ' . $report['number_player']],
+            ['75.00%'],
+            ['25.00%'],
+            ['1373.00 points'],
+            ['0'],
+            ['0.00 out of 5'],
+            ['0.00% Yes','0.00% Yes'],
+            ['0.00% Yes','0.00% Yes'],
+            ['0.00% Positive', '0.00% Neutral', '0.00% Negative']
+        ];
+
+        //test kahoot summary
+
+        $kahoot_summary_list = [
+            [$report['name']],
+            ['Q1','sdfdsfdsf','Q2','465645'],
+            ['1','Hello','1778','898','A','880','B'],
+            ['2','Kiên','968','968','A','0','A'],
+        ];
+
+        // test multiple sheets
+        $list = [
+            $overview_list,
+            $final_scores_list,
+            $kahoot_summary_list,
+            [$quiz_list, $true_or_false_list],
+            $raw_report_data_list
+        ];
+        $file_name = 'Mini Test.xlsx';
+        return Excel::download(new MultipleSheets($list), $file_name);
+
+    }
+    // pass report id,
+    public function exportNuew(Request $request){
+
+        //test final scores
+        /*
         if (!isset($request['report_id'])) {
             $request['report_id'] = 1;
         }
@@ -44,13 +221,16 @@ class ExportExcelController extends Controller
         $report = Reports::where('id', $request['report_id'])->get();
         $report = $report[0];
         $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        */
 
         /*
          * Done final_score_list
         */
+        /*
         $final_scores_list =[
-           "kahoot_name"=> ["Mini Test"]
+           "kahoot_name"=> [$report['name']]
         ];
+        return response()->json([$report]);
         $totalAllPlayerScore = 0;
         $totalCorrectAnswer = 0;
         $totalIncorrectAnswer = 0;
@@ -74,6 +254,7 @@ class ExportExcelController extends Controller
         //test raw report
 
         $reportPlayers = ReportPlayer::where('report_id', $request['report_id'])->limit(1)->get();
+        */
         $raw_report_data_list =[
             ['1 Quiz', 'sdfsdfdsf', 'A', 'B', 'C', 'D','A','20',
             'Hello','A','Correct','1','0','898','898','898','20.50%','4.1'],
@@ -118,6 +299,7 @@ class ExportExcelController extends Controller
         ];
 
         // test overview
+
         $user = User::select('name')->where('id', $report['owner_id'])->get();
         $user = $user[0];
         $numberPlayer = count($reportPlayers);

@@ -34,7 +34,10 @@ class ReportController extends Controller
 //        $column = $request['order_by'] ?? 'name';
 //        $type = $request['order_by_type'] ?? 'desc';
         $owner_id = $request->user()->only('id')['id'];
-        $reports = Reports::select('id', 'name', 'room_id', 'game_mode', 'created_at', 'number_player')->where('owner_id', $owner_id)->get();
+        $reports = Reports::select('id', 'name', 'created_at', 'number_player')->where([
+            'owner_id' => $owner_id,
+            'is_deleted' => 0
+            ])->get();
         return response()->json([
             'message'=> 'Get all report successfully', 'reports' => $reports
         ],200);
@@ -87,7 +90,7 @@ class ReportController extends Controller
         ],200);
     }
 
-    public function createTmp (Request $request) {
+    public function createReport (Request $request) {
         $validator = Validator::make($request->all(),[
             'room_id' => 'bail|required|integer',
             'topic_id' => 'bail|required|integer'
@@ -144,13 +147,15 @@ class ReportController extends Controller
                 'error'=>$validator->errors()],400);
         }
         $user = User::select('id', 'name')->where('id', $request->user()->only('id')['id'])->get()[0];
-        $report = Reports::where([
+        $report = Reports::select('id', 'name', 'room_id' ,'number_player', 'number_question', 'created_at')->where([
             'id' => $request['report_id'],
             'owner_id' => $user['id']
         ])->get();
+
         if (count($report) != 1) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+                ], 400);
         }
         $report = $report[0];
         $hostedBy = $user['name'];
@@ -163,7 +168,18 @@ class ReportController extends Controller
             'creator_id' => $user['id']
         ])->get();
         $topic_id = $topic_id[0]['topic_id'];
-        $questions = Questions::where('topic_id', $topic_id)->get();
+        $questions = Questions::select('title', 'question_type', 'score', 'time') ->where('topic_id', $topic_id)->get();
+        $temp = [];
+        for ($i = 0; $i <count($questions); $i++) {
+
+            $question['name'] = $questions[$i]['title'];
+            $question['type'] = $questions[$i]['question_type'];
+            $question['score'] = $questions[$i]['score'];
+            $question['time'] = $questions[$i]['time'];
+            array_push($temp, $question);
+        }
+        $questions = $temp;
+
         $report['number_question'] = count($questions);
 
         // Done to here
@@ -223,14 +239,15 @@ class ReportController extends Controller
 //
 //
 //        // Get number player
-//        $players = Players::select('id','name', 'total_score', 'number_correct_answer', 'number_incorrect_answer')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
-//        $report['number_player'] = count($players);
-//        //
+        $players = Players::select('id','name', 'total_score')->where('report_id', $report['id'])->orderBy('total_score', 'desc')->get();
+        for ($i = 0; $i < count($players); $i++) {
+            $players[$i]['rank'] = $i + 1;
+        }
         return response()->json([
             'message' => "Get report detail success",
             'summary' => $report,
-//            'players' => $players,
-//            'questions' => $questions,
+            'players' => $players,
+            'questions' => $questions,
 //            'not_finish' => $notFinish,
 //            'need_help' => $needHelp,
 //            'different_questions' => $differentQuestion
@@ -262,6 +279,9 @@ class ReportController extends Controller
                 'message'=>'Bad request'], 400);
         }
         $questions = Questions::where('topic_id', $request['topic_id'])->get();
+        for ($i = 0; $i < count($questions); $i++) {
+            $questions[$i]['answer'] = json_decode($questions[$i]['answer']);
+        }
         $owner_id = $request->user()->only('id');
         $owner_id = $owner_id['id'];
         $number_player = Players::where('room_id', $request['room_id'])->count('name');
@@ -349,4 +369,65 @@ class ReportController extends Controller
         ],200);
     }
 
+    public function resultPlay (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'PIN' => 'bail|required|integer',
+            'topic_id' => 'bail|required|integer',
+            'number_player' => 'bail|required|integer'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $players = $request['players'];
+
+        $user_id = $request->user()->only('id')['id'];
+        $room_id = Rooms::create([
+            'PIN' => $request['PIN'],
+            'creator_id' => $user_id,
+            'topic_id' => $request['topic_id']
+        ]);
+        $room_id = $room_id['id'];
+        $topic = Topics::select('name')->where('id', $request['topic_id'])->get()[0];
+        $report = Reports::create([
+            'name' => $topic['name'],
+            'room_id' => $room_id,
+            'owner_id' => $user_id,
+            'number_player' => $request['number_player']
+        ]);
+        $playerResult = [];
+        for ($i = 0; $i < count($players); $i++) {
+            $player = $players[$i];
+            $player = Players::create([
+                'name' => $player['name'],
+                'room_id' => $room_id,
+                'report_id' => $report['id'],
+                'total_score' => $player['total_score']
+            ]);
+            array_push($playerResult, $player);
+        }
+        return response()->json([
+            'success',
+            'room' => $room_id,
+            'report' => $report,
+            'players' => $playerResult
+            ], 200);
+    }
+
+    public function deleteReport (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'report_id' => 'bail|required|integer',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $report = Reports::where([
+            'id' => $request['report_id'],
+            'owner_id' => $request->user()->only('id')['id']
+        ])->update(['is_deleted' => 1]);
+        return response()->json([ 'success' => 'Delete report success'], 200);
+    }
 }

@@ -26,17 +26,17 @@ Route::group([
     Route::post('login', 'EntryController@login');
     Route::post('signup', 'EntryController@signup');
     Route::post('signup/activate', 'EntryController@activateAccount');
-    Route::post('reset-link','ResetPasswordController@getResetLink');
+    Route::post('reset-link', 'ResetPasswordController@getResetLink');
     Route::post('reset-password/{token}', 'ResetPasswordController@resetPassword');
     Route::group([
-      'middleware' => 'auth:api'
-    ], function() {
+        'middleware' => 'auth:api'
+    ], function () {
         Route::get('logout', 'EntryController@logout');
         Route::get('user', 'ProfileController@getUser');
-        Route::post('upload-image','ProfileController@uploadImage');
-        Route::put('rename','ProfileController@rename');
-        Route::get('user_id','ProfileController@getUserId');
-        Route::put('change-password','EntryController@changePassword');
+        Route::post('upload-image', 'ProfileController@uploadImage');
+        Route::put('rename', 'ProfileController@rename');
+        Route::get('user_id', 'ProfileController@getUserId');
+        Route::put('change-password', 'EntryController@changePassword');
 
         Route::get('home', 'HomeController@home');
 
@@ -53,6 +53,7 @@ Route::group([
         Route::prefix('room')->group(function () {
             Route::post('create', 'RoomController@index');
             Route::patch('lock', 'RoomController@lockRoom');
+            Route::patch('unlock', 'RoomController@unlockRoom');
         });
         Route::prefix('player')->group(function () {
             Route::get('list', 'PlayerController@index');
@@ -71,45 +72,9 @@ Route::group([
             Route::get('', 'ReportController@index');
             Route::patch('rename', 'ReportController@renameReport');
             Route::get('/detail', 'ReportController@reportDetail');
+            Route::patch('delete', 'ReportController@deleteReport');
         });
+        Route::post('/play-done', 'ReportController@resultPlay');
+        Route::get('/export', 'ExportExcelController@export');
     });
-
 });
-
-Route::get('/summary', 'ReportQuestionController@summary');
-
-Route::prefix('topic')->group(function () {
-    Route::get('', 'TopicController@index');
-    Route::post('duplicate', 'TopicController@duplicateTopic');
-    Route::patch('rename', 'TopicController@renameTopic');
-    Route::post('create', 'TopicController@createTopic');
-    Route::post('create-topic', 'TopicController@createTopics');
-    Route::post('delete', 'TopicController@delete');
-    Route::get('detail', 'QuestionsController@index');
-});
-Route::prefix('question')->group(function () {
-    Route::get('', 'QuestionController@index');
-});
-
-Route::prefix('room')->group(function () {
-    Route::post('create', 'RoomController@index');
-    Route::patch('lock', 'RoomController@lockRoom');
-});
-Route::prefix('player')->group(function () {
-    Route::get('list', 'PlayerController@index');
-    Route::post('join', 'PlayerController@create');
-    Route::post('get-out', 'PlayerController@getOutPlayer');
-});
-
-// Route::prefix('play')->group(function () {
-//     Route::get('', 'ReportController@createTmp');
-//     Route::post('answer', 'ReportPlayerController@create');
-//     Route::get('summary-question', 'ReportQuestionController@summaryQuestion');
-//     Route::get('top-five', 'PlayerController@topFiveMaxScore');
-//     Route::get('top-three-final', 'PlayerController@topThreeMaxScore');
-// });
-// Route::prefix('report')->group(function () {
-//     Route::get('', 'ReportController@index');
-//     Route::patch('rename', 'ReportController@renameReport');
-//     Route::get('/detail', 'ReportController@reportDetail');
-// });
