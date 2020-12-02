@@ -23,3 +23,10 @@ export const changeQuestion = (number) => {
     payload: number,
   };
 };
+
+export const getTopicId = (topic_id) => {
+  return {
+    type: "ADD_TOPIC_ID",
+    payload: topic_id
+  }
+} 

@@ -2,10 +2,16 @@ const initialState = {
     currentQuestion: 0,
     topPlayer: [],
     listPlayer: [],
-    listQuestion: []
+    listQuestion: [],
+    topic_id: 0
 };
 const fakeQuestionList = (state = initialState, action) => {
     switch (action.type) {
+        case "ADD_TOPIC_ID": {
+            return {
+                ...state, topic_id: action.payload
+            }
+        }
         case "SET_QUESTION_LIST":{
             const newList = [...action.payload];
             return {
