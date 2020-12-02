@@ -102,46 +102,46 @@ class ExportExcelController extends Controller
         $topic_id = Rooms::select('topic_id')->where('id', $report['room_id'])->get();
         $topic_id = $topic_id[0]['topic_id'];
         $questionsQuiz = Questions::where('topic_id', $topic_id)->get();
-        for ($i = 0; $i < count($questionsQuiz); $i++) {
-            $questionsQuiz[$i]['answer'] = json_decode($questionsQuiz[$i]['answer']);
-            $question = $questionsQuiz[$i];
-            $correctAns = [];
-            $answer = $question['answer'];
-            $listAns = [];
-            $listResultAns = [];
-            $listTimeAns = [];
-            $question_report = ReportQuestion::where('topic_id', 'id')->get();
-            $question_report = $question_report[0];
-            $resultAnsPlayer = [$question_report['a'] ?? 3, $question_report['b'] ?? 2, $question_report['c'] ?? 2, $question_report['d'] ?? 0];
-            $resultTimePlayer = [$question_report['avg_time_a'] ?? 2.4, $question_report['avg_time_b'] ?? 1.6, $question_report['avg_time_c'] ?? 1.8, $question_report['avg_time_d'] ?? 2.9];
-            for($i = 0; $i < count($answer); $i++) {
-                array_push($listAns, $answer[$i]['answer']);
-                if ($answer[$i]['correct']) {
-                    array_push($listResultAns, 'True');
-                } else {
-                    array_push($listResultAns, 'False');
-                }
-                if ($answer[$i]['correct']) {
-                    array_push($correctAns, $answer[$i]['answer']);
-                }
-            }
-            $playerReport = ReportPlayer::where([
-                ''
-            ])->get();
-            $quiz = [
-                ['Quiz'],
-                ['Mini Test'],
-                [($i + 1) . ' Quiz', $question['title']],
-                $correctAns,
-                ["100.00%"],
-                [$question['time']],
-                $listAns,
-                $listResultAns,
-                $resultAnsPlayer,
-                $resultTimePlayer
-
-            ];
-        }
+//        for ($i = 0; $i < count($questionsQuiz); $i++) {
+//            $questionsQuiz[$i]['answer'] = json_decode($questionsQuiz[$i]['answer']);
+//            $question = $questionsQuiz[$i];
+//            $correctAns = [];
+//            $answer = $question['answer'];
+//            $listAns = [];
+//            $listResultAns = [];
+//            $listTimeAns = [];
+//            $question_report = ReportQuestion::where('topic_id', 'id')->get();
+//            $question_report = $question_report[0];
+//            $resultAnsPlayer = [$question_report['a'] ?? 3, $question_report['b'] ?? 2, $question_report['c'] ?? 2, $question_report['d'] ?? 0];
+//            $resultTimePlayer = [$question_report['avg_time_a'] ?? 2.4, $question_report['avg_time_b'] ?? 1.6, $question_report['avg_time_c'] ?? 1.8, $question_report['avg_time_d'] ?? 2.9];
+//            for($i = 0; $i < count($answer); $i++) {
+//                array_push($listAns, $answer[$i]['answer']);
+//                if ($answer[$i]['correct']) {
+//                    array_push($listResultAns, 'True');
+//                } else {
+//                    array_push($listResultAns, 'False');
+//                }
+//                if ($answer[$i]['correct']) {
+//                    array_push($correctAns, $answer[$i]['answer']);
+//                }
+//            }
+//            $playerReport = ReportPlayer::where([
+//                ''
+//            ])->get();
+//            $quiz = [
+//                ['Quiz'],
+//                ['Mini Test'],
+//                [($i + 1) . ' Quiz', $question['title']],
+//                $correctAns,
+//                ["100.00%"],
+//                [$question['time']],
+//                $listAns,
+//                $listResultAns,
+//                $resultAnsPlayer,
+//                $resultTimePlayer
+//
+//            ];
+//        }
 
 
 
