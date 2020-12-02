@@ -5,15 +5,20 @@ import "./style.css";
 import socketIOClient from "socket.io-client";
 import { Redirect } from "react-router";
 const SHOW_OPTION = "showOption";
+const SEND_QUESTION = "sendQuestion";
 function Quiz(props) {
     const [redirect, setRedirect] = useState(false);
     const socketRef = useRef();
     const roomId = props.roomId;
+    const question = props.question;
+    const length = props.length;
+    const orderNumber = props.orderNumber;
     console.log(roomId);
     useEffect(() => {
         socketRef.current = socketIOClient("http://localhost:4000", {
             query: { roomId }
         });
+        socketRef.current.emit(SEND_QUESTION, question, roomId, length, orderNumber);
         socketRef.current.on(SHOW_OPTION, (show) => {
             setRedirect(show);
         });
@@ -41,7 +46,7 @@ function Quiz(props) {
             {
                 <div className="layout">
                     <div className="currentQuestion">
-                        {`${props.orderNumber} of ${props.length}`}
+                        {`${orderNumber} of ${length}`}
                     </div>
                 </div>
             }
@@ -67,7 +72,7 @@ function Quiz(props) {
                 </div>
             </div>
             <div className="qBlock2">
-                <div className="question">{props.question}</div>
+                <div className="question">{props.question.questionContent}</div>
             </div>
             <div className="loading-tkt"></div>
         </div>

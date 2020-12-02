@@ -12,6 +12,7 @@ const LOCK_ROOM = "lookRoom";
 const WAIT_TO_START = "waitToStart";
 const LOADING = "loading";
 const SHOW_OPTION = "showOption";
+const SEND_QUESTION = "sendQuestion";
 
 const roomList = [320];
 const lockedList = []; //room
@@ -91,12 +92,16 @@ io.on("connection", socket => {
         socket.in(roomId).emit(LOADING, true);
     });
 
-    // Listen to show answer option
+    // Listen for show answer option
     socket.on(SHOW_OPTION,(room,show)=>{
-        console.log(room,show);
         socket.in(room).emit(SHOW_OPTION, show==1);
     })
 
+    // Listen for send question
+    socket.on(SEND_QUESTION, (question, roomId, length, orderNumber)=>{
+        console.log(question, roomId, length, orderNumber);
+        socket.in(roomId).emit(SEND_QUESTION, question, roomId, length, orderNumber);
+    })
 
 
 

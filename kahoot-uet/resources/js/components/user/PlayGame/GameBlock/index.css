@@ -1,93 +1,71 @@
-div.start {
-    background-color: rgb(48, 35, 134);
+div.showQuestion-tkt {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
-div.start div.layout div.currentQuestion {
-    padding-top: 1rem;
-    padding-right: 1rem;
-    position: absolute;
-    background-color: orangered;
-    width: 400px;
-    height: 150px;
-    font-size: 60px;
+div.showQuestion-tkt div.title {
+    text-align: center;
+    flex-basis: 15vh;
+    font-weight: bolder;
+    color: black;
+    font-size: 70px;
+    background-color: white;
+    border-bottom: gray solid 2px;
+    padding: 3%;
+}
+div.showQuestion-tkt div.body {
+    display: flex;
+    flex-basis: 50vh;
+    padding: 0% 5%;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 900;
+}
+div.showQuestion-tkt div.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 2%;
+}
+div.showQuestion-tkt div.footer .answers {
+    flex-basis: 49%;
+    fill: white;
     color: white;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 10px;
+    display: flex;    margin-top: 20px;
+    border-radius: 3px;
+}
+div.showQuestion-tkt div.footer .signature {
+    min-height: 25em;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+}
+div.showQuestion-tkt div.footer .signature .sSvg svg {
+    transform: scale(7) translate(10px, 0px);
+}
+div.showQuestion-tkt div.footer .answer {
+    color: white;
+    font-size: 45px;
+    font-weight: bolder;
     text-align: center;
-    clip-path: polygon(0% 0%, 100% 0%, 90% 80%, 0% 100%);
+    width: 100%;
+    padding-top: 2em;
 }
-div.start svg.square {
-    position: absolute;
-    transform: rotate(45deg);
-    width: 500px;
-    height: 500px;
-}
-div.start svg.square rect {
-    height: 500px;
-    width: 500px;
-    fill: darkblue;
-}
-
-div.start svg.circle {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 800px;
-    height: 800px;
-}
-div.start svg.circle circle {
-    fill: darkblue;
-    r: 500;
-    cx: 500;
-    cy: 700;
-}
-div.start div.animation {
-    height: 300px;
-    width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-div.start div.test_name {
-    background-color: rgb(158, 142, 142);
-    /* width: 10rem; */
-    padding: 0.5rem 1rem;
-    position: absolute;
+div.showQuestion-tkt .time {
+    border-radius: 50%;
+    width: 20rem;
+    height: 20rem;
+    background-color: darkslategrey;
     text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: whitesmoke;
-    border-radius: 4px;
-    font-size: large;
-    font-family: "Archivo Black";
-    animation-name: popup_testname;
-    animation-duration: 5s;
-    /* transform: scale(0.5); */
+    padding-top: 0.8em;
+    font-size: 100px;
+    color: white;
 }
 
-@keyframes popup_testname {
-    0% {
-        top: 42%;
-        left: 25%;
-        transform: scale(0.5,0.5);
-    }
-    30% {
-        top: 42.5%;
-        left: 25.2%;
-        transform: scale(1,1);
-    }
-    70% {
-        top: 42.5%;
-        left: 25.2%;
-        transform: scale(1,1);
-    }
-    100% {
-        top: 42%;
-        left: 25%;
-        transform: scale(0);
-    }
+div.showQuestion-tkt .media {
+    max-height: 50vh;
 }

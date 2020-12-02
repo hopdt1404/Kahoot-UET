@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import IndexPlayer from "./IndexPlayer";
 import socketIOClient from "socket.io-client";
+import { Redirect } from "react-router";
+import { set } from "lodash";
+const SEND_QUESTION = "sendQuestion";
 const SHOW_OPTION = "showOption";
 function GetReadyPlayer(props) {
     const player = props.location.data.player;
@@ -8,17 +11,29 @@ function GetReadyPlayer(props) {
     const [counter, setCounter] = useState(5);
     const [labelCounter, setLabelCounter] = useState("");
     const socketRef = useRef();
+    const [question, setQuestion] = useState({});
+    const [length, setLength] = useState(0);
+    const [orderNumber, setOrderNumber] = useState(0);
     useEffect(() => {
         socketRef.current = socketIOClient("http://localhost:4000", {
             query: { roomId }
         });
+        socketRef.current.on(
+            SEND_QUESTION,
+            (question, roomId, length, orderNumber) => {
+                console.log(question, roomId, length, orderNumber);
+                setQuestion(question);
+                setOrderNumber(orderNumber);
+                setLength(length);
+            }
+        );
         socketRef.current.emit(SHOW_OPTION, roomId, counter);
         return () => {
             socketRef.current.disconnect();
         };
     }, [counter]);
     useEffect(() => {
-        counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
+        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
     }, [counter]);
 
     useEffect(() => {
@@ -46,7 +61,25 @@ function GetReadyPlayer(props) {
 
     return (
         <div>
-            <IndexPlayer roomId={roomId} player={player} />
+            {counter == 0 && (
+                <Redirect
+                    to={{
+                        pathname: "/player/gameblock",
+                        data: {
+                            question: question,
+                            orderNumber: orderNumber,
+                            length: length,
+                            roomId: roomId
+                        }
+                    }}
+                />
+            )}
+            <IndexPlayer
+                roomId={roomId}
+                player={player}
+                length={length}
+                indexNumber={orderNumber}
+            />
             <div className="lobby-main get-ready-main">
                 <div className="text-1">Question 1</div>
                 <div className="get-ready-countdown">
