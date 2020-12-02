@@ -80,6 +80,8 @@ class Forget extends Component {
                 </Form>
             <div style={{ textAlign: 'center' , marginTop: '2rem' }}>
             <Link to = {"/auth/login"}> Back to login </Link>
+            <br/>
+            <Link to = {"/auth/reset-password/dmkien"}> reset </Link>
             </div>
             
  

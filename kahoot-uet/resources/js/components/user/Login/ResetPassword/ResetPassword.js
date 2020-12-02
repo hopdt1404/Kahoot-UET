@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Button, Form, Label, Input } from 'reactstrap';
 import axios from 'axios';
 import './ResetPassword.css'
+import {Link} from "react-router-dom";
 
 class ResetPassword extends Component {
     constructor(props){

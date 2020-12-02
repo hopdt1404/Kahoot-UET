@@ -21,8 +21,9 @@
 }
 .setting-profile-img{
     min-width:30%;
-    height: 300px;
-    width: 300px;
+    height: auto;
+    width: 400px;
+    border: 1px;
 }
 .setting-user-infomation{
     display:flex;
@@ -51,4 +52,19 @@
     padding: 15px;
     margin: auto;
     margin-top: 6rem;
+}
+#selector{
+    padding: 16px 48px;
+    margin-top: 40px;
+    border-radius: 48px;
+    background-color: gray;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+#selector:hover{
+    transform: scale(1.05);
+    color: #ffc872;
+
 }

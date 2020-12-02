@@ -45,7 +45,7 @@ class ProfileController extends Controller
         $user->name = $name;
         $user->save();
         return response()->json([
-            'message'=>"renamed successfully"
+            'message'=>"successfully renamed"
         ],201);
     }
     public function getUserId(Request $request){

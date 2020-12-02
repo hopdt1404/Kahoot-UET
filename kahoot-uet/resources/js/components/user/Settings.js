@@ -93,9 +93,14 @@ class Settings extends Component {
             axios.put('http://127.0.0.1:8000/api/auth/rename', data, config)
             .then(res =>{
                 console.log(res);
+                this.setState({
+                    messName: res.data.message
+                })
             })
             .catch(err => {
-                console.log(err);
+                this.setState({
+                    messName: err.data.message
+                })
             })
         }
 
@@ -110,7 +115,11 @@ class Settings extends Component {
             formData.append("image",this.state.uploadedFile)
             axios.post('http://127.0.0.1:8000/api/auth/upload-image', formData, config)
             .then(res =>{
-                console.log(res);
+                console.log(res.data.image_url);
+                this.setState({
+                    profileImage: res.data.image_url
+                })
+
             })
             .catch(err => {
                 console.log(err);
@@ -156,10 +165,15 @@ class Settings extends Component {
                     }
                     axios.put('http://127.0.0.1:8000/api/auth/change-password',data, config)
                     .then(res=>{
-                        console.log(res);
+                        
+                        this.setState({
+                            messPass: res.data.message
+                        })
                     })
                     .catch(err=>{ 
-                        console.log(err);
+                        this.setState({
+                            messPass: err.data.message
+                        })
                     })
                 }
                 else{
@@ -181,6 +195,7 @@ class Settings extends Component {
         }
         const formErrors = this.state.formErrors;
         const messPass = this.state.messPass;
+        const messName = this.state.messName;
         return (
         <div style={{background:'rgb(242, 242, 242)',minHeight:'100vh'}}>
             <Header />
@@ -207,14 +222,17 @@ class Settings extends Component {
                                 <img class="setting-profile-img" src={profilePic} alt="your image"></img>
                                 <div style={{ marginLeft:"250px"}}>
                                 <div className="email">
-                                   <label> {"Email: " + this.state.email}  </label>
+                                   <label style={{fontSize:"25px"}}> {"Email: " + this.state.email}  </label>
                                 </div>
-                                <div className="fullname" >
-                                   <label> Full Name </label>
-                                   <input style={{ marginLeft:'10px'}} type="text" name="fullname" value={this.state.username}  onChange={this.handelNameChange}></input>
+                                <div className="fullname" style={{ marginTop: "15px" }} >
+                                   <label style={{fontSize:"25px"}}> Full Name </label>
+                                   <input style={{ marginLeft:'10px', fontSize:"25px"}} type="text" name="fullname" value={this.state.username}  onChange={this.handelNameChange}></input>
+                                   <br/>
+                                   {messName &&  <span className="errorMessage">{messName}</span>}
                                 </div>
                                 <div className="img-change"> 
-                                   <Input type="file" name="change img" className="profileImg" onChange={this.handelImgChange} ></Input>
+                                   <Input type="file" name="change img" className="profileImg" id="file" onChange={this.handelImgChange} hidden ></Input>
+                                   <Label for="file" id="selector" > Change Avatar </Label>
                                 </div>
                                 </div>
 
