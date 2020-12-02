@@ -4,6 +4,7 @@
 .setting-text{
     font-weight: bolder;
     font-size: 40px;
+    color: black;
 }
 .setting-tab-font{
     color: black;
@@ -11,17 +12,23 @@
     font-weight: bold;
 }
 .setting-profile{
-    margin:20px;
+    margin:35px;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
 }
 .setting-profile-img{
-    min-width:50%;
+    min-width:30%;
+    height: 300px;
+    width: 300px;
 }
 .setting-user-infomation{
     display:flex;
     justify-content: space-between;
     height:40px;
+    border-bottom: 1px solid rgb(242, 242, 242);
 }
 .setting-user-infomation-text{
     margin-left:10px;
@@ -30,7 +37,18 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    color: black;
 }
 .save-disable{
     background-color: gray;
+}
+.Pass-form{
+    background-color: white;
+    border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+    width: 100%;
+    max-width: 36rem;
+    padding: 15px;
+    margin: auto;
+    margin-top: 6rem;
 }
