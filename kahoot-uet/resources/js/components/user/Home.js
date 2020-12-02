@@ -15,36 +15,10 @@ export default class Home extends React.Component{
             fullname: "FullName",
             username: "username",
             kahootlist: [
-                {   
-                    id: 1,
-                    name: "test1",
-                    num_quest: 1,
-                    num_play: 1,
-                    image: null
-                },
-                {   
-                    id: 2,
-                    name: "test2",
-                    num_quest: 2,
-                    num_play: 2,
-                    image: null
-                }
+
             ],
             reportlist: [
-                {
-                    id:1,
-                    name:"abc",
-                    topic:"test1",
-                    date:"2016-09-06 11:53:31",
-                    image: null
-                },
-                {
-                    id:2,
-                    name:"test_report",
-                    topic:"test2",
-                    date:"2016-09-06 11:53:31",
-                    image: null
-                }
+
             ]
             
         };
@@ -72,12 +46,12 @@ export default class Home extends React.Component{
                 }
                 if (data.kahootlist) {
                     this.setState({
-                        kahootlist: data.kahootlist
+                        kahootlist: data.kahootlist.slice(0,3)
                     });
                 }
                 if (data.reportlist) {
                     this.setState({
-                        reportlist: data.reportlist
+                        reportlist: data.reportlist.slice(0,3)
                     });
                 }
             })
@@ -87,13 +61,13 @@ export default class Home extends React.Component{
         return "/user-reports/detail/"+String(id);
     }
     render() {
-        // Bao gio xong het thi them
-        // if (!localStorage.getItem("token")){
-        //     window.alert("Ban chưa dăng nhập");
-        //     return(
-        //         <Redirect to="/auth/login" />
-        //     )
-        // }
+
+        if (!localStorage.getItem("token")){
+            window.alert("Ban chưa dăng nhập");
+            return(
+                <Redirect to="/auth/login" />
+            )
+        }
         const reportShow = this.state.reportlist.map((data,index)=> {
             return(
                 <div class = "container mt-2 mb-2">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./user.css";
 import {
     CaretDownFill,
@@ -26,19 +26,21 @@ function Reports() {
     const [data, setData] = useState(DataReport.sort(sortrecent));
     const [reportchoose,setReportChoose] = useState(0);
     const [newname,setNewName] =useState("");
-    let config = {
+    const config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token")
         }
       }
+    useEffect(() => {
+        axios.get("http://localhost:3000/api/auth/report",config)
+            .then(res => {
+                const getData = res.data;
+                if (getData.reports){
+                    setData(getData.reports.sort(sortrecent));
+                }
+            })
+    }, [])
 
-    axios.get("http://localhost:3000/api/auth/report",config)
-    .then(res => {
-        const getData = res.data;
-        if (getData.reports){
-            setData(getData.reports.sort(sortrecent));
-        }
-    })
     
     function renameReport(){
         // axios rename
@@ -77,10 +79,17 @@ function Reports() {
         //axios export
         let postdata={
             report_id:reportchoose
-        }
-        axios.post("http://localhost:3000/api/auth/report/export",postdata,config)
+        };
+        axios.get("http://localhost:3000/api/auth/export",{
+            config,
+            params:{
+                "report_id":reportchoose
+            },
+                responseType: 'blob'
+
+        })
         .then(res => {
-            console.log(res);
+            return res.data;
         })
 
     }
@@ -172,12 +181,12 @@ function Reports() {
                             id="dropdownMenuButton"
                             data-toggle="dropdown"
                             aria-haspopup="true"
-                            aria-expanded="false"
+                            aria-expandedreport_id="false"
                             style={{
                                 border: "none",
                                 backgroundColor: "white"
                             }}
-                        >
+                            onClick={e => setReportChoose(each.id)}>
                             <CaretDownFill
                                 color="black"
                                 className="icons-svg"
@@ -200,7 +209,7 @@ function Reports() {
                                 />
                                 Open report
                             </Link>
-                            <button class="dropdown-item" data-toggle="modal" data-target="#rename" onClick={e => setReportChoose(each.id)}>
+                            <button class="dropdown-item" data-toggle="modal" data-target="#rename">
                                 <Pencil
                                     color="gray"
                                     className="icons-svg"
@@ -212,7 +221,7 @@ function Reports() {
                                 />
                                 Rename
                             </button>
-                            <button class="dropdown-item" data-toggle="modal" data-target="#delete" onClick={e => setReportChoose(each.id)}>
+                            <button class="dropdown-item" data-toggle="modal" data-target="#delete" >
                                 <Trash
                                     color="gray"
                                     className="icons-svg"

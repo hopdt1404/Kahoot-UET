@@ -27,6 +27,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "download-file": "^0.1.5",
         "express": "^4.17.1",
         "fs": "0.0.1-security",
         "ioredis": "^4.19.2",

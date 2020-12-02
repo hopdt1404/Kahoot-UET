@@ -27,6 +27,7 @@ class ExportExcelController extends Controller
 
     public function export (Request $request){
         //test final scores
+
         if (!isset($request['report_id'])) {
             $request['report_id'] = 1;
         }
@@ -35,13 +36,16 @@ class ExportExcelController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+                'error' => $validator->errors()], 400);
         }
         $report = Reports::where('id', $request['report_id'])->get();
         $exitReport = count($report);
         if ($exitReport != 1) {
             return response()->json([
-                'message'=>'Bad request'], 400);
+                'message'=>'Bad request',
+                'report' => $report,
+                'report_id' => $request['report_id']], 400);
         }
         $report = $report[0];
         $user = $request->user();
@@ -101,7 +105,7 @@ class ExportExcelController extends Controller
         ];
         $topic_id = Rooms::select('topic_id')->where('id', $report['room_id'])->get();
         $topic_id = $topic_id[0]['topic_id'];
-        $questionsQuiz = Questions::where('topic_id', $topic_id)->get();
+//        $questionsQuiz = Questions::where('topic_id', $topic_id)->get();
 //        for ($i = 0; $i < count($questionsQuiz); $i++) {
 //            $questionsQuiz[$i]['answer'] = json_decode($questionsQuiz[$i]['answer']);
 //            $question = $questionsQuiz[$i];

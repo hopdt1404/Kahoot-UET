@@ -206,12 +206,18 @@ class ReportDetail extends React.Component{
               'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
         }
+        console.log(this.state.id);
         let datasend={
             report_id:this.state.id
         }
 
-        axios.get('http://localhost:3000/api/auth/report/detail',datasend,config)
-        .then(res => {
+        axios.get('http://localhost:3000/api/auth/report/detail',{
+            config,
+            params: {
+                "report_id": this.props.match.params.id
+            }
+        })
+            .then(res => {
             const data = res.data;
             console.log(data);
             if (data.summary){
@@ -435,7 +441,7 @@ class ReportDetail extends React.Component{
                     <td>{each.name}</td>
                     <td>{each.type}</td>
                     <td>{each.time}</td>
-                    <td>{each.point}</td>
+                    <td>{each.score}</td>
                 </tr>
             )
         });
