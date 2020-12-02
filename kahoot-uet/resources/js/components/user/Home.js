@@ -16,14 +16,14 @@ export default class Home extends React.Component{
             kahootlist: [
                 {   
                     id: 1,
-                    name_quest: "test1",
+                    name: "test1",
                     num_quest: 1,
                     num_play: 1,
                     image: null
                 },
                 {   
                     id: 2,
-                    name_quest: "test2",
+                    name: "test2",
                     num_quest: 2,
                     num_play: 2,
                     image: null
@@ -55,9 +55,10 @@ export default class Home extends React.Component{
             }
           }
         axios
-            .get("localhost:8000/api/home",config)
+            .get("http://localhost:8000/api/auth/home",config)
             .then(res => {
-                const data = res.data;
+                const data = res.data[0];
+                console.log(data);
                 if (data.fullname) {
                     this.setState({
                         fullname: data.fullname

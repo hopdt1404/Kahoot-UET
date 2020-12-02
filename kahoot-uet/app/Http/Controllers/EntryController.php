@@ -65,11 +65,9 @@ class EntryController extends Controller
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'boolean'
         ]);
         $credentials = request(['email', 'password']);
-        $remember = $request->input('remember_me');
-        if(!Auth::attempt($credentials,$remember))
+        if(!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);

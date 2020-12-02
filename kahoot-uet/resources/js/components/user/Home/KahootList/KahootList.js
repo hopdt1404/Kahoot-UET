@@ -19,7 +19,7 @@ export default class KahootList extends React.Component{
                     <div class ="home-kahootlist-quest-info">
                         <div class = "home-kahootlist-quest-name">
                             <div class="home-kahootlist-quest-name-area">
-                                <span class="home-kahootlist-quest-name-text">{this.props.data.name_quest}</span>
+                                <span class="home-kahootlist-quest-name-text">{this.props.data.name}</span>
                             </div>
                         </div>
                         <div class="home-kahootlist-num-play">
