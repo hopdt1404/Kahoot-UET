@@ -34,7 +34,10 @@ class ReportController extends Controller
 //        $column = $request['order_by'] ?? 'name';
 //        $type = $request['order_by_type'] ?? 'desc';
         $owner_id = $request->user()->only('id')['id'];
-        $reports = Reports::select('id', 'name', 'created_at', 'number_player')->where('owner_id', $owner_id)->get();
+        $reports = Reports::select('id', 'name', 'created_at', 'number_player')->where([
+            'owner_id' => $owner_id,
+            'is_deleted' => 0
+            ])->get();
         return response()->json([
             'message'=> 'Get all report successfully', 'reports' => $reports
         ],200);
@@ -410,5 +413,21 @@ class ReportController extends Controller
             'report' => $report,
             'players' => $playerResult
             ], 200);
+    }
+
+    public function deleteReport (Request $request) {
+        $validator = Validator::make($request->all(),[
+            'report_id' => 'bail|required|integer',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Bad request',
+                'error'=>$validator->errors()],400);
+        }
+        $report = Reports::where([
+            'id' => $request['report_id'],
+            'owner_id' => $request->user()->only('id')['id']
+        ])->update(['is_deleted' => 1]);
+        return response()->json(['success'], 200);
     }
 }

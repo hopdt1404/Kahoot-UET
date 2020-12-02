@@ -72,6 +72,7 @@ Route::group([
             Route::get('', 'ReportController@index');
             Route::patch('rename', 'ReportController@renameReport');
             Route::get('/detail', 'ReportController@reportDetail');
+            Route::patch('delete', 'ReportController@deleteReport');
         });
         Route::post('/play-done', 'ReportController@resultPlay');
         Route::get('/export', 'ExportExcelController@export');
