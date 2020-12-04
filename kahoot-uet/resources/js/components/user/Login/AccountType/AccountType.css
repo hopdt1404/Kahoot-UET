@@ -1,0 +1,20 @@
+
+.login-button{
+    background-color: white;
+}
+.teacher:hover {
+    background-color: rgb(226, 27, 60) ;
+    transform: scale(1.06);
+}
+.student:hover {
+    background-color: rgb(0, 65, 159) ;
+    transform: scale(1.06);
+}
+.personal:hover {
+    background-color:#FFFF33 ;
+    transform: scale(1.06);
+}
+.professional:hover {
+    background-color: rgb(38, 137, 12) ;
+    transform: scale(1.06);
+}

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Notifications\ActiveAccount;
+use App\Jobs\ActiveAccountJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -39,7 +38,7 @@ class EntryController extends Controller
         if ($validator->fails()) { 
             return response()->json([
                 'message'=>'Registration failed',
-                'error'=>$validator->errors()], 400);            
+                'error'=>$validator->errors()], 200);            
         }
         $verification_code = strval(rand(100000,999999));
         $user = new User([
@@ -49,7 +48,11 @@ class EntryController extends Controller
             'password' => bcrypt($request->password),
             'verification_code' => $verification_code
         ]);
-        $user->notify(new ActiveAccount());
+        $details = [
+            'email' => $request->email,
+            'verification_code' =>$verification_code
+        ];
+        dispatch(new ActiveAccountJob($details));
         $user->verification_code = bcrypt($verification_code.$request->email);
         $user->save();
         return response()->json([
@@ -58,17 +61,12 @@ class EntryController extends Controller
     }
     public function login(Request $request)
     {
-        // return response()->json([
-        //     "cookie" => $request->cookie()
-        // ]);
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'boolean'
         ]);
         $credentials = request(['email', 'password']);
-        $remember = $request->input('remember_me');
-        if(!Auth::attempt($credentials,$remember))
+        if(!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);

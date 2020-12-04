@@ -1,11 +1,11 @@
-.main-content{
+.home-main-content{
     padding-top: 2rem;
     padding-bottom: 5.5rem;
     background-color: rgb(242, 242, 242);
     min-height: 100vh;
     z-index: 2;
 }
-.user-profile{
+.home-user-profile{
     display: flex;
     flex-direction: column;
     border-radius: 4px;
@@ -17,8 +17,9 @@
     box-shadow: rgba(184, 164, 164, 0.15) 0px 2px 4px 0px;
     margin-left: 20px;
     margin-right: 20px;
+    padding:10px;
 }
-.name{
+.home-name{
     color: rgb(70, 23, 143);
     font-size: 20px;
     font-weight: bold;
@@ -28,7 +29,7 @@
     word-break: break-word;
     overflow-wrap: break-word;
 }
-.username{
+.home-username{
     color: rgb(110, 110, 110);
     font-size: 15px;
     font-weight: bold;
@@ -37,7 +38,7 @@
     margin-bottom: 5px;
     padding: 0px;
 }
-.kahoot-list{
+.home-kahoot-list{
     display: flex;
     flex-direction: column;
     border-radius: 4px;
@@ -50,10 +51,10 @@
     margin-left: 20px;
     margin-right: 20px;
 }
-.create-kahoot{
+.home-create-kahoot{
     padding: 16px;
 }
-.create-kahoot-area{
+.home-create-kahoot-area{
     display: flex;
     flex-direction: column;
     border-radius: 4px;
@@ -63,18 +64,18 @@
     border: 1px dashed rgb(204, 204, 204);
     background-color: rgb(242, 242, 242);
 }
-.create-kahoot-box{
+.home-create-kahoot-box{
     text-align: center;
     padding: 24px 16px;
     border-radius: 4px;
 }
-.create-kahoot-text{
+.home-create-kahoot-text{
     font-size: 14px;
     color: rgb(110, 110, 110);
     max-width: 264px;
     margin: 0px auto 8px;
 }
-.create-kahoot-button{
+.home-create-kahoot-button{
     width: initial;
     margin: 0px;
     border: 0px;
@@ -92,4 +93,8 @@
     min-width: 32px;
     min-height: 32px;
     padding: 4px;
+}
+.home-see-all{
+    margin:15px;
+    text-align:center;
 }

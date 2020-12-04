@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, Switch } from "react-router-dom";
-import "../user.css";
+import "./user.css";
 import image_logo from "../../images/logo_kahoot.png";
 import {
     HouseDoor,
@@ -57,9 +57,9 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link to={"/play-game"}>
+                <Link to={"/player"}>
                     <button type="button" className="create-button">
-                        Play
+                        Player
                     </button>
                 </Link>
                 <Link to={"/creator"}>
@@ -86,18 +86,16 @@ function Header() {
                             Setting
                         </Link>
                         <hr />
-                        <Link
-                            to={"/auth/login"}
-                            className="dropdown-item"
-                            style={{ paddingLeft: "15px", color: "red" }}
-                        >
+                        <div  onClick={()=>{ if(localStorage.getItem('token')){ localStorage.removeItem('token')} }}> 
+                        <Link to={'/auth/login'} className="dropdown-item" style={{paddingLeft: "15px", color: "red"}}>
                             <ArrowBarRight color="red" className="icons-svg" />
                             Sign Out
-                        </Link>
+                            </Link>
+                        </div>
+                        
                     </div>
                 </div>
             </nav>
-            {/* <RouterPathHeader /> */}
         </div>
     );
 }

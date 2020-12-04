@@ -1,0 +1,30 @@
+.auth-Form{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(242 242 242);
+  }
+  h1.title {
+    text-align: center;
+    padding-top: 5rem;
+    font-weight: bold;
+  }
+  .login-Form {
+    background-color: white;
+    border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+    width: 100%;
+    max-width: 26rem;
+    padding: 15px;
+    margin: auto;
+    margin-top: 6rem;
+  }
+  .forgot-password{
+    padding-bottom: 20rem;
+    text-align: center;
+    margin-top: 1rem;
+    color: rgb(51, 51, 51);
+  }
+   #aa {
+     color: rgb(20, 11, 11);
+     text-decoration: underline;
+  }
